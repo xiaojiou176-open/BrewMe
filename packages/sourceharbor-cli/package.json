@@ -1,0 +1,17 @@
+{
+  "name": "@brewme/cli",
+  "version": "0.1.11",
+  "description": "Thin public CLI for BrewMe with repo-aware delegation.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "brewme": "./bin/brewme.js"
+  },
+  "files": [
+    "bin/brewme.js",
+    "README.md"
+  ],
+  "scripts": {
+    "pack:dry": "npm pack --dry-run"
+  }
+}
