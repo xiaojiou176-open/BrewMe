@@ -1,0 +1,21 @@
+{
+  "name": "brewme-openclaw-watchlist-briefing",
+  "version": "0.1.11",
+  "description": "BrewMe first-cut OpenClaw package template for watchlist briefings and MCP/API reuse.",
+  "license": "MIT",
+  "files": [
+    "README.md",
+    "openclaw.plugin.json",
+    "brewme-mcp-template.json",
+    "skills"
+  ],
+  "openclaw": {
+    "compat": {
+      "openclaw": ">=0.0.0"
+    },
+    "build": {
+      "manifest": "./openclaw.plugin.json",
+      "skills": "./skills"
+    }
+  }
+}

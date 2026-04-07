@@ -1,0 +1,11 @@
+{
+  "id": "brewme-openclaw",
+  "name": "BrewMe",
+  "description": "First-cut local BrewMe plugin and skill pack for OpenClaw watchlist briefings and MCP/API reuse.",
+  "skills": ["./skills"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "name": "brewme-codex",
+  "version": "0.1.11",
+  "description": "BrewMe plugin-grade bundle for grounded watchlist briefings through MCP and the HTTP API."
+}
