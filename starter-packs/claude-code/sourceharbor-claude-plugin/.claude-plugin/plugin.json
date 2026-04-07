@@ -1,5 +1,5 @@
 {
   "name": "brewme-claude-code",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "BrewMe plugin bundle for Claude Code with MCP-first watchlist briefings and grounded evidence reuse."
 }
