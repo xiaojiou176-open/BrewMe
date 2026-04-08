@@ -1,5 +1,5 @@
 {
-  "name": "video-analysis-standard-env",
+  "name": "brewme-strict-standard-env",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."
