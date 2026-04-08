@@ -1,6 +1,6 @@
 {
   "name": "@brewme/cli",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Thin public CLI for BrewMe with repo-aware delegation.",
   "homepage": "https://xiaojiou176-open.github.io/brewme/",
   "repository": {
