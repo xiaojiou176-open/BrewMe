@@ -5,7 +5,7 @@ import { existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import process from "node:process";
 
-const DOCS_URL = "https://github.com/xiaojiou176-open/brewme/tree/main/docs";
+const DOCS_URL = "https://xiaojiou176-open.github.io/brewme/";
 
 function resolveApiBaseUrl() {
 	const candidates = [
