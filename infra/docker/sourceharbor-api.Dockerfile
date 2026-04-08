@@ -18,7 +18,7 @@ LABEL org.opencontainers.image.created="${BREWME_BUILD_DATE}"
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app \
+    SOURCE_HARBOR_RUNTIME_ROOT=/opt/brewme-runtime \
     SOURCE_HARBOR_CACHE_ROOT=/var/lib/brewme \
     PIPELINE_ARTIFACT_ROOT=/var/lib/brewme/artifacts \
     SQLITE_STATE_PATH=/var/lib/brewme/state/api_state.db \
@@ -28,20 +28,40 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     TEMPORAL_TASK_QUEUE=brewme-worker \
     APP_VERSION=${BREWME_VERSION}
 
-WORKDIR /app
+WORKDIR /opt/brewme-runtime
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends ca-certificates curl \
   && rm -rf /var/lib/apt/lists/* \
-  && mkdir -p /var/lib/brewme/state /var/lib/brewme/artifacts
+  && mkdir -p /var/lib/brewme/state /var/lib/brewme/artifacts /opt/brewme-runtime/scripts
 
 COPY ${BREWME_WHEEL} /tmp/
-COPY apps /app/apps
-COPY integrations /app/integrations
-COPY config /app/config
+COPY config /opt/brewme-runtime/config
+COPY scripts/runtime /opt/brewme-runtime/scripts/runtime
 
 RUN python -m pip install --no-cache-dir "/tmp/${BREWME_WHEEL}" \
-  && rm -f "/tmp/${BREWME_WHEEL}"
+  && rm -f "/tmp/${BREWME_WHEEL}" \
+  && python - <<'PY'
+from __future__ import annotations
+
+import shutil
+import site
+from pathlib import Path
+
+for root in [Path(path) for path in site.getsitepackages()]:
+    for relative in (
+        "apps/web",
+        "apps/worker",
+        "apps/api/tests",
+        "apps/mcp/tests",
+    ):
+        target = root / relative
+        if target.exists():
+            shutil.rmtree(target)
+    for cache_dir in root.rglob("__pycache__"):
+        if cache_dir.is_dir():
+            shutil.rmtree(cache_dir)
+PY
 
 EXPOSE 8000
 
