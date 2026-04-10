@@ -21,6 +21,9 @@ The goal is simple:
 | `docs/assets/brewme-builder-loop.svg` | `svg` | `builder-loop` | `docs/see-it-fast.md` | `repository-tracked-source-file` | `maintainer-assertion-required` | `non-runtime-illustration` | `currently-published-in-repo` | `yes` |
 | `docs/assets/brewme-social-preview.svg` | `svg` | `social-preview-source` | `config/public/github-profile.json` | `repository-tracked-source-file` | `maintainer-assertion-required` | `non-runtime-illustration` | `repository-declared-profile-asset-source` | `yes` |
 | `docs/assets/brewme-social-preview.png` | `png` | `social-preview-upload` | `config/public/github-profile.json` | `repository-tracked-derived-file` | `maintainer-assertion-required` | `non-runtime-illustration` | `repository-declared-profile-asset` | `yes` |
+| `docs/assets/brewme-square-icon.svg` | `svg` | `directory-square-icon-source` | `config/public/mcp-directory-profile.json`<br>`docs/media-kit.md` | `repository-tracked-source-file` | `maintainer-assertion-required` | `non-runtime-illustration` | `currently-published-in-repo` | `yes` |
+| `docs/assets/brewme-square-icon.png` | `png` | `directory-square-icon` | `config/public/mcp-directory-profile.json`<br>`docs/media-kit.md` | `repository-tracked-derived-file` | `maintainer-assertion-required` | `non-runtime-illustration` | `currently-published-in-repo` | `yes` |
+| `docs/assets/brewme-mcp-directory-shot-01.png` | `png` | `directory-screenshot` | `config/public/mcp-directory-profile.json`<br>`docs/submission/mcp-so.md`<br>`docs/submission/pulsemcp.md`<br>`docs/submission/mcpservers-org.md`<br>`docs/submission/awesome-opencode.md` | `repository-tracked-derived-file` | `maintainer-assertion-required` | `non-runtime-illustration` | `currently-published-in-repo` | `yes` |
 
 ## Reading Notes
 

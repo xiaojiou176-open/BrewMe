@@ -39,6 +39,9 @@ Current truth:
 | --- | --- | --- |
 | `docs/assets/brewme-social-preview.png` | GitHub social preview upload target | manual repo-settings upload asset |
 | `docs/assets/brewme-social-preview.svg` | tracked source illustration for the preview | editable source file |
+| `docs/assets/brewme-square-icon.png` | square icon for MCP directory submissions and listing tiles | directory-friendly public icon asset |
+| `docs/assets/brewme-square-icon.svg` | tracked source illustration for the square icon | editable source file |
+| `docs/assets/brewme-mcp-directory-shot-01.png` | MCP directory and listing screenshot asset | submission-friendly product shot derived from the tracked studio preview |
 | `docs/assets/brewme-hero.svg` | README/front-door hero | public product-shape asset |
 | `docs/assets/brewme-studio-preview.svg` | README studio preview | public front-door asset |
 | `docs/assets/brewme-developer-flywheel.svg` | builder/product loop visual | README/docs narrative support |
