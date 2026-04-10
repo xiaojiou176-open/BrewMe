@@ -1,6 +1,6 @@
 {
   "name": "@brewme/sdk",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "Thin public TypeScript SDK for the BrewMe HTTP API.",
   "homepage": "https://xiaojiou176-open.github.io/brewme/",
   "repository": {
