@@ -21,7 +21,7 @@ const nextConfig = {
 	outputFileTracingRoot: monorepoRoot,
 	transpilePackages: ["@brewme/sdk"],
 	turbopack: {
-		root: monorepoRoot,
+		root: configDir,
 	},
 	...(process.env.WEB_E2E_NEXT_DIST_DIR
 		? { distDir: process.env.WEB_E2E_NEXT_DIST_DIR }
