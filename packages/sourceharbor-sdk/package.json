@@ -2,13 +2,13 @@
   "name": "@brewme/sdk",
   "version": "0.1.19",
   "description": "Thin public TypeScript SDK for the BrewMe HTTP API.",
-  "homepage": "https://xiaojiou176-open.github.io/brewme/",
+  "homepage": "https://xiaojiou176-open.github.io/BrewMe/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xiaojiou176-open/brewme.git"
+    "url": "git+https://github.com/xiaojiou176-open/BrewMe.git"
   },
   "bugs": {
-    "url": "https://github.com/xiaojiou176-open/brewme/issues"
+    "url": "https://github.com/xiaojiou176-open/BrewMe/issues"
   },
   "license": "MIT",
   "type": "module",

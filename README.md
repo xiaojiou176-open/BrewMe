@@ -47,14 +47,14 @@
   ·
   <a href="./docs/compare.md">Why It Stands Out</a>
   ·
-  <a href="https://github.com/xiaojiou176-open/brewme/discussions">Discussions</a>
+  <a href="https://github.com/xiaojiou176-open/BrewMe/discussions">Discussions</a>
 </p>
 
 <p align="center">
-  <img alt="CI" src="https://github.com/xiaojiou176-open/brewme/actions/workflows/ci.yml/badge.svg" />
-  <img alt="License" src="https://img.shields.io/github/license/xiaojiou176-open/brewme" />
-  <img alt="GitHub Discussions" src="https://img.shields.io/github/discussions/xiaojiou176-open/brewme" />
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/xiaojiou176-open/brewme?style=social" />
+  <img alt="CI" src="https://github.com/xiaojiou176-open/BrewMe/actions/workflows/ci.yml/badge.svg" />
+  <img alt="License" src="https://img.shields.io/github/license/xiaojiou176-open/BrewMe" />
+  <img alt="GitHub Discussions" src="https://img.shields.io/github/discussions/xiaojiou176-open/BrewMe" />
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/xiaojiou176-open/BrewMe?style=social" />
 </p>
 
 BrewMe helps you turn long-form sources into grounded search results,
@@ -661,8 +661,8 @@ More questions are answered in [docs/faq.md](./docs/faq.md).
 
 ## Community
 
-- **Questions and roadmap discussion:** [GitHub Discussions](https://github.com/xiaojiou176-open/brewme/discussions)
-- **Bug reports and feature requests:** [GitHub Issues](https://github.com/xiaojiou176-open/brewme/issues)
+- **Questions and roadmap discussion:** [GitHub Discussions](https://github.com/xiaojiou176-open/BrewMe/discussions)
+- **Bug reports and feature requests:** [GitHub Issues](https://github.com/xiaojiou176-open/BrewMe/issues)
 - **Security reports:** [SECURITY.md](./SECURITY.md)
 - **Project conduct and ownership:** [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md), [.github/CODEOWNERS](./.github/CODEOWNERS)
 - **Rights and public artifact boundaries:** [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md), [docs/reference/public-artifact-exposure.md](./docs/reference/public-artifact-exposure.md)
