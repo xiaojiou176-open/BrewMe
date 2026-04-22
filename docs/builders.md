@@ -72,6 +72,7 @@ If a newcomer only reads the builder docs, the safe takeaway should be:
 Representative routes:
 
 - `GET /api/v1/subscriptions/templates`
+- `GET /api/v1/subscriptions/vendor-signals`
 - `POST /api/v1/videos/process`
 - `GET /api/v1/jobs/{job_id}`
 - `POST /api/v1/retrieval/search`
@@ -87,6 +88,7 @@ Representative routes:
 
 Representative tools:
 
+- `brewme.subscriptions.manage` with `action=list_vendor_signals`
 - `brewme.jobs.get`
 - `brewme.jobs.compare`
 - `brewme.knowledge.cards.list`
