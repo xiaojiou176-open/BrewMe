@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "path": "docs/assets/brewme-hero.svg",
+      "asset_kind": "svg",
+      "surface_role": "supporting-front-door-poster",
+      "public_surfaces": [
+        "docs/media-kit.md"
+      ],
+      "provenance_status": "repository-tracked-source-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "currently-published-in-repo",
+      "follow_up_required": true,
+      "notes": "Supporting front-door poster asset kept in the public asset family and media kit."
+    },
+    {
+      "path": "docs/assets/brewme-architecture.svg",
+      "asset_kind": "svg",
+      "surface_role": "architecture-diagram",
+      "public_surfaces": [
+        "docs/architecture.md"
+      ],
+      "provenance_status": "repository-tracked-source-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "currently-published-in-repo",
+      "follow_up_required": true,
+      "notes": "Public system-map illustration for architecture docs."
+    },
+    {
+      "path": "docs/assets/brewme-studio-preview.svg",
+      "asset_kind": "svg",
+      "surface_role": "readme-front-door-preview",
+      "public_surfaces": [
+        "README.md",
+        "docs/see-it-fast.md"
+      ],
+      "provenance_status": "repository-tracked-source-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "currently-published-in-repo",
+      "follow_up_required": true,
+      "notes": "Current front-door preview card for the README and the no-boot evaluation page."
+    },
+    {
+      "path": "docs/assets/brewme-developer-flywheel.svg",
+      "asset_kind": "svg",
+      "surface_role": "builder-flywheel",
+      "public_surfaces": [
+        "README.md",
+        "docs/index.md"
+      ],
+      "provenance_status": "repository-tracked-source-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "currently-published-in-repo",
+      "follow_up_required": true,
+      "notes": "Builder-facing public illustration that maps source intake into Search, Ask, MCP, and operator reuse."
+    },
+    {
+      "path": "docs/assets/brewme-builder-loop.svg",
+      "asset_kind": "svg",
+      "surface_role": "builder-loop",
+      "public_surfaces": [
+        "docs/media-kit.md"
+      ],
+      "provenance_status": "repository-tracked-source-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "currently-published-in-repo",
+      "follow_up_required": true,
+      "notes": "Builder-facing supporting illustration retained in the media-kit asset family after leaving the no-boot front door."
+    },
+    {
+      "path": "docs/assets/brewme-social-preview.svg",
+      "asset_kind": "svg",
+      "surface_role": "social-preview-source",
+      "public_surfaces": [
+        "config/public/github-profile.json"
+      ],
+      "provenance_status": "repository-tracked-source-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "repository-declared-profile-asset-source",
+      "follow_up_required": true,
+      "notes": "Source illustration for the social preview asset family."
+    },
+    {
+      "path": "docs/assets/brewme-social-preview.png",
+      "asset_kind": "png",
+      "surface_role": "social-preview-upload",
+      "public_surfaces": [
+        "config/public/github-profile.json"
+      ],
+      "provenance_status": "repository-tracked-derived-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "repository-declared-profile-asset",
+      "follow_up_required": true,
+      "notes": "PNG upload target referenced by the GitHub profile manifest for social preview."
+    },
+    {
+      "path": "docs/assets/brewme-square-icon.svg",
+      "asset_kind": "svg",
+      "surface_role": "directory-square-icon-source",
+      "public_surfaces": [
+        "config/public/mcp-directory-profile.json",
+        "docs/media-kit.md"
+      ],
+      "provenance_status": "repository-tracked-source-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "currently-published-in-repo",
+      "follow_up_required": true,
+      "notes": "Editable source illustration for the directory-friendly square icon asset."
+    },
+    {
+      "path": "docs/assets/brewme-square-icon.png",
+      "asset_kind": "png",
+      "surface_role": "directory-square-icon",
+      "public_surfaces": [
+        "config/public/mcp-directory-profile.json",
+        "docs/media-kit.md"
+      ],
+      "provenance_status": "repository-tracked-derived-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "currently-published-in-repo",
+      "follow_up_required": true,
+      "notes": "PNG square icon derived from the tracked SVG source for MCP directory and listing submissions."
+    },
+    {
+      "path": "docs/assets/brewme-mcp-directory-shot-01.png",
+      "asset_kind": "png",
+      "surface_role": "directory-screenshot",
+      "public_surfaces": [
+        "config/public/mcp-directory-profile.json",
+        "docs/public-distribution.md",
+        "docs/media-kit.md"
+      ],
+      "provenance_status": "repository-tracked-derived-file",
+      "rights_basis": "maintainer-assertion-required",
+      "sanitization_status": "non-runtime-illustration",
+      "public_distribution_status": "currently-published-in-repo",
+      "follow_up_required": true,
+      "notes": "Submission-friendly product shot derived from the tracked studio preview source asset."
+    }
+  ]
+}

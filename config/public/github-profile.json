@@ -1,0 +1,28 @@
+{
+  "description": "Reader-first source intelligence and MCP server for YouTube, Bilibili, RSSHub, and RSS, with grounded search, published reader docs, public CLI/TypeScript SDK surfaces, and plugin-grade builder bundles.",
+  "homepage": "https://xiaojiou176-open.github.io/BrewMe/",
+  "topics": [
+    "brewme",
+    "source-first",
+    "codex",
+    "github-copilot",
+    "claude-code",
+    "vscode-agent",
+    "knowledge-pipeline",
+    "control-tower",
+    "retrieval",
+    "mcp",
+    "mcp-server",
+    "cli",
+    "typescript-sdk",
+    "ai-agents",
+    "research-automation",
+    "youtube",
+    "bilibili",
+    "rss",
+    "fastapi",
+    "temporal"
+  ],
+  "enable_discussions": true,
+  "social_preview_asset": "docs/assets/brewme-social-preview.png"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "io.github.xiaojiou176-open/brewme-mcp",
+  "title": "BrewMe MCP",
+  "version": "0.1.19",
+  "short_description": "Source-first AI knowledge control tower MCP server for YouTube, Bilibili, RSSHub, and RSS.",
+  "long_description": "BrewMe MCP gives agent clients the same source-first, proof-first control-tower surface the web and operator routes use: search, Ask, watchlists, briefings, subscriptions, job traces, and grounded evidence reuse.",
+  "homepage": "https://xiaojiou176-open.github.io/BrewMe/",
+  "repository": "https://github.com/xiaojiou176-open/BrewMe",
+  "documentation": "https://github.com/xiaojiou176-open/BrewMe/tree/main/docs",
+  "issues": "https://github.com/xiaojiou176-open/BrewMe/issues",
+  "license": "MIT",
+  "keywords": [
+    "brewme",
+    "mcp",
+    "mcp-server",
+    "source-first",
+    "proof-first",
+    "grounded-search",
+    "retrieval",
+    "knowledge-pipeline",
+    "youtube",
+    "bilibili",
+    "rsshub",
+    "rss"
+  ],
+  "transport": "stdio",
+  "entrypoint": {
+    "command": "brewme-mcp",
+    "checkout_install_steps": [
+      "uv build",
+      "python3 -m pip install dist/brewme-*.whl"
+    ],
+    "runtime_env": [
+      "SOURCE_HARBOR_API_BASE_URL"
+    ]
+  },
+  "environment_variables": [
+    {
+      "name": "SOURCE_HARBOR_API_BASE_URL",
+      "required": true,
+      "secret": false,
+      "description": "Base URL for a running BrewMe API."
+    }
+  ],
+  "assets": {
+    "social_preview": "docs/assets/brewme-social-preview.png",
+    "square_icon": "docs/assets/brewme-square-icon.png",
+    "directory_screenshot": "docs/assets/brewme-mcp-directory-shot-01.png"
+  },
+  "support": {
+    "security": "SECURITY.md",
+    "support": "SUPPORT.md",
+    "contributing": "CONTRIBUTING.md",
+    "changelog": "CHANGELOG.md"
+  }
+}
