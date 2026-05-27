@@ -1,0 +1,1089 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+import { getActionSessionTokenForForm } from "@/app/action-security";
+import { getFlashMessage } from "@/app/flash-message";
+import { upsertSubscriptionAction } from "@/app/subscriptions/actions";
+import { BilibiliDiscoveryDesk } from "@/components/bilibili-discovery-desk";
+import {
+	FormCheckboxField,
+	FormInputField,
+	FormSelectField,
+} from "@/components/form-field";
+import { ManualSourceIntakePanel } from "@/components/manual-source-intake-panel";
+import { SignalStrip } from "@/components/signal-strip";
+import { SourceIdentityCard } from "@/components/source-identity-card";
+import { SubmitButton } from "@/components/submit-button";
+import { SubscriptionBatchPanel } from "@/components/subscription-batch-panel";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+} from "@/components/ui/card";
+import { WebActionSessionHiddenInput } from "@/components/web-action-session-hidden-input";
+import { apiClient } from "@/lib/api/client";
+import type {
+	SubscriptionTemplate,
+	SubscriptionTemplateCatalogResponse,
+	VendorSignalCatalogResponse,
+} from "@/lib/api/types";
+import {
+	editorialMono,
+	editorialSans,
+	editorialSerif,
+} from "@/lib/editorial-fonts";
+import { getLocaleMessages } from "@/lib/i18n/messages";
+import {
+	resolveSearchParams,
+	type SearchParamsInput,
+} from "@/lib/search-params";
+import { buildProductMetadata } from "@/lib/seo";
+import { resolveSubscriptionIdentity } from "@/lib/source-identity";
+
+const subscriptionsCopy = getLocaleMessages().subscriptionsPage;
+
+export const metadata: Metadata = buildProductMetadata({
+	title: subscriptionsCopy.metadataTitle,
+	description: subscriptionsCopy.metadataDescription,
+	route: "subscriptions",
+});
+
+type SubscriptionsPageProps = {
+	searchParams?: SearchParamsInput;
+};
+
+type TemplatePresentation = SubscriptionTemplate;
+type SupportTier = SubscriptionTemplateCatalogResponse["support_tiers"][number];
+type VendorSignalVendor = VendorSignalCatalogResponse["vendors"][number];
+
+const CATEGORY_KEYS = ["misc", "tech", "creator", "macro", "ops"] as const;
+
+const LEGACY_TEMPLATE_IDS: Record<string, string> = {
+	bilibili_creator: "bilibili_user_video",
+	rsshub_route: "generic_rsshub_route",
+	generic_rss: "generic_rss_feed",
+};
+
+function normalizeTemplateCatalog(
+	payload: SubscriptionTemplateCatalogResponse,
+): TemplatePresentation[] {
+	return payload.templates;
+}
+
+function renderAlert(status: string, code: string) {
+	if (!status || !code) {
+		return null;
+	}
+	const isError = status === "error";
+	if (isError) {
+		return (
+			<p className="alert alert-enter error" role="alert" aria-live="assertive">
+				{getFlashMessage(code)}
+			</p>
+		);
+	}
+	return (
+		<output
+			className="alert alert-enter success"
+			aria-live="polite"
+			aria-atomic="true"
+		>
+			{getFlashMessage(code)}
+		</output>
+	);
+}
+
+function getTemplateHref(templateId: string): string {
+	return `/subscriptions?template=${encodeURIComponent(templateId)}`;
+}
+
+function normalizeTemplateId(rawTemplate: string): string | null {
+	if (!rawTemplate) {
+		return null;
+	}
+	return LEGACY_TEMPLATE_IDS[rawTemplate] ?? rawTemplate;
+}
+
+function findTemplate(
+	templates: TemplatePresentation[],
+	rawTemplate: string,
+): TemplatePresentation | null {
+	if (templates.length === 0) {
+		return null;
+	}
+	const normalizedId = normalizeTemplateId(rawTemplate);
+	return (
+		templates.find((template) => template.id === normalizedId) ?? templates[0]
+	);
+}
+
+function findSupportTier(
+	supportTiers: SupportTier[],
+	template: TemplatePresentation | null,
+): SupportTier | null {
+	if (!template) {
+		return null;
+	}
+	return supportTiers.find((tier) => tier.id === template.support_tier) ?? null;
+}
+
+function humanizeToken(value: string): string {
+	if (value === "rsshub") {
+		return "RSSHub";
+	}
+	if (value === "generic") {
+		return "Generic";
+	}
+	return value
+		.split(/[_-]+/)
+		.filter(Boolean)
+		.map((segment) => segment.charAt(0).toUpperCase() + segment.slice(1))
+		.join(" ");
+}
+
+function supportBadgeClass(level: string): string {
+	if (level === "strong_supported") {
+		return "border-emerald-500/40 bg-emerald-500/10 text-emerald-700";
+	}
+	if (level === "generic_supported") {
+		return "border-sky-500/40 bg-sky-500/10 text-sky-700";
+	}
+	return "border-amber-500/40 bg-amber-500/10 text-amber-700";
+}
+
+function provingBadgeClass(): string {
+	return "border-amber-500/40 bg-amber-500/10 text-amber-700";
+}
+
+function uniqueTemplateValues(
+	templates: TemplatePresentation[],
+	pick: (template: TemplatePresentation) => string,
+): string[] {
+	return Array.from(
+		new Set(
+			templates
+				.map((template) => pick(template).trim())
+				.filter((value) => value.length > 0),
+		),
+	);
+}
+
+function templatesForSupportTier(
+	templates: TemplatePresentation[],
+	supportTier: string,
+): TemplatePresentation[] {
+	return templates.filter((template) => template.support_tier === supportTier);
+}
+
+function vendorSignalBadgeClass(layer: string): string {
+	if (layer === "confirmed") {
+		return "border-emerald-500/40 bg-emerald-500/10 text-emerald-700";
+	}
+	return "border-amber-500/40 bg-amber-500/10 text-amber-700";
+}
+
+function buildVendorWatchlistHref(vendor: VendorSignalVendor): string {
+	const params = new URLSearchParams({
+		compose: "1",
+		name: vendor.starter_watchlist.name,
+		matcher_type: vendor.starter_watchlist.matcher_type,
+		matcher_value: vendor.starter_watchlist.matcher_value,
+		delivery_channel: vendor.starter_watchlist.delivery_channel,
+	});
+	return `/watchlists?${params.toString()}#create-watchlist`;
+}
+
+function buildVendorRawInputHref(vendor: VendorSignalVendor): string {
+	const firstConfirmed = vendor.channels.find(
+		(channel) => channel.signal_layer === "confirmed",
+	);
+	if (!firstConfirmed) {
+		return "#manual-source-intake-input";
+	}
+	return `/subscriptions?raw_input=${encodeURIComponent(firstConfirmed.url)}#manual-source-intake-input`;
+}
+
+export default async function SubscriptionsPage({
+	searchParams,
+}: SubscriptionsPageProps) {
+	const copy = getLocaleMessages().subscriptionsPage;
+	const {
+		status,
+		code,
+		template,
+		raw_input: rawInput,
+	} = await resolveSearchParams(searchParams, [
+		"status",
+		"code",
+		"template",
+		"raw_input",
+	] as const);
+	const sessionToken = getActionSessionTokenForForm();
+	const [subscriptionsResult, templateCatalogResult, vendorCatalogResult] =
+		await Promise.all([
+			apiClient
+				.listSubscriptions()
+				.then((data) => ({ data, errorCode: null as string | null }))
+				.catch(() => ({
+					data: [] as Awaited<ReturnType<typeof apiClient.listSubscriptions>>,
+					errorCode: "ERR_REQUEST_FAILED",
+				})),
+			apiClient
+				.listSubscriptionTemplates()
+				.then((data) => ({ data, errorCode: null as string | null }))
+				.catch(() => ({
+					data: {
+						support_tiers: [],
+						templates: [],
+					} satisfies SubscriptionTemplateCatalogResponse,
+					errorCode: "ERR_REQUEST_FAILED",
+				})),
+			apiClient
+				.listVendorSignalTemplates()
+				.then((data) => ({ data, errorCode: null as string | null }))
+				.catch(() => ({
+					data: {
+						signal_layers: [],
+						vendors: [],
+					} satisfies VendorSignalCatalogResponse,
+					errorCode: "ERR_REQUEST_FAILED",
+				})),
+		]);
+	const subscriptions = subscriptionsResult.data;
+	const templateCatalog = templateCatalogResult.data;
+	const vendorCatalog = vendorCatalogResult.data;
+	const templates = normalizeTemplateCatalog(templateCatalog);
+	const platformOptions = uniqueTemplateValues(
+		templates,
+		(entry) => entry.platform,
+	).map((value) => ({
+		value,
+		label:
+			value === "youtube"
+				? copy.platformOptions.youtube
+				: value === "bilibili"
+					? copy.platformOptions.bilibili
+					: value === "rss"
+						? copy.platformOptions.rss
+						: humanizeToken(value),
+	}));
+	const sourceTypeOptions = uniqueTemplateValues(
+		templates,
+		(entry) => entry.source_type,
+	).map((value) => ({
+		value,
+		label:
+			value === "url"
+				? copy.sourceTypeOptions.url
+				: value === "youtube_channel_id"
+					? copy.sourceTypeOptions.youtubeChannelId
+					: value === "bilibili_uid"
+						? copy.sourceTypeOptions.bilibiliUid
+						: value === "rsshub_route"
+							? copy.adapterTypeOptions.rsshubRoute
+							: humanizeToken(value),
+	}));
+	const adapterTypeOptions = uniqueTemplateValues(
+		templates,
+		(entry) => entry.adapter_type,
+	).map((value) => ({
+		value,
+		label:
+			copy.adapterTypeOptions[
+				value === "rsshub_route" ? "rsshubRoute" : "rssGeneric"
+			],
+	}));
+	const categoryOptions = CATEGORY_KEYS.map((value) => ({
+		value,
+		label: copy.categoryOptions[value],
+	}));
+	const platformLabelMap = new Map<string, string>(
+		platformOptions.map((option) => [option.value, option.label]),
+	);
+	const sourceTypeLabelMap = new Map<string, string>(
+		sourceTypeOptions.map((option) => [option.value, option.label]),
+	);
+	const adapterLabelMap = new Map<string, string>(
+		adapterTypeOptions.map((option) => [option.value, option.label]),
+	);
+	const selectedTemplate = findTemplate(templates, template.trim());
+	const selectedSupportTier = findSupportTier(
+		templateCatalog.support_tiers,
+		selectedTemplate,
+	);
+	const genericTemplates = templatesForSupportTier(
+		templates,
+		"generic_supported",
+	);
+	const provingTemplates = genericTemplates.filter(
+		(templateOption) =>
+			Boolean(templateOption.proof_boundary) ||
+			Boolean(templateOption.evidence_note),
+	);
+	const pageErrorCode =
+		subscriptionsResult.errorCode ?? templateCatalogResult.errorCode;
+	const highlightedSubscriptions = subscriptions.slice(0, 6);
+	const hasTrackedSources = highlightedSubscriptions.length > 0;
+	const bilibiliTrackedCreators = subscriptions
+		.filter(
+			(subscription) =>
+				String(subscription.platform || "")
+					.trim()
+					.toLowerCase() === "bilibili",
+		)
+		.map((subscription) => {
+			const uid = String(subscription.source_value || "").trim();
+			const sourceUrl =
+				String(subscription.source_url || "").trim() ||
+				(uid
+					? `https://space.bilibili.com/${uid}`
+					: "https://space.bilibili.com/");
+			return {
+				name:
+					String(subscription.source_name || "").trim() || "Bilibili creator",
+				uid,
+				url: sourceUrl,
+			};
+		});
+	return (
+		<div
+			className={`folo-page-shell folo-unified-shell ${editorialSans.className}`}
+		>
+			<div className="folo-page-header">
+				<p className="folo-page-kicker">{copy.kicker}</p>
+				<h1
+					className={`folo-page-title ${editorialSerif.className}`}
+					data-route-heading
+					tabIndex={-1}
+				>
+					{copy.heroTitle}
+				</h1>
+				<p className="folo-page-subtitle">
+					{hasTrackedSources
+						? "Start with the sources you already follow. Paste a new one only when you want to widen that map."
+						: "Paste a source first. Open the intake details only after you decide you want to keep it."}
+				</p>
+				<div className="mt-4 flex flex-wrap gap-3">
+					{hasTrackedSources ? (
+						<>
+							<Button asChild variant="hero">
+								<Link href="#tracked-universes">Open saved sources</Link>
+							</Button>
+							<Link
+								href="#manual-source-intake-input"
+								className="inline-flex items-center text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+							>
+								Paste a source
+							</Link>
+						</>
+					) : (
+						<Button asChild variant="hero">
+							<Link href="#manual-source-intake-input">Paste a source</Link>
+						</Button>
+					)}
+				</div>
+				{hasTrackedSources ? null : (
+					<Link
+						href="#tracked-universes"
+						className="mt-3 inline-flex text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+					>
+						Open saved sources after you paste the first one
+					</Link>
+				)}
+			</div>
+
+			{renderAlert(status, code)}
+			{pageErrorCode ? (
+				<Card
+					className="folo-surface border-destructive/40 bg-destructive/5"
+					role="alert"
+					aria-live="assertive"
+				>
+					<CardHeader className="gap-2">
+						<h2 className="text-base font-semibold">{copy.loadErrorTitle}</h2>
+						<CardDescription>{getFlashMessage(pageErrorCode)}</CardDescription>
+					</CardHeader>
+					<CardContent className="pt-0">
+						<Button asChild variant="outline" size="sm">
+							<Link href="/subscriptions">{copy.retryCurrentPageButton}</Link>
+						</Button>
+					</CardContent>
+				</Card>
+			) : null}
+
+			{vendorCatalog.vendors.length > 0 ? (
+				<Card
+					id="vendor-sources"
+					className="folo-surface border-border/70 bg-background/95"
+				>
+					<CardHeader className="gap-2">
+						<p className="text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+							Vendor radar
+						</p>
+						<h2
+							className={`text-2xl font-semibold ${editorialSerif.className}`}
+						>
+							Vendor sources
+						</h2>
+						<CardDescription>
+							Follow official changelog, release-note, status, and blog lanes
+							first. Keep X as a fast signal later, not as the main truth
+							source.
+						</CardDescription>
+					</CardHeader>
+					<CardContent className="space-y-4">
+						<div className="grid gap-4 xl:grid-cols-2">
+							{vendorCatalog.vendors.map((vendor) => {
+								const counts = {
+									confirmed: vendor.channels.filter(
+										(channel) => channel.signal_layer === "confirmed",
+									).length,
+									observation: vendor.channels.filter(
+										(channel) => channel.signal_layer === "observation",
+									).length,
+								};
+								return (
+									<article
+										key={vendor.id}
+										className="rounded-[1.35rem] border border-border/60 bg-muted/18 p-4"
+									>
+										<div className="space-y-3">
+											<div className="flex flex-wrap items-center gap-2">
+												<p className="text-lg font-semibold text-foreground">
+													{vendor.label}
+												</p>
+												<Badge
+													variant="outline"
+													className="border-emerald-500/40 bg-emerald-500/10 text-emerald-700"
+												>
+													Confirmed truth first
+												</Badge>
+											</div>
+											<p className="text-sm text-muted-foreground">
+												{vendor.description}
+											</p>
+											<SignalStrip
+												title="Signal mix"
+												description={vendor.official_first_move}
+												items={[
+													{
+														label: "Confirmed truth",
+														value: counts.confirmed,
+														valueLabel: String(counts.confirmed),
+														tone: "success",
+													},
+													{
+														label: "Observation layer",
+														value: counts.observation,
+														valueLabel: String(counts.observation),
+														tone: "warning",
+														detail: vendor.x_policy_summary,
+													},
+												]}
+											/>
+											<div className="flex flex-wrap gap-2">
+												<Button asChild variant="hero" size="sm">
+													<Link href={buildVendorRawInputHref(vendor)}>
+														Paste first confirmed source
+													</Link>
+												</Button>
+												<Button asChild variant="outline" size="sm">
+													<Link href={buildVendorWatchlistHref(vendor)}>
+														Create vendor watchlist
+													</Link>
+												</Button>
+											</div>
+											<details className="rounded-xl border border-border/60 bg-background/65 p-4">
+												<summary className="cursor-pointer text-sm font-medium text-foreground">
+													Channel map later
+												</summary>
+												<ul className="mt-3 space-y-3">
+													{vendor.channels.map((channel) => (
+														<li
+															key={channel.id}
+															className="rounded-lg border border-border/50 bg-muted/20 p-3"
+														>
+															<div className="flex flex-wrap items-center gap-2">
+																<p className="font-medium text-foreground">
+																	{channel.label}
+																</p>
+																<Badge
+																	variant="outline"
+																	className={vendorSignalBadgeClass(
+																		channel.signal_layer,
+																	)}
+																>
+																	{vendorCatalog.signal_layers.find(
+																		(item) => item.id === channel.signal_layer,
+																	)?.label ?? channel.signal_layer}
+																</Badge>
+															</div>
+															<p className="mt-2 text-sm text-muted-foreground">
+																{channel.why_it_matters}
+															</p>
+															<a
+																href={channel.url}
+																target="_blank"
+																rel="noreferrer"
+																className="mt-2 inline-flex text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
+															>
+																Open official source
+															</a>
+														</li>
+													))}
+												</ul>
+											</details>
+										</div>
+									</article>
+								);
+							})}
+						</div>
+					</CardContent>
+				</Card>
+			) : null}
+
+			<section className="grid gap-4 xl:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] xl:items-start">
+				<section id="manual-source-intake" className="xl:order-2">
+					<ManualSourceIntakePanel
+						copy={copy.manualIntake}
+						sessionToken={sessionToken}
+						headingLevel="h2"
+						initialRawInput={rawInput}
+					/>
+				</section>
+
+				<section className="space-y-4 xl:order-1">
+					<details
+						id="tracked-universes"
+						open
+						className="folo-surface rounded-[1.6rem] border border-border/70 bg-background/95 p-5 shadow-sm"
+					>
+						<summary className="m-[-0.5rem] cursor-pointer list-none rounded-[1.2rem] p-2 transition-colors hover:bg-muted/20">
+							<div className="flex flex-wrap items-start justify-between gap-3">
+								<div className="space-y-2">
+									<p
+										className={`text-[11px] uppercase tracking-[0.22em] text-muted-foreground ${editorialMono.className}`}
+									>
+										Saved sources
+									</p>
+									<h2
+										className={`text-2xl font-semibold ${editorialSerif.className}`}
+									>
+										Tracked universes
+									</h2>
+									<p className="max-w-3xl text-sm leading-6 text-muted-foreground">
+										Start here when you already know the world you want to keep
+										following. Paste a new source only after that picture looks
+										right.
+									</p>
+								</div>
+							</div>
+						</summary>
+						<div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-1">
+							{highlightedSubscriptions.length ? (
+								highlightedSubscriptions.map((subscription) => (
+									<SourceIdentityCard
+										key={subscription.id}
+										identity={resolveSubscriptionIdentity(subscription)}
+										compact
+									/>
+								))
+							) : (
+								<div className="rounded-[1.2rem] border border-dashed border-border/60 bg-background/70 p-4 text-sm text-muted-foreground">
+									<p>No saved sources yet.</p>
+									<p className="mt-2">
+										Paste a source and turn the first one into something you can
+										keep following.
+									</p>
+									<Button asChild variant="outline" size="sm" className="mt-4">
+										<Link href="#manual-source-intake-input">
+											Follow the first source
+										</Link>
+									</Button>
+								</div>
+							)}
+						</div>
+					</details>
+					<details className="group rounded-xl border border-border/70 bg-card text-card-foreground folo-surface">
+						<summary className="flex cursor-pointer list-none items-start justify-between gap-4 px-6 py-6 marker:content-none [&::-webkit-details-marker]:hidden">
+							<div className="space-y-1">
+								<p className="text-lg font-semibold text-foreground">
+									Bilibili discovery later
+								</p>
+								<p className="text-sm text-muted-foreground">
+									Keep the starter path focused on vendor sources or one pasted
+									source first. Open Bilibili discovery only when you want to
+									widen the intake universe.
+								</p>
+							</div>
+							<span className="rounded-full border border-border/60 bg-background/70 px-3 py-1 text-xs font-medium text-muted-foreground transition group-open:text-foreground">
+								Later
+							</span>
+						</summary>
+						<div className="border-t border-border/50 px-6 pb-6 pt-4">
+							<BilibiliDiscoveryDesk
+								trackedCreators={bilibiliTrackedCreators}
+							/>
+						</div>
+					</details>
+				</section>
+			</section>
+
+			<section className="space-y-4">
+				<details className="folo-surface rounded-[1.6rem] border border-border/70 bg-background/95 p-5 shadow-sm">
+					<summary className="m-[-0.5rem] cursor-pointer list-none rounded-[1.2rem] p-2 transition-colors hover:bg-muted/20">
+						<div className="flex flex-wrap items-start justify-between gap-3">
+							<div className="space-y-2">
+								<p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+									Advanced object workbench
+								</p>
+								<h2 className="text-xl font-semibold text-foreground">
+									Open the template, proof, and current source controls only
+									when you need them
+								</h2>
+								<p className="max-w-3xl text-sm leading-6 text-muted-foreground">
+									Start with the saved sources and paste flow above. Open this
+									layer only after you know which source you want to keep and
+									which details still need extra control.
+								</p>
+							</div>
+							<Badge variant="outline" className="border-border/60 bg-muted/20">
+								Secondary layer
+							</Badge>
+						</div>
+					</summary>
+					<div className="mt-5 space-y-5">
+						<section className="grid gap-4 xl:grid-cols-[1.3fr_0.9fr]">
+							<Card className="folo-surface border-border/70">
+								<CardHeader className="gap-2">
+									<h2 className="text-xl font-semibold">
+										{copy.supportMatrixTitle}
+									</h2>
+									<CardDescription>
+										{copy.supportMatrixDescription}
+									</CardDescription>
+								</CardHeader>
+								<CardContent className="grid gap-3 md:grid-cols-2">
+									{templateCatalog.support_tiers.map((tier) => (
+										<div
+											key={tier.id}
+											className="rounded-xl border border-border/60 bg-muted/20 p-4"
+										>
+											<Badge
+												variant="outline"
+												className={supportBadgeClass(tier.id)}
+											>
+												{tier.label}
+											</Badge>
+											<p className="mt-3 font-medium">{tier.label}</p>
+											<p className="mt-2 text-sm text-muted-foreground">
+												{tier.description}
+											</p>
+											<div className="mt-3 flex flex-wrap gap-2">
+												{templatesForSupportTier(templates, tier.id).map(
+													(templateOption) => (
+														<Badge
+															key={`${tier.id}-${templateOption.id}`}
+															variant="outline"
+														>
+															{templateOption.label}
+														</Badge>
+													),
+												)}
+											</div>
+										</div>
+									))}
+									<div className="rounded-xl border border-border/60 bg-muted/20 p-4">
+										<Badge variant="outline" className={provingBadgeClass()}>
+											{copy.supportLevels.proving.title}
+										</Badge>
+										<p className="mt-3 font-medium">
+											{copy.supportLevels.proving.title}
+										</p>
+										<p className="mt-2 text-sm text-muted-foreground">
+											{copy.supportLevels.proving.description}
+										</p>
+										<div className="mt-3 flex flex-wrap gap-2">
+											{provingTemplates.map((templateOption) => (
+												<Badge
+													key={`proving-${templateOption.id}`}
+													variant="outline"
+												>
+													{templateOption.label}
+												</Badge>
+											))}
+										</div>
+									</div>
+								</CardContent>
+							</Card>
+
+							<Card className="folo-surface border-border/70">
+								<CardHeader className="gap-2">
+									<h2 className="text-xl font-semibold">
+										{copy.intakeGuideTitle}
+									</h2>
+									<CardDescription>
+										{copy.intakeGuideDescription}
+									</CardDescription>
+								</CardHeader>
+								<CardContent className="space-y-4">
+									{selectedTemplate && selectedSupportTier ? (
+										<>
+											<div className="space-y-2">
+												<div className="flex flex-wrap items-center gap-2">
+													<p className="font-medium">
+														{selectedTemplate.label}
+													</p>
+													<Badge
+														variant="outline"
+														className={supportBadgeClass(
+															selectedTemplate.support_tier,
+														)}
+													>
+														{selectedSupportTier.label}
+													</Badge>
+												</div>
+												<p className="text-sm text-muted-foreground">
+													{selectedTemplate.description}
+												</p>
+											</div>
+											<dl className="grid gap-3 text-sm">
+												<div>
+													<dt className="font-medium">
+														{copy.guideLabels.supportLevel}
+													</dt>
+													<dd className="flex flex-wrap items-center gap-2 text-muted-foreground">
+														<span>{selectedSupportTier.label}</span>
+														{selectedTemplate.support_tier ===
+														"generic_supported" ? (
+															<Badge
+																variant="outline"
+																className={provingBadgeClass()}
+															>
+																{copy.supportLevels.proving.title}
+															</Badge>
+														) : null}
+													</dd>
+												</div>
+												<div>
+													<dt className="font-medium">
+														{copy.guideLabels.platform}
+													</dt>
+													<dd className="text-muted-foreground">
+														{platformLabelMap.get(selectedTemplate.platform) ??
+															humanizeToken(selectedTemplate.platform)}
+													</dd>
+												</div>
+												<div>
+													<dt className="font-medium">
+														{copy.guideLabels.sourceType}
+													</dt>
+													<dd className="text-muted-foreground">
+														{sourceTypeLabelMap.get(
+															selectedTemplate.source_type,
+														) ?? humanizeToken(selectedTemplate.source_type)}
+													</dd>
+												</div>
+												<div>
+													<dt className="font-medium">
+														{copy.guideLabels.adapterType}
+													</dt>
+													<dd className="text-muted-foreground">
+														{adapterLabelMap.get(
+															selectedTemplate.adapter_type,
+														) ?? selectedTemplate.adapter_type}
+													</dd>
+												</div>
+												<div>
+													<dt className="font-medium">
+														{copy.guideLabels.fillNow}
+													</dt>
+													<dd className="text-muted-foreground">
+														{selectedTemplate.fill_now ||
+															selectedTemplate.source_value_placeholder ||
+															copy.placeholders.sourceValue}
+													</dd>
+												</div>
+												<div>
+													<dt className="font-medium">
+														{copy.guideLabels.proofBoundary}
+													</dt>
+													<dd className="text-muted-foreground">
+														{selectedTemplate.proof_boundary ||
+															selectedTemplate.evidence_note ||
+															selectedSupportTier.description}
+													</dd>
+												</div>
+											</dl>
+										</>
+									) : (
+										<p className="text-sm text-muted-foreground">
+											{getFlashMessage("ERR_REQUEST_FAILED")}
+										</p>
+									)}
+									<Button asChild variant="outline" size="sm">
+										<Link href="/trends">{copy.openMergedStoriesButton}</Link>
+									</Button>
+								</CardContent>
+							</Card>
+						</section>
+
+						<section>
+							<Card className="folo-surface border-border/70">
+								<CardHeader className="gap-2">
+									<h2 className="text-xl font-semibold">
+										{copy.templateSectionTitle}
+									</h2>
+									<CardDescription>
+										{copy.templateSectionDescription}
+									</CardDescription>
+								</CardHeader>
+								<CardContent className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+									{templates.map((templateOption) => {
+										const supportTier =
+											templateCatalog.support_tiers.find(
+												(tier) => tier.id === templateOption.support_tier,
+											) ?? null;
+										const isSelected =
+											templateOption.id === selectedTemplate?.id;
+										return (
+											<article
+												key={templateOption.id}
+												className={`rounded-xl border p-4 ${
+													isSelected
+														? "border-primary/40 bg-primary/5"
+														: "border-border/60 bg-muted/20"
+												}`}
+											>
+												<div className="flex items-start justify-between gap-3">
+													<h3 className="text-base font-semibold">
+														{templateOption.label}
+													</h3>
+													<div className="flex flex-wrap justify-end gap-2">
+														<Badge
+															variant="outline"
+															className={supportBadgeClass(
+																templateOption.support_tier,
+															)}
+														>
+															{supportTier?.label ??
+																templateOption.support_tier}
+														</Badge>
+														{templateOption.support_tier ===
+														"generic_supported" ? (
+															<Badge
+																variant="outline"
+																className={provingBadgeClass()}
+															>
+																{copy.supportLevels.proving.title}
+															</Badge>
+														) : null}
+													</div>
+												</div>
+												<p className="mt-3 text-sm text-muted-foreground">
+													{templateOption.description}
+												</p>
+												<p className="mt-3 text-sm text-muted-foreground">
+													{templateOption.fill_now ||
+														templateOption.source_value_placeholder ||
+														copy.placeholders.sourceValue}
+												</p>
+												<p className="mt-3 text-sm text-muted-foreground">
+													{templateOption.proof_boundary ||
+														templateOption.evidence_note ||
+														supportTier?.description ||
+														copy.supportMatrixDescription}
+												</p>
+												<div className="mt-4">
+													<Button
+														asChild
+														variant={isSelected ? "hero" : "outline"}
+														size="sm"
+													>
+														<Link href={getTemplateHref(templateOption.id)}>
+															{isSelected
+																? copy.templateSelectedButton
+																: copy.templateButton}
+														</Link>
+													</Button>
+												</div>
+											</article>
+										);
+									})}
+								</CardContent>
+							</Card>
+						</section>
+
+						<section className="grid gap-4 xl:grid-cols-[1.35fr_0.95fr]">
+							<Card className="folo-surface border-border/70">
+								<CardHeader className="gap-2">
+									<h2 className="text-xl font-semibold">{copy.editorTitle}</h2>
+									<CardDescription>{copy.editorDescription}</CardDescription>
+								</CardHeader>
+								<CardContent>
+									{selectedTemplate ? (
+										<form
+											action={upsertSubscriptionAction}
+											className="grid gap-5 md:grid-cols-2"
+											data-auto-disable-required="true"
+										>
+											<WebActionSessionHiddenInput
+												sessionToken={sessionToken}
+											/>
+											<FormSelectField
+												id="platform"
+												name="platform"
+												label={copy.formLabels.platform}
+												defaultValue={selectedTemplate.platform}
+												options={platformOptions}
+											/>
+											<FormSelectField
+												id="source_type"
+												name="source_type"
+												label={copy.formLabels.sourceType}
+												defaultValue={selectedTemplate.source_type}
+												options={sourceTypeOptions}
+											/>
+											<FormInputField
+												id="source_value"
+												name="source_value"
+												label={copy.formLabels.sourceValue}
+												required
+												placeholder={
+													selectedTemplate.source_value_placeholder ??
+													copy.placeholders.sourceValue
+												}
+											/>
+											<FormSelectField
+												id="adapter_type"
+												name="adapter_type"
+												label={copy.formLabels.adapterType}
+												defaultValue={selectedTemplate.adapter_type}
+												options={adapterTypeOptions}
+											/>
+											<FormInputField
+												id="source_url"
+												name="source_url"
+												label={copy.formLabels.sourceUrl}
+												type="url"
+												required={selectedTemplate.source_url_required}
+												placeholder={
+													selectedTemplate.source_url_placeholder ??
+													copy.placeholders.sourceUrl
+												}
+											/>
+											<FormInputField
+												id="rsshub_route"
+												name="rsshub_route"
+												label={copy.formLabels.rsshubRoute}
+												placeholder={
+													selectedTemplate.rsshub_route_hint ??
+													copy.placeholders.rsshubRoute
+												}
+											/>
+											<FormSelectField
+												id="category"
+												name="category"
+												label={copy.formLabels.category}
+												defaultValue={selectedTemplate.category ?? "misc"}
+												options={categoryOptions}
+											/>
+											<FormInputField
+												id="tags"
+												name="tags"
+												label={copy.formLabels.tags}
+												placeholder={copy.placeholders.tags}
+											/>
+											<FormInputField
+												id="priority"
+												name="priority"
+												label={copy.formLabels.priority}
+												type="number"
+												min={0}
+												max={100}
+												defaultValue={50}
+											/>
+											<FormCheckboxField
+												name="enabled"
+												label={copy.formLabels.enabled}
+												defaultChecked
+												fieldClassName="md:col-span-2"
+											/>
+											<div className="md:col-span-2">
+												<SubmitButton
+													pendingLabel={copy.savePending}
+													statusText={copy.saveStatus}
+												>
+													{copy.saveButton}
+												</SubmitButton>
+											</div>
+										</form>
+									) : (
+										<p className="text-sm text-muted-foreground">
+											{getFlashMessage("ERR_REQUEST_FAILED")}
+										</p>
+									)}
+								</CardContent>
+							</Card>
+
+							<Card className="folo-surface border-border/70">
+								<CardHeader className="gap-2">
+									<h2 className="text-xl font-semibold">
+										{selectedSupportTier?.label ?? copy.loadErrorTitle}
+									</h2>
+									<CardDescription>
+										{selectedSupportTier?.description ??
+											getFlashMessage("ERR_REQUEST_FAILED")}
+									</CardDescription>
+								</CardHeader>
+								<CardContent className="space-y-4 text-sm text-muted-foreground">
+									<p>
+										{selectedTemplate?.fill_now ??
+											selectedTemplate?.source_value_placeholder ??
+											getFlashMessage("ERR_REQUEST_FAILED")}
+									</p>
+									<p>
+										{selectedTemplate?.proof_boundary ??
+											selectedTemplate?.evidence_note ??
+											selectedSupportTier?.description ??
+											getFlashMessage("ERR_REQUEST_FAILED")}
+									</p>
+								</CardContent>
+							</Card>
+						</section>
+
+						<section>
+							<Card className="folo-surface border-border/70">
+								<CardHeader className="gap-2">
+									<h2 className="text-xl font-semibold">{copy.currentTitle}</h2>
+									<CardDescription>
+										<output
+											className="text-sm text-muted-foreground"
+											aria-live="polite"
+											aria-atomic="true"
+										>
+											{copy.loadedPrefix} {subscriptions.length}{" "}
+											{copy.loadedSuffix}
+										</output>
+										<p className="text-sm text-muted-foreground">
+											{copy.currentDescription}
+										</p>
+									</CardDescription>
+								</CardHeader>
+								<CardContent>
+									<SubscriptionBatchPanel
+										subscriptions={subscriptions}
+										sessionToken={sessionToken}
+									/>
+								</CardContent>
+							</Card>
+						</section>
+					</div>
+				</details>
+			</section>
+		</div>
+	);
+}
