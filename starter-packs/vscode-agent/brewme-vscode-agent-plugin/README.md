@@ -19,7 +19,7 @@ How to use it:
 
 1. Copy this whole directory into the VS Code agent plugin source location you
    already manage, or point the source-install flow at this directory.
-2. Replace `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` in `.mcp.json` with the
+2. Replace `__REPLACE_WITH_BREWME_REPO_ROOT__` in `.mcp.json` with the
    absolute path to your BrewMe checkout.
 3. Point VS Code at `plugin.json`, then start from the included skill.
 

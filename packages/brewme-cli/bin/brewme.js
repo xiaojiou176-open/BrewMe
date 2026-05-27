@@ -9,7 +9,7 @@ const DOCS_URL = "https://xiaojiou176-open.github.io/BrewMe/";
 
 function resolveApiBaseUrl() {
 	const candidates = [
-		process.env.SOURCEHARBOR_API_BASE_URL,
+		process.env.BREWME_API_BASE_URL,
 		process.env.SOURCE_HARBOR_API_BASE_URL,
 		process.env.NEXT_PUBLIC_API_BASE_URL,
 		"http://127.0.0.1:9000",
@@ -79,7 +79,7 @@ function findRepoRoot(startDir) {
 }
 
 function resolveRepoRoot() {
-	const envRoot = process.env.SOURCEHARBOR_REPO_ROOT?.trim();
+	const envRoot = process.env.BREWME_REPO_ROOT?.trim();
 	if (envRoot && isRepoRoot(envRoot)) {
 		return resolve(envRoot);
 	}
@@ -92,7 +92,7 @@ function printHelp(repoRoot) {
 		: "Mode: public guidance only (no BrewMe repo checkout detected)";
 	const delegateLine = repoRoot
 		? "Delegated commands: bootstrap, up, down, status, full-stack, mcp, doctor, smoke"
-		: "Delegated commands are available after you run this inside a BrewMe checkout or set SOURCEHARBOR_REPO_ROOT.";
+		: "Delegated commands are available after you run this inside a BrewMe checkout or set BREWME_REPO_ROOT.";
 
 	console.log(`BrewMe CLI
 
@@ -133,7 +133,7 @@ function printMissingRepoGuidance() {
 	console.error(
 		[
 			"BrewMe CLI could not find a repo checkout to delegate into.",
-			"Run this command inside a BrewMe repo, or set SOURCEHARBOR_REPO_ROOT=/path/to/brewme.",
+			"Run this command inside a BrewMe repo, or set BREWME_REPO_ROOT=/path/to/brewme.",
 			`Docs: ${DOCS_URL}`,
 		].join("\n"),
 	);

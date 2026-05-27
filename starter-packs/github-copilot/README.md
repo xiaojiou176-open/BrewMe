@@ -21,7 +21,7 @@ Start here:
 
 1. Copy or clone the plugin bundle directory into the GitHub Copilot plugin or
    source-install location you already use.
-2. Replace `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` in `.mcp.json` with the
+2. Replace `__REPLACE_WITH_BREWME_REPO_ROOT__` in `.mcp.json` with the
    absolute path to your BrewMe checkout.
 3. Point GitHub Copilot at `plugin.json`, then start with
    `skills/brewme-watchlist-briefing/SKILL.md`.

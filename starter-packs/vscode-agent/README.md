@@ -21,7 +21,7 @@ Start here:
 
 1. Copy or clone the plugin bundle directory into the VS Code agent plugin
    location you already use, or point the source-install flow at this directory.
-2. Replace `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` in `.mcp.json` with the
+2. Replace `__REPLACE_WITH_BREWME_REPO_ROOT__` in `.mcp.json` with the
    absolute path to your BrewMe checkout.
 3. Point VS Code at `plugin.json`, then start with
    `skills/brewme-watchlist-briefing/SKILL.md`.

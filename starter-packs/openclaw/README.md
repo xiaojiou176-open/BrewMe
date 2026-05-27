@@ -22,7 +22,7 @@ Start here:
 1. Copy or symlink this whole directory into the local plugin or workspace-skill
    location you already use for OpenClaw.
 2. Open `brewme-mcp-template.json` and replace
-   `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` with the absolute path to your
+   `__REPLACE_WITH_BREWME_REPO_ROOT__` with the absolute path to your
    BrewMe checkout.
 3. Point OpenClaw at `openclaw.plugin.json`, then start with
    `skills/brewme-watchlist-briefing/SKILL.md` as the first workflow.

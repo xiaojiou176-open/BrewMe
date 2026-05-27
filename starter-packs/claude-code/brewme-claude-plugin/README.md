@@ -19,7 +19,7 @@ How to use it:
 
 1. Copy this whole directory into a Claude plugin directory, or use it as the
    submission artifact when preparing an Anthropic marketplace entry.
-2. Replace `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` in `.mcp.json` with the
+2. Replace `__REPLACE_WITH_BREWME_REPO_ROOT__` in `.mcp.json` with the
    absolute path to your BrewMe checkout.
 3. Start from the included skill or point Claude Code at the MCP template.
 
