@@ -1,0 +1,62 @@
+# Public Repo Readiness
+
+BrewMe is publicly readable and locally runnable today.
+
+That does **not** automatically mean every remote or release claim is proven for the current `main`.
+
+## What Is Fair To Claim
+
+- the repository exposes API, worker, MCP, and web surfaces
+- the local proof path is documented and rerunnable
+- the public story is backed by real commands and tests
+- the current frontstage/story surfaces can now be re-verified with a repo-owned clean proof pack and UI audit runner instead of one-off manual screenshot commands
+- the current public front door can also be re-verified with a repo-owned frontstage clean proof pack and UI audit runner over `/`, `/feed`, `/subscriptions`, and `/reader/demo`
+- the current Bilibili-facing front door now includes a discovery desk on `/subscriptions`, richer source facts on `/jobs` and the feed reading pane, and repo-owned browser proof on `/ops`
+- the current `/subscriptions` front door now also includes a vendor-radar starter desk backed by the shared `vendor-signals` catalog, with official changelog/status/blog lanes marked as confirmed truth and X explicitly held as an observation layer
+
+## What Needs Stronger Evidence
+
+- hosted availability
+- release distribution quality
+- remote workflow success on the current `main`
+- live GitHub profile settings matching `config/public/github-profile.json`
+- any external publication or attestation lane that is intentionally kept behind manual dispatch and protected-environment approval
+
+## Current Public-Readiness Reading Rule
+
+Treat these as separate ledgers, not one blended readiness badge:
+
+- tracked repo/docs truth
+- current remote `main` truth
+- latest release truth
+- live GitHub metadata truth
+- live provider/browser truth
+
+Two current reading rules are worth keeping explicit:
+
+- a live GitHub Release object can exist while current remote `main` has already moved ahead again
+- the live branch-protected required-check set is its own remote contract; if GitHub protection changes, tracked required-check docs and summaries must be refreshed before the repo repeats a "current remote proof" claim
+- fast-moving public distribution facts such as exact PyPI / Official MCP Registry versions or directory-site read-backs should stay centralized in `docs/public-distribution.md`; README, builder guides, and status pages should point at that ledger instead of duplicating day-specific listing state
+- the repo-managed web runtime under `.runtime-cache/tmp/web-runtime/workspace/apps/web` is local operator proof only; it is a staging copy for local verification, not a public distribution artifact
+- the repo-managed web runtime's `.env.local` under `.runtime-cache/tmp/web-runtime/workspace/apps/web/.env.local` is also local operator proof only; it exists to align browser writes with the local stack and must never be treated as a public surface or release artifact
+- repo-owned clean proof packs created for UI audit use are local verification artifacts only; they can support maintainer-local proof and Gemini/UI-audit review, but they do not widen the public distribution boundary
+- repo-owned frontstage clean proof packs and their fallback mini packs are also local verification artifacts only; they strengthen maintainer-local public-surface review, not hosted or release-current claims
+- a current-commit mutation receipt under `.runtime-cache/reports/mutation/mutmut-cicd-stats.json` can support repo-side strict CI, but it still belongs to the local/manual proof ledger until a fresh strict receipt or remote check says otherwise
+- `./bin/repo-side-strict-ci --mode pre-push` is still a repo-side closeout command, not a remote proof shortcut; on maintainer workstations it can now fall back from the standard-env container path to a host-bootstrapped pre-push quality gate when Docker itself is the only missing layer
+- GitHub Pages URLs are case-sensitive at the site layer even when GitHub repo URLs are not, so tracked public homepages must match the live deployed path exactly instead of assuming lowercase variants will redirect
+- an Official MCP Registry starter packet or older ledger claim is not enough to repeat a live-listing statement; fresh anonymous registry read-back must still return the current BrewMe entry before that claim is treated as public-ready truth
+- repo-owned local core-services fallback under `.runtime-cache/` strengthens local first-run resilience, but it remains local runtime proof rather than a hosted or release-current claim
+- the repo-managed local first-run path now has two extra maintainer-local hardening behaviors:
+  - `./bin/full-stack up` can self-heal Temporal by calling the repo-owned `core_services.sh up` path before failing worker startup
+  - `./bin/full-stack down` now attempts the matching repo-owned `core_services.sh down` cleanup so a clean local restart no longer leaves those core services behind by default
+  - the current local video-first lane can use Gemini upload waiting plus a lightweight proxy-video path so oversized raw downloads do not get mistaken for a stable hosted/runtime guarantee
+- the reader-first frontstage on `/reader`, `/feed`, `/search`, and `/ask` is a public product surface, but the working contracts that shaped it stay in the internal planning ledger; public docs should point at the stable summary and proof ladder instead of exposing those internal ledgers as visitor-facing truth
+- `/subscriptions` can now help with Bilibili discovery through explicit external hot/rank/search/creator shortcuts, but that surface is still a discovery front door, not a claim that BrewMe has become a full Bilibili client
+- `/subscriptions` can now help users start vendor watchlists from public vendor starter packets, but that surface is still a reader-first intake front door rather than a claim that BrewMe now owns or mirrors those vendor platforms
+
+That separation matters because BrewMe can honestly advance one layer without pretending all the other layers moved with it.
+
+Read this together with [proof.md](../proof.md) whenever you want to separate local credibility from remote proof.
+
+Commit-sensitive remote lanes should stay in maintainer-owned runtime reports and
+must not be promoted into the public truth route.
