@@ -326,7 +326,7 @@ def test_process_article_reuses_existing_row_and_dispatches_text_only(
     service.jobs_repo = repo  # type: ignore[assignment]
     _install_temporal_modules(monkeypatch, client=_FakeClient())
 
-    result = asyncio.run(service.process_article(url="https://example.com/posts/sourceharbor"))
+    result = asyncio.run(service.process_article(url="https://example.com/posts/brewme"))
 
     assert result["reused"] is True
     assert result["mode"] == "text_only"

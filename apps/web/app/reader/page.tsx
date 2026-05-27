@@ -20,7 +20,7 @@ import { resolveReaderSourceIdentity } from "@/lib/source-identity";
 export const metadata: Metadata = buildProductMetadata({
 	title: "Reader",
 	description:
-		"Finished SourceHarbor stories, reading shelf guidance, and source-aware reading flow.",
+		"Finished BrewMe stories, reading shelf guidance, and source-aware reading flow.",
 	route: "reader",
 });
 

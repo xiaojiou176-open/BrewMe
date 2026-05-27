@@ -74,24 +74,24 @@ jobs:
               )
 
           template = json.loads(
-              pathlib.Path("starter-packs/mcp-registry/sourceharbor-server.template.json").read_text(
+              pathlib.Path("starter-packs/mcp-registry/brewme-server.template.json").read_text(
                   encoding="utf-8"
               )
           )
           profile = json.loads(
               pathlib.Path("config/public/mcp-directory-profile.json").read_text(encoding="utf-8")
           )
-          expected_name = "io.github.xiaojiou176-open/sourceharbor-mcp"
+          expected_name = "io.github.xiaojiou176-open/brewme-mcp"
           if template["name"] != expected_name or profile["name"] != expected_name:
               raise SystemExit("registry server name drift detected between template/profile")
           if template["version"] != expected_version or profile["version"] != expected_version:
               raise SystemExit("registry template/profile version must match expected_version")
           package = template["packages"][0]
-          if package["registryType"] != "pypi" or package["identifier"] != "sourceharbor":
-              raise SystemExit("registry template must keep PyPI package identity sourceharbor")
+          if package["registryType"] != "pypi" or package["identifier"] != "brewme":
+              raise SystemExit("registry template must keep PyPI package identity brewme")
           if package["version"] != expected_version:
               raise SystemExit("registry template package version must match expected_version")
-          marker = "mcp-name: io.github.xiaojiou176-open/sourceharbor-mcp"
+          marker = "mcp-name: io.github.xiaojiou176-open/brewme-mcp"
           if marker not in pathlib.Path("README.md").read_text(encoding="utf-8"):
               raise SystemExit("README.md must keep the MCP ownership marker before registry publish")
           print(f"verified registry metadata alignment for {expected_version}")
@@ -107,7 +107,7 @@ jobs:
           import urllib.request
 
           expected_version = os.environ["EXPECTED_VERSION"]
-          with urllib.request.urlopen("https://pypi.org/pypi/sourceharbor/json", timeout=30) as response:
+          with urllib.request.urlopen("https://pypi.org/pypi/brewme/json", timeout=30) as response:
               payload = json.load(response)
           live_version = str(payload["info"]["version"])
           if live_version != expected_version:
@@ -126,7 +126,7 @@ jobs:
       - name: Stage server.json for registry publish
         run: |
           mkdir -p .runtime-cache/tmp/mcp-registry-publish
-          cp starter-packs/mcp-registry/sourceharbor-server.template.json .runtime-cache/tmp/mcp-registry-publish/server.json
+          cp starter-packs/mcp-registry/brewme-server.template.json .runtime-cache/tmp/mcp-registry-publish/server.json
 
       - name: Write MCP Registry publish metadata
         env:
@@ -138,8 +138,8 @@ jobs:
           from pathlib import Path
 
           metadata = {
-              "server_name": "io.github.xiaojiou176-open/sourceharbor-mcp",
-              "package_identifier": "sourceharbor",
+              "server_name": "io.github.xiaojiou176-open/brewme-mcp",
+              "package_identifier": "brewme",
               "expected_version": os.environ["EXPECTED_VERSION"],
               "workflow": "publish-mcp-registry.yml",
               "environment": "external-mcp-registry-publish",
@@ -173,7 +173,7 @@ jobs:
         run: |
           {
             echo "### MCP Registry publish result"
-            echo "- server name: \`io.github.xiaojiou176-open/sourceharbor-mcp\`"
+            echo "- server name: \`io.github.xiaojiou176-open/brewme-mcp\`"
             echo "- expected version: \`${EXPECTED_VERSION}\`"
             echo "- workflow: \`.github/workflows/publish-mcp-registry.yml\`"
             echo "- this lane assumes the matching PyPI version is already live and GitHub OIDC auth is accepted by the registry"

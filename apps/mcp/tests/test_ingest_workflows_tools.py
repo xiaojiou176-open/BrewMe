@@ -25,7 +25,7 @@ def test_ingest_poll_rejects_invalid_subscription_id() -> None:
     mcp = _FakeMCP()
     register_ingest_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.ingest.poll"](subscription_id="sub-1")
+    payload = mcp.tools["brewme.ingest.poll"](subscription_id="sub-1")
 
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "subscription_id"
@@ -36,7 +36,7 @@ def test_ingest_poll_rejects_invalid_max_new_videos() -> None:
     mcp = _FakeMCP()
     register_ingest_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.ingest.poll"](max_new_videos=0)
+    payload = mcp.tools["brewme.ingest.poll"](max_new_videos=0)
 
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "max_new_videos"
@@ -57,7 +57,7 @@ def test_ingest_poll_posts_expected_payload_with_normalized_uuid() -> None:
         }
 
     register_ingest_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.ingest.poll"](
+    payload = mcp.tools["brewme.ingest.poll"](
         subscription_id=UUID_1.upper(),
         platform="youtube",
         max_new_videos=10,
@@ -94,7 +94,7 @@ def test_ingest_poll_normalizes_run_response() -> None:
         },
     )
 
-    payload = mcp.tools["sourceharbor.ingest.poll"](platform="youtube")
+    payload = mcp.tools["brewme.ingest.poll"](platform="youtube")
 
     assert payload["run_id"] == UUID_1
     assert payload["workflow_id"] == "wf-ingest-1"
@@ -177,12 +177,12 @@ def test_ingest_runs_list_and_get_normalize_payloads() -> None:
 
     register_ingest_tools(mcp, fake_api_call)
 
-    list_payload = mcp.tools["sourceharbor.ingest.runs.list"](
+    list_payload = mcp.tools["brewme.ingest.runs.list"](
         platform="youtube",
         status="succeeded",
         limit=5,
     )
-    get_payload = mcp.tools["sourceharbor.ingest.runs.get"](run_id=UUID_1)
+    get_payload = mcp.tools["brewme.ingest.runs.get"](run_id=UUID_1)
 
     assert list_payload["items"][0]["id"] == UUID_1
     assert list_payload["items"][0]["workflow_id"] == "wf-ingest-2"
@@ -195,7 +195,7 @@ def test_ingest_runs_get_rejects_invalid_run_id() -> None:
     mcp = _FakeMCP()
     register_ingest_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.ingest.runs.get"](run_id="bad-run-id")
+    payload = mcp.tools["brewme.ingest.runs.get"](run_id="bad-run-id")
 
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "run_id"
@@ -205,7 +205,7 @@ def test_workflows_run_rejects_invalid_workflow_id() -> None:
     mcp = _FakeMCP()
     register_workflow_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.workflows.run"](
+    payload = mcp.tools["brewme.workflows.run"](
         workflow="daily_digest",
         workflow_id="bad workflow id",
     )
@@ -218,7 +218,7 @@ def test_workflows_run_rejects_unknown_workflow_name() -> None:
     mcp = _FakeMCP()
     register_workflow_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.workflows.run"](workflow="not-supported")
+    payload = mcp.tools["brewme.workflows.run"](workflow="not-supported")
 
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "workflow"
@@ -238,7 +238,7 @@ def test_workflows_run_passes_through_error_payload_from_upstream() -> None:
         }
 
     register_workflow_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.workflows.run"](workflow="daily_digest")
+    payload = mcp.tools["brewme.workflows.run"](workflow="daily_digest")
 
     assert payload["code"] == "UPSTREAM_HTTP_ERROR"
     assert payload["details"]["status_code"] == 503
@@ -255,11 +255,11 @@ def test_workflows_run_rejects_invalid_boolean_flags() -> None:
 
     register_workflow_tools(mcp, fake_api_call)
 
-    bad_run_once = mcp.tools["sourceharbor.workflows.run"](
+    bad_run_once = mcp.tools["brewme.workflows.run"](
         workflow="daily_digest",
         run_once="true",  # type: ignore[arg-type]
     )
-    bad_wait_for_result = mcp.tools["sourceharbor.workflows.run"](
+    bad_wait_for_result = mcp.tools["brewme.workflows.run"](
         workflow="daily_digest",
         wait_for_result="false",  # type: ignore[arg-type]
     )
@@ -275,7 +275,7 @@ def test_workflows_run_rejects_invalid_payload_value_ranges() -> None:
     mcp = _FakeMCP()
     register_workflow_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.workflows.run"](
+    payload = mcp.tools["brewme.workflows.run"](
         workflow="daily_digest",
         payload={"local_hour": 30},
     )

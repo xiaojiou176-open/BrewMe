@@ -58,7 +58,7 @@ def test_reader_batch_judge_route_returns_manifest(api_client, monkeypatch) -> N
             "singleton_count": 0,
             "summary_markdown": "# Manifest",
             "manifest": {
-                "manifest_kind": "sourceharbor_cluster_verdict_manifest_v1",
+                "manifest_kind": "brewme_cluster_verdict_manifest_v1",
                 "generated_at": now.isoformat(),
                 "consumption_batch_id": str(batch_id),
                 "window_id": "2026-04-09@America/Los_Angeles",
@@ -114,7 +114,7 @@ def test_reader_batch_materialize_route_returns_documents(api_client, monkeypatc
             "published_with_gap_count": 0,
             "documents": [document],
             "navigation_brief": {
-                "brief_kind": "sourceharbor_navigation_brief_v1",
+                "brief_kind": "brewme_navigation_brief_v1",
                 "generated_at": now.isoformat(),
                 "window_id": "2026-04-09@America/Los_Angeles",
                 "document_count": 1,
@@ -198,7 +198,7 @@ def test_reader_navigation_brief_route_returns_payload(api_client, monkeypatch) 
     monkeypatch.setattr(
         "apps.api.app.services.reader_pipeline.ReaderPipelineService.build_navigation_brief",
         lambda self, *, window_id=None, limit=8: {
-            "brief_kind": "sourceharbor_navigation_brief_v1",
+            "brief_kind": "brewme_navigation_brief_v1",
             "generated_at": now.isoformat(),
             "window_id": window_id or "2026-04-09@America/Los_Angeles",
             "document_count": 1,
@@ -212,7 +212,7 @@ def test_reader_navigation_brief_route_returns_payload(api_client, monkeypatch) 
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["brief_kind"] == "sourceharbor_navigation_brief_v1"
+    assert payload["brief_kind"] == "brewme_navigation_brief_v1"
     assert payload["document_count"] == 1
 
 
@@ -262,7 +262,7 @@ def test_reader_batch_routes_map_value_errors_and_manifest_payload(api_client, m
                 "singleton_count": 1,
                 "summary_markdown": "# Manifest",
                 "manifest_json": {
-                    "manifest_kind": "sourceharbor_cluster_verdict_manifest_v1",
+                    "manifest_kind": "brewme_cluster_verdict_manifest_v1",
                     "generated_at": now.isoformat(),
                     "consumption_batch_id": str(batch_id),
                     "window_id": "2026-04-09@America/Los_Angeles",

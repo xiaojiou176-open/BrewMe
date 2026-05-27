@@ -14,10 +14,10 @@ _BOOTSTRAP_TAG = f"{os.getpid()}-{uuid.uuid4().hex}"
 os.environ.setdefault("DATABASE_URL", "sqlite+pysqlite:///:memory:")
 os.environ.setdefault("TEMPORAL_TARGET_HOST", "127.0.0.1:7233")
 os.environ.setdefault("TEMPORAL_NAMESPACE", "default")
-os.environ.setdefault("TEMPORAL_TASK_QUEUE", "sourceharbor-worker")
+os.environ.setdefault("TEMPORAL_TASK_QUEUE", "brewme-worker")
 os.environ.setdefault(
     "SQLITE_STATE_PATH",
-    os.path.join(tempfile.gettempdir(), f"sourceharbor-api-tests-{_BOOTSTRAP_TAG}.db"),
+    os.path.join(tempfile.gettempdir(), f"brewme-api-tests-{_BOOTSTRAP_TAG}.db"),
 )
 
 
@@ -31,7 +31,7 @@ def _isolated_api_test_env(
     monkeypatch.setenv("DATABASE_URL", "sqlite+pysqlite:///:memory:")
     monkeypatch.setenv("TEMPORAL_TARGET_HOST", "127.0.0.1:7233")
     monkeypatch.setenv("TEMPORAL_NAMESPACE", "default")
-    monkeypatch.setenv("TEMPORAL_TASK_QUEUE", "sourceharbor-worker")
+    monkeypatch.setenv("TEMPORAL_TASK_QUEUE", "brewme-worker")
     monkeypatch.setenv("SQLITE_STATE_PATH", str((env_root / "state.db").resolve()))
     monkeypatch.setenv("UI_AUDIT_GEMINI_ENABLED", "false")
     if request.node.get_closest_marker("allow_unauth_write") is not None:

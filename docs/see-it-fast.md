@@ -6,7 +6,7 @@ This page is for fast evaluation. It is not a hosted demo, cloud sandbox, or one
 
 The goal here is simple:
 
-1. show what SourceHarbor feels like when you read it
+1. show what BrewMe feels like when you read it
 2. show what the finished output actually looks like
 3. let you decide whether it is worth a deeper evaluation
 
@@ -14,15 +14,15 @@ If you like what you see here, the next step is [run it locally](./start-here.md
 
 <p>
   <img
-    src="./assets/sourceharbor-studio-preview.svg"
-    alt="SourceHarbor first-look preview showing one finished reading sample with proof nearby."
+    src="./assets/brewme-studio-preview.svg"
+    alt="BrewMe first-look preview showing one finished reading sample with proof nearby."
     width="100%"
   />
 </p>
 
 ## The 20-Second Mental Model
 
-SourceHarbor is not just a summarizer.
+BrewMe is not just a summarizer.
 
 It is a full intake-to-reading loop:
 
@@ -86,7 +86,7 @@ Why it matters:
 
 ## What The Result Looks Like
 
-SourceHarbor's reading artifact template already tells the story of the output shape:
+BrewMe's reading artifact template already tells the story of the output shape:
 
 ```markdown
 # <title>

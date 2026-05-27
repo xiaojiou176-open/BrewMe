@@ -1,9 +1,9 @@
-# SourceHarbor
+# BrewMe
 
 <p align="center">
   <img
-    src="./docs/assets/sourceharbor-studio-preview.svg"
-    alt="SourceHarbor studio preview showing the reader, timeline, and proof surfaces"
+    src="./docs/assets/brewme-studio-preview.svg"
+    alt="BrewMe studio preview showing the reader, timeline, and proof surfaces"
     width="100%"
   />
 </p>
@@ -19,13 +19,13 @@
 </p>
 
 <p align="center">
-  <img alt="CI" src="https://github.com/xiaojiou176-open/SourceHarbor/actions/workflows/ci.yml/badge.svg" />
-  <img alt="License" src="https://img.shields.io/github/license/xiaojiou176-open/SourceHarbor" />
-  <img alt="GitHub Discussions" src="https://img.shields.io/github/discussions/xiaojiou176-open/SourceHarbor" />
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/xiaojiou176-open/SourceHarbor?style=social" />
+  <img alt="CI" src="https://github.com/xiaojiou176-open/BrewMe/actions/workflows/ci.yml/badge.svg" />
+  <img alt="License" src="https://img.shields.io/github/license/xiaojiou176-open/BrewMe" />
+  <img alt="GitHub Discussions" src="https://img.shields.io/github/discussions/xiaojiou176-open/BrewMe" />
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/xiaojiou176-open/BrewMe?style=social" />
 </p>
 
-SourceHarbor helps you turn long-form sources into a reader-first flow of
+BrewMe helps you turn long-form sources into a reader-first flow of
 grounded search results, finished reading surfaces, and inspectable job runs.
 It stays source-first and proof-first: you can inspect it, run it locally, and
 verify each surface instead of trusting product copy on vibes alone.
@@ -49,7 +49,7 @@ If you are here as a builder, skip straight to [docs/builders.md](./docs/builder
 
 If you only remember one sentence, remember this:
 
-> SourceHarbor is a **reader-first, source-first, proof-first** product repo.
+> BrewMe is a **reader-first, source-first, proof-first** product repo.
 
 Current intake truth:
 
@@ -67,7 +67,7 @@ Current intake truth:
 | **Search + Ask** | Search saved material or ask for the current story with evidence nearby | real local routes after boot: `/search` and `/ask` |
 | **Jobs + Proof** | Inspect the pipeline, artifacts, and truth layers instead of trusting marketing copy | `/jobs`, [docs/proof.md](./docs/proof.md), and [docs/project-status.md](./docs/project-status.md) |
 
-SourceHarbor is a **multi-surface product repo, not a single skill package**.
+BrewMe is a **multi-surface product repo, not a single skill package**.
 Public starter packs and plugin-grade bundles are adoption layers inside that
 repo. They are not the whole product, and they are not raw exports of the
 internal `.agents/skills` tree.
@@ -76,15 +76,15 @@ internal `.agents/skills` tree.
 
 Think of this as the label on the box, not fine print:
 
-- SourceHarbor is **not** presented as a hosted SaaS or online signup product.
+- BrewMe is **not** presented as a hosted SaaS or online signup product.
 - Agent Autopilot is **not** a shipped capability; it remains a bounded spike direction.
 - Hosted Team Workspace is **not** a current promise; it remains a deferred bet.
-- SourceHarbor does **not** yet ship a public Python SDK.
-- SourceHarbor does **not** claim that one public image is the whole product stack; the dedicated API image still expects external Postgres/Temporal once you move past health-only smoke.
-- SourceHarbor does **not** collapse a repo-side PyPI/GHCR route into a live registry claim without read-back proof.
-- SourceHarbor does **not** claim official marketplace or registry listing everywhere.
-- SourceHarbor does **not** yet claim a registry-published OpenClaw plugin package or official Codex directory listing.
-- SourceHarbor does **not** claim that every RSSHub route has already been individually validated.
+- BrewMe does **not** yet ship a public Python SDK.
+- BrewMe does **not** claim that one public image is the whole product stack; the dedicated API image still expects external Postgres/Temporal once you move past health-only smoke.
+- BrewMe does **not** collapse a repo-side PyPI/GHCR route into a live registry claim without read-back proof.
+- BrewMe does **not** claim official marketplace or registry listing everywhere.
+- BrewMe does **not** yet claim a registry-published OpenClaw plugin package or official Codex directory listing.
+- BrewMe does **not** claim that every RSSHub route has already been individually validated.
 
 If you need the explicit bet boundaries, read:
 
@@ -101,11 +101,11 @@ Keep these truth layers separate when you read or share the repo:
 - local support-service containers plus devcontainer/strict-CI images do not turn Docker or GHCR into the current product front door
 - local real-profile browser proof can confirm login persistence and page state without turning those same sites into source-ingestion product claims
 
-That is why SourceHarbor keeps `proof.md`, `project-status.md`, and the public-reference docs as separate ledgers instead of one blanket “ready” claim.
+That is why BrewMe keeps `proof.md`, `project-status.md`, and the public-reference docs as separate ledgers instead of one blanket “ready” claim.
 
 ## Compounder Layer
 
-These are the surfaces that make SourceHarbor reusable instead of one-and-done:
+These are the surfaces that make BrewMe reusable instead of one-and-done:
 
 | Compounder | What it does | Current truth |
 | --- | --- | --- |
@@ -121,7 +121,7 @@ These are the surfaces that make SourceHarbor reusable instead of one-and-done:
 These are real directions, but they are **not** current product claims:
 
 - **Agent Autopilot** is currently a spike topic, not a shipped capability. The most honest next slice is human-approved workflow orchestration, not silent autonomy. See [docs/reference/project-positioning.md](./docs/reference/project-positioning.md).
-- **Hosted or managed SourceHarbor** is also a spike topic, not a current promise. Today the repository remains source-first and local-proof-first. See [docs/reference/project-positioning.md](./docs/reference/project-positioning.md).
+- **Hosted or managed BrewMe** is also a spike topic, not a current promise. Today the repository remains source-first and local-proof-first. See [docs/reference/project-positioning.md](./docs/reference/project-positioning.md).
 
 ## See It In 30 Seconds
 
@@ -137,9 +137,9 @@ Start with three surfaces:
 Source -> queued job -> timeline -> reader / proof -> MCP / API reuse
 ```
 
-## Why Star SourceHarbor Now
+## Why Star BrewMe Now
 
-- **It solves the full loop, not a single step.** SourceHarbor handles subscription intake, ingestion, digest production, artifact indexing, retrieval, and notification-ready outbound lanes in one system.
+- **It solves the full loop, not a single step.** BrewMe handles subscription intake, ingestion, digest production, artifact indexing, retrieval, and notification-ready outbound lanes in one system.
 - **It exposes proof, not vague claims.** Jobs, artifacts, step summaries, CI, and local verification paths are all first-class public surfaces.
 - **It is ready for operators and agents at the same time.** Humans use the reader-facing web surfaces. Agents use API and MCP. Both point at the same pipeline.
 - **It is already shaped like a real product.** The repository is source-first and inspectable, but the public surface is now optimized around outcomes rather than internal wiring.
@@ -165,7 +165,7 @@ Use it to choose the next page, then leave quickly:
 - **No-boot tour:** [docs/see-it-fast.md](./docs/see-it-fast.md)
 - **First real local run:** [docs/start-here.md](./docs/start-here.md)
 - **Runtime and verification truth:** [docs/proof.md](./docs/proof.md), [docs/testing.md](./docs/testing.md), [docs/runtime-truth.md](./docs/runtime-truth.md)
-- **Builder/package surfaces:** [docs/builders.md](./docs/builders.md), [packages/sourceharbor-cli/README.md](./packages/sourceharbor-cli/README.md), [packages/sourceharbor-sdk/README.md](./packages/sourceharbor-sdk/README.md)
+- **Builder/package surfaces:** [docs/builders.md](./docs/builders.md), [packages/brewme-cli/README.md](./packages/brewme-cli/README.md), [packages/brewme-sdk/README.md](./packages/brewme-sdk/README.md)
 
 If you need the live operator-side log trail after a local run, start at
 `.runtime-cache/logs/components/full-stack`.
@@ -176,8 +176,8 @@ If you are here as a builder, use the builder path on purpose:
 
 - **MCP / API / CLI / SDK map:** [docs/builders.md](./docs/builders.md)
 - **Official submit/read-back truth:** [docs/public-distribution.md](./docs/public-distribution.md)
-- **Public packages and starter packs:** [`packages/sourceharbor-cli`](./packages/sourceharbor-cli/README.md), [`packages/sourceharbor-sdk`](./packages/sourceharbor-sdk/README.md), [`starter-packs/README.md`](./starter-packs/README.md)
-- **Registry ownership marker:** `mcp-name: io.github.xiaojiou176-open/sourceharbor-mcp`
+- **Public packages and starter packs:** [`packages/brewme-cli`](./packages/brewme-cli/README.md), [`packages/brewme-sdk`](./packages/brewme-sdk/README.md), [`starter-packs/README.md`](./starter-packs/README.md)
+- **Registry ownership marker:** `mcp-name: io.github.xiaojiou176-open/brewme-mcp`
 
 Container truth also stays separate on purpose:
 
@@ -185,7 +185,7 @@ Container truth also stays separate on purpose:
 - the dedicated API image is a builder lane, not the default install story
 - core-services compose, devcontainer, and strict-CI images are runtime or infrastructure surfaces, not the product front door
 
-## Why SourceHarbor Feels Different
+## Why BrewMe Feels Different
 
 Most repos in this space stop at one of these layers:
 
@@ -194,7 +194,7 @@ Most repos in this space stop at one of these layers:
 - a search index
 - an internal operations surface
 
-SourceHarbor is built around the full knowledge flow:
+BrewMe is built around the full knowledge flow:
 
 1. **Capture** sources continuously
 2. **Process** each item into job-backed artifacts
@@ -224,7 +224,7 @@ still requires a manual GitHub Settings check.
 
 Operator-generated pointers and historical planning ledgers can help maintainers inspect deeper evidence, but they are not the public truth route.
 
-> SourceHarbor is a public, source-first engineering repository.
+> BrewMe is a public, source-first engineering repository.
 >
 > It is inspectable, and you can run it locally. It is not marketed as a turnkey hosted product, and external distribution claims are valid only when live remote workflows prove them for the current `main` commit.
 
@@ -242,7 +242,7 @@ Start where you are:
 - **I want to see a real local result:** [docs/start-here.md](./docs/start-here.md)
 - **I want the system map:** [docs/architecture.md](./docs/architecture.md)
 - **I want the MCP quickstart:** [docs/mcp-quickstart.md](./docs/mcp-quickstart.md)
-- **I want the public builder packages:** [docs/builders.md](./docs/builders.md), [starter-packs/README.md](./starter-packs/README.md), [packages/sourceharbor-cli/README.md](./packages/sourceharbor-cli/README.md), [packages/sourceharbor-sdk/README.md](./packages/sourceharbor-sdk/README.md)
+- **I want the public builder packages:** [docs/builders.md](./docs/builders.md), [starter-packs/README.md](./starter-packs/README.md), [packages/brewme-cli/README.md](./packages/brewme-cli/README.md), [packages/brewme-sdk/README.md](./packages/brewme-sdk/README.md)
 - **I want proof and verification commands:** [docs/proof.md](./docs/proof.md)
 - **I want testing and CI details:** [docs/testing.md](./docs/testing.md)
 - **I want positioning and trade-offs:** [docs/compare.md](./docs/compare.md)
@@ -252,7 +252,7 @@ Start where you are:
 
 ### Is this a hosted SaaS?
 
-No. SourceHarbor is a source-first repository you can inspect, run locally, adapt, and extend.
+No. BrewMe is a source-first repository you can inspect, run locally, adapt, and extend.
 
 ### Is this only for video?
 
@@ -275,8 +275,8 @@ More questions are answered in [docs/faq.md](./docs/faq.md).
 
 ## Community
 
-- **Questions and roadmap discussion:** [GitHub Discussions](https://github.com/xiaojiou176-open/SourceHarbor/discussions)
-- **Bug reports and feature requests:** [GitHub Issues](https://github.com/xiaojiou176-open/SourceHarbor/issues)
+- **Questions and roadmap discussion:** [GitHub Discussions](https://github.com/xiaojiou176-open/BrewMe/discussions)
+- **Bug reports and feature requests:** [GitHub Issues](https://github.com/xiaojiou176-open/BrewMe/issues)
 - **Security reports:** [SECURITY.md](./SECURITY.md)
 - **Project conduct and ownership:** [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md), [.github/CODEOWNERS](./.github/CODEOWNERS)
 - **Rights and public artifact boundaries:** [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md), [docs/reference/public-artifact-exposure.md](./docs/reference/public-artifact-exposure.md)
@@ -284,4 +284,4 @@ More questions are answered in [docs/faq.md](./docs/faq.md).
 
 ## License
 
-SourceHarbor is released under the MIT License. See [LICENSE](./LICENSE).
+BrewMe is released under the MIT License. See [LICENSE](./LICENSE).

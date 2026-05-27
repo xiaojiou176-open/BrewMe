@@ -4,7 +4,7 @@ Please do not open public issues for suspected vulnerabilities.
 
 Primary security intake:
 
-- GitHub Security Advisories: <https://github.com/xiaojiou176-open/sourceharbor/security>
+- GitHub Security Advisories: <https://github.com/xiaojiou176-open/brewme/security>
 
 Include:
 

@@ -1,6 +1,6 @@
 # Rollback Runbook
 
-This runbook describes the minimum rollback path for the current SourceHarbor repository state.
+This runbook describes the minimum rollback path for the current BrewMe repository state.
 
 It is not a blanket promise that every rollback is lossless. Treat it like an emergency exit map: it tells you how to get back to a safer schema shape, but you still need to understand what data or runtime assumptions may be left behind.
 

@@ -1,1 +1,1 @@
-export * from "@sourceharbor/sdk";
+export * from "@brewme/sdk";

@@ -536,8 +536,8 @@ def collect_duplicate_env_groups(root: Path, policy: dict[str, Any]) -> dict[str
         total_duplicate_size += duplicate_size
         groups.append(
             {
-                "id": "sourceharbor-project-venvs",
-                "label": "SourceHarbor project environments",
+                "id": "brewme-project-venvs",
+                "label": "BrewMe project environments",
                 "canonical_path": rel_path_from(root, canonical_path),
                 "status": "duplicates-detected" if duplicate_entries else "canonical-only",
                 "duplicate_size_bytes": duplicate_size,

@@ -20,10 +20,10 @@ from pydantic import TypeAdapter
 os.environ.setdefault("DATABASE_URL", "sqlite+pysqlite:///:memory:")
 os.environ.setdefault("TEMPORAL_TARGET_HOST", "127.0.0.1:7233")
 os.environ.setdefault("TEMPORAL_NAMESPACE", "default")
-os.environ.setdefault("TEMPORAL_TASK_QUEUE", "sourceharbor-worker")
+os.environ.setdefault("TEMPORAL_TASK_QUEUE", "brewme-worker")
 os.environ.setdefault(
     "SQLITE_STATE_PATH",
-    os.path.join(tempfile.gettempdir(), "sourceharbor-mock-contract-tests.db"),
+    os.path.join(tempfile.gettempdir(), "brewme-mock-contract-tests.db"),
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]

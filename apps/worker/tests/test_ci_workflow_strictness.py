@@ -180,7 +180,7 @@ jobs:
   python-tests:
     runs-on: ubuntu-latest
     env:
-      SOURCE_HARBOR_CHROME_PROFILE_NAME: sourceharbor
+      SOURCE_HARBOR_CHROME_PROFILE_NAME: brewme
       SOURCE_HARBOR_CHROME_CDP_PORT: "9339"
     timeout-minutes: 10
     steps:
@@ -439,7 +439,7 @@ on:
   pull_request:
 jobs:
   pre-commit-hosted:
-    runs-on: [self-hosted, sourceharbor]
+    runs-on: [self-hosted, brewme]
     timeout-minutes: 5
     steps:
       - name: Checkout
@@ -466,7 +466,7 @@ on:
   pull_request:
 jobs:
   pre-commit-hosted:
-    runs-on: [self-hosted, sourceharbor]
+    runs-on: [self-hosted, brewme]
     timeout-minutes: 5
     steps:
       - name: Normalize self-hosted workspace (pre-checkout)
@@ -631,7 +631,7 @@ jobs:
 """
     blocks = {
         "runner-bootstrap": """  runner-bootstrap:
-    runs-on: [self-hosted, sourceharbor]
+    runs-on: [self-hosted, brewme]
     timeout-minutes: 30
     steps:
       - run: |
@@ -660,7 +660,7 @@ jobs:
 """
     blocks = {
         "runner-bootstrap": """  runner-bootstrap:
-    runs-on: [self-hosted, sourceharbor]
+    runs-on: [self-hosted, brewme]
     timeout-minutes: 30
     steps:
       - run: |
@@ -673,7 +673,7 @@ jobs:
     module._check_runner_health_specific_rules(workflow_text, blocks, failures)
 
     assert (
-        "runner-health.yml: runner-bootstrap: missing label-route online threshold guard for sourceharbor"
+        "runner-health.yml: runner-bootstrap: missing label-route online threshold guard for brewme"
         in failures
     )
 
@@ -689,13 +689,13 @@ jobs:
 """
     blocks = {
         "runner-bootstrap": """  runner-bootstrap:
-    runs-on: [self-hosted, sourceharbor]
+    runs-on: [self-hosted, brewme]
     timeout-minutes: 30
     steps:
       - run: |
           MIN_ONLINE_CORE_RUNNERS="${MIN_ONLINE_CORE_RUNNERS:-3}"
           MIN_ONLINE_LABEL_RUNNERS="${MIN_ONLINE_LABEL_RUNNERS:-1}"
-          label_online_count="$(gh api "orgs/${GH_ORG}/actions/runners" --jq "[.runners[] | select((.labels | map(.name) | index(\\"sourceharbor\\")) and .status==\\"online\\")] | length")"
+          label_online_count="$(gh api "orgs/${GH_ORG}/actions/runners" --jq "[.runners[] | select((.labels | map(.name) | index(\\"brewme\\")) and .status==\\"online\\")] | length")"
 """,
     }
     failures: list[str] = []
@@ -711,7 +711,7 @@ jobs:
         not in failures
     )
     assert (
-        "runner-health.yml: runner-bootstrap: missing label-route online threshold guard for sourceharbor"
+        "runner-health.yml: runner-bootstrap: missing label-route online threshold guard for brewme"
         not in failures
     )
 
@@ -1042,7 +1042,7 @@ def test_web_e2e_job_calls_repo_script_inside_strict_ci_entry() -> None:
     assert "describe_task_queue" in script
     assert "TASK_QUEUE_TYPE_WORKFLOW" in script
     assert "TASK_QUEUE_TYPE_ACTIVITY" in script
-    assert "web-e2e worker pollers detected on task queue sourceharbor-worker" in script
+    assert "web-e2e worker pollers detected on task queue brewme-worker" in script
     assert "no task queue pollers within 30s" in script
     assert ".runtime-cache/logs/tests/web-e2e-api.log" in script
     assert ".runtime-cache/logs/tests/web-e2e-worker.log" in script

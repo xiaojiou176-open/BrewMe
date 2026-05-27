@@ -1,7 +1,7 @@
 import {
-	createSourceHarborClient,
+	createBrewMeClient,
 	apiClient as sdkApiClient,
-} from "@sourceharbor/sdk";
+} from "@brewme/sdk";
 
 import { resolveApiBaseUrl } from "@/lib/api/url";
 
@@ -34,4 +34,4 @@ export const apiClient = new Proxy(sdkApiClient as WebApiClient, {
 	},
 }) as WebApiClient;
 
-export { createSourceHarborClient };
+export { createBrewMeClient };

@@ -307,7 +307,7 @@ def test_api_real_smoke_script_enforces_real_postgres_and_strict_mode() -> None:
     assert '"wait_for_result": True' in script
     assert '"workflow_name"] == "CleanupWorkspaceWorkflow"' in script
     assert "api -> temporal -> worker cleanup workflow closure probe passed" in script
-    assert 'SMOKE_WRITE_TOKEN="${SOURCE_HARBOR_API_KEY:-sourceharbor-local-dev-token}"' in script
+    assert 'SMOKE_WRITE_TOKEN="${SOURCE_HARBOR_API_KEY:-brewme-local-dev-token}"' in script
     assert 'export SOURCE_HARBOR_API_KEY="${SOURCE_HARBOR_API_KEY:-$SMOKE_WRITE_TOKEN}"' in script
     assert (
         'export WEB_ACTION_SESSION_TOKEN="${WEB_ACTION_SESSION_TOKEN:-$SMOKE_WRITE_TOKEN}"'
@@ -372,12 +372,12 @@ def test_ci_api_real_smoke_script_replaces_bootstrap_sqlite_default_with_postgre
 
 def test_ci_api_real_smoke_script_preserves_explicit_non_sqlite_database_url() -> None:
     result = _run_ci_api_real_smoke_script(
-        database_url="postgresql+psycopg://postgres:postgres@db.internal:5432/sourceharbor_ci"
+        database_url="postgresql+psycopg://postgres:postgres@db.internal:5432/brewme_ci"
     )
 
     assert result.returncode == 0, result.stderr
     assert (
-        "DATABASE_URL=postgresql+psycopg://postgres:postgres@db.internal:5432/sourceharbor_ci"
+        "DATABASE_URL=postgresql+psycopg://postgres:postgres@db.internal:5432/brewme_ci"
         in result.stdout
     )
 
@@ -449,13 +449,13 @@ def test_strict_ci_entry_injects_api_real_smoke_postgres_default_before_standard
 
 def test_strict_ci_entry_preserves_explicit_api_real_smoke_postgres_before_standard_env() -> None:
     result = _run_strict_ci_api_real_smoke_entry(
-        database_url="postgresql+psycopg://postgres:postgres@db.internal:5432/sourceharbor_ci",
+        database_url="postgresql+psycopg://postgres:postgres@db.internal:5432/brewme_ci",
         temporal_target_host=None,
     )
 
     assert result.returncode == 0, result.stderr
     assert (
-        "DATABASE_URL=postgresql+psycopg://postgres:postgres@db.internal:5432/sourceharbor_ci"
+        "DATABASE_URL=postgresql+psycopg://postgres:postgres@db.internal:5432/brewme_ci"
         in result.stdout
     )
 
@@ -569,10 +569,10 @@ def test_strict_ci_entry_marks_debug_build_as_diagnostic_only() -> None:
     strict_entry = (_repo_root() / "scripts" / "ci" / "strict_entry.sh").read_text(encoding="utf-8")
 
     assert (
-        'sourceharbor_log info strict_ci_entry_diagnostic_mode "using debug-build diagnostic path"'
+        'brewme_log info strict_ci_entry_diagnostic_mode "using debug-build diagnostic path"'
         in strict_entry
     )
     assert (
-        'sourceharbor_log info strict_ci_entry_release_qualifying "using pinned-image release-qualifying path"'
+        'brewme_log info strict_ci_entry_release_qualifying "using pinned-image release-qualifying path"'
         in strict_entry
     )

@@ -25,7 +25,7 @@ usage() {
   cat <<'EOF'
 Usage: ./scripts/deploy/core_services.sh [up|down|restart|status|logs] [--env-file <path>]
 
-SourceHarbor local core services compose helper.
+BrewMe local core services compose helper.
 Starts or inspects the repo-local Postgres + Temporal stack from
 infra/compose/core-services.compose.yml.
 When Docker Desktop is unavailable but the local machine has `postgres`/`pg_ctl`

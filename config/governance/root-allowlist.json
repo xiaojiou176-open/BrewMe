@@ -102,7 +102,7 @@
     {
       "path": ".stitch",
       "kind": "design-contract",
-      "reason": "Repo-tracked Stitch design truth source for SourceHarbor UI system rules and generation guidance.",
+      "reason": "Repo-tracked Stitch design truth source for BrewMe UI system rules and generation guidance.",
       "owner": "platform",
       "mutable": false
     },

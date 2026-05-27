@@ -45,7 +45,7 @@ def test_reader_batch_activity_wrappers_delegate_to_store(monkeypatch: pytest.Mo
     monkeypatch.setattr(
         activities_entry.Settings,
         "from_env",
-        staticmethod(lambda: SimpleNamespace(database_url="postgresql://sourceharbor")),
+        staticmethod(lambda: SimpleNamespace(database_url="postgresql://brewme")),
     )
     monkeypatch.setattr(activities_entry, "PostgresBusinessStore", _factory)
 
@@ -94,7 +94,7 @@ def test_reader_batch_activity_wrappers_delegate_to_store(monkeypatch: pytest.Mo
         )
     ) == {"id": "batch-1", "status": "failed"}
 
-    assert all(store.database_url == "postgresql://sourceharbor" for store in created_stores)
+    assert all(store.database_url == "postgresql://brewme" for store in created_stores)
     assert created_stores[0].calls == [("get", {"batch_id": "batch-1"})]
     assert created_stores[1].calls[0][0] == "prepare"
     assert created_stores[2].calls == [

@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/e2e-live-smoke.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/e2e-live-smoke.jsonl"
 ENV_PROFILE="${ENV_PROFILE:-local}"
 CLI_LIVE_SMOKE_API_BASE_URL="http://127.0.0.1:9000"
 LIVE_SMOKE_REQUIRE_API="1"
@@ -195,7 +195,7 @@ else
 fi
 
 log() {
-  sourceharbor_log info e2e_live_smoke "$*"
+  brewme_log info e2e_live_smoke "$*"
 }
 
 fail() {
@@ -203,8 +203,8 @@ fail() {
   stop_long_phase_heartbeat
   run_teardown
   write_diagnostics "failed" "$*"
-  sourceharbor_log error e2e_live_smoke_error "$*"
-  sourceharbor_log error e2e_live_smoke_failure_kind "failure_kind=${FAILURE_KIND} diagnostics_path=${DIAGNOSTICS_PATH}"
+  brewme_log error e2e_live_smoke_error "$*"
+  brewme_log error e2e_live_smoke_failure_kind "failure_kind=${FAILURE_KIND} diagnostics_path=${DIAGNOSTICS_PATH}"
   exit 1
 }
 
@@ -782,7 +782,7 @@ resolve_local_api_write_token() {
     return 0
   fi
   if [[ -z "${CI:-}" && -z "${GITHUB_ACTIONS:-}" ]]; then
-    printf 'sourceharbor-local-dev-token'
+    printf 'brewme-local-dev-token'
     return 0
   fi
   printf ''

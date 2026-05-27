@@ -426,7 +426,7 @@ def build_disk_governance_operator_summary(root: Path, policy: dict[str, Any]) -
     if not repo_web_runtime_path.exists() and duplicate_entries:
         return {
             "status": "warn",
-            "summary": "Repo-external duplicate project envs are present under ~/.cache/sourceharbor even though the repo-side web runtime duplicate is clear.",
+            "summary": "Repo-external duplicate project envs are present under ~/.cache/brewme even though the repo-side web runtime duplicate is clear.",
             "next_step": "Audit duplicate env provenance first; keep the canonical project-venv and do not clear extra envs until known entrypoints are confirmed clear.",
             "details": details,
         }
@@ -471,7 +471,7 @@ def build_disk_governance_operator_summary(root: Path, policy: dict[str, Any]) -
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Build a four-layer disk-space audit for SourceHarbor."
+        description="Build a four-layer disk-space audit for BrewMe."
     )
     parser.add_argument("--repo-root", default=str(repo_root()))
     parser.add_argument("--policy", default="")

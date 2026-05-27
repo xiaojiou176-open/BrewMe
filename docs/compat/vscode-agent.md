@@ -1,15 +1,15 @@
 # VS Code Agent Compatibility
 
-This is the shortest honest VS Code agent adoption path for SourceHarbor.
+This is the shortest honest VS Code agent adoption path for BrewMe.
 
 ## Pick Your Door
 
 | If you want to... | Use this | Why |
 | --- | --- | --- |
 | give VS Code agent workflows governed access to jobs, retrieval, and artifacts | MCP | same control-tower truth the operator surfaces use |
-| call SourceHarbor from scripts or tools | `@sourceharbor/sdk` | typed HTTP client for the public contract |
-| do quick terminal inspection | `@sourceharbor/cli` | thin CLI over the current API |
-| boot and manage the whole repo locally | `./bin/sourceharbor` | repo-local runtime management stays in the clone |
+| call BrewMe from scripts or tools | `@brewme/sdk` | typed HTTP client for the public contract |
+| do quick terminal inspection | `@brewme/cli` | thin CLI over the current API |
+| boot and manage the whole repo locally | `./bin/brewme` | repo-local runtime management stays in the clone |
 
 ## Fastest Path
 
@@ -20,8 +20,8 @@ This is the shortest honest VS Code agent adoption path for SourceHarbor.
 
 ## Starter Template
 
-Use [templates/public-skills/vscode-agent/sourceharbor-watchlist-briefing.md](../../templates/public-skills/vscode-agent/sourceharbor-watchlist-briefing.md)
-when you want VS Code agent workflows to operate over SourceHarbor watchlists,
+Use [templates/public-skills/vscode-agent/brewme-watchlist-briefing.md](../../templates/public-skills/vscode-agent/brewme-watchlist-briefing.md)
+when you want VS Code agent workflows to operate over BrewMe watchlists,
 Ask, and evidence surfaces without reading any private repo memory first.
 
 ## Plugin-Grade Bundle
@@ -29,10 +29,10 @@ Ask, and evidence surfaces without reading any private repo memory first.
 If you want a stronger, source-installable bundle instead of a docs-only
 starter, use:
 
-- [starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/README.md](../../starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/README.md)
-- [starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/plugin.json](../../starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/plugin.json)
-- [starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/.mcp.json](../../starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/.mcp.json)
-- [starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/skills/sourceharbor-watchlist-briefing/SKILL.md](../../starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/skills/sourceharbor-watchlist-briefing/SKILL.md)
+- [starter-packs/vscode-agent/brewme-vscode-agent-plugin/README.md](../../starter-packs/vscode-agent/brewme-vscode-agent-plugin/README.md)
+- [starter-packs/vscode-agent/brewme-vscode-agent-plugin/plugin.json](../../starter-packs/vscode-agent/brewme-vscode-agent-plugin/plugin.json)
+- [starter-packs/vscode-agent/brewme-vscode-agent-plugin/.mcp.json](../../starter-packs/vscode-agent/brewme-vscode-agent-plugin/.mcp.json)
+- [starter-packs/vscode-agent/brewme-vscode-agent-plugin/skills/brewme-watchlist-briefing/SKILL.md](../../starter-packs/vscode-agent/brewme-vscode-agent-plugin/skills/brewme-watchlist-briefing/SKILL.md)
 
 This is the repo's strongest current artifact for VS Code agent source install
 or local plugin-location loading.
@@ -40,6 +40,6 @@ or local plugin-location loading.
 ## Honest Boundary
 
 - VS Code agent workflows are a **ship-now fit** through MCP + HTTP API + the public starter layer.
-- SourceHarbor now ships a VS Code agent plugin bundle, but that does **not**
-  mean SourceHarbor is live-listed in the VS Code Marketplace.
+- BrewMe now ships a VS Code agent plugin bundle, but that does **not**
+  mean BrewMe is live-listed in the VS Code Marketplace.
 - This is still a source-first integration story, not a hosted VS Code product.

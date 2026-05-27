@@ -16,7 +16,7 @@ def _fake_settings() -> SimpleNamespace:
     return SimpleNamespace(
         temporal_target_host="127.0.0.1:7233",
         temporal_namespace="default",
-        temporal_task_queue="sourceharbor-worker",
+        temporal_task_queue="brewme-worker",
         digest_daily_local_hour=9,
         digest_local_timezone="UTC",
     )
@@ -327,7 +327,7 @@ def test_poll_and_process_workflow_start_paths(monkeypatch) -> None:
     process = asyncio.run(worker_main.start_process_workflow(_fake_settings(), "job-1"))
     assert poll["ok"] is True
     assert process["ok"] is True
-    assert captured[0]["kwargs"]["task_queue"] == "sourceharbor-worker"
+    assert captured[0]["kwargs"]["task_queue"] == "brewme-worker"
     assert captured[1]["kwargs"]["id_reuse_policy"] == _Reuse.REJECT_DUPLICATE
     assert captured[1]["kwargs"]["id_conflict_policy"] == _Conflict.USE_EXISTING
 

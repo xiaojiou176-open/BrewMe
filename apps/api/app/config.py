@@ -40,12 +40,12 @@ def _read_positive_float_env(name: str, *, default: float) -> float:
     return value
 
 
-def _sourceharbor_cache_root() -> str:
+def _brewme_cache_root() -> str:
     raw = os.getenv("SOURCE_HARBOR_CACHE_ROOT")
     return (
         os.path.expanduser(raw.strip())
         if raw and raw.strip()
-        else os.path.expanduser("~/.cache/sourceharbor")
+        else os.path.expanduser("~/.cache/brewme")
     )
 
 
@@ -86,7 +86,7 @@ class Settings:
     @classmethod
     def from_env(cls) -> Settings:
         return cls(
-            app_name=os.getenv("APP_NAME", "SourceHarbor API"),
+            app_name=os.getenv("APP_NAME", "BrewMe API"),
             app_version=os.getenv("APP_VERSION", "0.1.19"),
             database_url=_read_required_env("DATABASE_URL"),
             temporal_target_host=_read_required_env("TEMPORAL_TARGET_HOST"),
@@ -111,7 +111,7 @@ class Settings:
             sqlite_state_path=_read_required_env("SQLITE_STATE_PATH"),
             pipeline_artifact_root=os.getenv(
                 "PIPELINE_ARTIFACT_ROOT",
-                os.path.join(_sourceharbor_cache_root(), "artifacts"),
+                os.path.join(_brewme_cache_root(), "artifacts"),
             ),
             notification_enabled=_parse_bool(
                 os.getenv("NOTIFICATION_ENABLED"),

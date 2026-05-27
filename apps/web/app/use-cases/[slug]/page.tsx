@@ -18,11 +18,11 @@ const BUILDER_RESOURCE_LINKS = {
 	builders: "/builders",
 	proof: "/proof",
 	starterPacks:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/README.md",
-	cli: "https://github.com/xiaojiou176-open/sourceharbor/blob/main/packages/sourceharbor-cli/README.md",
-	sdk: "https://github.com/xiaojiou176-open/sourceharbor/blob/main/packages/sourceharbor-sdk/README.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/README.md",
+	cli: "https://github.com/xiaojiou176-open/brewme/blob/main/packages/brewme-cli/README.md",
+	sdk: "https://github.com/xiaojiou176-open/brewme/blob/main/packages/brewme-sdk/README.md",
 	mediaKit:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/media-kit.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/media-kit.md",
 } as const;
 
 type UseCasePageProps = {

@@ -1,6 +1,6 @@
 # Notice
 
-SourceHarbor is maintained as a public, source-first engineering repository.
+BrewMe is maintained as a public, source-first engineering repository.
 
 Public-facing claims should be backed by:
 

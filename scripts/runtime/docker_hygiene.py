@@ -326,7 +326,7 @@ def _apply_cleanup(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Report or clean repo-owned Docker residue for SourceHarbor without touching global Docker cache."
+        description="Report or clean repo-owned Docker residue for BrewMe without touching global Docker cache."
     )
     parser.add_argument("--repo-root", default=str(repo_root()))
     parser.add_argument("--policy", default="")

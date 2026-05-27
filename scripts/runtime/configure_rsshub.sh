@@ -211,7 +211,7 @@ trigger_poll() {
 require_command curl
 
 if [[ -z "${SOURCE_HARBOR_API_KEY:-}" && -z "${CI:-}" && -z "${GITHUB_ACTIONS:-}" ]]; then
-  export SOURCE_HARBOR_API_KEY="sourceharbor-local-dev-token"
+  export SOURCE_HARBOR_API_KEY="brewme-local-dev-token"
 fi
 if [[ -z "${WEB_ACTION_SESSION_TOKEN:-}" && -n "${SOURCE_HARBOR_API_KEY:-}" ]]; then
   export WEB_ACTION_SESSION_TOKEN="$SOURCE_HARBOR_API_KEY"

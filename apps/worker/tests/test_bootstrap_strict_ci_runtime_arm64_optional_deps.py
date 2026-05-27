@@ -90,7 +90,7 @@ def test_configure_strict_ci_python_environment_uses_tmp_scoped_repo_env() -> No
         )
         uv_path = Path(lines["UV"])
 
-        assert uv_path.is_relative_to(tmp_root / "sourceharbor-strict-ci")
+        assert uv_path.is_relative_to(tmp_root / "brewme-strict-ci")
         assert uv_path.name
         assert lines["UV"] == lines["VENV"]
         assert lines["PATH0"] == lines["UV"] + "/bin"
@@ -285,7 +285,7 @@ def test_bootstrap_runtime_fails_fast_when_linux_arm64_optional_native_web_packa
         assert "--prefix apps/web install" not in npm_calls
         uv_environment = uv_log.read_text(encoding="utf-8").strip().split("=", 1)[1]
         assert Path(uv_environment).is_relative_to(
-            Path(tempfile.gettempdir()) / "sourceharbor-strict-ci"
+            Path(tempfile.gettempdir()) / "brewme-strict-ci"
         )
         assert uv_environment.endswith("/Linux-aarch64")
 

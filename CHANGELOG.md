@@ -75,7 +75,7 @@ and this project follows semantic-ish release communication even when the reposi
 ### Changed
 
 - landed the Wave 2 reader-frontstage tail so `/`, `/subscriptions`, `/feed`, and `/reader/[documentId]` now share one calmer reader-first product line with stronger source identity and a first-class repair rail
-- refreshed the public distribution ledgers after a new read-back pass: the Official MCP Registry API and PyPI still confirm `0.1.14`, `awesome-opencode#270` remains open, `mcp.so` currently says `Project not found`, `mcpservers.org` search returns `0` servers for `sourceharbor`, and PulseMCP public read-back still stops at an anonymous `Access Denied` page
+- refreshed the public distribution ledgers after a new read-back pass: the Official MCP Registry API and PyPI still confirm `0.1.14`, `awesome-opencode#270` remains open, `mcp.so` currently says `Project not found`, `mcpservers.org` search returns `0` servers for `brewme`, and PulseMCP public read-back still stops at an anonymous `Access Denied` page
 
 ## [0.1.22] - 2026-04-10
 
@@ -133,7 +133,7 @@ and this project follows semantic-ish release communication even when the reposi
 ### Changed
 
 - bumped the root Python package, public CLI, public TypeScript SDK, starter-pack manifests, and plugin bundle version anchors to `0.1.17`
-- aligned outward-facing version anchors across `contracts/source/openapi.yaml`, `apps/api/app/config.py`, `infra/docker/sourceharbor-api.Dockerfile`, and `uv.lock`
+- aligned outward-facing version anchors across `contracts/source/openapi.yaml`, `apps/api/app/config.py`, `infra/docker/brewme-api.Dockerfile`, and `uv.lock`
 - tightened the public distribution docs so GitHub Copilot / VS Code agent bundles now read as real repo-tracked surfaces instead of future repack work
 
 ## [0.1.14] - 2026-04-08
@@ -141,7 +141,7 @@ and this project follows semantic-ish release communication even when the reposi
 ### Changed
 
 - clarified the container/distribution truth split so local compose, devcontainer parity, and the GHCR strict CI image no longer read like one public Docker install story
-- clarified that SourceHarbor is a multi-surface product repo and that skill-package criteria apply only to its public starter-pack and plugin-grade distribution surfaces
+- clarified that BrewMe is a multi-surface product repo and that skill-package criteria apply only to its public starter-pack and plugin-grade distribution surfaces
 - bumped the public CLI, public TypeScript SDK, OpenAPI contract, and plugin/template version anchors to `0.1.14` so the latest release line catches back up with the current `main` head after the distribution-truth closeout landed
 
 ## [0.1.13] - 2026-04-07
@@ -155,8 +155,8 @@ and this project follows semantic-ish release communication even when the reposi
 
 ### Changed
 
-- transferred the canonical public repository into the `xiaojiou176-open` organization while keeping the public `sourceharbor` entry and `main` branch intact
-- rewired public-facing GitHub URLs, metadata defaults, GHCR references, and registry templates to the canonical `xiaojiou176-open/sourceharbor` slug
+- transferred the canonical public repository into the `xiaojiou176-open` organization while keeping the public `brewme` entry and `main` branch intact
+- rewired public-facing GitHub URLs, metadata defaults, GHCR references, and registry templates to the canonical `xiaojiou176-open/brewme` slug
 - tightened workflow security guardrails with `zizmor`, `trivy`, and `trufflehog`, then aligned the main GitHub Actions lanes so the canonical org repo is fresh-green again
 
 ## [0.1.11] - 2026-04-04
@@ -220,7 +220,7 @@ and this project follows semantic-ish release communication even when the reposi
 
 - promoted disk governance into a more resilient Ops / doctor hardening gate, including safer fallback behavior when audit policy or report data is unreadable
 - clarified the public starter surface so `starter-packs/` stays the public entry directory and `templates/public-skills/**` stays the copyable template asset layer
-- clarified the repo-local CLI wording so `./bin/sourceharbor` no longer reads like the repository has no packaged public CLI
+- clarified the repo-local CLI wording so `./bin/brewme` no longer reads like the repository has no packaged public CLI
 - bumped the public CLI, public TypeScript SDK, and OpenAPI contract version anchors to `0.1.6` so the next release line matches the current `main` head
 
 ## [0.1.5] - 2026-04-03
@@ -234,7 +234,7 @@ and this project follows semantic-ish release communication even when the reposi
 
 ### Added
 
-- first public builder packages under `packages/sourceharbor-cli` and `packages/sourceharbor-sdk`
+- first public builder packages under `packages/brewme-cli` and `packages/brewme-sdk`
 - first public compatibility docs and starter packs for Codex / Claude Code under `docs/compat/*`, `docs/public-skills.md`, and `templates/public-skills/**`
 - first public builder examples under `examples/cli` and `examples/sdk`
 
@@ -264,7 +264,7 @@ and this project follows semantic-ish release communication even when the reposi
 - job evidence bundle export for internal reuse and async collaboration
 - read-only sample corpus and playground surfaces
 - truthful use-case landing pages for YouTube, Bilibili, RSS, MCP, and research pipeline discovery
-- a thin `./bin/sourceharbor` facade that exposes the existing repo-owned `bin/*` entrypoints as one discoverable local CLI/help surface
+- a thin `./bin/brewme` facade that exposes the existing repo-owned `bin/*` entrypoints as one discoverable local CLI/help surface
 
 ### Changed
 

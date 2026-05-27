@@ -307,7 +307,7 @@ def _render_report(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Audit and optionally maintain repo-owned external cache/state under ~/.cache/sourceharbor."
+        description="Audit and optionally maintain repo-owned external cache/state under ~/.cache/brewme."
     )
     parser.add_argument("--repo-root", default=str(repo_root()))
     parser.add_argument("--policy", default="")

@@ -16,7 +16,7 @@ body:
     id: proposal
     attributes:
       label: Proposed direction
-      description: What should SourceHarbor do?
+      description: What should BrewMe do?
       placeholder: Add a publishable briefing surface that turns digest artifacts into shareable review pages.
     validations:
       required: true

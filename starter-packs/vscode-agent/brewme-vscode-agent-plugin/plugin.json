@@ -1,0 +1,9 @@
+{
+  "name": "BrewMe VS Code Agent Plugin",
+  "version": "0.1.19",
+  "description": "VS Code agent plugin bundle for grounded BrewMe watchlist briefings through MCP and the HTTP API.",
+  "skills": [
+    "./skills/brewme-watchlist-briefing"
+  ],
+  "mcpServers": "./.mcp.json"
+}

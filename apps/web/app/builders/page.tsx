@@ -15,33 +15,33 @@ import { buildProductMetadata } from "@/lib/seo";
 
 const RESOURCE_LINKS = {
 	builders:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/builders.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/builders.md",
 	distribution:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/public-distribution.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/public-distribution.md",
 	starterPacks:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/README.md",
-	cli: "https://github.com/xiaojiou176-open/sourceharbor/blob/main/packages/sourceharbor-cli/README.md",
-	sdk: "https://github.com/xiaojiou176-open/sourceharbor/blob/main/packages/sourceharbor-sdk/README.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/README.md",
+	cli: "https://github.com/xiaojiou176-open/brewme/blob/main/packages/brewme-cli/README.md",
+	sdk: "https://github.com/xiaojiou176-open/brewme/blob/main/packages/brewme-sdk/README.md",
 	codexBundle:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/codex/sourceharbor-codex-plugin/README.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/codex/brewme-codex-plugin/README.md",
 	claudeBundle:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/claude-code/sourceharbor-claude-plugin/README.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/claude-code/brewme-claude-plugin/README.md",
 	openclawBundle:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/openclaw/README.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/openclaw/README.md",
 	mcpRegistry:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/mcp-registry/README.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/mcp-registry/README.md",
 	codexCompat:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/compat/codex.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/compat/codex.md",
 	claudeCompat:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/compat/claude-code.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/compat/claude-code.md",
 	openclawCompat:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/compat/openclaw.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/compat/openclaw.md",
 	publicSkills:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/public-skills.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/public-skills.md",
 	projectStatus:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/project-status.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/project-status.md",
 	mediaKit:
-		"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/media-kit.md",
+		"https://github.com/xiaojiou176-open/brewme/blob/main/docs/media-kit.md",
 } as const;
 
 const OFFICIAL_SURFACE_ROWS = [
@@ -51,7 +51,7 @@ const OFFICIAL_SURFACE_ROWS = [
 		tone: "secondary" as const,
 		snapshot: "Official directory proof still missing.",
 		summary:
-			"SourceHarbor already ships a Codex-compatible plugin bundle, but there is still no official self-serve public directory path to claim as live listing proof.",
+			"BrewMe already ships a Codex-compatible plugin bundle, but there is still no official self-serve public directory path to claim as live listing proof.",
 		href: RESOURCE_LINKS.codexCompat,
 		cta: "Open Codex boundary",
 	},
@@ -71,7 +71,7 @@ const OFFICIAL_SURFACE_ROWS = [
 		tone: "outline" as const,
 		snapshot: "Live registry receipt has not been captured yet.",
 		summary:
-			"SourceHarbor now has a first-cut OpenClaw pack plus publish-ready ClawHub metadata, but not a live public registry receipt yet.",
+			"BrewMe now has a first-cut OpenClaw pack plus publish-ready ClawHub metadata, but not a live public registry receipt yet.",
 		href: RESOURCE_LINKS.openclawCompat,
 		cta: "Open OpenClaw boundary",
 	},
@@ -99,10 +99,10 @@ const builderCopy = getLocaleMessages().builderSurfaces;
 export const metadata: Metadata = buildProductMetadata({
 	title: "Builders",
 	description:
-		"Choose one SourceHarbor builder first hop for MCP, Codex, Claude Code, OpenClaw, CLI, SDK, and proof-first adoption.",
+		"Choose one BrewMe builder first hop for MCP, Codex, Claude Code, OpenClaw, CLI, SDK, and proof-first adoption.",
 	route: "builders",
 	keywords: [
-		"SourceHarbor builders",
+		"BrewMe builders",
 		"Codex workflow",
 		"Claude Code workflow",
 		"OpenClaw starter pack",
@@ -118,7 +118,7 @@ export default function BuildersPage() {
 	return (
 		<div className="folo-page-shell folo-unified-shell">
 			<div className="folo-page-header">
-				<p className="folo-page-kicker">SourceHarbor Builder Entry</p>
+				<p className="folo-page-kicker">BrewMe Builder Entry</p>
 				<h1 className="folo-page-title" data-route-heading tabIndex={-1}>
 					{builderCopy.title}
 				</h1>

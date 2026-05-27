@@ -8,7 +8,7 @@ LOG_DIR="$ROOT_DIR/.runtime-cache/logs/components/full-stack"
 inherited_env_profile="${ENV_PROFILE-}"
 inherited_api_port="${API_PORT-}"
 inherited_web_port="${WEB_PORT-}"
-inherited_sourceharbor_api_base_url="${SOURCE_HARBOR_API_BASE_URL-}"
+inherited_brewme_api_base_url="${SOURCE_HARBOR_API_BASE_URL-}"
 inherited_next_public_api_base_url="${NEXT_PUBLIC_API_BASE_URL-}"
 inherited_core_postgres_port="${CORE_POSTGRES_PORT-}"
 inherited_database_url="${DATABASE_URL-}"
@@ -18,7 +18,7 @@ inherited_temporal_task_queue="${TEMPORAL_TASK_QUEUE-}"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "components" "$SCRIPT_NAME" "$LOG_DIR/full-stack.jsonl"
+brewme_log_init "components" "$SCRIPT_NAME" "$LOG_DIR/full-stack.jsonl"
 mkdir -p "$RUN_DIR" "$LOG_DIR"
 LAST_FAILURE_REASON_FILE="$RUN_DIR/last_failure_reason"
 
@@ -83,7 +83,7 @@ target_port = (os.environ.get("TARGET_DATABASE_PORT") or "15432").strip()
 default_password = os.environ.get("TARGET_DATABASE_PASSWORD", "postgres")
 
 if not raw:
-    raw = f"postgresql+psycopg://postgres:{default_password}@127.0.0.1:{target_port}/sourceharbor"
+    raw = f"postgresql+psycopg://postgres:{default_password}@127.0.0.1:{target_port}/brewme"
 
 if raw.startswith("postgresql://"):
     raw = "postgresql+psycopg://" + raw[len("postgresql://"):]
@@ -94,7 +94,7 @@ if scheme == "postgresql":
     scheme = "postgresql+psycopg"
 
 hostname = parsed.hostname or "127.0.0.1"
-database_name = parsed.path.lstrip("/") or "sourceharbor"
+database_name = parsed.path.lstrip("/") or "brewme"
 
 if hostname in {"localhost", "127.0.0.1"}:
     username = parsed.username or "postgres"
@@ -108,8 +108,8 @@ PY
 
 normalize_temporal_task_queue() {
   local queue="${1:-}"
-  if [[ -z "$queue" || "$queue" == "sourceharbor" ]]; then
-    printf 'sourceharbor-worker\n'
+  if [[ -z "$queue" || "$queue" == "brewme" ]]; then
+    printf 'brewme-worker\n'
     return 0
   fi
   printf '%s\n' "$queue"
@@ -130,7 +130,7 @@ fi
 
 API_PORT="$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "API_PORT" "$api_port_cli" "$inherited_api_port" "${API_PORT:-}" "9000")"
 WEB_PORT="$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "WEB_PORT" "$web_port_cli" "$inherited_web_port" "${WEB_PORT:-}" "3000")"
-SOURCE_HARBOR_API_BASE_URL="$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "SOURCE_HARBOR_API_BASE_URL" "" "$inherited_sourceharbor_api_base_url" "${SOURCE_HARBOR_API_BASE_URL:-}" "http://127.0.0.1:${API_PORT}")"
+SOURCE_HARBOR_API_BASE_URL="$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "SOURCE_HARBOR_API_BASE_URL" "" "$inherited_brewme_api_base_url" "${SOURCE_HARBOR_API_BASE_URL:-}" "http://127.0.0.1:${API_PORT}")"
 NEXT_PUBLIC_API_BASE_URL="$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "NEXT_PUBLIC_API_BASE_URL" "" "$inherited_next_public_api_base_url" "${NEXT_PUBLIC_API_BASE_URL:-}" "http://127.0.0.1:${API_PORT}")"
 if [[ -n "$api_health_url_cli" ]]; then
   API_HEALTH_URL="$api_health_url_cli"
@@ -138,16 +138,16 @@ else
   API_HEALTH_URL="${SOURCE_HARBOR_API_BASE_URL}/healthz"
 fi
 CORE_POSTGRES_PORT="$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "CORE_POSTGRES_PORT" "" "$inherited_core_postgres_port" "${CORE_POSTGRES_PORT:-}" "15432")"
-DATABASE_URL="$(normalize_runtime_database_url "$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "DATABASE_URL" "" "$inherited_database_url" "${DATABASE_URL:-}" "postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/sourceharbor")" "$CORE_POSTGRES_PORT" "${CORE_POSTGRES_PASSWORD:-postgres}")"
+DATABASE_URL="$(normalize_runtime_database_url "$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "DATABASE_URL" "" "$inherited_database_url" "${DATABASE_URL:-}" "postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/brewme")" "$CORE_POSTGRES_PORT" "${CORE_POSTGRES_PASSWORD:-postgres}")"
 TEMPORAL_TARGET_HOST="$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "TEMPORAL_TARGET_HOST" "" "$inherited_temporal_target_host" "${TEMPORAL_TARGET_HOST:-}" "127.0.0.1:7233")"
 TEMPORAL_NAMESPACE="$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "TEMPORAL_NAMESPACE" "" "$inherited_temporal_namespace" "${TEMPORAL_NAMESPACE:-}" "default")"
-TEMPORAL_TASK_QUEUE="$(normalize_temporal_task_queue "$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "TEMPORAL_TASK_QUEUE" "" "$inherited_temporal_task_queue" "${TEMPORAL_TASK_QUEUE:-}" "sourceharbor-worker")")"
+TEMPORAL_TASK_QUEUE="$(normalize_temporal_task_queue "$(resolve_runtime_route_value_with_sources "$ROOT_DIR" "TEMPORAL_TASK_QUEUE" "" "$inherited_temporal_task_queue" "${TEMPORAL_TASK_QUEUE:-}" "brewme-worker")")"
 
 export API_PORT WEB_PORT SOURCE_HARBOR_API_BASE_URL NEXT_PUBLIC_API_BASE_URL API_HEALTH_URL
 export DATABASE_URL TEMPORAL_TARGET_HOST TEMPORAL_NAMESPACE TEMPORAL_TASK_QUEUE
 ci_mode="$(printf '%s' "${CI:-}" | tr '[:upper:]' '[:lower:]')"
 github_actions_mode="$(printf '%s' "${GITHUB_ACTIONS:-}" | tr '[:upper:]' '[:lower:]')"
-local_default_write_token="sourceharbor-local-dev-token"
+local_default_write_token="brewme-local-dev-token"
 if [[ "$ci_mode" == "1" || "$ci_mode" == "true" || "$ci_mode" == "yes" || "$ci_mode" == "on" || "$github_actions_mode" == "1" || "$github_actions_mode" == "true" || "$github_actions_mode" == "yes" || "$github_actions_mode" == "on" ]]; then
   local_default_write_token=""
 fi
@@ -171,7 +171,7 @@ if ! [[ "$WEB_PORT" =~ ^[0-9]+$ ]] || (( WEB_PORT <= 0 || WEB_PORT > 65535 )); t
   exit 2
 fi
 
-log() { sourceharbor_log info full_stack "$*"; }
+log() { brewme_log info full_stack "$*"; }
 
 usage() {
   cat <<'EOF'

@@ -60,17 +60,17 @@ EXCLUDED_PREFIXES = (
 
 ALLOWED_SUBSTRINGS = (
     "/workspace",
-    "/tmp/sourceharbor",
-    "/private/tmp/sourceharbor",
-    "/tmp/sourceharbor",
-    "/private/tmp/sourceharbor",
+    "/tmp/brewme",
+    "/private/tmp/brewme",
+    "/tmp/brewme",
+    "/private/tmp/brewme",
     "/Users/<name>/",
     "/home/<name>/",
     "/home/ubuntu/actions-runner/",
-    "$HOME/.cache/sourceharbor",
-    "~/.cache/sourceharbor",
-    "$HOME/.sourceharbor",
-    "~/.sourceharbor",
+    "$HOME/.cache/brewme",
+    "~/.cache/brewme",
+    "$HOME/.brewme",
+    "~/.brewme",
     ".runtime-cache/tmp/",
 )
 
@@ -161,7 +161,7 @@ def main() -> int:
         for item in errors:
             print(f"  - {item}")
         print(
-            "  - remediation: keep only controlled execution paths like /workspace or /tmp/sourceharbor* in public canonical surfaces; remove maintainer-specific absolute paths, old workspace prefixes, and personal email addresses"
+            "  - remediation: keep only controlled execution paths like /workspace or /tmp/brewme* in public canonical surfaces; remove maintainer-specific absolute paths, old workspace prefixes, and personal email addresses"
         )
         return 1
 

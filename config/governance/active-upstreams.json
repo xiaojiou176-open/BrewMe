@@ -208,7 +208,7 @@
       "kind": "image",
       "owner": "platform",
       "upgrade_owner": "platform",
-      "source": "ghcr.io/xiaojiou176-open/sourceharbor-ci-standard@sha256:8910a9a90aca43c0f97986d5b531cd8ddde3922481272643d5a073dbf9e17851",
+      "source": "ghcr.io/xiaojiou176-open/brewme-ci-standard@sha256:8910a9a90aca43c0f97986d5b531cd8ddde3922481272643d5a073dbf9e17851",
       "pin": "sha256:8910a9a90aca43c0f97986d5b531cd8ddde3922481272643d5a073dbf9e17851",
       "interface_type": "public_contract",
       "integration_surface": "public_image",

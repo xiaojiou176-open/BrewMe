@@ -61,23 +61,23 @@ printf '%s\n' "${{{key}:-}}"
     assert proc.stdout.strip() == "from_parent"
 
 
-def test_load_repo_env_legacy_sourceharbor_paths_normalize_to_cache_root(
+def test_load_repo_env_legacy_brewme_paths_normalize_to_cache_root(
     tmp_path: Path,
 ) -> None:
     root = _repo_root()
     home = tmp_path / "home"
-    legacy_root = home / ".sourceharbor"
+    legacy_root = home / ".brewme"
     (legacy_root / "state").mkdir(parents=True, exist_ok=True)
     (legacy_root / "artifacts").mkdir(parents=True, exist_ok=True)
     (legacy_root / "workspace").mkdir(parents=True, exist_ok=True)
     (legacy_root / "project-venv").mkdir(parents=True, exist_ok=True)
     (tmp_path / ".env").write_text(
         (
-            'export PIPELINE_ARTIFACT_ROOT="$HOME/.sourceharbor/artifacts"\n'
-            'export PIPELINE_WORKSPACE_DIR="$HOME/.sourceharbor/workspace"\n'
-            'export SQLITE_PATH="$HOME/.sourceharbor/state/worker_state.db"\n'
-            'export SQLITE_STATE_PATH="$HOME/.sourceharbor/state/api_state.db"\n'
-            'export UV_PROJECT_ENVIRONMENT="$HOME/.sourceharbor/project-venv"\n'
+            'export PIPELINE_ARTIFACT_ROOT="$HOME/.brewme/artifacts"\n'
+            'export PIPELINE_WORKSPACE_DIR="$HOME/.brewme/workspace"\n'
+            'export SQLITE_PATH="$HOME/.brewme/state/worker_state.db"\n'
+            'export SQLITE_STATE_PATH="$HOME/.brewme/state/api_state.db"\n'
+            'export UV_PROJECT_ENVIRONMENT="$HOME/.brewme/project-venv"\n'
         ),
         encoding="utf-8",
     )
@@ -105,8 +105,8 @@ printf 'UV=%s\\n' "${{UV_PROJECT_ENVIRONMENT:-}}"
     )
     assert proc.returncode == 0, proc.stderr
     lines = dict(line.split("=", 1) for line in proc.stdout.strip().splitlines())
-    assert lines["ART"] == str(home / ".cache" / "sourceharbor" / "artifacts")
-    assert lines["WS"] == str(home / ".cache" / "sourceharbor" / "workspace")
-    assert lines["SQLITE"] == str(home / ".cache" / "sourceharbor" / "state" / "worker_state.db")
-    assert lines["SQLITE_STATE"] == str(home / ".cache" / "sourceharbor" / "state" / "api_state.db")
-    assert lines["UV"] == str(home / ".cache" / "sourceharbor" / "project-venv")
+    assert lines["ART"] == str(home / ".cache" / "brewme" / "artifacts")
+    assert lines["WS"] == str(home / ".cache" / "brewme" / "workspace")
+    assert lines["SQLITE"] == str(home / ".cache" / "brewme" / "state" / "worker_state.db")
+    assert lines["SQLITE_STATE"] == str(home / ".cache" / "brewme" / "state" / "api_state.db")
+    assert lines["UV"] == str(home / ".cache" / "brewme" / "project-venv")

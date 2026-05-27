@@ -1,8 +1,8 @@
 {
   "description": "Reader-first source intelligence and MCP server for YouTube, Bilibili, RSSHub, and RSS, with grounded search, published reader docs, public CLI/TypeScript SDK surfaces, and plugin-grade builder bundles.",
-  "homepage": "https://xiaojiou176-open.github.io/SourceHarbor/",
+  "homepage": "https://xiaojiou176-open.github.io/BrewMe/",
   "topics": [
-    "sourceharbor",
+    "brewme",
     "source-first",
     "codex",
     "github-copilot",
@@ -24,5 +24,5 @@
     "temporal"
   ],
   "enable_discussions": true,
-  "social_preview_asset": "docs/assets/sourceharbor-social-preview.png"
+  "social_preview_asset": "docs/assets/brewme-social-preview.png"
 }

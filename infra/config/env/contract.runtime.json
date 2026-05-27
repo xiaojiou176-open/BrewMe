@@ -51,7 +51,7 @@
       "scope": "api",
       "required": false,
       "secret": false,
-      "default": "SourceHarbor API",
+      "default": "BrewMe API",
       "consumer": [
         "apps/api/app/config.py"
       ],
@@ -163,12 +163,12 @@
       "scope": "shared",
       "required": false,
       "secret": false,
-      "default": "$HOME/.cache/sourceharbor",
+      "default": "$HOME/.cache/brewme",
       "consumer": [
         "apps/api/app/config.py",
         "apps/worker/worker/config.py"
       ],
-      "description": "Canonical repo-owned external cache/state root for SourceHarbor runtime defaults."
+      "description": "Canonical repo-owned external cache/state root for BrewMe runtime defaults."
     },
     {
       "name": "DIGEST_DAILY_LOCAL_HOUR",

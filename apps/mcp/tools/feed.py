@@ -40,7 +40,7 @@ def _normalize_feed_item(item: Any) -> dict[str, Any]:
 
 def register_feed_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.feed.digests.list",
+        name="brewme.feed.digests.list",
         description="List digest feed entries with optional feedback and sort filters.",
     )
     def list_digest_feed(

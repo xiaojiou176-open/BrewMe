@@ -579,7 +579,7 @@ class JobsService:
         )
 
         return {
-            "bundle_kind": "sourceharbor_job_evidence_bundle_v1",
+            "bundle_kind": "brewme_job_evidence_bundle_v1",
             "sharing_scope": "internal",
             "sample": False,
             "generated_at": datetime.now(UTC).isoformat(),

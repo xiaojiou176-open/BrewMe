@@ -1,11 +1,11 @@
 # Architecture
 
-SourceHarbor is easiest to understand as a single knowledge pipeline with four outward-facing surfaces.
+BrewMe is easiest to understand as a single knowledge pipeline with four outward-facing surfaces.
 
 <p>
   <img
-    src="./assets/sourceharbor-architecture.svg"
-    alt="SourceHarbor architecture showing source intake, API and worker pipeline, artifact generation, retrieval and MCP surfaces, plus the reader-first web surfaces."
+    src="./assets/brewme-architecture.svg"
+    alt="BrewMe architecture showing source intake, API and worker pipeline, artifact generation, retrieval and MCP surfaces, plus the reader-first web surfaces."
     width="100%"
   />
 </p>
@@ -90,14 +90,14 @@ Everything else in the repository exists to make that loop reliable, inspectable
 - `contracts`: shared schemas and contract artifacts
 - `infra`: compose, migrations, runtime infrastructure, and deployment assets
 - `scripts` and `bin`: reproducible operator and CI entrypoints, including the runtime route snapshot under `.runtime-cache/run/full-stack/resolved.env`
-- `./bin/sourceharbor`: thin repo-local CLI/help facade over those existing `bin/*` entrypoints
+- `./bin/brewme`: thin repo-local CLI/help facade over those existing `bin/*` entrypoints
 
 ## Under Evaluation, Not Runtime Surfaces
 
 Two directions are intentionally kept outside the current runtime surface:
 
-- **Agent Autopilot**: SourceHarbor has workflows, MCP, retrieval, notifications, and evidence surfaces that can support a future spike, but it does not currently expose autonomous research ops as a product claim.
-- **Hosted workspace**: SourceHarbor already has product-shaped front doors, but the repository still assumes source-first, local-proof-first operation rather than a managed multi-tenant service.
+- **Agent Autopilot**: BrewMe has workflows, MCP, retrieval, notifications, and evidence surfaces that can support a future spike, but it does not currently expose autonomous research ops as a product claim.
+- **Hosted workspace**: BrewMe already has product-shaped front doors, but the repository still assumes source-first, local-proof-first operation rather than a managed multi-tenant service.
 
 See [reference/project-positioning.md](./reference/project-positioning.md) for
 the stable public summary of those future-direction boundaries.

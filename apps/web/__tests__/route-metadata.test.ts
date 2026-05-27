@@ -33,7 +33,7 @@ describe("route metadata", () => {
 		const metadata = buildAppShellMetadata();
 
 		expect(metadata.title).toMatchObject({
-			default: "SourceHarbor Front Door",
+			default: "BrewMe Front Door",
 		});
 		expect(metadata.description).toMatch(/Reader-first front door/i);
 		expect(toKeywordList(metadata.keywords)).toEqual(
@@ -52,40 +52,40 @@ describe("route metadata", () => {
 				"evidence bundle",
 			]),
 		);
-		expect(metadata.applicationName).toBe("SourceHarbor");
-		expect(metadata.openGraph?.siteName).toBe("SourceHarbor");
+		expect(metadata.applicationName).toBe("BrewMe");
+		expect(metadata.openGraph?.siteName).toBe("BrewMe");
 		expect(metadata.openGraph?.images).toEqual(
 			expect.arrayContaining([
 				expect.objectContaining({
-					url: expect.stringContaining("sourceharbor-social-preview"),
+					url: expect.stringContaining("brewme-social-preview"),
 				}),
 			]),
 		);
 		expect(metadata.twitter?.images).toEqual(
 			expect.arrayContaining([
-				expect.stringContaining("sourceharbor-social-preview"),
+				expect.stringContaining("brewme-social-preview"),
 			]),
 		);
 	});
 
 	it("adds canonical metadata when a public site URL is configured", () => {
-		process.env.SOURCE_HARBOR_PUBLIC_SITE_URL = "https://sourceharbor.ai";
+		process.env.SOURCE_HARBOR_PUBLIC_SITE_URL = "https://brewme.ai";
 
 		const metadata = buildProductMetadata({
 			title: "Search",
-			description: "Grounded search for SourceHarbor artifacts.",
+			description: "Grounded search for BrewMe artifacts.",
 			route: "search",
 		});
 
-		expect(metadata.metadataBase?.toString()).toBe("https://sourceharbor.ai/");
+		expect(metadata.metadataBase?.toString()).toBe("https://brewme.ai/");
 		expect(metadata.alternates?.canonical).toBe(
-			"https://sourceharbor.ai/search",
+			"https://brewme.ai/search",
 		);
-		expect(metadata.openGraph?.url).toBe("https://sourceharbor.ai/search");
+		expect(metadata.openGraph?.url).toBe("https://brewme.ai/search");
 		expect(metadata.openGraph?.images).toEqual(
 			expect.arrayContaining([
 				expect.objectContaining({
-					url: "https://raw.githubusercontent.com/xiaojiou176-open/sourceharbor/main/docs/assets/sourceharbor-social-preview.png",
+					url: "https://raw.githubusercontent.com/xiaojiou176-open/brewme/main/docs/assets/brewme-social-preview.png",
 				}),
 			]),
 		);
@@ -94,17 +94,17 @@ describe("route metadata", () => {
 	});
 
 	it("keeps dynamic use-case metadata on the slug-specific canonical path", async () => {
-		process.env.SOURCE_HARBOR_PUBLIC_SITE_URL = "https://sourceharbor.ai";
+		process.env.SOURCE_HARBOR_PUBLIC_SITE_URL = "https://brewme.ai";
 
 		const metadata = await generateUseCaseMetadata({
 			params: Promise.resolve({ slug: "claude-code" }),
 		});
 
 		expect(metadata.alternates?.canonical).toBe(
-			"https://sourceharbor.ai/use-cases/claude-code",
+			"https://brewme.ai/use-cases/claude-code",
 		);
 		expect(metadata.openGraph?.url).toBe(
-			"https://sourceharbor.ai/use-cases/claude-code",
+			"https://brewme.ai/use-cases/claude-code",
 		);
 
 		delete process.env.SOURCE_HARBOR_PUBLIC_SITE_URL;

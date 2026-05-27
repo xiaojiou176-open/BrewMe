@@ -1,0 +1,23 @@
+[Unit]
+Description=BrewMe - Temporal Worker
+After=network.target brewme-api.service
+Wants=brewme-api.service
+
+[Service]
+Type=simple
+User=brewme
+Group=brewme
+WorkingDirectory=/opt/brewme/repo
+EnvironmentFile=/opt/brewme/.env
+ExecStart=/usr/bin/bash -lc 'exec "${UV_PROJECT_ENVIRONMENT:-$HOME/.cache/brewme/project-venv}/bin/python" -m apps.worker.worker.main'
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=brewme-worker
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -12,7 +12,7 @@ RUNTIME_DIR = Path(__file__).resolve().parent
 if str(RUNTIME_DIR) not in sys.path:
     sys.path.insert(0, str(RUNTIME_DIR))
 
-from sourceharbor_chrome import (  # noqa: E402
+from brewme_chrome import (  # noqa: E402
     default_cdp_port,
     default_profile_dir,
     default_profile_name,
@@ -77,7 +77,7 @@ def _shell_exports(payload: dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Resolve SourceHarbor Chrome profile info for migration-source or repo-runtime modes."
+        description="Resolve BrewMe Chrome profile info for migration-source or repo-runtime modes."
     )
     parser.add_argument(
         "--mode",

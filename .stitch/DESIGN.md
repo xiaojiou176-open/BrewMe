@@ -1,4 +1,4 @@
-# Design System: SourceHarbor
+# Design System: BrewMe
 
 ## 0. Wave 2 Governance
 
@@ -15,7 +15,7 @@ repo truth into one reader-first product family.
   - Use it only for warmth, margin-note tone, and quiet reader-facing
     atmosphere.
 
-SourceHarbor should feel like:
+BrewMe should feel like:
 
 - Notion for the bones
 - WIRED for the story order
@@ -40,7 +40,7 @@ Wave 2 banned primary systems:
 
 ## 1. Product Lens
 
-SourceHarbor is a reader-first editorial product, not a generic dashboard and not an operator console wearing a nicer coat. Every page should help a person move from source intake to finished reading with as little cognitive drag as possible.
+BrewMe is a reader-first editorial product, not a generic dashboard and not an operator console wearing a nicer coat. Every page should help a person move from source intake to finished reading with as little cognitive drag as possible.
 
 The route contract is fixed:
 
@@ -87,7 +87,7 @@ Color rules:
 
 ## 4. Typography Rules
 
-SourceHarbor already has a strong typographic split. Preserve it.
+BrewMe already has a strong typographic split. Preserve it.
 
 - **App Shell / Neutral Chrome:** `Geist Sans` may appear in framework-owned or neutral shell chrome
 - **Display / Section Headings:** `Newsreader` via `editorialSerif`
@@ -264,7 +264,7 @@ If a component exists in the shadcn-style layer, compose from that layer before 
 
 ## 12. Definition Of Done For Future UI Work
 
-A new SourceHarbor surface is only visually complete when:
+A new BrewMe surface is only visually complete when:
 
 - the page has one obvious first action
 - source identity and provenance honesty are visible where they matter

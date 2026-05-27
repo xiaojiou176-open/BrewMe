@@ -7,16 +7,16 @@ SCRIPT_NAME="ci_pr_llm_real_smoke"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/ci-pr-llm-real-smoke.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/ci-pr-llm-real-smoke.jsonl"
 
 log() {
-  sourceharbor_log info ci_pr_llm_real_smoke "$*"
+  brewme_log info ci_pr_llm_real_smoke "$*"
 }
 
 mkdir -p .runtime-cache/logs/tests .runtime-cache/reports/tests
 uv sync --frozen --extra dev --extra e2e
 
-SMOKE_WRITE_TOKEN="${SOURCE_HARBOR_API_KEY:-sourceharbor-local-dev-token}"
+SMOKE_WRITE_TOKEN="${SOURCE_HARBOR_API_KEY:-brewme-local-dev-token}"
 export SOURCE_HARBOR_API_KEY="${SOURCE_HARBOR_API_KEY:-$SMOKE_WRITE_TOKEN}"
 export WEB_ACTION_SESSION_TOKEN="${WEB_ACTION_SESSION_TOKEN:-$SMOKE_WRITE_TOKEN}"
 

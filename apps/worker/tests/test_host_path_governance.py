@@ -36,7 +36,7 @@ def test_scan_text_rejects_old_workspace_prefix() -> None:
     module = _load_module()
     old_workspace_prefix = "VS Code" + "/1_Personal_Project"
     bad_workspace_path = (
-        "/" + "Users" + "/yuyifeng/Documents/" + old_workspace_prefix + "/开源/sourceharbor"
+        "/" + "Users" + "/yuyifeng/Documents/" + old_workspace_prefix + "/开源/brewme"
     )
 
     errors = module._scan_text(
@@ -52,7 +52,7 @@ def test_scan_text_allows_controlled_contract_paths() -> None:
     module = _load_module()
 
     errors = module._scan_text(
-        "standard image workdir is /workspace and temp outputs may use /tmp/sourceharbor-live-smoke-123",
+        "standard image workdir is /workspace and temp outputs may use /tmp/brewme-live-smoke-123",
         rel_path="docs/start-here.md",
     )
 
@@ -61,7 +61,7 @@ def test_scan_text_allows_controlled_contract_paths() -> None:
 
 def test_scan_text_rejects_personal_email_domains() -> None:
     module = _load_module()
-    personal_email = "sourceharbor-maintainer" + "@" + "gmail.com"
+    personal_email = "brewme-maintainer" + "@" + "gmail.com"
 
     errors = module._scan_text(
         f"contact {personal_email} privately",

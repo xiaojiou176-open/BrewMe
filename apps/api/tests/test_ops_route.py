@@ -5,11 +5,11 @@ import os
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
-os.environ.setdefault("DATABASE_URL", "sqlite:////tmp/sourceharbor-ops-route.db")
+os.environ.setdefault("DATABASE_URL", "sqlite:////tmp/brewme-ops-route.db")
 os.environ.setdefault("TEMPORAL_TARGET_HOST", "127.0.0.1:7233")
 os.environ.setdefault("TEMPORAL_NAMESPACE", "default")
-os.environ.setdefault("TEMPORAL_TASK_QUEUE", "sourceharbor-worker")
-os.environ.setdefault("SQLITE_STATE_PATH", "/tmp/sourceharbor-ops-route-state.db")
+os.environ.setdefault("TEMPORAL_TASK_QUEUE", "brewme-worker")
+os.environ.setdefault("SQLITE_STATE_PATH", "/tmp/brewme-ops-route-state.db")
 
 
 def _make_ops_client(monkeypatch, replacement) -> TestClient:  # noqa: ANN001
@@ -89,7 +89,7 @@ def test_ops_inbox_route_sanitizes_internal_errors(monkeypatch) -> None:
         def get_inbox(self, *, limit=5, window_hours=24):  # noqa: ANN001
             del limit, window_hours
             raise RuntimeError(
-                "db password=postgresql://ops:super-secret@127.0.0.1:5432/sourceharbor"
+                "db password=postgresql://ops:super-secret@127.0.0.1:5432/brewme"
             )
 
     client = _make_ops_client(monkeypatch, ExplodingOpsService)

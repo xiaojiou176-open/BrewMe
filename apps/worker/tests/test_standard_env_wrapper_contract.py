@@ -118,7 +118,7 @@ def _run_build_ci_standard_image(
             """#!/usr/bin/env bash
 set -euo pipefail
 if [[ "${1:-}" == "-" ]]; then
-  printf 'https://github.com/xiaojiou176-open/sourceharbor\\n'
+  printf 'https://github.com/xiaojiou176-open/brewme\\n'
   exit 0
 fi
 if [[ "${2:-}" == "shell-exports" ]]; then
@@ -281,7 +281,7 @@ def test_build_ci_standard_image_uses_single_platform_for_local_load() -> None:
         if value == "--label"
     ]
     assert (
-        "org.opencontainers.image.source=https://github.com/xiaojiou176-open/sourceharbor" in labels
+        "org.opencontainers.image.source=https://github.com/xiaojiou176-open/brewme" in labels
     )
 
 
@@ -301,7 +301,7 @@ def test_build_ci_standard_image_default_path_preserves_buildx_multi_platform_se
         if value == "--label"
     ]
     assert (
-        "org.opencontainers.image.source=https://github.com/xiaojiou176-open/sourceharbor" in labels
+        "org.opencontainers.image.source=https://github.com/xiaojiou176-open/brewme" in labels
     )
 
 
@@ -320,14 +320,14 @@ def test_build_ci_standard_image_preserves_multi_platform_push() -> None:
 
 def test_standard_env_wrapper_rewrites_loopback_backend_targets_for_container_runtime() -> None:
     result = _run_standard_env_probe(
-        database_url="postgresql+psycopg://postgres:postgres@127.0.0.1:5432/sourceharbor_pytests",
+        database_url="postgresql+psycopg://postgres:postgres@127.0.0.1:5432/brewme_pytests",
         temporal_target_host="localhost:7233",
         simulated_uname="Darwin",
     )
 
     assert result.returncode == 0, result.stderr
     assert (
-        "DATABASE_URL=postgresql+psycopg://postgres:postgres@host.docker.internal:5432/sourceharbor_pytests"
+        "DATABASE_URL=postgresql+psycopg://postgres:postgres@host.docker.internal:5432/brewme_pytests"
         in result.stdout
     )
     assert "TEMPORAL_TARGET_HOST=host.docker.internal:7233" in result.stdout
@@ -335,14 +335,14 @@ def test_standard_env_wrapper_rewrites_loopback_backend_targets_for_container_ru
 
 def test_standard_env_wrapper_preserves_non_loopback_backend_targets() -> None:
     result = _run_standard_env_probe(
-        database_url="postgresql+psycopg://postgres:postgres@postgres.internal:5432/sourceharbor_pytests",
+        database_url="postgresql+psycopg://postgres:postgres@postgres.internal:5432/brewme_pytests",
         temporal_target_host="temporal.internal:7233",
         simulated_uname="Darwin",
     )
 
     assert result.returncode == 0, result.stderr
     assert (
-        "DATABASE_URL=postgresql+psycopg://postgres:postgres@postgres.internal:5432/sourceharbor_pytests"
+        "DATABASE_URL=postgresql+psycopg://postgres:postgres@postgres.internal:5432/brewme_pytests"
         in result.stdout
     )
     assert "TEMPORAL_TARGET_HOST=temporal.internal:7233" in result.stdout
@@ -350,14 +350,14 @@ def test_standard_env_wrapper_preserves_non_loopback_backend_targets() -> None:
 
 def test_standard_env_wrapper_preserves_loopback_targets_on_linux() -> None:
     result = _run_standard_env_probe(
-        database_url="postgresql+psycopg://postgres:postgres@127.0.0.1:5432/sourceharbor_pytests",
+        database_url="postgresql+psycopg://postgres:postgres@127.0.0.1:5432/brewme_pytests",
         temporal_target_host="127.0.0.1:7233",
         simulated_uname="Linux",
     )
 
     assert result.returncode == 0, result.stderr
     assert (
-        "DATABASE_URL=postgresql+psycopg://postgres:postgres@127.0.0.1:5432/sourceharbor_pytests"
+        "DATABASE_URL=postgresql+psycopg://postgres:postgres@127.0.0.1:5432/brewme_pytests"
         in result.stdout
     )
     assert "TEMPORAL_TARGET_HOST=127.0.0.1:7233" in result.stdout

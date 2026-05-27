@@ -113,7 +113,7 @@
     {
       "path": "scripts/runtime/logging.sh",
       "contains": [
-        "sourceharbor_log_init()",
+        "brewme_log_init()",
         "scripts/runtime/log_jsonl_event.py",
         "--upstream-contract-surface"
       ]
@@ -122,7 +122,7 @@
       "path": "scripts/governance/gate.sh",
       "contains": [
         "source \"$ROOT_DIR/scripts/runtime/logging.sh\"",
-        "sourceharbor_log_init \"governance\""
+        "brewme_log_init \"governance\""
       ]
     }
   ]

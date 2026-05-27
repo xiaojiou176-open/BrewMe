@@ -8,7 +8,7 @@ from pathlib import Path
 def _load_doctor_module():
     root = Path(__file__).resolve().parents[3]
     module_path = root / "scripts" / "runtime" / "doctor.py"
-    spec = importlib.util.spec_from_file_location("sourceharbor_runtime_doctor", module_path)
+    spec = importlib.util.spec_from_file_location("brewme_runtime_doctor", module_path)
     assert spec is not None
     assert spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -21,7 +21,7 @@ def test_evaluate_database_target_blocks_host_postgres_split_brain() -> None:
     module = _load_doctor_module()
 
     result = module.evaluate_database_target(
-        "postgresql+psycopg://postgres:postgres@127.0.0.1:5432/sourceharbor",
+        "postgresql+psycopg://postgres:postgres@127.0.0.1:5432/brewme",
         "15432",
         True,
     )
@@ -34,7 +34,7 @@ def test_evaluate_database_target_accepts_container_first_local_port() -> None:
     module = _load_doctor_module()
 
     result = module.evaluate_database_target(
-        "postgresql+psycopg://postgres:postgres@127.0.0.1:15432/sourceharbor",
+        "postgresql+psycopg://postgres:postgres@127.0.0.1:15432/brewme",
         "15432",
         True,
     )

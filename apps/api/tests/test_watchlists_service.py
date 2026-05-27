@@ -9,11 +9,11 @@ from sqlalchemy.exc import DBAPIError
 
 
 def _load_watchlists_module():
-    os.environ.setdefault("DATABASE_URL", "sqlite:////tmp/sourceharbor-watchlists-test.db")
+    os.environ.setdefault("DATABASE_URL", "sqlite:////tmp/brewme-watchlists-test.db")
     os.environ.setdefault("TEMPORAL_TARGET_HOST", "127.0.0.1:7233")
     os.environ.setdefault("TEMPORAL_NAMESPACE", "default")
-    os.environ.setdefault("TEMPORAL_TASK_QUEUE", "sourceharbor-worker")
-    os.environ.setdefault("SQLITE_STATE_PATH", "/tmp/sourceharbor-watchlists-test-state.db")
+    os.environ.setdefault("TEMPORAL_TASK_QUEUE", "brewme-worker")
+    os.environ.setdefault("SQLITE_STATE_PATH", "/tmp/brewme-watchlists-test-state.db")
     module = importlib.import_module("apps.api.app.services.watchlists")
     return importlib.reload(module)
 

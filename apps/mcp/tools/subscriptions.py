@@ -12,7 +12,7 @@ ApiCall = Callable[..., dict[str, Any]]
 
 def register_subscription_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.subscriptions.manage",
+        name="brewme.subscriptions.manage",
         description=(
             "Manage subscriptions and inspect the shared template catalog for "
             "strong-supported YouTube/Bilibili lanes plus generalized RSSHub and RSS intake. "
@@ -130,7 +130,7 @@ def register_subscription_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         return invalid_argument(
             "action must be one of: list, list_templates, list_vendor_signals, upsert, manual_intake, remove, batch_update_category",
             method="POST",
-            path="sourceharbor.subscriptions.manage",
+            path="brewme.subscriptions.manage",
             field="action",
             value=action,
         )

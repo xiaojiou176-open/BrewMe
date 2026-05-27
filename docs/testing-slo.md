@@ -1,6 +1,6 @@
 # Testing SLOs
 
-This page defines the default release-readiness thresholds for SourceHarbor.
+This page defines the default release-readiness thresholds for BrewMe.
 
 ## SLO Thresholds (Defaults)
 

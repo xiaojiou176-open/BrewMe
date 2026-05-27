@@ -1,6 +1,6 @@
 # Evaluation Assets
 
-This directory holds the smallest truthful evaluation contract for SourceHarbor.
+This directory holds the smallest truthful evaluation contract for BrewMe.
 
 ## Files
 

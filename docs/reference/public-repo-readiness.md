@@ -1,6 +1,6 @@
 # Public Repo Readiness
 
-SourceHarbor is publicly readable and locally runnable today.
+BrewMe is publicly readable and locally runnable today.
 
 That does **not** automatically mean every remote or release claim is proven for the current `main`.
 
@@ -44,17 +44,17 @@ Two current reading rules are worth keeping explicit:
 - a current-commit mutation receipt under `.runtime-cache/reports/mutation/mutmut-cicd-stats.json` can support repo-side strict CI, but it still belongs to the local/manual proof ledger until a fresh strict receipt or remote check says otherwise
 - `./bin/repo-side-strict-ci --mode pre-push` is still a repo-side closeout command, not a remote proof shortcut; on maintainer workstations it can now fall back from the standard-env container path to a host-bootstrapped pre-push quality gate when Docker itself is the only missing layer
 - GitHub Pages URLs are case-sensitive at the site layer even when GitHub repo URLs are not, so tracked public homepages must match the live deployed path exactly instead of assuming lowercase variants will redirect
-- an Official MCP Registry starter packet or older ledger claim is not enough to repeat a live-listing statement; fresh anonymous registry read-back must still return the current SourceHarbor entry before that claim is treated as public-ready truth
+- an Official MCP Registry starter packet or older ledger claim is not enough to repeat a live-listing statement; fresh anonymous registry read-back must still return the current BrewMe entry before that claim is treated as public-ready truth
 - repo-owned local core-services fallback under `.runtime-cache/` strengthens local first-run resilience, but it remains local runtime proof rather than a hosted or release-current claim
 - the repo-managed local first-run path now has two extra maintainer-local hardening behaviors:
   - `./bin/full-stack up` can self-heal Temporal by calling the repo-owned `core_services.sh up` path before failing worker startup
   - `./bin/full-stack down` now attempts the matching repo-owned `core_services.sh down` cleanup so a clean local restart no longer leaves those core services behind by default
   - the current local video-first lane can use Gemini upload waiting plus a lightweight proxy-video path so oversized raw downloads do not get mistaken for a stable hosted/runtime guarantee
 - the reader-first frontstage on `/reader`, `/feed`, `/search`, and `/ask` is a public product surface, but the working contracts that shaped it stay in the internal planning ledger; public docs should point at the stable summary and proof ladder instead of exposing those internal ledgers as visitor-facing truth
-- `/subscriptions` can now help with Bilibili discovery through explicit external hot/rank/search/creator shortcuts, but that surface is still a discovery front door, not a claim that SourceHarbor has become a full Bilibili client
-- `/subscriptions` can now help users start vendor watchlists from public vendor starter packets, but that surface is still a reader-first intake front door rather than a claim that SourceHarbor now owns or mirrors those vendor platforms
+- `/subscriptions` can now help with Bilibili discovery through explicit external hot/rank/search/creator shortcuts, but that surface is still a discovery front door, not a claim that BrewMe has become a full Bilibili client
+- `/subscriptions` can now help users start vendor watchlists from public vendor starter packets, but that surface is still a reader-first intake front door rather than a claim that BrewMe now owns or mirrors those vendor platforms
 
-That separation matters because SourceHarbor can honestly advance one layer without pretending all the other layers moved with it.
+That separation matters because BrewMe can honestly advance one layer without pretending all the other layers moved with it.
 
 Read this together with [proof.md](../proof.md) whenever you want to separate local credibility from remote proof.
 

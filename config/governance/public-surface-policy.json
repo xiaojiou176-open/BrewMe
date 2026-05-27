@@ -56,7 +56,7 @@
     },
     "SECURITY.md": {
       "must_contain": [
-        "https://github.com/xiaojiou176-open/sourceharbor/security",
+        "https://github.com/xiaojiou176-open/brewme/security",
         "This repository does not offer email-based private vulnerability intake."
       ],
       "must_not_contain": [
@@ -75,7 +75,7 @@
     },
     "SUPPORT.md": {
       "must_contain": [
-        "https://github.com/xiaojiou176-open/sourceharbor/security"
+        "https://github.com/xiaojiou176-open/brewme/security"
       ],
       "must_not_contain": [
         "codex-test@example.com"
@@ -83,7 +83,7 @@
     },
     ".github/ISSUE_TEMPLATE/config.yml": {
       "must_contain": [
-        "https://github.com/xiaojiou176-open/sourceharbor/security"
+        "https://github.com/xiaojiou176-open/brewme/security"
       ],
       "must_not_contain": [
         "codex-test@example.com"

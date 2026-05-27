@@ -55,7 +55,7 @@ usage() {
   cat <<'EOF'
 Usage: ./scripts/ci/build_standard_image.sh [--push] [--load] [--tag <tag>] [--metadata-file <path>]
 
-Build the SourceHarbor strict CI/devcontainer standard image.
+Build the BrewMe strict CI/devcontainer standard image.
 Primary role: repo CI, devcontainer parity, and the GHCR infrastructure image
 publish path described by the strict CI contract.
 This is not a newcomer-facing product container installer or public runtime

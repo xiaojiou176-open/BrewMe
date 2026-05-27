@@ -99,7 +99,7 @@ def _required_migration_variables() -> list[dict]:
     return [
         {
             "name": "PIPELINE_ARTIFACT_ROOT",
-            "canonical_path": "$HOME/.sourceharbor/artifacts",
+            "canonical_path": "$HOME/.brewme/artifacts",
             "path_kind": "directory",
             "ownership": "repo-primary",
             "allow_existing_target": False,
@@ -107,7 +107,7 @@ def _required_migration_variables() -> list[dict]:
         },
         {
             "name": "PIPELINE_WORKSPACE_DIR",
-            "canonical_path": "$HOME/.sourceharbor/workspace",
+            "canonical_path": "$HOME/.brewme/workspace",
             "path_kind": "directory",
             "ownership": "repo-primary",
             "allow_existing_target": False,
@@ -115,7 +115,7 @@ def _required_migration_variables() -> list[dict]:
         },
         {
             "name": "SQLITE_PATH",
-            "canonical_path": "$HOME/.sourceharbor/state/worker_state.db",
+            "canonical_path": "$HOME/.brewme/state/worker_state.db",
             "path_kind": "file",
             "ownership": "repo-primary",
             "allow_existing_target": False,
@@ -123,7 +123,7 @@ def _required_migration_variables() -> list[dict]:
         },
         {
             "name": "SQLITE_STATE_PATH",
-            "canonical_path": "$HOME/.sourceharbor/state/api_state.db",
+            "canonical_path": "$HOME/.brewme/state/api_state.db",
             "path_kind": "file",
             "ownership": "repo-primary",
             "allow_existing_target": False,
@@ -131,7 +131,7 @@ def _required_migration_variables() -> list[dict]:
         },
         {
             "name": "UV_PROJECT_ENVIRONMENT",
-            "canonical_path": "$HOME/.cache/sourceharbor/project-venv",
+            "canonical_path": "$HOME/.cache/brewme/project-venv",
             "path_kind": "directory",
             "ownership": "repo-primary",
             "allow_existing_target": True,
@@ -154,14 +154,14 @@ def _minimal_checker_policy() -> dict:
         "legacy_retirement_quiet_minutes": 1440,
         "canonical_paths": {},
         "duplicate_env_policy": {
-            "canonical_mainline_path": "$HOME/.cache/sourceharbor/project-venv",
-            "duplicate_glob": "$HOME/.cache/sourceharbor/project-venv*",
+            "canonical_mainline_path": "$HOME/.cache/brewme/project-venv",
+            "duplicate_glob": "$HOME/.cache/brewme/project-venv*",
             "reference_files": [
                 ".env",
                 ".env.example",
                 "scripts/lib/standard_env.sh",
-                "infra/systemd/sourceharbor-api.service",
-                "infra/systemd/sourceharbor-worker.service",
+                "infra/systemd/brewme-api.service",
+                "infra/systemd/brewme-worker.service",
             ],
         },
         "migration_variables": _required_migration_variables(),
@@ -241,7 +241,7 @@ def test_report_disk_space_classifies_layers_and_keeps_docker_unverified(tmp_pat
                 "count_in_layer_total": True,
             },
         ],
-        "docker_named_volumes": ["sourceharbor_core_postgres_data"],
+        "docker_named_volumes": ["brewme_core_postgres_data"],
         "cleanup_waves": {},
         "excluded_paths": [],
     }
@@ -268,7 +268,7 @@ def test_report_disk_space_classifies_layers_and_keeps_docker_unverified(tmp_pat
 def test_report_disk_space_counts_present_docker_volume_into_repo_external_total(
     tmp_path: Path,
 ) -> None:
-    mountpoint = tmp_path / "docker-volumes" / "sourceharbor_core_postgres_data"
+    mountpoint = tmp_path / "docker-volumes" / "brewme_core_postgres_data"
     mountpoint.mkdir(parents=True, exist_ok=True)
     (mountpoint / "data.bin").write_bytes(b"x" * 256)
 
@@ -281,8 +281,8 @@ def test_report_disk_space_counts_present_docker_volume_into_repo_external_total
         'if [[ "$1" == "info" ]]; then\n'
         "  exit 0\n"
         "fi\n"
-        'if [[ "$1" == "volume" && "$2" == "inspect" && "$3" == "sourceharbor_core_postgres_data" ]]; then\n'
-        f'  printf \'[{{"Name":"sourceharbor_core_postgres_data","Mountpoint":"{mountpoint}"}}]\\n\'\n'
+        'if [[ "$1" == "volume" && "$2" == "inspect" && "$3" == "brewme_core_postgres_data" ]]; then\n'
+        f'  printf \'[{{"Name":"brewme_core_postgres_data","Mountpoint":"{mountpoint}"}}]\\n\'\n'
         "  exit 0\n"
         "fi\n"
         'if [[ "$1" == "volume" && "$2" == "inspect" && "$3" == "miniflux_db_data" ]]; then\n'
@@ -310,7 +310,7 @@ def test_report_disk_space_counts_present_docker_volume_into_repo_external_total
                 "count_in_layer_total": True,
             }
         ],
-        "docker_named_volumes": ["sourceharbor_core_postgres_data", "miniflux_db_data"],
+        "docker_named_volumes": ["brewme_core_postgres_data", "miniflux_db_data"],
         "cleanup_waves": {},
         "excluded_paths": [],
     }
@@ -339,7 +339,7 @@ def test_report_disk_space_counts_present_docker_volume_into_repo_external_total
 def test_report_disk_space_counts_user_state_root_without_double_counting_child_highlights(
     tmp_path: Path,
 ) -> None:
-    state_root = tmp_path / "sourceharbor-state"
+    state_root = tmp_path / "brewme-state"
     artifacts = state_root / "artifacts"
     workspace = state_root / "workspace"
     sqlite_state = state_root / "state"
@@ -414,10 +414,10 @@ def test_report_disk_space_counts_user_state_root_without_double_counting_child_
     expected_total = 16 + len("workspace") + (len(b"sqlite") * 3)
     assert payload["totals"]["repo-external-repo-owned"]["size_bytes"] == expected_total
     highlight_paths = {item["path"] for item in payload["highlights"]}
-    assert "sourceharbor-state" in highlight_paths
-    assert "sourceharbor-state/artifacts" in highlight_paths
-    assert "sourceharbor-state/workspace" in highlight_paths
-    assert "sourceharbor-state/state" in highlight_paths
+    assert "brewme-state" in highlight_paths
+    assert "brewme-state/artifacts" in highlight_paths
+    assert "brewme-state/workspace" in highlight_paths
+    assert "brewme-state/state" in highlight_paths
 
 
 def test_report_disk_space_emits_duplicate_env_groups_without_counting_canonical_as_duplicate(
@@ -1711,9 +1711,9 @@ def test_legacy_disk_migration_apply_cleans_orphan_sqlite_sidecars_after_canonic
     tmp_path: Path,
 ) -> None:
     home = tmp_path / "home"
-    legacy_root = home / ".sourceharbor"
+    legacy_root = home / ".brewme"
     legacy_state = legacy_root / "state"
-    canonical_root = home / ".cache" / "sourceharbor"
+    canonical_root = home / ".cache" / "brewme"
     canonical_state = canonical_root / "state"
     canonical_state.mkdir(parents=True, exist_ok=True)
     (canonical_state / "worker_state.db").write_bytes(b"canonical-worker")
@@ -1726,12 +1726,12 @@ def test_legacy_disk_migration_apply_cleans_orphan_sqlite_sidecars_after_canonic
 
     (tmp_path / ".env").write_text(
         (
-            'export SOURCE_HARBOR_CACHE_ROOT="$HOME/.cache/sourceharbor"\n'
-            'export SQLITE_PATH="$HOME/.cache/sourceharbor/state/worker_state.db"\n'
-            'export SQLITE_STATE_PATH="$HOME/.cache/sourceharbor/state/api_state.db"\n'
-            'export PIPELINE_ARTIFACT_ROOT="$HOME/.cache/sourceharbor/artifacts"\n'
-            'export PIPELINE_WORKSPACE_DIR="$HOME/.cache/sourceharbor/workspace"\n'
-            'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/sourceharbor/project-venv"\n'
+            'export SOURCE_HARBOR_CACHE_ROOT="$HOME/.cache/brewme"\n'
+            'export SQLITE_PATH="$HOME/.cache/brewme/state/worker_state.db"\n'
+            'export SQLITE_STATE_PATH="$HOME/.cache/brewme/state/api_state.db"\n'
+            'export PIPELINE_ARTIFACT_ROOT="$HOME/.cache/brewme/artifacts"\n'
+            'export PIPELINE_WORKSPACE_DIR="$HOME/.cache/brewme/workspace"\n'
+            'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/brewme/project-venv"\n'
         ),
         encoding="utf-8",
     )
@@ -1744,17 +1744,17 @@ def test_legacy_disk_migration_apply_cleans_orphan_sqlite_sidecars_after_canonic
         "legacy_retirement_quiet_minutes": 1440,
         "canonical_paths": {
             "repo_runtime_root": ".runtime-cache",
-            "user_state_root": "$HOME/.cache/sourceharbor",
-            "user_cache_root": "$HOME/.cache/sourceharbor",
-            "user_project_venv": "$HOME/.cache/sourceharbor/project-venv",
+            "user_state_root": "$HOME/.cache/brewme",
+            "user_cache_root": "$HOME/.cache/brewme",
+            "user_project_venv": "$HOME/.cache/brewme/project-venv",
             "legacy_state_root": "$HOME/.video-digestor",
             "legacy_cache_root": "$HOME/.cache/video-digestor",
         },
-        "legacy_extra_roots": ["$HOME/.sourceharbor"],
+        "legacy_extra_roots": ["$HOME/.brewme"],
         "migration_variables": [
             {
                 "name": "PIPELINE_ARTIFACT_ROOT",
-                "canonical_path": "$HOME/.cache/sourceharbor/artifacts",
+                "canonical_path": "$HOME/.cache/brewme/artifacts",
                 "path_kind": "directory",
                 "ownership": "repo-primary",
                 "allow_existing_target": False,
@@ -1762,7 +1762,7 @@ def test_legacy_disk_migration_apply_cleans_orphan_sqlite_sidecars_after_canonic
             },
             {
                 "name": "PIPELINE_WORKSPACE_DIR",
-                "canonical_path": "$HOME/.cache/sourceharbor/workspace",
+                "canonical_path": "$HOME/.cache/brewme/workspace",
                 "path_kind": "directory",
                 "ownership": "repo-primary",
                 "allow_existing_target": False,
@@ -1770,7 +1770,7 @@ def test_legacy_disk_migration_apply_cleans_orphan_sqlite_sidecars_after_canonic
             },
             {
                 "name": "SQLITE_PATH",
-                "canonical_path": "$HOME/.cache/sourceharbor/state/worker_state.db",
+                "canonical_path": "$HOME/.cache/brewme/state/worker_state.db",
                 "path_kind": "file",
                 "ownership": "repo-primary",
                 "allow_existing_target": False,
@@ -1778,7 +1778,7 @@ def test_legacy_disk_migration_apply_cleans_orphan_sqlite_sidecars_after_canonic
             },
             {
                 "name": "SQLITE_STATE_PATH",
-                "canonical_path": "$HOME/.cache/sourceharbor/state/api_state.db",
+                "canonical_path": "$HOME/.cache/brewme/state/api_state.db",
                 "path_kind": "file",
                 "ownership": "repo-primary",
                 "allow_existing_target": False,
@@ -1786,7 +1786,7 @@ def test_legacy_disk_migration_apply_cleans_orphan_sqlite_sidecars_after_canonic
             },
             {
                 "name": "UV_PROJECT_ENVIRONMENT",
-                "canonical_path": "$HOME/.cache/sourceharbor/project-venv",
+                "canonical_path": "$HOME/.cache/brewme/project-venv",
                 "path_kind": "directory",
                 "ownership": "repo-primary",
                 "allow_existing_target": True,
@@ -2308,21 +2308,21 @@ def test_check_disk_space_governance_rejects_runtime_web_drift(tmp_path: Path) -
     (tmp_path / "infra" / "systemd").mkdir(parents=True, exist_ok=True)
     (tmp_path / "docs" / "reference").mkdir(parents=True, exist_ok=True)
     (tmp_path / ".env.example").write_text(
-        'export PIPELINE_ARTIFACT_ROOT="$HOME/.sourceharbor/artifacts"\n'
-        'export PIPELINE_WORKSPACE_DIR="$HOME/.sourceharbor/workspace"\n'
-        'export SQLITE_PATH="$HOME/.sourceharbor/state/worker_state.db"\n'
-        'export SQLITE_STATE_PATH="$HOME/.sourceharbor/state/api_state.db"\n'
-        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/sourceharbor/project-venv"\n'
+        'export PIPELINE_ARTIFACT_ROOT="$HOME/.brewme/artifacts"\n'
+        'export PIPELINE_WORKSPACE_DIR="$HOME/.brewme/workspace"\n'
+        'export SQLITE_PATH="$HOME/.brewme/state/worker_state.db"\n'
+        'export SQLITE_STATE_PATH="$HOME/.brewme/state/api_state.db"\n'
+        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/brewme/project-venv"\n'
         "export WEB_RUNTIME_WEB_DIR=.runtime/web\n"
         "export WEB_E2E_RUNTIME_WEB_DIR=.runtime/web\n",
         encoding="utf-8",
     )
-    (tmp_path / "infra" / "systemd" / "sourceharbor-api.service").write_text(
-        "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/sourceharbor/project-venv}/bin/python\"'\n",
+    (tmp_path / "infra" / "systemd" / "brewme-api.service").write_text(
+        "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/brewme/project-venv}/bin/python\"'\n",
         encoding="utf-8",
     )
-    (tmp_path / "infra" / "systemd" / "sourceharbor-worker.service").write_text(
-        "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/sourceharbor/project-venv}/bin/python\"'\n",
+    (tmp_path / "infra" / "systemd" / "brewme-worker.service").write_text(
+        "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/brewme/project-venv}/bin/python\"'\n",
         encoding="utf-8",
     )
     (tmp_path / "docs" / "reference" / "runtime-cache-retention.md").write_text(
@@ -2348,18 +2348,18 @@ def test_check_disk_space_governance_rejects_shared_layer_cleanup_candidate(tmp_
     (tmp_path / "infra" / "systemd").mkdir(parents=True, exist_ok=True)
     (tmp_path / "docs" / "reference").mkdir(parents=True, exist_ok=True)
     (tmp_path / ".env.example").write_text(
-        'export PIPELINE_ARTIFACT_ROOT="$HOME/.sourceharbor/artifacts"\n'
-        'export PIPELINE_WORKSPACE_DIR="$HOME/.sourceharbor/workspace"\n'
-        'export SQLITE_PATH="$HOME/.sourceharbor/state/worker_state.db"\n'
-        'export SQLITE_STATE_PATH="$HOME/.sourceharbor/state/api_state.db"\n'
-        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/sourceharbor/project-venv"\n'
+        'export PIPELINE_ARTIFACT_ROOT="$HOME/.brewme/artifacts"\n'
+        'export PIPELINE_WORKSPACE_DIR="$HOME/.brewme/workspace"\n'
+        'export SQLITE_PATH="$HOME/.brewme/state/worker_state.db"\n'
+        'export SQLITE_STATE_PATH="$HOME/.brewme/state/api_state.db"\n'
+        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/brewme/project-venv"\n'
         "export WEB_RUNTIME_WEB_DIR=.runtime-cache/tmp/web-runtime/workspace/apps/web\n"
         "export WEB_E2E_RUNTIME_WEB_DIR=.runtime-cache/tmp/web-runtime/workspace/apps/web\n",
         encoding="utf-8",
     )
-    for service in ("sourceharbor-api.service", "sourceharbor-worker.service"):
+    for service in ("brewme-api.service", "brewme-worker.service"):
         (tmp_path / "infra" / "systemd" / service).write_text(
-            "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/sourceharbor/project-venv}/bin/python\"'\n",
+            "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/brewme/project-venv}/bin/python\"'\n",
             encoding="utf-8",
         )
     (tmp_path / "docs" / "reference" / "runtime-cache-retention.md").write_text(
@@ -2412,18 +2412,18 @@ def test_check_disk_space_governance_requires_user_state_root_in_audit_totals(
     (tmp_path / "infra" / "systemd").mkdir(parents=True, exist_ok=True)
     (tmp_path / "docs" / "reference").mkdir(parents=True, exist_ok=True)
     (tmp_path / ".env.example").write_text(
-        'export PIPELINE_ARTIFACT_ROOT="$HOME/.sourceharbor/artifacts"\n'
-        'export PIPELINE_WORKSPACE_DIR="$HOME/.sourceharbor/workspace"\n'
-        'export SQLITE_PATH="$HOME/.sourceharbor/state/worker_state.db"\n'
-        'export SQLITE_STATE_PATH="$HOME/.sourceharbor/state/api_state.db"\n'
-        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/sourceharbor/project-venv"\n'
+        'export PIPELINE_ARTIFACT_ROOT="$HOME/.brewme/artifacts"\n'
+        'export PIPELINE_WORKSPACE_DIR="$HOME/.brewme/workspace"\n'
+        'export SQLITE_PATH="$HOME/.brewme/state/worker_state.db"\n'
+        'export SQLITE_STATE_PATH="$HOME/.brewme/state/api_state.db"\n'
+        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/brewme/project-venv"\n'
         "export WEB_RUNTIME_WEB_DIR=.runtime-cache/tmp/web-runtime/workspace/apps/web\n"
         "export WEB_E2E_RUNTIME_WEB_DIR=.runtime-cache/tmp/web-runtime/workspace/apps/web\n",
         encoding="utf-8",
     )
-    for service in ("sourceharbor-api.service", "sourceharbor-worker.service"):
+    for service in ("brewme-api.service", "brewme-worker.service"):
         (tmp_path / "infra" / "systemd" / service).write_text(
-            "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/sourceharbor/project-venv}/bin/python\"'\n",
+            "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/brewme/project-venv}/bin/python\"'\n",
             encoding="utf-8",
         )
     (tmp_path / "docs" / "reference" / "runtime-cache-retention.md").write_text(
@@ -2439,7 +2439,7 @@ def test_check_disk_space_governance_requires_user_state_root_in_audit_totals(
         {
             **_minimal_checker_policy(),
             "canonical_paths": {
-                "user_state_root": "$HOME/.sourceharbor",
+                "user_state_root": "$HOME/.brewme",
             },
         },
     )
@@ -2456,18 +2456,18 @@ def test_check_disk_space_governance_rejects_excluded_path_and_broad_repo_tmp_lo
     (tmp_path / "infra" / "systemd").mkdir(parents=True, exist_ok=True)
     (tmp_path / "docs" / "reference").mkdir(parents=True, exist_ok=True)
     (tmp_path / ".env.example").write_text(
-        'export PIPELINE_ARTIFACT_ROOT="$HOME/.sourceharbor/artifacts"\n'
-        'export PIPELINE_WORKSPACE_DIR="$HOME/.sourceharbor/workspace"\n'
-        'export SQLITE_PATH="$HOME/.sourceharbor/state/worker_state.db"\n'
-        'export SQLITE_STATE_PATH="$HOME/.sourceharbor/state/api_state.db"\n'
-        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/sourceharbor/project-venv"\n'
+        'export PIPELINE_ARTIFACT_ROOT="$HOME/.brewme/artifacts"\n'
+        'export PIPELINE_WORKSPACE_DIR="$HOME/.brewme/workspace"\n'
+        'export SQLITE_PATH="$HOME/.brewme/state/worker_state.db"\n'
+        'export SQLITE_STATE_PATH="$HOME/.brewme/state/api_state.db"\n'
+        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/brewme/project-venv"\n'
         "export WEB_RUNTIME_WEB_DIR=.runtime-cache/tmp/web-runtime/workspace/apps/web\n"
         "export WEB_E2E_RUNTIME_WEB_DIR=.runtime-cache/tmp/web-runtime/workspace/apps/web\n",
         encoding="utf-8",
     )
-    for service in ("sourceharbor-api.service", "sourceharbor-worker.service"):
+    for service in ("brewme-api.service", "brewme-worker.service"):
         (tmp_path / "infra" / "systemd" / service).write_text(
-            "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/sourceharbor/project-venv}/bin/python\"'\n",
+            "ExecStart=/bin/bash -lc 'exec \"${UV_PROJECT_ENVIRONMENT:-${HOME}/.cache/brewme/project-venv}/bin/python\"'\n",
             encoding="utf-8",
         )
     (tmp_path / "docs" / "reference" / "runtime-cache-retention.md").write_text(

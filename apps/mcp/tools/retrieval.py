@@ -60,7 +60,7 @@ def _normalize_retrieval_item(item: Any) -> dict[str, Any]:
 
 def register_retrieval_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.retrieval.search",
+        name="brewme.retrieval.search",
         description="Search retrieval index over generated artifacts (digest/transcript/outline/comments).",
     )
     def retrieval_search(

@@ -14,7 +14,7 @@ def test_mark_running_activity_reports_conflict_for_already_running(
 ) -> None:
     settings = Settings(
         sqlite_path=str((tmp_path / "state.db").resolve()),
-        database_url="postgresql+psycopg://postgres:postgres@localhost:5432/sourceharbor",
+        database_url="postgresql+psycopg://postgres:postgres@localhost:5432/brewme",
     )
     monkeypatch.setattr(
         activities_job_state.Settings,
@@ -98,7 +98,7 @@ def test_mark_succeeded_activity_rejects_terminal_overwrite(
 ) -> None:
     settings = Settings(
         sqlite_path=str((tmp_path / "state.db").resolve()),
-        database_url="postgresql+psycopg://postgres:postgres@localhost:5432/sourceharbor",
+        database_url="postgresql+psycopg://postgres:postgres@localhost:5432/brewme",
     )
     monkeypatch.setattr(
         activities_job_state.Settings,

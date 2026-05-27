@@ -97,7 +97,7 @@ def integration_api(
         monkeypatch.setenv("DATABASE_URL", app_database_url)
         monkeypatch.setenv("TEMPORAL_TARGET_HOST", "127.0.0.1:7233")
         monkeypatch.setenv("TEMPORAL_NAMESPACE", "default")
-        monkeypatch.setenv("TEMPORAL_TASK_QUEUE", "sourceharbor-worker")
+        monkeypatch.setenv("TEMPORAL_TASK_QUEUE", "brewme-worker")
         monkeypatch.setenv("SQLITE_STATE_PATH", state_db_path)
         monkeypatch.setenv("UI_AUDIT_GEMINI_ENABLED", "false")
         monkeypatch.setenv("SOURCE_HARBOR_ALLOW_UNAUTH_WRITE", "true")

@@ -11,7 +11,7 @@ license = "MIT"
 license-files = ["LICENSE", "NOTICE.md"]
 requires-python = ">=3.11,<3.13"
 authors = [
-  { name = "SourceHarbor Maintainers" },
+  { name = "BrewMe Maintainers" },
 ]
 keywords = [
   "mcp",
@@ -47,13 +47,13 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/xiaojiou176-open/sourceharbor"
-Documentation = "https://github.com/xiaojiou176-open/sourceharbor/tree/main/docs"
-Repository = "https://github.com/xiaojiou176-open/sourceharbor"
-Issues = "https://github.com/xiaojiou176-open/sourceharbor/issues"
+Homepage = "https://github.com/xiaojiou176-open/brewme"
+Documentation = "https://github.com/xiaojiou176-open/brewme/tree/main/docs"
+Repository = "https://github.com/xiaojiou176-open/brewme"
+Issues = "https://github.com/xiaojiou176-open/brewme/issues"
 
 [project.scripts]
-sourceharbor-mcp = "apps.mcp.server:main"
+brewme-mcp = "apps.mcp.server:main"
 
 [project.optional-dependencies]
 dev = [
@@ -115,7 +115,7 @@ reruns_delay = 0
 data_file = ".runtime-cache/reports/python/.coverage"
 
 [tool.coverage.paths]
-sourceharbor = [
+brewme = [
   ".",
   "/workspace",
 ]

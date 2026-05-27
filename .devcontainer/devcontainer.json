@@ -1,5 +1,5 @@
 {
-  "name": "sourceharbor-strict-standard-env",
+  "name": "brewme-strict-standard-env",
   "build": {
     "dockerfile": "Dockerfile",
     "context": ".."

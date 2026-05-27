@@ -79,7 +79,7 @@ export function FeedFeedbackPanel({
 			<div className="space-y-2">
 				<p className="text-sm font-medium">Feed curation</p>
 				<p className="text-sm text-muted-foreground">
-					Use these signals to tell SourceHarbor what should stay, what was
+					Use these signals to tell BrewMe what should stay, what was
 					useful, and what should be filtered out later.
 				</p>
 				<p

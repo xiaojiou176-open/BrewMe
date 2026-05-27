@@ -1,6 +1,6 @@
 # AI Evaluation
 
-SourceHarbor keeps a small, reviewable evaluation surface in [`evals/`](../../evals/).
+BrewMe keeps a small, reviewable evaluation surface in [`evals/`](../../evals/).
 
 ## Current Assets
 

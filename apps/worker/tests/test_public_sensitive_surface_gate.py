@@ -48,12 +48,12 @@ def test_scan_text_rejects_concrete_home_cache_path_fragments() -> None:
     module = _load_module()
 
     errors = module._scan_text(
-        "Use ~/.cache/sourceharbor/browser/chrome-user-data/Profile 1 for local proof.",
+        "Use ~/.cache/brewme/browser/chrome-user-data/Profile 1 for local proof.",
         rel_path="docs/testing.md",
     )
 
     assert len(errors) == 3
-    assert any(".cache/sourceharbor" in item for item in errors)
+    assert any(".cache/brewme" in item for item in errors)
     assert any("chrome-user-data" in item for item in errors)
     assert any("Profile 1" in item for item in errors)
 

@@ -50,7 +50,7 @@ def _normalize_set_config_payload(payload: dict[str, Any]) -> dict[str, Any]:
 
 def register_notification_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.notifications.manage",
+        name="brewme.notifications.manage",
         description="Manage notifications. action=get_config|set_config|send_test|daily_send|category_send.",
     )
     def manage_notifications(
@@ -79,7 +79,7 @@ def register_notification_tools(mcp: FastMCP, api_call: ApiCall) -> None:
             return invalid_argument(
                 digest_hour_error,
                 method="POST",
-                path="sourceharbor.notifications.manage",
+                path="brewme.notifications.manage",
                 field="daily_digest_hour_utc",
                 value=daily_digest_hour_utc,
             )
@@ -95,7 +95,7 @@ def register_notification_tools(mcp: FastMCP, api_call: ApiCall) -> None:
             return invalid_argument(
                 priority_error,
                 method="POST",
-                path="sourceharbor.notifications.manage",
+                path="brewme.notifications.manage",
                 field="priority",
                 value=priority,
             )
@@ -175,7 +175,7 @@ def register_notification_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         return invalid_argument(
             "action must be one of: get_config, set_config, send_test, daily_send, category_send",
             method="POST",
-            path="sourceharbor.notifications.manage",
+            path="brewme.notifications.manage",
             field="action",
             value=action,
         )

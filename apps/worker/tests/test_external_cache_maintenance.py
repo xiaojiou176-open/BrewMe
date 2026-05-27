@@ -42,16 +42,16 @@ def _write_policy(path: Path) -> None:
         "legacy_retirement_quiet_minutes": 1440,
         "canonical_paths": {
             "repo_runtime_root": ".runtime-cache",
-            "user_state_root": "$HOME/.cache/sourceharbor",
-            "user_cache_root": "$HOME/.cache/sourceharbor",
-            "user_project_venv": "$HOME/.cache/sourceharbor/project-venv",
+            "user_state_root": "$HOME/.cache/brewme",
+            "user_cache_root": "$HOME/.cache/brewme",
+            "user_project_venv": "$HOME/.cache/brewme/project-venv",
             "legacy_state_root": "$HOME/.video-digestor",
             "legacy_cache_root": "$HOME/.cache/video-digestor",
         },
-        "legacy_extra_roots": ["$HOME/.sourceharbor"],
+        "legacy_extra_roots": ["$HOME/.brewme"],
         "duplicate_env_policy": {
-            "canonical_mainline_path": "$HOME/.cache/sourceharbor/project-venv",
-            "duplicate_glob": "$HOME/.cache/sourceharbor/project-venv*",
+            "canonical_mainline_path": "$HOME/.cache/brewme/project-venv",
+            "duplicate_glob": "$HOME/.cache/brewme/project-venv*",
             "reference_files": [".env"],
         },
         "migration_variables": [],
@@ -61,16 +61,16 @@ def _write_policy(path: Path) -> None:
         "cleanup_waves": {},
         "external_cache_maintenance": {
             "report_path": ".runtime-cache/reports/governance/external-cache-maintenance.json",
-            "stamp_path": "$HOME/.cache/sourceharbor/maintenance/external-cache-maintenance-stamp.json",
+            "stamp_path": "$HOME/.cache/brewme/maintenance/external-cache-maintenance-stamp.json",
             "auto_interval_minutes": 60,
             "groups": {
                 "project-venv": {
-                    "path": "$HOME/.cache/sourceharbor/project-venv",
+                    "path": "$HOME/.cache/brewme/project-venv",
                     "kind": "protected-mainline",
                     "max_total_size_mb": 1024,
                 },
                 "duplicate-envs": {
-                    "path_glob": "$HOME/.cache/sourceharbor/project-venv-*",
+                    "path_glob": "$HOME/.cache/brewme/project-venv-*",
                     "kind": "duplicate-env",
                     "ttl_days": 7,
                     "quiet_minutes": 10080,
@@ -78,14 +78,14 @@ def _write_policy(path: Path) -> None:
                 },
             },
         },
-        "excluded_paths": ["$HOME/.cache/sourceharbor/project-venv"],
+        "excluded_paths": ["$HOME/.cache/brewme/project-venv"],
     }
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def test_external_cache_maintenance_deletes_old_duplicate_env(tmp_path: Path) -> None:
     home = tmp_path / "home"
-    cache_root = home / ".cache" / "sourceharbor"
+    cache_root = home / ".cache" / "brewme"
     canonical = cache_root / "project-venv"
     duplicate = cache_root / "project-venv-codex"
     canonical.mkdir(parents=True)
@@ -96,8 +96,8 @@ def test_external_cache_maintenance_deletes_old_duplicate_env(tmp_path: Path) ->
     os.utime(duplicate, (stale_ts, stale_ts))
     os.utime(duplicate / "pyvenv.cfg", (stale_ts, stale_ts))
     (tmp_path / ".env").write_text(
-        'export SOURCE_HARBOR_CACHE_ROOT="$HOME/.cache/sourceharbor"\n'
-        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/sourceharbor/project-venv"\n',
+        'export SOURCE_HARBOR_CACHE_ROOT="$HOME/.cache/brewme"\n'
+        'export UV_PROJECT_ENVIRONMENT="$HOME/.cache/brewme/project-venv"\n',
         encoding="utf-8",
     )
     _write_policy(tmp_path / "policy.json")
@@ -119,7 +119,7 @@ def test_external_cache_maintenance_deletes_old_duplicate_env(tmp_path: Path) ->
 
 def test_external_cache_maintenance_auto_mode_respects_stamp(tmp_path: Path) -> None:
     home = tmp_path / "home"
-    maintenance_dir = home / ".cache" / "sourceharbor" / "maintenance"
+    maintenance_dir = home / ".cache" / "brewme" / "maintenance"
     maintenance_dir.mkdir(parents=True)
     recent_run = datetime.now(UTC) - timedelta(minutes=10)
     (maintenance_dir / "external-cache-maintenance-stamp.json").write_text(

@@ -202,7 +202,7 @@ def test_health_get_tool_merges_system_and_providers() -> None:
         }
 
     register_health_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.health.get"](scope="all", window_hours=12)
+    payload = mcp.tools["brewme.health.get"](scope="all", window_hours=12)
 
     assert payload["system"]["status"] == "ok"
     assert payload["providers"]["window_hours"] == 12
@@ -219,14 +219,14 @@ def test_subscriptions_manage_supports_list_upsert_remove() -> None:
 
     register_subscription_tools(mcp, fake_api_call)
     assert (
-        mcp.tools["sourceharbor.subscriptions.manage"](action="list", platform="youtube")["ok"]
+        mcp.tools["brewme.subscriptions.manage"](action="list", platform="youtube")["ok"]
         is True
     )
     assert (
-        mcp.tools["sourceharbor.subscriptions.manage"](action="list_vendor_signals")["ok"] is True
+        mcp.tools["brewme.subscriptions.manage"](action="list_vendor_signals")["ok"] is True
     )
     assert (
-        mcp.tools["sourceharbor.subscriptions.manage"](
+        mcp.tools["brewme.subscriptions.manage"](
             action="upsert",
             platform="youtube",
             source_type="url",
@@ -235,7 +235,7 @@ def test_subscriptions_manage_supports_list_upsert_remove() -> None:
         is True
     )
     assert (
-        mcp.tools["sourceharbor.subscriptions.manage"](
+        mcp.tools["brewme.subscriptions.manage"](
             action="batch_update_category",
             ids=[UUID_1, UUID_2],
             category="macro",
@@ -243,7 +243,7 @@ def test_subscriptions_manage_supports_list_upsert_remove() -> None:
         is True
     )
     assert (
-        mcp.tools["sourceharbor.subscriptions.manage"](
+        mcp.tools["brewme.subscriptions.manage"](
             action="manual_intake",
             source_value="https://www.youtube.com/watch?v=demo",
             category="creator",
@@ -253,7 +253,7 @@ def test_subscriptions_manage_supports_list_upsert_remove() -> None:
         )["ok"]
         is True
     )
-    assert mcp.tools["sourceharbor.subscriptions.manage"](action="remove", id=UUID_1)["ok"] is True
+    assert mcp.tools["brewme.subscriptions.manage"](action="remove", id=UUID_1)["ok"] is True
 
     assert calls[0]["method"] == "GET"
     assert calls[1]["path"] == "/api/v1/subscriptions/vendor-signals"
@@ -289,15 +289,15 @@ def test_notifications_manage_supports_get_set_send_daily_and_category_send() ->
         raise AssertionError(f"unexpected call: {method} {path}")
 
     register_notification_tools(mcp, fake_api_call)
-    assert mcp.tools["sourceharbor.notifications.manage"](action="get_config")["enabled"] is True
+    assert mcp.tools["brewme.notifications.manage"](action="get_config")["enabled"] is True
     assert (
-        mcp.tools["sourceharbor.notifications.manage"](action="set_config", enabled=True)["enabled"]
+        mcp.tools["brewme.notifications.manage"](action="set_config", enabled=True)["enabled"]
         is True
     )
-    assert mcp.tools["sourceharbor.notifications.manage"](action="send_test")["status"] == "sent"
-    assert mcp.tools["sourceharbor.notifications.manage"](action="daily_send")["sent"] is True
+    assert mcp.tools["brewme.notifications.manage"](action="send_test")["status"] == "sent"
+    assert mcp.tools["brewme.notifications.manage"](action="daily_send")["sent"] is True
     assert (
-        mcp.tools["sourceharbor.notifications.manage"](
+        mcp.tools["brewme.notifications.manage"](
             action="category_send", category="tech", body="digest"
         )["status"]
         == "sent"
@@ -314,11 +314,11 @@ def test_notifications_manage_supports_get_set_send_daily_and_category_send() ->
 def test_notifications_manage_rejects_invalid_action_with_standard_payload() -> None:
     mcp = _FakeMCP()
     register_notification_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.notifications.manage"](action="invalid")
+    payload = mcp.tools["brewme.notifications.manage"](action="invalid")
 
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "action"
-    assert payload["details"]["path"] == "sourceharbor.notifications.manage"
+    assert payload["details"]["path"] == "brewme.notifications.manage"
 
 
 def test_reader_tools_cover_list_get_and_navigation() -> None:
@@ -357,7 +357,7 @@ def test_reader_tools_cover_list_get_and_navigation() -> None:
             }
         assert path == "/api/v1/reader/navigation-brief"
         return {
-            "brief_kind": "sourceharbor_navigation_brief_v1",
+            "brief_kind": "brewme_navigation_brief_v1",
             "generated_at": "2026-04-09T12:00:00Z",
             "window_id": "2026-04-09@America/Los_Angeles",
             "document_count": 1,
@@ -368,9 +368,9 @@ def test_reader_tools_cover_list_get_and_navigation() -> None:
 
     register_reader_tools(mcp, fake_api_call)
 
-    listed = mcp.tools["sourceharbor.reader.documents.list"](limit=5)
-    fetched = mcp.tools["sourceharbor.reader.documents.get"](document_id=UUID_1)
-    brief = mcp.tools["sourceharbor.reader.navigation.get"](limit=3)
+    listed = mcp.tools["brewme.reader.documents.list"](limit=5)
+    fetched = mcp.tools["brewme.reader.documents.get"](document_id=UUID_1)
+    brief = mcp.tools["brewme.reader.navigation.get"](limit=3)
 
     assert listed["items"][0]["stable_key"] == "topic-ai-agents-2026-04-09"
     assert fetched["warning"]["published_with_gap"] is True
@@ -391,8 +391,8 @@ def test_artifacts_get_supports_markdown_and_asset() -> None:
         raise AssertionError(path)
 
     register_artifact_tools(mcp, fake_api_call)
-    markdown = mcp.tools["sourceharbor.artifacts.get"](kind="markdown", job_id=UUID_1)
-    asset = mcp.tools["sourceharbor.artifacts.get"](
+    markdown = mcp.tools["brewme.artifacts.get"](kind="markdown", job_id=UUID_1)
+    asset = mcp.tools["brewme.artifacts.get"](
         kind="asset", job_id=UUID_1, path="frames/f1.png", include_base64=True
     )
 
@@ -415,7 +415,7 @@ def test_retrieval_search_tool_normalizes_payload() -> None:
         }
 
     register_retrieval_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.retrieval.search"](query="timeout", top_k=2)
+    payload = mcp.tools["brewme.retrieval.search"](query="timeout", top_k=2)
     assert payload["top_k"] == 2
     assert payload["items"][0]["source"] == "digest"
 
@@ -435,7 +435,7 @@ def test_retrieval_search_supports_mode_parameter() -> None:
         }
 
     register_retrieval_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.retrieval.search"](query="timeout", top_k=3, mode="semantic")
+    payload = mcp.tools["brewme.retrieval.search"](query="timeout", top_k=3, mode="semantic")
     assert payload["top_k"] == 3
     assert payload["items"][0]["mode"] == "semantic"
 
@@ -443,7 +443,7 @@ def test_retrieval_search_supports_mode_parameter() -> None:
 def test_retrieval_search_rejects_invalid_top_k() -> None:
     mcp = _FakeMCP()
     register_retrieval_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.retrieval.search"](query="x", top_k=0)
+    payload = mcp.tools["brewme.retrieval.search"](query="x", top_k=0)
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "top_k"
 
@@ -451,7 +451,7 @@ def test_retrieval_search_rejects_invalid_top_k() -> None:
 def test_retrieval_search_rejects_top_k_above_schema_limit() -> None:
     mcp = _FakeMCP()
     register_retrieval_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.retrieval.search"](query="x", top_k=51)
+    payload = mcp.tools["brewme.retrieval.search"](query="x", top_k=51)
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "top_k"
 
@@ -459,7 +459,7 @@ def test_retrieval_search_rejects_top_k_above_schema_limit() -> None:
 def test_retrieval_search_rejects_invalid_mode() -> None:
     mcp = _FakeMCP()
     register_retrieval_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.retrieval.search"](query="x", top_k=10, mode="vector")
+    payload = mcp.tools["brewme.retrieval.search"](query="x", top_k=10, mode="vector")
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "mode"
 
@@ -474,7 +474,7 @@ def test_retrieval_search_rejects_empty_query() -> None:
         return {"ok": True}
 
     register_retrieval_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.retrieval.search"](query="   ", top_k=10)
+    payload = mcp.tools["brewme.retrieval.search"](query="   ", top_k=10)
 
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "query"
@@ -503,7 +503,7 @@ def test_retrieval_search_normalizes_out_of_schema_upstream_values() -> None:
         }
 
     register_retrieval_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.retrieval.search"](query=" timeout ", top_k=10)
+    payload = mcp.tools["brewme.retrieval.search"](query=" timeout ", top_k=10)
 
     assert payload["query"] == "timeout"
     assert payload["top_k"] == 10
@@ -539,7 +539,7 @@ def test_retrieval_search_sanitizes_upstream_error_payload() -> None:
         }
 
     register_retrieval_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.retrieval.search"](query="timeout", top_k=10)
+    payload = mcp.tools["brewme.retrieval.search"](query="timeout", top_k=10)
 
     assert payload["code"] == "UPSTREAM_HTTP_ERROR"
     assert "super-secret-token" not in payload["message"]
@@ -558,7 +558,7 @@ def test_notifications_manage_rejects_out_of_range_daily_digest_hour_utc() -> No
         return {"ok": True}
 
     register_notification_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.notifications.manage"](
+    payload = mcp.tools["brewme.notifications.manage"](
         action="set_config",
         daily_digest_hour_utc=24,
     )
@@ -577,7 +577,7 @@ def test_notifications_manage_rejects_out_of_range_priority() -> None:
         return {"ok": True}
 
     register_notification_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.notifications.manage"](
+    payload = mcp.tools["brewme.notifications.manage"](
         action="category_send",
         category="tech",
         priority=101,
@@ -607,7 +607,7 @@ def test_notifications_manage_sanitizes_upstream_error_payload() -> None:
         raise AssertionError(path)
 
     register_notification_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.notifications.manage"](action="daily_send")
+    payload = mcp.tools["brewme.notifications.manage"](action="daily_send")
 
     assert payload["code"] == "UPSTREAM_HTTP_ERROR"
     assert "daily-send-secret" not in payload["message"]
@@ -625,7 +625,7 @@ def test_workflows_run_tool_posts_expected_body() -> None:
         return {"workflow": "daily_digest", "workflow_id": "wf-1", "status": "started"}
 
     register_workflow_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.workflows.run"](workflow="daily_digest")
+    payload = mcp.tools["brewme.workflows.run"](workflow="daily_digest")
     assert payload["workflow"] == "daily_digest"
 
 
@@ -644,7 +644,7 @@ def test_computer_use_run_tool_posts_expected_body_and_normalizes_result() -> No
         }
 
     register_computer_use_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.computer_use.run"](
+    payload = mcp.tools["brewme.computer_use.run"](
         instruction="click", screenshot_base64="ZmFrZQ=="
     )
     assert payload["actions"][0]["action"] == "click"
@@ -707,15 +707,15 @@ def test_ui_audit_run_and_read_tools() -> None:
         raise AssertionError(path)
 
     register_ui_audit_tools(mcp, fake_api_call)
-    run_payload = mcp.tools["sourceharbor.ui_audit.run"](artifact_root="/tmp")
-    get_payload = mcp.tools["sourceharbor.ui_audit.read"](action="get", run_id=run_id)
-    findings_payload = mcp.tools["sourceharbor.ui_audit.read"](
+    run_payload = mcp.tools["brewme.ui_audit.run"](artifact_root="/tmp")
+    get_payload = mcp.tools["brewme.ui_audit.read"](action="get", run_id=run_id)
+    findings_payload = mcp.tools["brewme.ui_audit.read"](
         action="list_findings", run_id=run_id
     )
-    artifact_payload = mcp.tools["sourceharbor.ui_audit.read"](
+    artifact_payload = mcp.tools["brewme.ui_audit.read"](
         action="get_artifact", run_id=run_id, key="axe.json", include_base64=True
     )
-    autofix_payload = mcp.tools["sourceharbor.ui_audit.read"](
+    autofix_payload = mcp.tools["brewme.ui_audit.read"](
         action="autofix", run_id=run_id, max_files=2
     )
 
@@ -737,7 +737,7 @@ def test_videos_process_normalizes_missing_overrides_to_empty_object() -> None:
         return {"ok": True}
 
     register_job_tools(mcp, fake_api_call)
-    response = mcp.tools["sourceharbor.videos.process"](
+    response = mcp.tools["brewme.videos.process"](
         video={
             "platform": "youtube",
             "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
@@ -752,16 +752,16 @@ def test_artifacts_get_rejects_path_traversal_and_invalid_job_id() -> None:
     mcp = _FakeMCP()
     register_artifact_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    invalid_id = mcp.tools["sourceharbor.artifacts.get"](
+    invalid_id = mcp.tools["brewme.artifacts.get"](
         kind="asset", job_id="job-1", path="frames/a.png"
     )
-    traversal = mcp.tools["sourceharbor.artifacts.get"](
+    traversal = mcp.tools["brewme.artifacts.get"](
         kind="asset", job_id=UUID_1, path="../secret.txt"
     )
-    absolute = mcp.tools["sourceharbor.artifacts.get"](
+    absolute = mcp.tools["brewme.artifacts.get"](
         kind="asset", job_id=UUID_1, path="/etc/passwd"
     )
-    scheme = mcp.tools["sourceharbor.artifacts.get"](
+    scheme = mcp.tools["brewme.artifacts.get"](
         kind="asset", job_id=UUID_1, path="file:///tmp/x"
     )
 
@@ -784,7 +784,7 @@ def test_artifacts_get_preserves_non_404_errors_for_asset_reads() -> None:
         }
 
     register_artifact_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.artifacts.get"](
+    payload = mcp.tools["brewme.artifacts.get"](
         kind="asset", job_id=UUID_1, path="frames/a.png"
     )
 
@@ -806,7 +806,7 @@ def test_artifacts_get_maps_404_asset_reads_to_exists_false() -> None:
         }
 
     register_artifact_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.artifacts.get"](
+    payload = mcp.tools["brewme.artifacts.get"](
         kind="asset", job_id=UUID_1, path="frames/missing.png"
     )
 
@@ -818,14 +818,14 @@ def test_artifacts_get_maps_404_asset_reads_to_exists_false() -> None:
 def test_jobs_get_rejects_invalid_job_id() -> None:
     mcp = _FakeMCP()
     register_job_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.jobs.get"](job_id="not-a-uuid")
+    payload = mcp.tools["brewme.jobs.get"](job_id="not-a-uuid")
     assert payload["code"] == "INVALID_ARGUMENT"
 
 
 def test_workflows_run_rejects_unknown_payload_keys() -> None:
     mcp = _FakeMCP()
     register_workflow_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.workflows.run"](
+    payload = mcp.tools["brewme.workflows.run"](
         workflow="daily_digest",
         payload={"timezone_name": "UTC", "evil": True},
     )
@@ -835,7 +835,7 @@ def test_workflows_run_rejects_unknown_payload_keys() -> None:
 def test_videos_process_rejects_unknown_overrides_keys() -> None:
     mcp = _FakeMCP()
     register_job_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.videos.process"](
+    payload = mcp.tools["brewme.videos.process"](
         video={"platform": "youtube", "url": "https://example.com"},
         overrides={"llm": {}, "unexpected": {}},
     )
@@ -845,7 +845,7 @@ def test_videos_process_rejects_unknown_overrides_keys() -> None:
 def test_subscriptions_remove_rejects_invalid_id() -> None:
     mcp = _FakeMCP()
     register_subscription_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.subscriptions.manage"](action="remove", id="sub-1")
+    payload = mcp.tools["brewme.subscriptions.manage"](action="remove", id="sub-1")
     assert payload["code"] == "INVALID_ARGUMENT"
 
 
@@ -868,8 +868,8 @@ def test_ui_audit_read_rejects_invalid_run_id_and_oversized_base64() -> None:
         }
 
     register_ui_audit_tools(mcp, fake_api_call)
-    invalid_id = mcp.tools["sourceharbor.ui_audit.read"](action="get", run_id="run-1")
-    oversized = mcp.tools["sourceharbor.ui_audit.read"](
+    invalid_id = mcp.tools["brewme.ui_audit.read"](action="get", run_id="run-1")
+    oversized = mcp.tools["brewme.ui_audit.read"](
         action="get_artifact",
         run_id=run_id,
         key="axe.json",
@@ -883,7 +883,7 @@ def test_ui_audit_read_rejects_invalid_run_id_and_oversized_base64() -> None:
 def test_computer_use_rejects_unknown_safety_fields() -> None:
     mcp = _FakeMCP()
     register_computer_use_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.computer_use.run"](
+    payload = mcp.tools["brewme.computer_use.run"](
         instruction="click",
         screenshot_base64="ZmFrZQ==",
         safety={"confirm_before_execute": True, "bad_field": True},
@@ -894,7 +894,7 @@ def test_computer_use_rejects_unknown_safety_fields() -> None:
 def test_health_get_rejects_invalid_window_hours() -> None:
     mcp = _FakeMCP()
     register_health_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.health.get"](scope="providers", window_hours=0)
+    payload = mcp.tools["brewme.health.get"](scope="providers", window_hours=0)
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "window_hours"
 
@@ -902,7 +902,7 @@ def test_health_get_rejects_invalid_window_hours() -> None:
 def test_ui_audit_read_autofix_rejects_invalid_limits() -> None:
     mcp = _FakeMCP()
     register_ui_audit_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.ui_audit.read"](
+    payload = mcp.tools["brewme.ui_audit.read"](
         action="autofix",
         run_id=UUID_1,
         max_files=0,
@@ -914,7 +914,7 @@ def test_ui_audit_read_autofix_rejects_invalid_limits() -> None:
 def test_jobs_list_videos_rejects_invalid_limit() -> None:
     mcp = _FakeMCP()
     register_job_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    payload = mcp.tools["sourceharbor.videos.list"](limit=0)
+    payload = mcp.tools["brewme.videos.list"](limit=0)
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "limit"
 
@@ -922,11 +922,11 @@ def test_jobs_list_videos_rejects_invalid_limit() -> None:
 def test_computer_use_rejects_invalid_screenshot_and_safety_values() -> None:
     mcp = _FakeMCP()
     register_computer_use_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
-    invalid_screenshot = mcp.tools["sourceharbor.computer_use.run"](
+    invalid_screenshot = mcp.tools["brewme.computer_use.run"](
         instruction="click",
         screenshot_base64="not-base64",
     )
-    invalid_safety_max_actions = mcp.tools["sourceharbor.computer_use.run"](
+    invalid_safety_max_actions = mcp.tools["brewme.computer_use.run"](
         instruction="click",
         screenshot_base64="ZmFrZQ==",
         safety={"max_actions": 0},
@@ -942,7 +942,7 @@ def test_computer_use_rejects_invalid_blocked_actions_shape() -> None:
     mcp = _FakeMCP()
     register_computer_use_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    invalid_blocked_actions = mcp.tools["sourceharbor.computer_use.run"](
+    invalid_blocked_actions = mcp.tools["brewme.computer_use.run"](
         instruction="click",
         screenshot_base64="ZmFrZQ==",
         safety={"blocked_actions": ["click", "", 1]},  # type: ignore[list-item]
@@ -1017,7 +1017,7 @@ def test_workflows_run_reports_invalid_payload_value_with_original_input() -> No
     mcp = _FakeMCP()
     register_workflow_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.workflows.run"](
+    payload = mcp.tools["brewme.workflows.run"](
         workflow="cleanup",
         payload={"cache_max_size_mb": 0},
     )
@@ -1043,7 +1043,7 @@ def test_computer_use_rejects_invalid_confirm_before_execute_type() -> None:
     mcp = _FakeMCP()
     register_computer_use_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.computer_use.run"](
+    payload = mcp.tools["brewme.computer_use.run"](
         instruction="click",
         screenshot_base64="ZmFrZQ==",
         safety={"confirm_before_execute": "true"},
@@ -1057,7 +1057,7 @@ def test_computer_use_rejects_blank_instruction() -> None:
     mcp = _FakeMCP()
     register_computer_use_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.computer_use.run"](
+    payload = mcp.tools["brewme.computer_use.run"](
         instruction="   ",
         screenshot_base64="ZmFrZQ==",
     )
@@ -1079,7 +1079,7 @@ def test_computer_use_includes_all_safety_fields_and_passes_upstream_errors() ->
         }
 
     register_computer_use_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.computer_use.run"](
+    payload = mcp.tools["brewme.computer_use.run"](
         instruction="click submit",
         screenshot_base64="ZmFrZQ==",
         safety={

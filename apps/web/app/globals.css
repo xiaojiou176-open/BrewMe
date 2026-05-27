@@ -3148,7 +3148,7 @@ tr[data-state="deleting"] td {
 	padding: var(--space-6) var(--space-12);
 }
 
-/* ─── Reading pane (SourceHarbor-style) ───────────────────────────────── */
+/* ─── Reading pane (BrewMe-style) ───────────────────────────────── */
 .reading-pane-prose .markdown-body {
 	max-width: 100%;
 	line-height: 1.75;

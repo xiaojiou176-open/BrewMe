@@ -3,7 +3,7 @@ import type {
 	ManualSourceIntakeResult,
 	SourceIdentityRef,
 	Subscription,
-} from "@sourceharbor/sdk";
+} from "@brewme/sdk";
 
 export type SourceRelationKind =
 	| "matched_subscription"

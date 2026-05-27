@@ -1,7 +1,7 @@
 {
-  "name": "sourceharbor-remotion",
+  "name": "brewme-remotion",
   "version": "0.1.0",
-  "description": "SourceHarbor front-door promo video",
+  "description": "BrewMe front-door promo video",
   "repository": {},
   "license": "MIT",
   "private": true,
@@ -27,8 +27,8 @@
   "scripts": {
     "dev": "remotion studio",
     "build": "remotion bundle",
-    "render:still": "remotion still SourceHarborFrontDoor dist/sourceharbor-front-door.png --frame=0",
-    "render:video": "remotion render SourceHarborFrontDoor dist/sourceharbor-front-door.mp4",
+    "render:still": "remotion still BrewMeFrontDoor dist/brewme-front-door.png --frame=0",
+    "render:video": "remotion render BrewMeFrontDoor dist/brewme-front-door.mp4",
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc"
   },

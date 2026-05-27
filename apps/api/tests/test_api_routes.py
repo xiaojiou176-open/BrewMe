@@ -33,7 +33,7 @@ def test_metrics_endpoint_exposes_prometheus_text(api_client: TestClient) -> Non
     assert response.status_code == 200
     assert "text/plain" in response.headers.get("content-type", "")
     body = response.text
-    assert "sourceharbor_http_requests_total" in body
+    assert "brewme_http_requests_total" in body
     assert 'route="/healthz"' in body
 
 

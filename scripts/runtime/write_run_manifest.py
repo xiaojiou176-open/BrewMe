@@ -51,13 +51,13 @@ def main() -> int:
         "channel": args.channel,
         "argv": argv,
         "created_at": datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z"),
-        "repo_commit": os.getenv("sourceharbor_log_repo_commit", "unknown"),
+        "repo_commit": os.getenv("brewme_log_repo_commit", "unknown"),
         "env_profile": os.getenv(
-            "sourceharbor_log_env_profile", os.getenv("ENV_PROFILE", "unknown")
+            "brewme_log_env_profile", os.getenv("ENV_PROFILE", "unknown")
         ),
-        "log_path": _normalize_log_path(os.getenv("sourceharbor_log_path", "")),
-        "test_run_id": os.getenv("sourceharbor_test_run_id", ""),
-        "gate_run_id": os.getenv("sourceharbor_gate_run_id", ""),
+        "log_path": _normalize_log_path(os.getenv("brewme_log_path", "")),
+        "test_run_id": os.getenv("brewme_test_run_id", ""),
+        "gate_run_id": os.getenv("brewme_gate_run_id", ""),
     }
     manifest_path = ROOT / ".runtime-cache" / "run" / "manifests" / f"{args.run_id}.json"
     write_json_artifact(

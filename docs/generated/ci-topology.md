@@ -10,7 +10,7 @@ Current deterministic PR-facing CI in this repository is intentionally small and
 - canonical python-tests command: `bash scripts/ci/python_tests.sh`
 - pre-push is a contributor-side parity hook: it reruns env contract, placebo assertion guard, `bash scripts/ci/python_tests.sh`, and web lint locally after a deterministic `npm ci` refresh when tracked web manifests drift or `apps/web/node_modules/.bin/next` is missing.
 - PR-facing security workflows: `codeql.yml`, `dependency-review.yml`, `zizmor.yml`, `trivy.yml`, `trufflehog.yml`
-- Public API image publish workflow runs on `ubuntu-latest` and builds `ghcr.io/xiaojiou176-open/sourceharbor-api` via `scripts/ci/build_public_api_image.sh`
+- Public API image publish workflow runs on `ubuntu-latest` and builds `ghcr.io/xiaojiou176-open/brewme-api` via `scripts/ci/build_public_api_image.sh`
 - GHCR image publish workflow runs on `ubuntu-latest` and sets up Docker Buildx before calling `scripts/ci/build_standard_image.sh`
 - release evidence attestation stays in `.github/workflows/release-evidence-attest.yml`.
 

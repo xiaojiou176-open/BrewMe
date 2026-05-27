@@ -21,11 +21,11 @@ export const metadata: Metadata = buildProductMetadata({
 });
 
 const TOOL_EXAMPLES = [
-	"sourceharbor.jobs.get",
-	"sourceharbor.jobs.compare",
-	"sourceharbor.knowledge.cards.list",
-	"sourceharbor.retrieval.search",
-	"sourceharbor.ingest.poll",
+	"brewme.jobs.get",
+	"brewme.jobs.compare",
+	"brewme.knowledge.cards.list",
+	"brewme.retrieval.search",
+	"brewme.ingest.poll",
 ];
 
 export default function McpPage() {
@@ -51,8 +51,8 @@ export default function McpPage() {
 					</CardHeader>
 					<CardContent className="space-y-4">
 						<pre className="overflow-x-auto rounded-lg border border-border/70 bg-muted/40 p-4 text-sm">
-							<code>{`./bin/sourceharbor help
-./bin/sourceharbor mcp
+							<code>{`./bin/brewme help
+./bin/brewme mcp
 
 # direct entrypoint still works
 ./bin/dev-mcp`}</code>

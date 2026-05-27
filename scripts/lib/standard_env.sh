@@ -7,7 +7,7 @@ STANDARD_ENV_IMAGE="${SOURCE_HARBOR_STANDARD_ENV_IMAGE:-$STRICT_CI_STANDARD_IMAG
 STANDARD_ENV_DOCKERFILE="${SOURCE_HARBOR_STANDARD_ENV_DOCKERFILE:-$ROOT_DIR/$STRICT_CI_STANDARD_IMAGE_DOCKERFILE}"
 STANDARD_ENV_WORKDIR="${SOURCE_HARBOR_STANDARD_ENV_WORKDIR:-$STRICT_CI_STANDARD_IMAGE_WORKDIR}"
 STANDARD_ENV_HOST_GATEWAY="${SOURCE_HARBOR_STANDARD_ENV_HOST_GATEWAY:-host.docker.internal}"
-STANDARD_ENV_MARKER_PATH="${SOURCE_HARBOR_STANDARD_ENV_MARKER_PATH:-/etc/sourceharbor-strict-ci-standard-env}"
+STANDARD_ENV_MARKER_PATH="${SOURCE_HARBOR_STANDARD_ENV_MARKER_PATH:-/etc/brewme-strict-ci-standard-env}"
 STANDARD_ENV_DOCKERENV_PATH="${SOURCE_HARBOR_STANDARD_ENV_DOCKERENV_PATH:-/.dockerenv}"
 STANDARD_ENV_LOCAL_FALLBACK_ON_PULL_FAILURE="${SOURCE_HARBOR_STANDARD_ENV_LOCAL_FALLBACK_ON_PULL_FAILURE:-1}"
 
@@ -267,9 +267,9 @@ run_in_standard_env() {
 ensure_external_uv_project_environment() {
   local root_dir="${1:-}"
   local current_value="${UV_PROJECT_ENVIRONMENT:-}"
-  local cache_root="${SOURCE_HARBOR_CACHE_ROOT:-${HOME}/.cache/sourceharbor}"
+  local cache_root="${SOURCE_HARBOR_CACHE_ROOT:-${HOME}/.cache/brewme}"
   local fallback="${cache_root}/project-venv"
-  local legacy_fallback="${HOME}/.sourceharbor/project-venv"
+  local legacy_fallback="${HOME}/.brewme/project-venv"
 
   if [[ -z "$root_dir" ]]; then
     if [[ "$current_value" == "$legacy_fallback" ]]; then
@@ -286,7 +286,7 @@ ensure_external_uv_project_environment() {
   fi
 
   case "$current_value" in
-    "$legacy_fallback"|"$HOME/.sourceharbor"/project-venv)
+    "$legacy_fallback"|"$HOME/.brewme"/project-venv)
       export UV_PROJECT_ENVIRONMENT="$fallback"
       ;;
     "$root_dir"/*|.venv|./.venv|.runtime-cache/*)

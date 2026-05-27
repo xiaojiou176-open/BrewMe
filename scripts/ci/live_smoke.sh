@@ -8,14 +8,14 @@ SCRIPT_NAME="ci_live_smoke"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/ci-live-smoke.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/ci-live-smoke.jsonl"
 
 log() {
-  sourceharbor_log info ci_live_smoke "$*"
+  brewme_log info ci_live_smoke "$*"
 }
 
 fail() {
-  sourceharbor_log error ci_live_smoke_error "$*"
+  brewme_log error ci_live_smoke_error "$*"
   exit 1
 }
 

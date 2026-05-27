@@ -7,7 +7,7 @@ set -euo pipefail
 # Default parameters (CLI flags may override them)
 GCP_PROJECT=""
 GCP_ZONE="us-west1-b"
-INSTANCE_NAME="sourceharbor-prod"
+INSTANCE_NAME="brewme-prod"
 MACHINE_TYPE="e2-standard-2"
 DISK_SIZE="50GB"
 IMAGE_FAMILY="debian-12"
@@ -102,17 +102,17 @@ gcloud compute instances create "$INSTANCE_NAME" \
   --boot-disk-size="$DISK_SIZE" \
   --image-family="$IMAGE_FAMILY" \
   --image-project="$IMAGE_PROJECT" \
-  --tags="http-server,https-server,sourceharbor-api" \
+  --tags="http-server,https-server,brewme-api" \
   --scopes="$INSTANCE_SCOPES"
 
 # ── Step 3: Open firewall (idempotent) ────────────────────────────────────────
 log "Ensuring firewall rules …"
-gcloud compute firewall-rules create allow-sourceharbor-api \
+gcloud compute firewall-rules create allow-brewme-api \
   --project="$GCP_PROJECT" \
   --allow="tcp:8000" \
-  --target-tags="sourceharbor-api" \
-  --description="SourceHarbor API port" 2>/dev/null || \
-  log "firewall rule 'allow-sourceharbor-api' already exists, skipping."
+  --target-tags="brewme-api" \
+  --description="BrewMe API port" 2>/dev/null || \
+  log "firewall rule 'allow-brewme-api' already exists, skipping."
 
 gcloud compute firewall-rules create allow-http-https \
   --project="$GCP_PROJECT" \
@@ -204,8 +204,8 @@ if [[ -n "$GITHUB_REPO_URL" ]]; then
       echo '  1. cp .env.example .env && edit .env with your secrets';
       echo '  2. ./scripts/bootstrap_full_stack.sh';
       echo '  3. sudo cp infra/systemd/*.service /etc/systemd/system/';
-      echo '  4. sudo systemctl daemon-reload && sudo systemctl enable sourceharbor-api sourceharbor-worker sourceharbor-web';
-      echo '  5. sudo cp infra/nginx/sourceharbor.conf /etc/nginx/sites-available/sourceharbor.conf && sudo nginx -t && sudo systemctl reload nginx';"
+      echo '  4. sudo systemctl daemon-reload && sudo systemctl enable brewme-api brewme-worker brewme-web';
+      echo '  5. sudo cp infra/nginx/brewme.conf /etc/nginx/sites-available/brewme.conf && sudo nginx -t && sudo systemctl reload nginx';"
 fi
 
 # ── Done ──────────────────────────────────────────────────────────────────────
@@ -221,10 +221,10 @@ log "  1. SSH in: gcloud compute ssh $INSTANCE_NAME --project=$GCP_PROJECT --zon
 log "  2. cd ~/app && cp .env.example .env  (then fill in secrets)"
 log "  3. ./scripts/bootstrap_full_stack.sh"
 log "  4. sudo cp infra/systemd/*.service /etc/systemd/system/"
-log "  5. sudo systemctl daemon-reload && sudo systemctl enable sourceharbor-api sourceharbor-worker sourceharbor-web"
-log "  6. sudo systemctl start sourceharbor-api sourceharbor-worker sourceharbor-web"
-log "  7. sudo cp infra/nginx/sourceharbor.conf /etc/nginx/sites-available/sourceharbor.conf"
-log "     sudo ln -sf /etc/nginx/sites-available/sourceharbor.conf /etc/nginx/sites-enabled/sourceharbor.conf"
+log "  5. sudo systemctl daemon-reload && sudo systemctl enable brewme-api brewme-worker brewme-web"
+log "  6. sudo systemctl start brewme-api brewme-worker brewme-web"
+log "  7. sudo cp infra/nginx/brewme.conf /etc/nginx/sites-available/brewme.conf"
+log "     sudo ln -sf /etc/nginx/sites-available/brewme.conf /etc/nginx/sites-enabled/brewme.conf"
 log "     sudo nginx -t && sudo systemctl reload nginx"
 log ""
 log "  API will be at: http://$EXTERNAL_IP:8000"

@@ -1,0 +1,13 @@
+# BrewMe Watchlist Briefing
+
+This skill is the OpenClaw-facing watchlist briefing card for BrewMe.
+
+It is designed to behave like a self-contained operator skill package:
+
+- one skill prompt that teaches the agent the workflow
+- one MCP/HTTP setup reference
+- one HTTP fallback reference
+- one capability map over the BrewMe operator surfaces
+- one example output that keeps the answer shape stable
+
+Use it when the agent should start from one watchlist, reuse the current story/briefing context, and answer one operator question with evidence.

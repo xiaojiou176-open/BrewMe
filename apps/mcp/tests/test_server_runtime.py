@@ -346,7 +346,7 @@ def test_create_server_registers_tools_and_normalizes_error_payloads(
 
     mcp = server.create_server()
     assert isinstance(mcp, FakeFastMCP)
-    assert mcp.name == "sourceharbor"
+    assert mcp.name == "brewme"
     api_call = recorder["api_call"]
     assert api_call is not None
 

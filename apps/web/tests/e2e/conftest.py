@@ -33,7 +33,7 @@ WEB_E2E_ARTIFACT_ROOT = PROJECT_ROOT / ".runtime-cache" / "evidence" / "tests" /
 WEB_E2E_VIDEO_DIR = WEB_E2E_ARTIFACT_ROOT / "videos"
 WEB_E2E_TRACE_DIR = WEB_E2E_ARTIFACT_ROOT / "traces"
 WEB_E2E_SCREENSHOT_DIR = WEB_E2E_ARTIFACT_ROOT / "screenshots"
-WEB_E2E_WRITE_TOKEN = "sourceharbor-local-dev-token"
+WEB_E2E_WRITE_TOKEN = "brewme-local-dev-token"
 
 DeviceProfile = Literal["desktop", "tablet", "mobile"]
 ReducedMotion = Literal["no-preference", "reduce"]

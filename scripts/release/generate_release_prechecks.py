@@ -288,8 +288,8 @@ def _build_observability_checks(repo_root: Path) -> list[dict[str, object]]:
                         "trace_id='release-trace-0001';"
                         "trace=client.get('/healthz', headers={'x-trace-id': trace_id});"
                         "body=metrics.text;"
-                        "tokens=['sourceharbor_http_requests_total','sourceharbor_http_request_duration_seconds_sum',"
-                        "'sourceharbor_http_request_duration_seconds_count','route=\"/healthz\"','status=\"200\"','status=\"404\"'];"
+                        "tokens=['brewme_http_requests_total','brewme_http_request_duration_seconds_sum',"
+                        "'brewme_http_request_duration_seconds_count','route=\"/healthz\"','status=\"200\"','status=\"404\"'];"
                         "red=(metrics.status_code==200 and all(t in body for t in tokens));"
                         "trace_ok=(trace.status_code==200 and trace.headers.get('x-trace-id','')==trace_id);"
                         "print(json.dumps({'red': red, 'trace': trace_ok, 'metrics_status': metrics.status_code,"
@@ -372,9 +372,9 @@ def _build_observability_checks(repo_root: Path) -> list[dict[str, object]]:
     metrics_body = metrics_response.text
 
     red_tokens = (
-        "sourceharbor_http_requests_total",
-        "sourceharbor_http_request_duration_seconds_sum",
-        "sourceharbor_http_request_duration_seconds_count",
+        "brewme_http_requests_total",
+        "brewme_http_request_duration_seconds_sum",
+        "brewme_http_request_duration_seconds_count",
         'route="/healthz"',
         'status="200"',
         'status="404"',

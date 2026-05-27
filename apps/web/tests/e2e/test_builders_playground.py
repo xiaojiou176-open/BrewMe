@@ -14,7 +14,7 @@ def test_builders_resource_links(page: Page) -> None:
         codex_bundle_link.click()
     popup = popup_info.value
     expect(popup).to_have_url(
-        re.compile(r"github\\.com/.*/starter-packs/codex/sourceharbor-codex-plugin/README\\.md")
+        re.compile(r"github\\.com/.*/starter-packs/codex/brewme-codex-plugin/README\\.md")
     )
     popup.close()
 
@@ -24,7 +24,7 @@ def test_builders_resource_links(page: Page) -> None:
         claude_bundle_link.click()
     popup = popup_info.value
     expect(popup).to_have_url(
-        re.compile(r"github\\.com/.*/starter-packs/claude-code/sourceharbor-claude-plugin/README\\.md")
+        re.compile(r"github\\.com/.*/starter-packs/claude-code/brewme-claude-plugin/README\\.md")
     )
     popup.close()
 

@@ -131,7 +131,7 @@ def send_with_resend(
         "Authorization": f"Bearer {resend_api_key}",
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "User-Agent": "sourceharbor/1.0 (+https://local.sourceharbor)",
+        "User-Agent": "brewme/1.0 (+https://local.brewme)",
     }
     if isinstance(idempotency_key, str) and idempotency_key.strip():
         headers["Idempotency-Key"] = idempotency_key.strip()

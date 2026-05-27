@@ -1,7 +1,7 @@
 {
   "version": 1,
   "standard_image": {
-    "repository": "ghcr.io/xiaojiou176-open/sourceharbor-ci-standard",
+    "repository": "ghcr.io/xiaojiou176-open/brewme-ci-standard",
     "tag": "897e073e246868e284a7d974b9b2ba03c1d50661",
     "digest": "sha256:8910a9a90aca43c0f97986d5b531cd8ddde3922481272643d5a073dbf9e17851",
     "dockerfile": ".devcontainer/Dockerfile",

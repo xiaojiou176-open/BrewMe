@@ -24,7 +24,7 @@ def test_reader_documents_list_rejects_invalid_limit() -> None:
     mcp = _FakeMCP()
     register_reader_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.reader.documents.list"](limit=0)
+    payload = mcp.tools["brewme.reader.documents.list"](limit=0)
 
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "limit"
@@ -34,7 +34,7 @@ def test_reader_document_get_rejects_invalid_uuid() -> None:
     mcp = _FakeMCP()
     register_reader_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    payload = mcp.tools["sourceharbor.reader.documents.get"](document_id="doc-1")
+    payload = mcp.tools["brewme.reader.documents.get"](document_id="doc-1")
 
     assert payload["code"] == "INVALID_ARGUMENT"
     assert payload["details"]["field"] == "document_id"
@@ -87,7 +87,7 @@ def test_reader_tools_normalize_document_and_navigation_payloads() -> None:
             }
         if method == "GET" and path == "/api/v1/reader/navigation-brief":
             return {
-                "brief_kind": "sourceharbor_navigation_brief_v1",
+                "brief_kind": "brewme_navigation_brief_v1",
                 "generated_at": "2026-04-09T00:00:00Z",
                 "window_id": "2026-04-09@America/Los_Angeles",
                 "document_count": 1,
@@ -99,9 +99,9 @@ def test_reader_tools_normalize_document_and_navigation_payloads() -> None:
 
     register_reader_tools(mcp, fake_api_call)
 
-    list_payload = mcp.tools["sourceharbor.reader.documents.list"](limit=5)
-    detail_payload = mcp.tools["sourceharbor.reader.documents.get"](document_id=UUID_1)
-    navigation_payload = mcp.tools["sourceharbor.reader.navigation.get"](limit=3)
+    list_payload = mcp.tools["brewme.reader.documents.list"](limit=5)
+    detail_payload = mcp.tools["brewme.reader.documents.get"](document_id=UUID_1)
+    navigation_payload = mcp.tools["brewme.reader.navigation.get"](limit=3)
 
     assert list_payload["items"][0]["stable_key"] == "topic-ai-agents-2026-04-09"
     assert list_payload["items"][0]["publish_status"] == "published_with_gap"

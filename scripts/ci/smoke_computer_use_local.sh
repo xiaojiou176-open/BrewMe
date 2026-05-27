@@ -16,7 +16,7 @@ heartbeat_pid=""
 TMP_FILES=()
 
 if [[ -z "${SOURCE_HARBOR_API_KEY:-}" && -z "${CI:-}" && -z "${GITHUB_ACTIONS:-}" ]]; then
-  export SOURCE_HARBOR_API_KEY="sourceharbor-local-dev-token"
+  export SOURCE_HARBOR_API_KEY="brewme-local-dev-token"
 fi
 
 log() {

@@ -52,7 +52,7 @@ qg_log() {
   shift 2
   local message="$*"
   printf '[quality-gate] %s\n' "$message" >&2
-  sourceharbor_log_json_only "$severity" "$event" "$message"
+  brewme_log_json_only "$severity" "$event" "$message"
 }
 
 prepare_web_runtime() {
@@ -329,7 +329,7 @@ quality_gate_summary_json="$quality_gate_summary_dir/summary.json"
 quality_gate_summary_md="$quality_gate_summary_dir/summary.md"
 root_dirtiness_snapshot="$TMP_DIR/root-before.json"
 mkdir -p "$quality_gate_summary_dir"
-sourceharbor_log_init "governance" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/governance/quality-gate.jsonl"
+brewme_log_init "governance" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/governance/quality-gate.jsonl"
 : > "$quality_gate_summary_tsv"
 
 cleanup_quality_gate_residue() {

@@ -34,7 +34,7 @@ def _normalize_knowledge_card(item: Any) -> dict[str, Any]:
 
 def register_knowledge_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.knowledge.cards.list",
+        name="brewme.knowledge.cards.list",
         description="List structured knowledge cards derived from digest outputs.",
     )
     def list_knowledge_cards(

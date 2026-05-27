@@ -39,7 +39,7 @@ def test_reports_daily_send_normalizes_success_payload_and_date_fallback() -> No
         }
 
     register_report_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.reports.daily_send"](
+    payload = mcp.tools["brewme.reports.daily_send"](
         date="2026-02-25",
         to_email="demo@example.com",
         subject="Daily",
@@ -61,6 +61,6 @@ def test_reports_daily_send_passes_error_payload_through() -> None:
     }
 
     register_report_tools(mcp, lambda *_args, **_kwargs: error_payload)
-    payload = mcp.tools["sourceharbor.reports.daily_send"](date="2026-02-25")
+    payload = mcp.tools["brewme.reports.daily_send"](date="2026-02-25")
 
     assert payload == error_payload

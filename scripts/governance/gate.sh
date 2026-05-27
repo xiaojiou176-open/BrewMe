@@ -9,7 +9,7 @@ export PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-$ROOT_DIR/.runtime-cache/tmp/
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "governance" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/governance/governance-gate.jsonl"
+brewme_log_init "governance" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/governance/governance-gate.jsonl"
 
 cleanup_workspace_runtime_residue() {
   PYTHONDONTWRITEBYTECODE=1 \
@@ -43,7 +43,7 @@ while (($# > 0)); do
       exit 0
       ;;
     *)
-      sourceharbor_log error invalid_argument "unknown argument: $1"
+      brewme_log error invalid_argument "unknown argument: $1"
       usage >&2
       exit 2
       ;;
@@ -51,13 +51,13 @@ while (($# > 0)); do
 done
 
 if [[ "$MODE" != "pre-commit" && "$MODE" != "pre-push" && "$MODE" != "ci" && "$MODE" != "audit" ]]; then
-  sourceharbor_log error invalid_mode "invalid mode: $MODE"
+  brewme_log error invalid_mode "invalid mode: $MODE"
   exit 2
 fi
 
 cd "$ROOT_DIR"
 
-sourceharbor_log info start "mode=$MODE"
+brewme_log info start "mode=$MODE"
 python3 scripts/runtime/clean_source_runtime_residue.py --apply
 python3 scripts/governance/check_root_allowlist.py --strict-local-private
 python3 scripts/governance/check_root_semantic_cleanliness.py
@@ -124,4 +124,4 @@ python3 scripts/governance/check_upstream_failure_classification.py
 python3 scripts/governance/check_vendor_registry_integrity.py
 python3 scripts/governance/render_third_party_notices.py --check
 
-sourceharbor_log info complete "PASS"
+brewme_log info complete "PASS"

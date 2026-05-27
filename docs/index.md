@@ -1,4 +1,4 @@
-# SourceHarbor Docs
+# BrewMe Docs
 
 If the README is the storefront, this page is the lobby directory.
 
@@ -6,7 +6,7 @@ If the README is the storefront, this page is the lobby directory.
 
 This index keeps the approved public ledger front and center: reader-first surfaces, proof ladders, and verification checks stay obvious, while working blueprints stay in the internal planning ledger. Whenever you mention release vs remote vs distribution truth, link to [project-status.md](./project-status.md), [proof.md](./proof.md), or [public-distribution.md](./public-distribution.md) so readers can verify the exact ledger.
 
-SourceHarbor has several layers, but the public entry should stay simple:
+BrewMe has several layers, but the public entry should stay simple:
 
 1. **See the outcome in under a minute**
 2. **Take the no-boot tour**
@@ -16,8 +16,8 @@ SourceHarbor has several layers, but the public entry should stay simple:
 
 <p>
   <img
-    src="./assets/sourceharbor-developer-flywheel.svg"
-    alt="SourceHarbor developer flywheel showing source intake, proof-rich jobs, Search and Ask, MCP and API reuse, and the operator loop."
+    src="./assets/brewme-developer-flywheel.svg"
+    alt="BrewMe developer flywheel showing source intake, proof-rich jobs, Search and Ask, MCP and API reuse, and the operator loop."
     width="100%"
   />
 </p>
@@ -41,7 +41,7 @@ This is the shortest honest explanation for why the repo feels more product-shap
 | **Get the fastest no-boot preview** | [see-it-fast.md](./see-it-fast.md) | The reader, timeline, and proof path without setup |
 | **Run the shortest truthful path** | [start-here.md](./start-here.md) | A result-first local flow ending in jobs, feed, and proof |
 | **Open the MCP front door** | [mcp-quickstart.md](./mcp-quickstart.md) | Startup, representative tools, and the relation between MCP, API, and Web |
-| **Build on top of SourceHarbor** | [builders.md](./builders.md) | How Codex, Claude Code, OpenClaw, generic MCP clients, API consumers, public packages, and starter packs fit the current repo truth |
+| **Build on top of BrewMe** | [builders.md](./builders.md) | How Codex, Claude Code, OpenClaw, generic MCP clients, API consumers, public packages, and starter packs fit the current repo truth |
 | **Open the public starter surface** | [public-skills.md](./public-skills.md) | Public compatibility docs, starter prompts, and runnable examples |
 | **Check public distribution status** | [public-distribution.md](./public-distribution.md) | What is bundle-ready, what is submit-ready, and which final steps stay human-only |
 | **Grab the public asset pack** | [media-kit.md](./media-kit.md) | Exact social preview path, tracked public visuals, listing copy hooks, and teaser-video prep notes |
@@ -53,7 +53,7 @@ This is the shortest honest explanation for why the repo feels more product-shap
 | **See what is still a future-direction spike** | [reference/project-positioning.md](./reference/project-positioning.md) | What is worth exploring next without pretending it already exists |
 | **Understand the moving parts** | [architecture.md](./architecture.md) | API, worker, MCP, web, and shared surfaces |
 | **See how verification works** | [testing.md](./testing.md) | Local checks, CI checks, and smoke paths |
-| **Compare SourceHarbor to other repo shapes** | [compare.md](./compare.md) | Differentiation, trade-offs, and why this repo is product-shaped |
+| **Compare BrewMe to other repo shapes** | [compare.md](./compare.md) | Differentiation, trade-offs, and why this repo is product-shaped |
 | **Scan common questions fast** | [faq.md](./faq.md) | Adoption, scope, hosted-vs-source-first, and proof boundaries |
 
 ## Read In Layers

@@ -36,7 +36,7 @@ async def send_video_digest_activity_impl(
             require_daily_digest=False,
         )
         subject_title = str(job.get("title") or job.get("video_uid") or job_id)
-        subject = f"[SourceHarbor] Video digest {subject_title}"
+        subject = f"[BrewMe] Video digest {subject_title}"
         digest_markdown = safe_read_text(str(job.get("artifact_digest_md") or ""))
         body_markdown = build_video_digest_markdown(job, digest_markdown)
         insert_payload = {
@@ -227,7 +227,7 @@ async def send_daily_digest_activity_impl(
             notification_enabled=settings.notification_enabled,
             require_daily_digest=True,
         )
-        subject = f"[SourceHarbor] Daily digest {digest_day.isoformat()}"
+        subject = f"[BrewMe] Daily digest {digest_day.isoformat()}"
         insert_payload = {
             "digest_scope": "daily",
             "digest_date": digest_day.isoformat(),

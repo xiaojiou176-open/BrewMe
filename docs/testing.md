@@ -1,6 +1,6 @@
 # Testing
 
-SourceHarbor uses layered verification.
+BrewMe uses layered verification.
 
 Think of it like product evidence in layers:
 
@@ -122,7 +122,7 @@ Important local-truth notes:
   `.runtime-cache/tmp/local-temporal/dev.sqlite`
 - if your machine already has a host Postgres on `127.0.0.1:5432`, that is a different data plane from the core-services container path
 - the repo-managed web runtime also writes `.runtime-cache/tmp/web-runtime/workspace/apps/web/.env.local` so browser-triggered writes keep the same local API base URL and write-session fallback as the supervisor path
-- `CI=false` or similar non-truthy env strings must not suppress the maintainer-local `sourceharbor-local-dev-token` fallback during repo-managed full-stack startup
+- `CI=false` or similar non-truthy env strings must not suppress the maintainer-local `brewme-local-dev-token` fallback during repo-managed full-stack startup
 - `./bin/full-stack up` can now self-heal Temporal reachability by trying the
   repo-owned `core_services.sh up` path before failing worker startup
 - Temporal preflight now verifies namespace readiness after TCP reachability, so

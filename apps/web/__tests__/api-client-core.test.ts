@@ -1034,7 +1034,7 @@ describe("apiClient core behavior", () => {
 						published_with_gap_count: 0,
 						documents: [],
 						navigation_brief: {
-							brief_kind: "sourceharbor_navigation_brief_v1",
+							brief_kind: "brewme_navigation_brief_v1",
 							generated_at: "2026-04-09T00:00:00Z",
 							window_id: "2026-04-09@America/Los_Angeles",
 							document_count: 1,
@@ -1118,7 +1118,7 @@ describe("apiClient core behavior", () => {
 			.mockResolvedValueOnce(
 				new Response(
 					JSON.stringify({
-						brief_kind: "sourceharbor_navigation_brief_v1",
+						brief_kind: "brewme_navigation_brief_v1",
 						generated_at: "2026-04-09T00:00:00Z",
 						window_id: "2026-04-09@America/Los_Angeles",
 						document_count: 1,

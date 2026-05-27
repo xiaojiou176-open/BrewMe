@@ -188,7 +188,7 @@ def test_workflows_run_uses_stable_workflow_id_for_non_run_once_requests(
     assert captured["request_payload"] == {"run_once": False}
     assert captured["kwargs"] == {
         "id": "provider_canary-workflow",
-        "task_queue": "sourceharbor-worker",
+        "task_queue": "brewme-worker",
     }
 
 
@@ -250,5 +250,5 @@ def test_workflows_run_supports_consume_pending_requests(
     }
     assert captured["kwargs"] == {
         "id": "consume_pending-workflow",
-        "task_queue": "sourceharbor-worker",
+        "task_queue": "brewme-worker",
     }

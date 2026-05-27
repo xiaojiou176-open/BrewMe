@@ -1,7 +1,7 @@
-# SourceHarbor VS Code Agent Pack
+# BrewMe VS Code Agent Pack
 
 This is the first public VS Code agent plugin-grade starter pack for
-SourceHarbor.
+BrewMe.
 
 Use it when you want:
 
@@ -12,21 +12,21 @@ Use it when you want:
 Start here:
 
 - `docs/compat/vscode-agent.md`
-- `starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/README.md`
-- `starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/plugin.json`
-- `starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/.mcp.json`
-- `starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/skills/sourceharbor-watchlist-briefing/SKILL.md`
+- `starter-packs/vscode-agent/brewme-vscode-agent-plugin/README.md`
+- `starter-packs/vscode-agent/brewme-vscode-agent-plugin/plugin.json`
+- `starter-packs/vscode-agent/brewme-vscode-agent-plugin/.mcp.json`
+- `starter-packs/vscode-agent/brewme-vscode-agent-plugin/skills/brewme-watchlist-briefing/SKILL.md`
 
 ## Three-step quickstart
 
 1. Copy or clone the plugin bundle directory into the VS Code agent plugin
    location you already use, or point the source-install flow at this directory.
 2. Replace `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` in `.mcp.json` with the
-   absolute path to your SourceHarbor checkout.
+   absolute path to your BrewMe checkout.
 3. Point VS Code at `plugin.json`, then start with
-   `skills/sourceharbor-watchlist-briefing/SKILL.md`.
+   `skills/brewme-watchlist-briefing/SKILL.md`.
 
-If your local SourceHarbor stack is not using `http://127.0.0.1:9000`, replace
+If your local BrewMe stack is not using `http://127.0.0.1:9000`, replace
 the placeholder with the real `SOURCE_HARBOR_API_BASE_URL` before you hand the
 bundle to VS Code.
 

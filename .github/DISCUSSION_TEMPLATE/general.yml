@@ -9,7 +9,7 @@ body:
     attributes:
       label: Topic
       description: What are you discussing?
-      placeholder: I am evaluating SourceHarbor for a long-form research workflow and want to compare operating models.
+      placeholder: I am evaluating BrewMe for a long-form research workflow and want to compare operating models.
     validations:
       required: true
   - type: textarea
@@ -17,4 +17,4 @@ body:
     attributes:
       label: Goal or context
       description: What decision, question, or conversation are you trying to move forward?
-      placeholder: I want to understand whether SourceHarbor is better as an internal operator tool or a reusable product base.
+      placeholder: I want to understand whether BrewMe is better as an internal operator tool or a reusable product base.

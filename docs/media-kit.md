@@ -14,13 +14,13 @@ Use it like a tracked asset pack, not like a launch checklist.
 If you want to upload the current tracked GitHub social preview asset, use:
 
 ```text
-<repo-root>/docs/assets/sourceharbor-social-preview.png
+<repo-root>/docs/assets/brewme-social-preview.png
 ```
 
 Supporting source file:
 
 ```text
-<repo-root>/docs/assets/sourceharbor-social-preview.svg
+<repo-root>/docs/assets/brewme-social-preview.svg
 ```
 
 Tracked config pointer:
@@ -37,16 +37,16 @@ Current truth:
 
 | Asset | Role | Current use |
 | --- | --- | --- |
-| `docs/assets/sourceharbor-social-preview.png` | GitHub social preview upload target | manual repo-settings upload asset |
-| `docs/assets/sourceharbor-social-preview.svg` | tracked source illustration for the preview | editable source file |
-| `docs/assets/sourceharbor-square-icon.png` | square icon for MCP directory submissions and listing tiles | directory-friendly public icon asset |
-| `docs/assets/sourceharbor-square-icon.svg` | tracked source illustration for the square icon | editable source file |
-| `docs/assets/sourceharbor-mcp-directory-shot-01.png` | MCP directory and listing screenshot asset | submission-friendly product shot derived from the tracked studio preview |
-| `docs/assets/sourceharbor-hero.svg` | supporting front-door poster | public poster-style asset kept in the media kit family |
-| `docs/assets/sourceharbor-studio-preview.svg` | README + no-boot front-door preview | current primary front-door asset |
-| `docs/assets/sourceharbor-builder-loop.svg` | supporting builder-facing visual | optional builder/distribution illustration kept out of the main front door |
-| `docs/assets/sourceharbor-developer-flywheel.svg` | builder/product loop visual | README/docs narrative support |
-| `docs/assets/sourceharbor-architecture.svg` | system map | architecture/docs proof support |
+| `docs/assets/brewme-social-preview.png` | GitHub social preview upload target | manual repo-settings upload asset |
+| `docs/assets/brewme-social-preview.svg` | tracked source illustration for the preview | editable source file |
+| `docs/assets/brewme-square-icon.png` | square icon for MCP directory submissions and listing tiles | directory-friendly public icon asset |
+| `docs/assets/brewme-square-icon.svg` | tracked source illustration for the square icon | editable source file |
+| `docs/assets/brewme-mcp-directory-shot-01.png` | MCP directory and listing screenshot asset | submission-friendly product shot derived from the tracked studio preview |
+| `docs/assets/brewme-hero.svg` | supporting front-door poster | public poster-style asset kept in the media kit family |
+| `docs/assets/brewme-studio-preview.svg` | README + no-boot front-door preview | current primary front-door asset |
+| `docs/assets/brewme-builder-loop.svg` | supporting builder-facing visual | optional builder/distribution illustration kept out of the main front door |
+| `docs/assets/brewme-developer-flywheel.svg` | builder/product loop visual | README/docs narrative support |
+| `docs/assets/brewme-architecture.svg` | system map | architecture/docs proof support |
 
 ## Safe Copy Hooks
 
@@ -68,7 +68,7 @@ promo copy:
 
 Keep these boundaries explicit:
 
-- do not say SourceHarbor is already officially listed everywhere
+- do not say BrewMe is already officially listed everywhere
 - do not say OpenClaw is registry-published today
 - do not say Codex has an official directory listing today
 - do not say Claude Code is already live-listed if you only have submission-ready assets

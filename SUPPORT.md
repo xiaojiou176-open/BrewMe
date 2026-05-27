@@ -8,4 +8,4 @@ Use GitHub Issues for bugs and scoped feature requests.
 - Feature requests: concrete user problem, expected behavior, and success criteria
 - Discussions: product direction, workflow design, setup questions, and evaluation notes
 
-For security-sensitive reports, use the private GitHub Security Advisory path documented in [SECURITY.md](SECURITY.md): <https://github.com/xiaojiou176-open/sourceharbor/security>
+For security-sensitive reports, use the private GitHub Security Advisory path documented in [SECURITY.md](SECURITY.md): <https://github.com/xiaojiou176-open/brewme/security>

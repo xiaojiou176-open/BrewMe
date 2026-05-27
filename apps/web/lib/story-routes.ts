@@ -55,7 +55,7 @@ export function decorateAskRoute(
 	}
 
 	const [withoutHash, hash = ""] = safeRoute.split("#", 2);
-	const parsed = new URL(withoutHash, "https://sourceharbor.local");
+	const parsed = new URL(withoutHash, "https://brewme.local");
 	setParamIfPresent(parsed.searchParams, "question", params.question);
 	setParamIfPresent(parsed.searchParams, "mode", params.mode ?? null);
 	if (params.top_k !== null && params.top_k !== undefined) {

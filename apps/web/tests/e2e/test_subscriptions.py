@@ -45,7 +45,7 @@ def _create_subscription_via_form(page: Page, source_value: str) -> None:
     create_form = _create_subscription_form(page)
     create_form.locator('[name="source_value"]').fill(source_value)
     _select_option(page, r"(适配器类型|Adapter type)", r"(RSSHub 路由|RSSHub route)")
-    create_form.locator('[name="rsshub_route"]').fill("/youtube/channel/sourceharbor-e2e")
+    create_form.locator('[name="rsshub_route"]').fill("/youtube/channel/brewme-e2e")
     _select_option(page, r"(分类|Category)", r"(创作者|Creator)")
     create_form.locator('[name="tags"]').fill("ai,weekly")
     create_form.evaluate("(form) => form.requestSubmit()")
@@ -73,7 +73,7 @@ def _expect_subscription_success(page: Page) -> None:
 
 
 def test_subscriptions_save_subscription_button(page: Page) -> None:
-    source_value = f"https://www.youtube.com/@sourceharbor-e2e-{uuid4().hex[:8]}"
+    source_value = f"https://www.youtube.com/@brewme-e2e-{uuid4().hex[:8]}"
     page.goto("/subscriptions", wait_until="domcontentloaded")
     _create_subscription_via_form(page, source_value)
 
@@ -84,7 +84,7 @@ def test_subscriptions_save_subscription_button(page: Page) -> None:
 
 
 def test_subscriptions_delete_button(page: Page) -> None:
-    source_value = f"https://www.youtube.com/@sourceharbor-delete-{uuid4().hex[:8]}"
+    source_value = f"https://www.youtube.com/@brewme-delete-{uuid4().hex[:8]}"
     page.goto("/subscriptions", wait_until="domcontentloaded")
     _create_subscription_via_form(page, source_value)
 
@@ -105,7 +105,7 @@ def test_subscriptions_delete_button(page: Page) -> None:
 
 
 def test_subscriptions_batch_update_category(page: Page) -> None:
-    source_value = f"https://www.youtube.com/@sourceharbor-batch-{uuid4().hex[:8]}"
+    source_value = f"https://www.youtube.com/@brewme-batch-{uuid4().hex[:8]}"
     page.goto("/subscriptions", wait_until="domcontentloaded")
     _create_subscription_via_form(page, source_value)
 

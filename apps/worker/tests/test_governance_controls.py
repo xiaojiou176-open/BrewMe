@@ -137,7 +137,7 @@ def test_python_tests_public_entrypoint_uses_managed_uv_environment() -> None:
         _repo_root() / "config" / "governance" / "public-entrypoints.json"
     ).read_text(encoding="utf-8")
 
-    assert 'sourceharbor_entrypoint_bootstrap tests python-tests "" "$@"' in entrypoint
+    assert 'brewme_entrypoint_bootstrap tests python-tests "" "$@"' in entrypoint
     assert 'exec "$ROOT_DIR/scripts/ci/python_tests.sh" "$@"' in entrypoint
     assert 'source "$ROOT_DIR/scripts/lib/standard_env.sh"' in script
     assert 'ensure_external_uv_project_environment "$ROOT_DIR"' in script
@@ -165,7 +165,7 @@ def test_public_entrypoint_manifest_checker_loads_registry_for_python_tests() ->
 def test_pr_llm_real_smoke_uses_managed_write_token_and_dev_api_entrypoint() -> None:
     script = (_repo_root() / "scripts" / "ci" / "pr_llm_real_smoke.sh").read_text(encoding="utf-8")
 
-    assert 'SMOKE_WRITE_TOKEN="${SOURCE_HARBOR_API_KEY:-sourceharbor-local-dev-token}"' in script
+    assert 'SMOKE_WRITE_TOKEN="${SOURCE_HARBOR_API_KEY:-brewme-local-dev-token}"' in script
     assert 'export SOURCE_HARBOR_API_KEY="${SOURCE_HARBOR_API_KEY:-$SMOKE_WRITE_TOKEN}"' in script
     assert (
         'export WEB_ACTION_SESSION_TOKEN="${WEB_ACTION_SESSION_TOKEN:-$SMOKE_WRITE_TOKEN}"'
@@ -249,7 +249,7 @@ def test_standard_image_build_path_declares_repository_source_metadata() -> None
     build_script = (root / "scripts" / "ci" / "build_standard_image.sh").read_text(encoding="utf-8")
 
     assert (
-        'LABEL org.opencontainers.image.source="https://github.com/xiaojiou176-open/sourceharbor"'
+        'LABEL org.opencontainers.image.source="https://github.com/xiaojiou176-open/brewme"'
         in dockerfile
     )
     assert '--label "org.opencontainers.image.source=${source_repository_url}"' in build_script
@@ -285,14 +285,14 @@ def test_shell_logging_helper_contract_exists_and_is_wired() -> None:
         encoding="utf-8"
     )
 
-    assert "sourceharbor_log_init()" in helper
+    assert "brewme_log_init()" in helper
     assert "scripts/runtime/log_jsonl_event.py" in helper
     assert 'source "$ROOT_DIR/scripts/runtime/logging.sh"' in governance_gate
-    assert 'sourceharbor_log_init "governance"' in governance_gate
-    assert 'sourceharbor_log_init "components" "$SCRIPT_NAME"' in full_stack
-    assert 'sourceharbor_log_init "tests" "$SCRIPT_NAME"' in api_real_smoke
-    assert 'sourceharbor_log_init "tests" "$SCRIPT_NAME"' in smoke_llm_real
-    assert 'sourceharbor_log_init "tests" "$SCRIPT_NAME"' in external_smoke
+    assert 'brewme_log_init "governance"' in governance_gate
+    assert 'brewme_log_init "components" "$SCRIPT_NAME"' in full_stack
+    assert 'brewme_log_init "tests" "$SCRIPT_NAME"' in api_real_smoke
+    assert 'brewme_log_init "tests" "$SCRIPT_NAME"' in smoke_llm_real
+    assert 'brewme_log_init "tests" "$SCRIPT_NAME"' in external_smoke
     assert 'source "$ROOT_DIR/scripts/lib/load_env.sh"' in external_smoke
     assert 'source "$ROOT_DIR/scripts/lib/standard_env.sh"' in external_smoke
     assert 'load_repo_env "$ROOT_DIR" "$SCRIPT_NAME"' in external_smoke
@@ -433,12 +433,12 @@ def test_disk_space_governance_defaults_and_docs_are_wired() -> None:
     assert "cleanup_waves" in policy
     assert 'export CORE_POSTGRES_PORT="${CORE_POSTGRES_PORT:-15432}"' in env_example
     assert (
-        'export DATABASE_URL="postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/sourceharbor"'
+        'export DATABASE_URL="postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/brewme"'
         in env_example
     )
-    assert "export TEMPORAL_TASK_QUEUE=sourceharbor-worker" in env_example
+    assert "export TEMPORAL_TASK_QUEUE=brewme-worker" in env_example
     assert (
-        'export SOURCE_HARBOR_CACHE_ROOT="${SOURCE_HARBOR_CACHE_ROOT:-$HOME/.cache/sourceharbor}"'
+        'export SOURCE_HARBOR_CACHE_ROOT="${SOURCE_HARBOR_CACHE_ROOT:-$HOME/.cache/brewme}"'
         in env_example
     )
     assert "${UV_PROJECT_ENVIRONMENT:-$SOURCE_HARBOR_CACHE_ROOT/project-venv}" in env_example
@@ -450,8 +450,8 @@ def test_disk_space_governance_defaults_and_docs_are_wired() -> None:
     )
     assert "${SOURCE_HARBOR_CHROME_PROFILE_DIR:-Profile 1}" in env_example
     assert "${SOURCE_HARBOR_CHROME_CDP_PORT:-9339}" in env_example
-    assert "$HOME/.sourceharbor" not in env_example
+    assert "$HOME/.brewme" not in env_example
     assert "video-digestor" not in env_example
     assert "disk-space-governance.md" in runbook
     assert "[disk-space-governance]" in checker
-    assert ".cache/sourceharbor" in host_paths
+    assert ".cache/brewme" in host_paths

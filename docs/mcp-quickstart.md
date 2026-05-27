@@ -1,6 +1,6 @@
 # MCP Quickstart
 
-SourceHarbor already exposes an MCP surface for agents and automation.
+BrewMe already exposes an MCP surface for agents and automation.
 
 In plain language:
 
@@ -16,7 +16,7 @@ That same system truth now stretches across the product line:
 - `/ask` consumes that story context instead of pretending every answer starts from nowhere
 - MCP reuses those same contracts for agents
 
-This is the strongest ecosystem binding for SourceHarbor today:
+This is the strongest ecosystem binding for BrewMe today:
 
 - **Codex** and **Claude Code** are a real fit because they can talk through MCP or HTTP while staying source-first and local-proof-first
 - **OpenHands** and **OpenCode** are worth mentioning as ecosystem neighbors, but they are not the best primary product label for this repo
@@ -25,9 +25,9 @@ This is the strongest ecosystem binding for SourceHarbor today:
 If you want one packaged command surface first from inside a local checkout, run:
 
 ```bash
-npm install --global ./packages/sourceharbor-cli
+npm install --global ./packages/brewme-cli
 source .runtime-cache/run/full-stack/resolved.env
-sourceharbor templates
+brewme templates
 ```
 
 If your stack is not using the repo-managed runtime snapshot, pass the real API
@@ -36,7 +36,7 @@ base URL through `SOURCE_HARBOR_API_BASE_URL` instead of assuming port `9000`.
 If you are already inside the repo and only want the direct substrate, run:
 
 ```bash
-./bin/sourceharbor help
+./bin/brewme help
 ```
 
 If you want the install artifact that the official MCP Registry template now
@@ -44,13 +44,13 @@ targets, use the root Python package:
 
 ```bash
 uv build
-python3 -m pip install dist/sourceharbor-*.whl
-sourceharbor-mcp
+python3 -m pip install dist/brewme-*.whl
+brewme-mcp
 ```
 
 Registry ownership marker:
 
-`mcp-name: io.github.xiaojiou176-open/sourceharbor-mcp`
+`mcp-name: io.github.xiaojiou176-open/brewme-mcp`
 
 If you specifically want the OpenClaw-facing compatibility path, start with
 [docs/compat/openclaw.md](./compat/openclaw.md) and
@@ -61,7 +61,7 @@ Container truth, kept short:
 - core-services compose is for repo-local runtime helpers
 - the devcontainer is for contributor workspace parity
 - the strict CI GHCR image is for CI/devcontainer parity and attestation
-- `ghcr.io/xiaojiou176-open/sourceharbor-api` is the public API image lane
+- `ghcr.io/xiaojiou176-open/brewme-api` is the public API image lane
 
 ## Start MCP Locally
 
@@ -69,7 +69,7 @@ Container truth, kept short:
 ./bin/bootstrap-full-stack --install-deps 0
 ./bin/full-stack up
 source .runtime-cache/run/full-stack/resolved.env
-./bin/sourceharbor mcp
+./bin/brewme mcp
 ```
 
 The thin facade above routes to the same underlying entrypoint as
@@ -78,11 +78,11 @@ The thin facade above routes to the same underlying entrypoint as
 
 ## Representative Tools
 
-- `sourceharbor.jobs.get`
-- `sourceharbor.jobs.compare`
-- `sourceharbor.knowledge.cards.list`
-- `sourceharbor.retrieval.search`
-- `sourceharbor.ingest.poll`
+- `brewme.jobs.get`
+- `brewme.jobs.compare`
+- `brewme.knowledge.cards.list`
+- `brewme.retrieval.search`
+- `brewme.ingest.poll`
 
 The full manifest lives in [apps/mcp/schemas/tools.json](../apps/mcp/schemas/tools.json).
 
@@ -91,12 +91,12 @@ The full manifest lives in [apps/mcp/schemas/tools.json](../apps/mcp/schemas/too
 - MCP is real and already wired
 - MCP is not a second copy of the business logic
 - MCP is not evidence that the whole repo should be described as a single skill package
-- `@sourceharbor/cli` is a thin builder-facing wrapper over the HTTP API, and
+- `@brewme/cli` is a thin builder-facing wrapper over the HTTP API, and
   inside a checkout its convenience commands can delegate back into the
   repo-local substrate
 - the packaged CLI reads `SOURCE_HARBOR_API_BASE_URL` from the environment
   today; it does not expose a standalone `--base-url` flag
-- the public TypeScript SDK lives next to this flow in `packages/sourceharbor-sdk`; Python SDK still stays later
+- the public TypeScript SDK lives next to this flow in `packages/brewme-sdk`; Python SDK still stays later
 - advanced lanes such as UI audit and computer-use may still require extra runtime conditions or secrets
 
 ## Why It Matters

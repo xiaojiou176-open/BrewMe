@@ -19,7 +19,7 @@ const nextConfig = {
 		],
 	},
 	outputFileTracingRoot: monorepoRoot,
-	transpilePackages: ["@sourceharbor/sdk"],
+	transpilePackages: ["@brewme/sdk"],
 	turbopack: {
 		// Keep Turbopack scoped to the app directory so runtime workspace copies
 		// do not infer a higher synthetic root and rewrite `.next` paths into

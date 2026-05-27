@@ -30,7 +30,7 @@ def _normalize_provider_item(item: Any) -> dict[str, Any]:
 
 def register_health_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.health.get",
+        name="brewme.health.get",
         description="Get system/provider health in one call. scope=system|providers|all.",
     )
     def get_health(
@@ -51,7 +51,7 @@ def register_health_tools(mcp: FastMCP, api_call: ApiCall) -> None:
             return invalid_argument(
                 window_hours_error or "window_hours is invalid",
                 method="GET",
-                path="sourceharbor.health.get",
+                path="brewme.health.get",
                 field="window_hours",
                 value=window_hours,
             )

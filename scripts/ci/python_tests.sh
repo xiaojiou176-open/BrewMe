@@ -183,8 +183,8 @@ sys.path.insert(0, str(ROOT / "scripts" / "governance"))
 from common import write_runtime_metadata
 
 reports_dir = ROOT / ".runtime-cache" / "reports" / "python"
-gate_run_id = os.getenv("sourceharbor_gate_run_id", "") or os.getenv("sourceharbor_log_run_id", "") or "python-tests-with-coverage"
-repo_commit = os.getenv("sourceharbor_log_repo_commit", "")
+gate_run_id = os.getenv("brewme_gate_run_id", "") or os.getenv("brewme_log_run_id", "") or "python-tests-with-coverage"
+repo_commit = os.getenv("brewme_log_repo_commit", "")
 
 for artifact in sorted(reports_dir.glob(".coverage*")):
     if artifact.name.endswith(".meta.json") or not artifact.is_file():

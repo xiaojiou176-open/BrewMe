@@ -709,7 +709,7 @@ def _render_text(report: dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Detect or migrate legacy SourceHarbor disk paths into canonical roots."
+        description="Detect or migrate legacy BrewMe disk paths into canonical roots."
     )
     parser.add_argument("--repo-root", default=str(repo_root()))
     parser.add_argument("--policy", default="")

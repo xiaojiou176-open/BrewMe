@@ -9,7 +9,7 @@ LOAD_IMAGE="0"
 TAG_OVERRIDE=""
 METADATA_FILE=""
 PLATFORMS="${SOURCE_HARBOR_PUBLIC_IMAGE_BUILD_PLATFORMS:-linux/amd64,linux/arm64}"
-IMAGE_REPOSITORY="${SOURCE_HARBOR_PUBLIC_API_IMAGE_REPOSITORY:-ghcr.io/xiaojiou176-open/sourceharbor-api}"
+IMAGE_REPOSITORY="${SOURCE_HARBOR_PUBLIC_API_IMAGE_REPOSITORY:-ghcr.io/xiaojiou176-open/brewme-api}"
 STAGING_ROOT="$ROOT_DIR/.runtime-cache/tmp/public-image-audit"
 CONTEXT_DIR="$STAGING_ROOT/build-context"
 DIST_DIR="$STAGING_ROOT/dist"
@@ -69,7 +69,7 @@ usage() {
   cat <<'EOF'
 Usage: ./scripts/ci/build_public_api_image.sh [--push] [--load] [--tag <tag>] [--metadata-file <path>]
 
-Build the SourceHarbor public API image.
+Build the BrewMe public API image.
 This is the newcomer-facing API container lane, separate from the strict CI
 standard image used for CI/devcontainer parity.
 EOF
@@ -125,14 +125,14 @@ mkdir -p "$CONTEXT_DIR" "$DIST_DIR"
 
 uv build --wheel --out-dir "$DIST_DIR"
 
-wheel_path="$(find "$DIST_DIR" -maxdepth 1 -type f -name "sourceharbor-${SOURCEHARBOR_VERSION}-*.whl" | head -n 1)"
+wheel_path="$(find "$DIST_DIR" -maxdepth 1 -type f -name "brewme-${SOURCEHARBOR_VERSION}-*.whl" | head -n 1)"
 if [[ -z "$wheel_path" || ! -f "$wheel_path" ]]; then
   echo "[build-public-api-image] failed to locate built wheel for version ${SOURCEHARBOR_VERSION}" >&2
   exit 1
 fi
 
 wheel_name="$(basename "$wheel_path")"
-cp "$ROOT_DIR/infra/docker/sourceharbor-api.Dockerfile" "$CONTEXT_DIR/Dockerfile"
+cp "$ROOT_DIR/infra/docker/brewme-api.Dockerfile" "$CONTEXT_DIR/Dockerfile"
 cp "$wheel_path" "$CONTEXT_DIR/$wheel_name"
 cp -R "$ROOT_DIR/config" "$CONTEXT_DIR/config"
 mkdir -p "$CONTEXT_DIR/scripts"

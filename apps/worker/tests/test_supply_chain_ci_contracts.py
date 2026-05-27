@@ -281,7 +281,7 @@ def test_canonical_core_surfaces_do_not_require_removed_cache_service() -> None:
         "runbook-local": repo_root / "docs" / "runbook-local.md",
         "core-compose": repo_root / "infra" / "compose" / "core-services.compose.yml",
         "strict-ci-contract": repo_root / "infra" / "config" / "strict_ci_contract.json",
-        "api-systemd": repo_root / "infra" / "systemd" / "sourceharbor-api.service",
+        "api-systemd": repo_root / "infra" / "systemd" / "brewme-api.service",
         "bootstrap-full-stack": repo_root / "scripts" / "runtime" / "bootstrap_full_stack.sh",
         "recreate-gce-instance": repo_root / "scripts" / "deploy" / "recreate_gce_instance.sh",
         "active-upstreams": repo_root / "config" / "governance" / "active-upstreams.json",

@@ -1,5 +1,5 @@
 {
-  "matrix_kind": "sourceharbor_bilibili_live_canary_matrix_v1",
+  "matrix_kind": "brewme_bilibili_live_canary_matrix_v1",
   "notes": "Repo-curated public Bilibili samples for current-head live canary runs. Some sources may drift; keep taxonomy honest instead of silently replacing failures.",
   "samples": [
     {

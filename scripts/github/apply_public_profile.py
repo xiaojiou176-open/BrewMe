@@ -110,7 +110,7 @@ def main() -> int:
     if "--verify" in args:
         verify_only = True
         args = [arg for arg in args if arg != "--verify"]
-    repo = args[0] if args else "xiaojiou176-open/sourceharbor"
+    repo = args[0] if args else "xiaojiou176-open/brewme"
     if verify_only:
         return verify_profile(repo)
 

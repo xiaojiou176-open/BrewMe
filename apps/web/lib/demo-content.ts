@@ -4,7 +4,7 @@ export const USE_CASE_PAGES = {
 		subtitle:
 			"Turn long YouTube videos into grounded digests, searchable knowledge, and shareable evidence bundles.",
 		why: [
-			"Use SourceHarbor when you want a YouTube source to become a digest, not just a transcript blob.",
+			"Use BrewMe when you want a YouTube source to become a digest, not just a transcript blob.",
 			"Job trace and evidence bundle keep the output reviewable instead of turning it into black-box AI copy.",
 		],
 		links: [
@@ -12,7 +12,7 @@ export const USE_CASE_PAGES = {
 			{ href: "/watchlists", label: "Open Watchlists" },
 			{ href: "/playground", label: "Open sample playground" },
 			{
-				href: "https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/start-here.md",
+				href: "https://github.com/xiaojiou176-open/brewme/blob/main/docs/start-here.md",
 				label: "Read local quickstart",
 			},
 		],
@@ -50,7 +50,7 @@ export const USE_CASE_PAGES = {
 	"mcp-use-cases": {
 		title: "MCP use cases",
 		subtitle:
-			"Use the same SourceHarbor pipeline from assistants, MCP clients, and operator workflows without duplicating business logic.",
+			"Use the same BrewMe pipeline from assistants, MCP clients, and operator workflows without duplicating business logic.",
 		why: [
 			"MCP is the agent-facing doorway into the same system state used by Web and API.",
 			"Use cases are strongest when grounded in real jobs, retrieval, and evidence bundles.",
@@ -65,10 +65,10 @@ export const USE_CASE_PAGES = {
 	codex: {
 		title: "Codex operator workflow",
 		subtitle:
-			"Use SourceHarbor from Codex through MCP or HTTP without duplicating the product's operator truth.",
+			"Use BrewMe from Codex through MCP or HTTP without duplicating the product's operator truth.",
 		why: [
 			"Codex is a strong fit when you want a coding or ops agent to inspect real jobs, artifacts, retrieval results, and readiness gates instead of scraping screenshots.",
-			"SourceHarbor already exposes the same state to Web, API, and MCP, so Codex can stay on the real control plane.",
+			"BrewMe already exposes the same state to Web, API, and MCP, so Codex can stay on the real control plane.",
 		],
 		links: [
 			{ href: "/mcp", label: "Open MCP quickstart" },
@@ -80,9 +80,9 @@ export const USE_CASE_PAGES = {
 	"claude-code": {
 		title: "Claude Code workflow",
 		subtitle:
-			"Use SourceHarbor as a source-first MCP and API substrate for Claude Code-style local workflows.",
+			"Use BrewMe as a source-first MCP and API substrate for Claude Code-style local workflows.",
 		why: [
-			"Claude Code is a better fit than a generic chat shell because SourceHarbor already has inspectable jobs, artifacts, retrieval, and operator surfaces.",
+			"Claude Code is a better fit than a generic chat shell because BrewMe already has inspectable jobs, artifacts, retrieval, and operator surfaces.",
 			"The honest story is not 'another assistant'; it is a reusable AI knowledge runtime that Claude Code can query through governed surfaces.",
 		],
 		links: [
@@ -98,9 +98,9 @@ export const USE_CASE_PAGES = {
 	"research-pipeline": {
 		title: "AI research pipeline",
 		subtitle:
-			"See how SourceHarbor connects intake, digest generation, search, watchlists, trends, and evidence bundles into one reusable loop.",
+			"See how BrewMe connects intake, digest generation, search, watchlists, trends, and evidence bundles into one reusable loop.",
 		why: [
-			"SourceHarbor is strongest when reused over time, not when treated like a one-shot summarizer.",
+			"BrewMe is strongest when reused over time, not when treated like a one-shot summarizer.",
 			"This page is a truthful map of the current compounder layer, not a hosted product promise.",
 		],
 		links: [

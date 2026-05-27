@@ -8,7 +8,7 @@ from apps.mcp.tools._common import ApiCall, is_error_payload, to_optional_str
 
 
 def register_report_tools(mcp: FastMCP, api_call: ApiCall) -> None:
-    @mcp.tool(name="sourceharbor.reports.daily_send", description="Send daily report notification.")
+    @mcp.tool(name="brewme.reports.daily_send", description="Send daily report notification.")
     def send_daily_report(
         date: str | None = None,
         to_email: str | None = None,

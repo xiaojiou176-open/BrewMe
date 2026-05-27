@@ -2,7 +2,7 @@
   "version": 1,
   "assets": [
     {
-      "path": "docs/assets/sourceharbor-hero.svg",
+      "path": "docs/assets/brewme-hero.svg",
       "asset_kind": "svg",
       "surface_role": "supporting-front-door-poster",
       "public_surfaces": [
@@ -16,7 +16,7 @@
       "notes": "Supporting front-door poster asset kept in the public asset family and media kit."
     },
     {
-      "path": "docs/assets/sourceharbor-architecture.svg",
+      "path": "docs/assets/brewme-architecture.svg",
       "asset_kind": "svg",
       "surface_role": "architecture-diagram",
       "public_surfaces": [
@@ -30,7 +30,7 @@
       "notes": "Public system-map illustration for architecture docs."
     },
     {
-      "path": "docs/assets/sourceharbor-studio-preview.svg",
+      "path": "docs/assets/brewme-studio-preview.svg",
       "asset_kind": "svg",
       "surface_role": "readme-front-door-preview",
       "public_surfaces": [
@@ -45,7 +45,7 @@
       "notes": "Current front-door preview card for the README and the no-boot evaluation page."
     },
     {
-      "path": "docs/assets/sourceharbor-developer-flywheel.svg",
+      "path": "docs/assets/brewme-developer-flywheel.svg",
       "asset_kind": "svg",
       "surface_role": "builder-flywheel",
       "public_surfaces": [
@@ -60,7 +60,7 @@
       "notes": "Builder-facing public illustration that maps source intake into Search, Ask, MCP, and operator reuse."
     },
     {
-      "path": "docs/assets/sourceharbor-builder-loop.svg",
+      "path": "docs/assets/brewme-builder-loop.svg",
       "asset_kind": "svg",
       "surface_role": "builder-loop",
       "public_surfaces": [
@@ -74,7 +74,7 @@
       "notes": "Builder-facing supporting illustration retained in the media-kit asset family after leaving the no-boot front door."
     },
     {
-      "path": "docs/assets/sourceharbor-social-preview.svg",
+      "path": "docs/assets/brewme-social-preview.svg",
       "asset_kind": "svg",
       "surface_role": "social-preview-source",
       "public_surfaces": [
@@ -88,7 +88,7 @@
       "notes": "Source illustration for the social preview asset family."
     },
     {
-      "path": "docs/assets/sourceharbor-social-preview.png",
+      "path": "docs/assets/brewme-social-preview.png",
       "asset_kind": "png",
       "surface_role": "social-preview-upload",
       "public_surfaces": [
@@ -102,7 +102,7 @@
       "notes": "PNG upload target referenced by the GitHub profile manifest for social preview."
     },
     {
-      "path": "docs/assets/sourceharbor-square-icon.svg",
+      "path": "docs/assets/brewme-square-icon.svg",
       "asset_kind": "svg",
       "surface_role": "directory-square-icon-source",
       "public_surfaces": [
@@ -117,7 +117,7 @@
       "notes": "Editable source illustration for the directory-friendly square icon asset."
     },
     {
-      "path": "docs/assets/sourceharbor-square-icon.png",
+      "path": "docs/assets/brewme-square-icon.png",
       "asset_kind": "png",
       "surface_role": "directory-square-icon",
       "public_surfaces": [
@@ -132,7 +132,7 @@
       "notes": "PNG square icon derived from the tracked SVG source for MCP directory and listing submissions."
     },
     {
-      "path": "docs/assets/sourceharbor-mcp-directory-shot-01.png",
+      "path": "docs/assets/brewme-mcp-directory-shot-01.png",
       "asset_kind": "png",
       "surface_role": "directory-screenshot",
       "public_surfaces": [

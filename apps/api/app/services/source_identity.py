@@ -94,7 +94,7 @@ def build_identity_payload(
     resolved_universe = str(source_universe_label or "").strip() or resolved_name
     initials = _build_initials(resolved_name or resolved_universe)
     resolved_avatar_url = str(avatar_url or "").strip() or _build_svg_data_url(
-        primary_text=resolved_name or "SourceHarbor",
+        primary_text=resolved_name or "BrewMe",
         secondary_text=initials,
         platform=resolved_platform,
         square=False,
@@ -106,7 +106,7 @@ def build_identity_payload(
             resolved_thumbnail_url = f"https://i.ytimg.com/vi/{youtube_video_id}/hqdefault.jpg"
         else:
             resolved_thumbnail_url = _build_svg_data_url(
-                primary_text=resolved_name or "SourceHarbor",
+                primary_text=resolved_name or "BrewMe",
                 secondary_text=(resolved_platform or "source").upper()[:6],
                 platform=resolved_platform,
                 square=True,

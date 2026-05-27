@@ -9,7 +9,7 @@ REQUIRED_API_ENV = {
     "DATABASE_URL": "sqlite+pysqlite:///:memory:",
     "TEMPORAL_TARGET_HOST": "127.0.0.1:7233",
     "TEMPORAL_NAMESPACE": "default",
-    "TEMPORAL_TASK_QUEUE": "sourceharbor-worker",
+    "TEMPORAL_TASK_QUEUE": "brewme-worker",
 }
 
 
@@ -64,7 +64,7 @@ def test_api_settings_from_env_uses_expected_defaults(
 
     settings = config_module.Settings.from_env()
 
-    assert settings.app_name == "SourceHarbor API"
+    assert settings.app_name == "BrewMe API"
     assert settings.api_temporal_connect_timeout_seconds == 5.0
     assert settings.api_temporal_start_timeout_seconds == 10.0
     assert settings.api_temporal_result_timeout_seconds == 180.0

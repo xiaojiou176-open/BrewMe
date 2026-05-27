@@ -130,7 +130,7 @@ def _normalize_autofix_payload(payload: dict[str, Any]) -> dict[str, Any]:
 
 def register_ui_audit_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.ui_audit.run",
+        name="brewme.ui_audit.run",
         description="Run UI audit from artifact directory evidence and persist the run snapshot.",
     )
     def ui_audit_run(
@@ -159,7 +159,7 @@ def register_ui_audit_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         return _normalize_run_payload(response)
 
     @mcp.tool(
-        name="sourceharbor.ui_audit.read",
+        name="brewme.ui_audit.read",
         description=(
             "Read UI audit results. action=get|list_findings|get_artifact|autofix. "
             "autofix currently returns a plan-only dry-run summary."
@@ -181,7 +181,7 @@ def register_ui_audit_tools(mcp: FastMCP, api_call: ApiCall) -> None:
             return invalid_argument(
                 "run_id must be a valid UUID",
                 method="POST",
-                path="sourceharbor.ui_audit.read",
+                path="brewme.ui_audit.read",
                 field="run_id",
                 value=run_id,
             )
@@ -303,7 +303,7 @@ def register_ui_audit_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         return invalid_argument(
             "action must be one of: get, list_findings, get_artifact, autofix",
             method="POST",
-            path="sourceharbor.ui_audit.read",
+            path="brewme.ui_audit.read",
             field="action",
             value=action,
         )

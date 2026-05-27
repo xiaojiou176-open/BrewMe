@@ -27,7 +27,7 @@ import sys
 print(hashlib.sha256(sys.argv[1].encode("utf-8")).hexdigest()[:12])
 PY
   )"
-  env_dir="${UV_PROJECT_ENVIRONMENT:-${env_root%/}/sourceharbor-strict-ci/${repo_hash}/${platform_id}}"
+  env_dir="${UV_PROJECT_ENVIRONMENT:-${env_root%/}/brewme-strict-ci/${repo_hash}/${platform_id}}"
   export UV_PROJECT_ENVIRONMENT="$env_dir"
   export VIRTUAL_ENV="$env_dir"
   export UV_LINK_MODE="${UV_LINK_MODE:-copy}"
@@ -131,9 +131,9 @@ if [[ "${STRICT_CI_BOOTSTRAP_LOAD_HELPERS_ONLY:-0}" != "1" ]]; then
   export DATABASE_URL="${DATABASE_URL:-sqlite+pysqlite:///:memory:}"
   export TEMPORAL_TARGET_HOST="${TEMPORAL_TARGET_HOST:-127.0.0.1:7233}"
   export TEMPORAL_NAMESPACE="${TEMPORAL_NAMESPACE:-default}"
-  export TEMPORAL_TASK_QUEUE="${TEMPORAL_TASK_QUEUE:-sourceharbor-worker}"
-  export SQLITE_STATE_PATH="${SQLITE_STATE_PATH:-/tmp/sourceharbor-strict-api.db}"
-  export SQLITE_PATH="${SQLITE_PATH:-/tmp/sourceharbor-strict-worker.db}"
+  export TEMPORAL_TASK_QUEUE="${TEMPORAL_TASK_QUEUE:-brewme-worker}"
+  export SQLITE_STATE_PATH="${SQLITE_STATE_PATH:-/tmp/brewme-strict-api.db}"
+  export SQLITE_PATH="${SQLITE_PATH:-/tmp/brewme-strict-worker.db}"
   configure_strict_ci_python_environment
   uv sync --frozen --extra dev --extra e2e
 

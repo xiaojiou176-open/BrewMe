@@ -134,7 +134,7 @@ describe("dashboard/settings/subscriptions pages", () => {
 					source_url_required: false,
 					supports_video_pipeline: false,
 					fill_now:
-						"Bring the exact RSSHub route you want SourceHarbor to poll, then add a canonical source URL only if it helps operators recognize the feed.",
+						"Bring the exact RSSHub route you want BrewMe to poll, then add a canonical source URL only if it helps operators recognize the feed.",
 					proof_boundary:
 						"Do not assume every RSSHub route is equally solid. Treat each route as proven only after it survives real runs.",
 					evidence_note:

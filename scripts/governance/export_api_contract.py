@@ -164,8 +164,8 @@ def _apply_default_env() -> None:
         "DATABASE_URL": "sqlite+pysqlite:///:memory:",
         "TEMPORAL_TARGET_HOST": "127.0.0.1:7233",
         "TEMPORAL_NAMESPACE": "default",
-        "TEMPORAL_TASK_QUEUE": "sourceharbor-worker",
-        "SQLITE_STATE_PATH": "/tmp/sourceharbor-contract-export.db",
+        "TEMPORAL_TASK_QUEUE": "brewme-worker",
+        "SQLITE_STATE_PATH": "/tmp/brewme-contract-export.db",
         "NOTIFICATION_ENABLED": "0",
         "UI_AUDIT_GEMINI_ENABLED": "0",
     }
