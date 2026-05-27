@@ -31,15 +31,15 @@ load_env_files() {
   done
 }
 
-sourceharbor_default_cache_root() {
-  printf '%s\n' "${SOURCE_HARBOR_CACHE_ROOT:-$HOME/.cache/sourceharbor}"
+brewme_default_cache_root() {
+  printf '%s\n' "${SOURCE_HARBOR_CACHE_ROOT:-$HOME/.cache/brewme}"
 }
 
-sourceharbor_legacy_state_root() {
-  printf '%s\n' "$HOME/.sourceharbor"
+brewme_legacy_state_root() {
+  printf '%s\n' "$HOME/.brewme"
 }
 
-_normalize_sourceharbor_repo_owned_path() {
+_normalize_brewme_repo_owned_path() {
   local current_value="${1:-}"
   local canonical_value="${2:-}"
   local legacy_value="${3:-}"
@@ -57,18 +57,18 @@ _normalize_sourceharbor_repo_owned_path() {
   printf '%s\n' "$current_value"
 }
 
-ensure_sourceharbor_cache_contract() {
+ensure_brewme_cache_contract() {
   local root_dir="${1:-}"
   local cache_root
-  cache_root="$(sourceharbor_default_cache_root)"
+  cache_root="$(brewme_default_cache_root)"
   export SOURCE_HARBOR_CACHE_ROOT="$cache_root"
 
   local legacy_root
-  legacy_root="$(sourceharbor_legacy_state_root)"
+  legacy_root="$(brewme_legacy_state_root)"
 
   local normalized_pipeline_artifact_root
   normalized_pipeline_artifact_root="$(
-    _normalize_sourceharbor_repo_owned_path \
+    _normalize_brewme_repo_owned_path \
       "${PIPELINE_ARTIFACT_ROOT:-}" \
       "$cache_root/artifacts" \
       "$legacy_root/artifacts"
@@ -77,7 +77,7 @@ ensure_sourceharbor_cache_contract() {
 
   local normalized_pipeline_workspace_dir
   normalized_pipeline_workspace_dir="$(
-    _normalize_sourceharbor_repo_owned_path \
+    _normalize_brewme_repo_owned_path \
       "${PIPELINE_WORKSPACE_DIR:-}" \
       "$cache_root/workspace" \
       "$legacy_root/workspace"
@@ -86,7 +86,7 @@ ensure_sourceharbor_cache_contract() {
 
   local normalized_sqlite_path
   normalized_sqlite_path="$(
-    _normalize_sourceharbor_repo_owned_path \
+    _normalize_brewme_repo_owned_path \
       "${SQLITE_PATH:-}" \
       "$cache_root/state/worker_state.db" \
       "$legacy_root/state/worker_state.db"
@@ -95,7 +95,7 @@ ensure_sourceharbor_cache_contract() {
 
   local normalized_sqlite_state_path
   normalized_sqlite_state_path="$(
-    _normalize_sourceharbor_repo_owned_path \
+    _normalize_brewme_repo_owned_path \
       "${SQLITE_STATE_PATH:-}" \
       "$cache_root/state/api_state.db" \
       "$legacy_root/state/api_state.db"
@@ -104,7 +104,7 @@ ensure_sourceharbor_cache_contract() {
 
   local normalized_uv_project_environment
   normalized_uv_project_environment="$(
-    _normalize_sourceharbor_repo_owned_path \
+    _normalize_brewme_repo_owned_path \
       "${UV_PROJECT_ENVIRONMENT:-}" \
       "$cache_root/project-venv" \
       "$legacy_root/project-venv"
@@ -116,7 +116,7 @@ ensure_sourceharbor_cache_contract() {
   fi
 }
 
-run_sourceharbor_external_cache_maintenance_if_due() {
+run_brewme_external_cache_maintenance_if_due() {
   local root_dir="${1:-}"
   [[ -n "$root_dir" ]] || return 0
   command -v python3 >/dev/null 2>&1 || return 0
@@ -410,6 +410,6 @@ load_repo_env() {
   restore_process_env "$shell_snapshot"
 
   export ENV_PROFILE="$profile"
-  ensure_sourceharbor_cache_contract "$root_dir"
-  run_sourceharbor_external_cache_maintenance_if_due "$root_dir"
+  ensure_brewme_cache_contract "$root_dir"
+  run_brewme_external_cache_maintenance_if_due "$root_dir"
 }

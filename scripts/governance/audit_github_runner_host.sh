@@ -6,7 +6,7 @@ PROJECT_ID="${GCP_PROJECT_ID:-}"
 ZONE="${GCP_ZONE:-us-central1-a}"
 INSTANCE=""
 RUNNER_NAME="pool-core02-03"
-REPO_NAME="sourceharbor"
+REPO_NAME="brewme"
 OUT_DIR=""
 
 usage() {
@@ -17,7 +17,7 @@ Usage:
     --zone us-central1-a \
     --instance github-runner-core-02 \
     [--runner-name pool-core02-03] \
-    [--repo-name sourceharbor] \
+    [--repo-name brewme] \
     [--out-dir .runtime-cache/tmp/runner-health/core02]
 USAGE
 }

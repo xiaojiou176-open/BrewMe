@@ -214,7 +214,7 @@ for endpoint in endpoints:
             "Authorization": f"Bearer {token}",
             "Accept": "application/vnd.github+json",
             "X-GitHub-Api-Version": "2022-11-28",
-            "User-Agent": "sourceharbor-standard-image-readiness",
+            "User-Agent": "brewme-standard-image-readiness",
         },
     )
     try:
@@ -309,7 +309,7 @@ try:
         f"{token_endpoint}?{urllib.parse.urlencode({'service': 'ghcr.io', 'scope': requested_scope})}",
         headers={
             "Authorization": f"Basic {basic}",
-            "User-Agent": "sourceharbor-standard-image-readiness",
+            "User-Agent": "brewme-standard-image-readiness",
         },
     )
     with urllib.request.urlopen(exchange_request, timeout=15) as exchange_response:
@@ -321,7 +321,7 @@ try:
     else:
         headers = {
             "Authorization": f"Bearer {bearer}",
-            "User-Agent": "sourceharbor-standard-image-readiness",
+            "User-Agent": "brewme-standard-image-readiness",
         }
         request = urllib.request.Request(endpoint, method="POST", headers=headers)
         with urllib.request.urlopen(request, timeout=15) as response:
@@ -387,11 +387,11 @@ elif [[ -n "${GHCR_TOKEN:-}" ]]; then
   token_mode="ghcr-token"
   selected_token="$GHCR_TOKEN"
   package_probe_json="$(probe_github_package_api "$selected_token" "$expected_owner" "$expected_package_name")"
-elif gh auth status -h github.com >/tmp/sourceharbor-gh-auth-status.txt 2>/dev/null; then
+elif gh auth status -h github.com >/tmp/brewme-gh-auth-status.txt 2>/dev/null; then
   token_mode="gh-cli"
   # repo scope alone does not grant GHCR package push rights, and we must only
   # inspect the active account instead of any secondary cached logins.
-  if python3 - <<'PY' /tmp/sourceharbor-gh-auth-status.txt
+  if python3 - <<'PY' /tmp/brewme-gh-auth-status.txt
 from pathlib import Path
 import sys
 

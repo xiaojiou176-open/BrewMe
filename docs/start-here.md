@@ -10,7 +10,7 @@ If you want one discoverable repo-local command surface before you memorize
 individual entrypoints, start here:
 
 ```bash
-./bin/sourceharbor help
+./bin/brewme help
 ```
 
 That helper stays intentionally thin. The direct `bin/*` commands below remain
@@ -27,8 +27,8 @@ If you specifically want the packaged public wrapper instead of the operator
 path, install it after you understand the repo-local flow:
 
 ```bash
-npm install --global ./packages/sourceharbor-cli
-sourceharbor help
+npm install --global ./packages/brewme-cli
+brewme help
 ```
 
 ## What You Should See By The End
@@ -45,7 +45,7 @@ sourceharbor help
 ### 1. Install dependencies
 
 ```bash
-./bin/sourceharbor help
+./bin/brewme help
 cp .env.example .env
 set -a
 source .env
@@ -63,7 +63,7 @@ building ad-hoc node state in the repo root.
 The default local database path is container-first:
 
 - `CORE_POSTGRES_PORT=15432`
-- `DATABASE_URL=postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/sourceharbor`
+- `DATABASE_URL=postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/brewme`
 
 This avoids a silent split-brain when your machine already has a host Postgres
 on `127.0.0.1:5432`.
@@ -101,15 +101,15 @@ If you explicitly want the reader stack too, opt in on purpose:
 Equivalent thin-facade path:
 
 ```bash
-./bin/sourceharbor bootstrap
-./bin/sourceharbor full-stack up
+./bin/brewme bootstrap
+./bin/brewme full-stack up
 ```
 
 Equivalent packaged-CLI path from inside the checkout:
 
 ```bash
-sourceharbor bootstrap
-sourceharbor full-stack up
+brewme bootstrap
+brewme full-stack up
 ```
 
 Open:
@@ -127,7 +127,7 @@ If anything feels off before you continue, run:
 Or through the thin facade:
 
 ```bash
-./bin/sourceharbor doctor
+./bin/brewme doctor
 ```
 
 Why source the runtime snapshot:
@@ -144,7 +144,7 @@ Direct write endpoints require a local write token.
 For local development, use:
 
 ```bash
-export SOURCE_HARBOR_API_KEY="${SOURCE_HARBOR_API_KEY:-sourceharbor-local-dev-token}"
+export SOURCE_HARBOR_API_KEY="${SOURCE_HARBOR_API_KEY:-brewme-local-dev-token}"
 ```
 
 If you start the API outside the repo-managed `./bin/full-stack up` path, also
@@ -211,7 +211,7 @@ curl -sS -X POST "${SOURCE_HARBOR_API_BASE_URL}/api/v1/retrieval/search" \
 
 Use these off-ramps instead of keeping every deep operator detail on this page:
 
-- **Keep operating SourceHarbor:** `/subscriptions`, `/feed`, `/reader`, `/search`, `/ask`, `/briefings`, `/watchlists`, `/trends`, and `/jobs?job_id=<job-id>`
+- **Keep operating BrewMe:** `/subscriptions`, `/feed`, `/reader`, `/search`, `/ask`, `/briefings`, `/watchlists`, `/trends`, and `/jobs?job_id=<job-id>`
 - **Go from one-off processing to continuous intake:** [runbook-local.md](./runbook-local.md)
 - **Verify more than the newcomer path:** [testing.md](./testing.md)
 - **Debug runtime truth or local browser/login proof:** [runtime-truth.md](./runtime-truth.md) and [runbook-local.md](./runbook-local.md)

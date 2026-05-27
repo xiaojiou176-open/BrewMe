@@ -1,6 +1,6 @@
 # Project Positioning
 
-SourceHarbor is a **source-first engineering repository** for AI knowledge intake and MCP-ready long-form source operations.
+BrewMe is a **source-first engineering repository** for AI knowledge intake and MCP-ready long-form source operations.
 
 What that means in plain language:
 
@@ -22,7 +22,7 @@ The public promise should stay smaller than the internal engineering ambition. T
 
 ## Current Non-promises
 
-SourceHarbor should still **not** be described as:
+BrewMe should still **not** be described as:
 
 - a turnkey hosted team workspace
 - a managed SaaS product

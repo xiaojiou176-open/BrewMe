@@ -7,10 +7,10 @@ import pytest
 
 REQUIRED_WORKER_ENV = {
     "SQLITE_PATH": "{tmp}/state.db",
-    "DATABASE_URL": "postgresql+psycopg://postgres:postgres@localhost:5432/sourceharbor",
+    "DATABASE_URL": "postgresql+psycopg://postgres:postgres@localhost:5432/brewme",
     "TEMPORAL_TARGET_HOST": "localhost:7233",
     "TEMPORAL_NAMESPACE": "default",
-    "TEMPORAL_TASK_QUEUE": "sourceharbor-worker",
+    "TEMPORAL_TASK_QUEUE": "brewme-worker",
     "PIPELINE_WORKSPACE_DIR": "{tmp}/workspace",
     "PIPELINE_ARTIFACT_ROOT": "{tmp}/artifacts",
 }

@@ -1,7 +1,7 @@
-# SourceHarbor Starter Packs
+# BrewMe Starter Packs
 
 These starter packs are the first public workflow surface for builders inside
-SourceHarbor.
+BrewMe.
 They live inside a **multi-surface product repo, not a single skill package**.
 
 They are intentionally **not** the same thing as `.agents/skills/`.
@@ -33,14 +33,14 @@ What lives here:
 
 | If you want to... | Open this first | Current truth |
 | --- | --- | --- |
-| drive SourceHarbor from Codex | `starter-packs/codex/AGENTS.md` | primary public pack today |
-| prepare a Codex-compatible plugin bundle | `starter-packs/codex/sourceharbor-codex-plugin/` | bundle-ready local artifact today; official Codex listing still unavailable for self-serve publishing |
+| drive BrewMe from Codex | `starter-packs/codex/AGENTS.md` | primary public pack today |
+| prepare a Codex-compatible plugin bundle | `starter-packs/codex/brewme-codex-plugin/` | bundle-ready local artifact today; official Codex listing still unavailable for self-serve publishing |
 | drive it from GitHub Copilot | `starter-packs/github-copilot/README.md` | plugin-grade source-install pack today over the same MCP/API truth |
-| prepare a GitHub Copilot plugin bundle | `starter-packs/github-copilot/sourceharbor-github-copilot-plugin/` | plugin-grade source-install artifact today; official marketplace listing is still a separate truth layer |
+| prepare a GitHub Copilot plugin bundle | `starter-packs/github-copilot/brewme-github-copilot-plugin/` | plugin-grade source-install artifact today; official marketplace listing is still a separate truth layer |
 | drive it from Claude Code | `starter-packs/claude-code/CLAUDE.md` | primary public pack today |
-| prepare a Claude Code plugin submission bundle | `starter-packs/claude-code/sourceharbor-claude-plugin/` | plugin-grade bundle today; official listing still depends on Anthropic review |
+| prepare a Claude Code plugin submission bundle | `starter-packs/claude-code/brewme-claude-plugin/` | plugin-grade bundle today; official listing still depends on Anthropic review |
 | drive it from VS Code agent workflows | `starter-packs/vscode-agent/README.md` | plugin-grade source-install pack today over the same MCP/API truth |
-| prepare a VS Code agent plugin bundle | `starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/` | source-installable plugin bundle today; live Marketplace listing is still a separate truth layer |
+| prepare a VS Code agent plugin bundle | `starter-packs/vscode-agent/brewme-vscode-agent-plugin/` | source-installable plugin bundle today; live Marketplace listing is still a separate truth layer |
 | drive it from OpenClaw | `starter-packs/openclaw/README.md` | first-cut local starter pack today over the same MCP/API path |
 | prepare OpenClaw / ClawHub packaging metadata | `starter-packs/openclaw/clawhub.package.template.json` | publish-template only today; still not proof of ClawHub publication |
 | prepare official MCP Registry distribution | `starter-packs/mcp-registry/README.md` | PyPI-ready server package plus registry template today; still not proof of live registry publication |

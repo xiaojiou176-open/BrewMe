@@ -1,6 +1,6 @@
 # Public Privacy And Data Boundary
 
-This page explains what SourceHarbor's public repository should and should not expose.
+This page explains what BrewMe's public repository should and should not expose.
 
 ## Allowed Public Material
 
@@ -40,7 +40,7 @@ Two current examples:
 - maintainer-local clean proof screenshot packs and UI audit runs may intentionally hide dev-only overlay noise for evaluation purposes, but they still stay local verification state and must not be republished as if they were raw product telemetry
 - maintainer-local frontstage clean proof packs and tempdir mini packs follow the same privacy rule: they exist to evaluate public-facing IA and visual quality, but they remain local review artifacts rather than public telemetry or user-facing data exports
 - public proof ledgers may safely describe release/current-main drift or required-check mismatches, but they must not reveal private tokens, mailbox state, browser-session content, or other operator-only data while doing so
-- public proof ledgers may also say that a fresh anonymous registry read-back returned no SourceHarbor entry or that a lowercase Pages homepage path 404s, but they must not fill those gaps with operator-only dashboard screenshots or credential state
+- public proof ledgers may also say that a fresh anonymous registry read-back returned no BrewMe entry or that a lowercase Pages homepage path 404s, but they must not fill those gaps with operator-only dashboard screenshots or credential state
 - fast-moving anonymous distribution read-backs should stay centralized in one public ledger (`docs/public-distribution.md`) rather than being recopied into multiple public docs with slightly different day-specific wording
 - repo-managed runtime workspaces such as `.runtime-cache/tmp/web-runtime/` and mutation debug sandboxes stay local-only verification state; they must be governed and cleaned, not exposed as public repository artifacts
 - repo-owned core services cleaned by `./bin/full-stack down` also remain
@@ -48,7 +48,7 @@ Two current examples:
   public platform action or public proof artifact
 - repo-owned fallback service logs under `.runtime-cache/logs/local-core/` stay private runtime diagnostics; they are meant for maintainer troubleshooting, not for public repo storytelling or artifact publication
 - repo-owned proxy-video artifacts created only to satisfy maintainer-local Gemini video input constraints stay private runtime state too; they are not public samples, not media-kit assets, and not proof of redistribution rights
-- the new Bilibili discovery desk on `/subscriptions` may point users to external hot/rank/search/creator pages, but those outgoing shortcuts do not authorize SourceHarbor to mirror the resulting account/session state back into the public repo
-- the vendor-radar desk on `/subscriptions` may point users to official changelog, status, blog, or X pages, but those outgoing shortcuts do not authorize SourceHarbor to mirror any signed-in session state, private mailing-list content, or operator-side follow graph back into the public repo
-- donor reference trees under the internal `.agents` reference area may contain upstream test idioms or placeholder secret-shaped strings for study purposes; they are internal reference inputs and must not be treated as public SourceHarbor surfaces or fed back into public trust claims
+- the new Bilibili discovery desk on `/subscriptions` may point users to external hot/rank/search/creator pages, but those outgoing shortcuts do not authorize BrewMe to mirror the resulting account/session state back into the public repo
+- the vendor-radar desk on `/subscriptions` may point users to official changelog, status, blog, or X pages, but those outgoing shortcuts do not authorize BrewMe to mirror any signed-in session state, private mailing-list content, or operator-side follow graph back into the public repo
+- donor reference trees under the internal `.agents` reference area may contain upstream test idioms or placeholder secret-shaped strings for study purposes; they are internal reference inputs and must not be treated as public BrewMe surfaces or fed back into public trust claims
 - thin public stubs for submission packets or UI handoffs may stay in `docs/`, but the maintainer-ready packet content and design ledgers must live in the internal planning area rather than the public newcomer path

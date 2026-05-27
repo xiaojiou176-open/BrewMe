@@ -118,7 +118,7 @@ def main() -> int:
     out_dir = (root / args.out_dir).resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    with tempfile.TemporaryDirectory(prefix="sourceharbor-gitleaks-") as tmp_dir:
+    with tempfile.TemporaryDirectory(prefix="brewme-gitleaks-") as tmp_dir:
         tmp_root = Path(tmp_dir)
         history_json = tmp_root / "gitleaks-history.json"
         working_tree_json = tmp_root / "gitleaks-working-tree.json"

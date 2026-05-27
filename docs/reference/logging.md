@@ -1,6 +1,6 @@
 # Logging Contract
 
-SourceHarbor keeps runtime and governance logs under `.runtime-cache/logs/`.
+BrewMe keeps runtime and governance logs under `.runtime-cache/logs/`.
 
 ## Required Vocabulary
 

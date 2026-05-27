@@ -143,7 +143,7 @@ const MESSAGES = {
 					"Ask now reuses the server-owned story payload shared with Briefings instead of a second browser-side view model.",
 				mcpTitle: "For builders",
 				mcpDescription:
-					"Use these only when you're integrating SourceHarbor into another tool.",
+					"Use these only when you're integrating BrewMe into another tool.",
 				mcpCta: "Open tool setup",
 				jobCta: "Open job details",
 			},
@@ -300,8 +300,8 @@ const MESSAGES = {
 		ops: {
 			metadataTitle: "Ops Inbox",
 			metadataDescription:
-				"Operator inbox for SourceHarbor failures, provider health, delivery readiness, hardening gates, and recommended next steps.",
-			kicker: "SourceHarbor Ops",
+				"Operator inbox for BrewMe failures, provider health, delivery readiness, hardening gates, and recommended next steps.",
+			kicker: "BrewMe Ops",
 			heroTitle: "Ops inbox",
 			heroSubtitle:
 				"Open the operator queue for failures, provider health, delivery readiness, and the next action to take.",
@@ -367,8 +367,8 @@ const MESSAGES = {
 		settings: {
 			metadataTitle: "Settings",
 			metadataDescription:
-				"Notification delivery settings, daily digest scheduling, failure alerts, and test-send controls for SourceHarbor operators.",
-			kicker: "SourceHarbor Settings",
+				"Notification delivery settings, daily digest scheduling, failure alerts, and test-send controls for BrewMe operators.",
+			kicker: "BrewMe Settings",
 			heroTitle: "Notification settings",
 			heroSubtitle:
 				"Control digest delivery, failure alerts, and test-send behavior from one operator surface.",
@@ -394,9 +394,9 @@ const MESSAGES = {
 			overrideRecipientPlaceholder:
 				"Leave blank to use the configured recipient",
 			subjectLabel: "Subject (optional)",
-			subjectPlaceholder: "SourceHarbor test notification",
+			subjectPlaceholder: "BrewMe test notification",
 			bodyLabel: "Body (optional)",
-			bodyPlaceholder: "This is a SourceHarbor test notification.",
+			bodyPlaceholder: "This is a BrewMe test notification.",
 			sendButton: "Send test email",
 			sendPending: "Sending…",
 			sendStatus: "Sending the test notification. Please wait.",
@@ -404,8 +404,8 @@ const MESSAGES = {
 		mcpPage: {
 			metadataTitle: "MCP",
 			metadataDescription:
-				"Agent-facing SourceHarbor MCP quickstart, with real startup commands, representative tools, and builder-ready MCP/API positioning.",
-			kicker: "SourceHarbor MCP Front Door",
+				"Agent-facing BrewMe MCP quickstart, with real startup commands, representative tools, and builder-ready MCP/API positioning.",
+			kicker: "BrewMe MCP Front Door",
 			heroTitle: "MCP Quickstart",
 			heroSubtitle:
 				"Use this when you need the tool surface first. Web serves operators, API serves integrations, and MCP gives assistants the same pipeline through one thinner door.",
@@ -413,7 +413,7 @@ const MESSAGES = {
 			startDescription:
 				"Start MCP through the repo-local CLI so you get the same server and route contract the rest of the product already uses.",
 			startNote:
-				"`./bin/sourceharbor mcp` routes to the same FastMCP server wired in apps/mcp/server.py. `./bin/dev-mcp` remains the direct underlying entrypoint.",
+				"`./bin/brewme mcp` routes to the same FastMCP server wired in apps/mcp/server.py. `./bin/dev-mcp` remains the direct underlying entrypoint.",
 			toolsTitle: "Representative tools",
 			toolsDescription:
 				"Most sessions only need one or two of these families first.",
@@ -426,8 +426,8 @@ const MESSAGES = {
 		knowledgePage: {
 			metadataTitle: "Knowledge",
 			metadataDescription:
-				"SourceHarbor knowledge layer for extracted knowledge cards, job-linked evidence, and reusable long-lived assets.",
-			kicker: "SourceHarbor Knowledge Layer",
+				"BrewMe knowledge layer for extracted knowledge cards, job-linked evidence, and reusable long-lived assets.",
+			kicker: "BrewMe Knowledge Layer",
 			heroTitle: "Knowledge",
 			heroSubtitle:
 				"Treat this as the long-lived asset layer extracted from digests. It behaves more like a knowledge-card cabinet than a one-time reading flow.",
@@ -467,8 +467,8 @@ const MESSAGES = {
 		ingestRunsPage: {
 			metadataTitle: "Ingest Runs",
 			metadataDescription:
-				"SourceHarbor intake ledger for recent ingest runs, candidate counts, job creation, and batch-level run detail.",
-			kicker: "SourceHarbor Intake",
+				"BrewMe intake ledger for recent ingest runs, candidate counts, job creation, and batch-level run detail.",
+			kicker: "BrewMe Intake",
 			heroTitle: "Ingest Runs",
 			heroSubtitle:
 				"Treat this as the intake ledger. It tells you whether each pull actually launched, how many candidates it found, and how many jobs it created.",
@@ -512,7 +512,7 @@ const MESSAGES = {
 		feedPage: {
 			metadataTitle: "Timeline",
 			metadataDescription:
-				"SourceHarbor digest feed for reading entries, filtering source/category/feedback, and moving from feed curation into reading pane, job trace, and evidence.",
+				"BrewMe digest feed for reading entries, filtering source/category/feedback, and moving from feed curation into reading pane, job trace, and evidence.",
 			kicker: "Follow the story",
 			heroTitle: "Timeline",
 			heroSubtitle:
@@ -574,7 +574,7 @@ const MESSAGES = {
 		subscriptionsPage: {
 			metadataTitle: "Follow sources",
 			metadataDescription:
-				"SourceHarbor source intake front door for strong YouTube and Bilibili presets, general RSSHub routes, and generic RSS feeds, with guided template setup and bulk subscription management.",
+				"BrewMe source intake front door for strong YouTube and Bilibili presets, general RSSHub routes, and generic RSS feeds, with guided template setup and bulk subscription management.",
 			kicker: "Follow new sources",
 			heroTitle: "Follow sources",
 			heroSubtitle:
@@ -640,7 +640,7 @@ const MESSAGES = {
 					description:
 						"General preset for wider source coverage when RSSHub can normalize a route into a usable feed.",
 					fillNow:
-						"Bring a source URL or handle plus the exact RSSHub route you want SourceHarbor to poll.",
+						"Bring a source URL or handle plus the exact RSSHub route you want BrewMe to poll.",
 					proofBoundary:
 						"Do not assume every RSSHub route is equally solid. Treat each route as proven only after it survives real runs.",
 				},
@@ -683,7 +683,7 @@ const MESSAGES = {
 			manualIntake: {
 				title: "Paste a source",
 				description:
-					"Paste a creator page, video, article, or feed. SourceHarbor will decide whether it should become something you follow or just enter today's reading.",
+					"Paste a creator page, video, article, or feed. BrewMe will decide whether it should become something you follow or just enter today's reading.",
 				placeholder:
 					"https://space.bilibili.com/13416784\nhttps://www.youtube.com/@MindAmend\nhttps://www.youtube.com/watch?v=dQw4w9WgXcQ\n/36kr/newsflashes\nhttps://example.com/feed.xml",
 				hint: "One line per input. Creator pages usually become followed sources. Direct links usually enter today's reading first.",
@@ -741,7 +741,7 @@ const MESSAGES = {
 		searchPage: {
 			metadataTitle: "Search",
 			metadataDescription:
-				"Grounded search and Ask entry for SourceHarbor, with cited retrieval over digests, transcripts, outlines, and knowledge cards.",
+				"Grounded search and Ask entry for BrewMe, with cited retrieval over digests, transcripts, outlines, and knowledge cards.",
 			searchKicker: "Find something to read",
 			askKicker: "Ask about what you follow",
 			searchTitle: "Search",
@@ -808,7 +808,7 @@ const MESSAGES = {
 			searchTruthTitle: "What this page does",
 			askTruthTitle: "What this page can do",
 			searchTruthPrimary:
-				"Search helps you look through what SourceHarbor has already saved, then jump back to the original source or preview the moment something looks worth reading.",
+				"Search helps you look through what BrewMe has already saved, then jump back to the original source or preview the moment something looks worth reading.",
 			searchTruthSecondary:
 				"Keep the first pass simple. Filters and broader source families are there when you need them, not before.",
 			askTruthPrimary:
@@ -850,7 +850,7 @@ const MESSAGES = {
 			askAnswerUnavailableState: "Saved topic unavailable",
 			askAnswerNoConfidentState: "Not enough to answer yet",
 			askAnswerGroundedDescription:
-				"SourceHarbor can now answer this as a briefing-aware front door: current answer first, recent change next, receipts underneath.",
+				"BrewMe can now answer this as a briefing-aware front door: current answer first, recent change next, receipts underneath.",
 			askAnswerContextOnlyDescription:
 				"No question is loaded yet, so Ask is showing the current briefing answer before it narrows further.",
 			askAnswerUnavailableDescription:
@@ -905,8 +905,8 @@ const MESSAGES = {
 		watchlistsPage: {
 			metadataTitle: "Watchlists",
 			metadataDescription:
-				"Persisted SourceHarbor watchlists for topics, claim kinds, platforms, and source matchers, with notification readiness and trend follow-through.",
-			kicker: "SourceHarbor Compounders",
+				"Persisted BrewMe watchlists for topics, claim kinds, platforms, and source matchers, with notification readiness and trend follow-through.",
+			kicker: "BrewMe Compounders",
 			heroTitle: "Watchlists",
 			heroSubtitle:
 				"Treat this like a simple list of topics you want to keep following. Start with one topic or source, then open story views only when you need more context.",
@@ -973,8 +973,8 @@ const MESSAGES = {
 		trendsPage: {
 			metadataTitle: "Trends",
 			metadataDescription:
-				"Cross-run trend and merged story view for SourceHarbor watchlists, showing how repeated themes are converging across multiple sources and recent evidence runs.",
-			kicker: "SourceHarbor Trends",
+				"Cross-run trend and merged story view for BrewMe watchlists, showing how repeated themes are converging across multiple sources and recent evidence runs.",
+			kicker: "BrewMe Trends",
 			heroTitle: "Merged source stories",
 			heroSubtitle:
 				"This is where repeated watchlist hits start turning into one readable story. Start with the current line, then drop into source coverage and raw movement only when you need receipts.",
@@ -1016,8 +1016,8 @@ const MESSAGES = {
 		briefingsPage: {
 			metadataTitle: "Briefings",
 			metadataDescription:
-				"Unified watchlist briefing surface for SourceHarbor, showing what the current story is, what changed, and which evidence to inspect next.",
-			kicker: "SourceHarbor Briefings",
+				"Unified watchlist briefing surface for BrewMe, showing what the current story is, what changed, and which evidence to inspect next.",
+			kicker: "BrewMe Briefings",
 			heroTitle: "Unified briefings",
 			heroSubtitle:
 				"Start with the current story, then inspect what changed, then drill into the receipts. This is the smallest truthful unified story line built on watchlists, merged stories, jobs, and knowledge.",
@@ -1091,11 +1091,11 @@ const MESSAGES = {
 		proofPage: {
 			metadataTitle: "Proof",
 			metadataDescription:
-				"SourceHarbor proof boundary for product surface, local supervisor proof, long live-smoke lanes, and remote proof expectations.",
-			kicker: "SourceHarbor Proof",
+				"BrewMe proof boundary for product surface, local supervisor proof, long live-smoke lanes, and remote proof expectations.",
+			kicker: "BrewMe Proof",
 			heroTitle: "Proof boundary",
 			heroSubtitle:
-				"Treat this as the master switch for what SourceHarbor can say confidently now and what still needs extra evidence. Code, docs, local runtime, and remote proof are not the same ledger.",
+				"Treat this as the master switch for what BrewMe can say confidently now and what still needs extra evidence. Code, docs, local runtime, and remote proof are not the same ledger.",
 			nextTruthfulJumpsTitle: "Next truthful jumps",
 			nextTruthfulJumpsDescription:
 				"These jumps are already real surfaces. They are not decorative packaging.",
@@ -1107,7 +1107,7 @@ const MESSAGES = {
 			layers: {
 				productSurfaceTitle: "Product surface",
 				productSurfaceBody:
-					"README, runtime-truth, project-status, Search, Ask, MCP, and Ops explain what SourceHarbor is and where each claim lives.",
+					"README, runtime-truth, project-status, Search, Ask, MCP, and Ops explain what BrewMe is and where each claim lives.",
 				localSupervisorTitle: "Local supervisor proof",
 				localSupervisorBody:
 					"`bootstrap -> up -> status -> doctor` proves the repo-managed local stack, with routes taken from `resolved.env` instead of assumed defaults.",
@@ -1122,8 +1122,8 @@ const MESSAGES = {
 		playgroundPage: {
 			metadataTitle: "Playground",
 			metadataDescription:
-				"Read-only SourceHarbor playground built on clearly labeled sample corpus, example jobs, retrieval results, and bundle shape.",
-			kicker: "SourceHarbor Playground",
+				"Read-only BrewMe playground built on clearly labeled sample corpus, example jobs, retrieval results, and bundle shape.",
+			kicker: "BrewMe Playground",
 			heroTitle: "Read-only sample playground",
 			heroSubtitle:
 				"This page uses a clearly labeled sample corpus, not live production results. Its job is to let you feel the product value before wiring the whole stack.",
@@ -1143,8 +1143,8 @@ const MESSAGES = {
 		jobsPage: {
 			metadataTitle: "Job Trace",
 			metadataDescription:
-				"Inspect SourceHarbor job trace, compare runs, review evidence bundles, and follow long-lived knowledge cards back to the underlying pipeline work.",
-			kicker: "SourceHarbor Job Trace",
+				"Inspect BrewMe job trace, compare runs, review evidence bundles, and follow long-lived knowledge cards back to the underlying pipeline work.",
+			kicker: "BrewMe Job Trace",
 			heroTitle: "Job Trace",
 			heroSubtitle:
 				"Look up a job ID to inspect full pipeline state, compare drift, and trace evidence bundles without leaving the operator surface.",
@@ -1212,10 +1212,10 @@ const MESSAGES = {
 			opensInNewTabSuffix: "(opens in a new tab)",
 		},
 		useCasesPage: {
-			kicker: "SourceHarbor Use Case",
+			kicker: "BrewMe Use Case",
 			whyTitle: "Why this page exists",
 			whyDescription:
-				"These use-case pages are discoverability surfaces, not hosted product promises. Every claim here should route back to a real SourceHarbor capability.",
+				"These use-case pages are discoverability surfaces, not hosted product promises. Every claim here should route back to a real BrewMe capability.",
 			nextStepsTitle: "Next truthful steps",
 			nextStepsDescription:
 				"Use these links to move from copy into real product surfaces, proof, or sample playgrounds.",
@@ -1269,7 +1269,7 @@ const MESSAGES = {
 				compounders: {
 					title: "Worth coming back to",
 					description:
-						"Watchlists, trends, bundles, and the sample playground make SourceHarbor feel like a reusable research product instead of a one-shot summarizer.",
+						"Watchlists, trends, bundles, and the sample playground make BrewMe feel like a reusable research product instead of a one-shot summarizer.",
 					bullets: ["Watchlists", "Trends", "Bundles"],
 				},
 			},
@@ -1381,7 +1381,7 @@ const MESSAGES = {
 			metadataTitle: "首页",
 			metadataDescription:
 				"Reader-first front door，先带你进入 source-universe intake、digest curation、published reader docs，再进入 builder / MCP / ops。",
-			kicker: "SourceHarbor front door",
+			kicker: "BrewMe front door",
 			heroTitle: "从 source intake 走到 finished reading",
 			heroSubtitle:
 				"先选一条第一路径：挂接 source universe、进入阅读桌面，或在故事成形后直接打开 reader。builder rail 保持次级入口。",
@@ -1429,7 +1429,7 @@ const MESSAGES = {
 					"每条路径都会诚实说明什么已经成立、什么只是 preview、什么还需要更强 receipt。",
 				returnLoopTitle: "Worth returning to after the first read",
 				returnLoopDescription:
-					"Watchlists、trends、briefings、bundles 和 playground 让 SourceHarbor 更像可反复回来的阅读系统，而不是一次性 summarizer。",
+					"Watchlists、trends、briefings、bundles 和 playground 让 BrewMe 更像可反复回来的阅读系统，而不是一次性 summarizer。",
 			},
 			whyNowCompact:
 				"先把故事读完，来源线索留在手边，保存的主题和 brief 负责让你下次再回来。",
@@ -1566,8 +1566,8 @@ const MESSAGES = {
 		ops: {
 			metadataTitle: "Ops Inbox",
 			metadataDescription:
-				"SourceHarbor 的 operator inbox，用来查看 failures、provider health、delivery readiness 与下一步动作。",
-			kicker: "SourceHarbor Ops",
+				"BrewMe 的 operator inbox，用来查看 failures、provider health、delivery readiness 与下一步动作。",
+			kicker: "BrewMe Ops",
 			heroTitle: "运营诊断",
 			heroSubtitle:
 				"打开给值班者看的异常队列：失败任务、provider health、delivery readiness，以及接下来该做什么。",
@@ -1632,8 +1632,8 @@ const MESSAGES = {
 		settings: {
 			metadataTitle: "设置",
 			metadataDescription:
-				"管理 SourceHarbor 的通知投递、日报时机、failure alerts 与 test-send controls。",
-			kicker: "SourceHarbor Settings",
+				"管理 BrewMe 的通知投递、日报时机、failure alerts 与 test-send controls。",
+			kicker: "BrewMe Settings",
 			heroTitle: "通知设置",
 			heroSubtitle:
 				"从一个 operator surface 里管理摘要投递、失败告警和测试发送行为。",
@@ -1658,9 +1658,9 @@ const MESSAGES = {
 			overrideRecipientLabel: "覆盖收件人（可选）",
 			overrideRecipientPlaceholder: "留空则使用已配置的收件人",
 			subjectLabel: "主题（可选）",
-			subjectPlaceholder: "SourceHarbor 测试通知",
+			subjectPlaceholder: "BrewMe 测试通知",
 			bodyLabel: "正文（可选）",
-			bodyPlaceholder: "这是一封来自 SourceHarbor 的测试通知。",
+			bodyPlaceholder: "这是一封来自 BrewMe 的测试通知。",
 			sendButton: "发送测试邮件",
 			sendPending: "发送中…",
 			sendStatus: "正在发送测试通知，请稍候。",
@@ -1668,8 +1668,8 @@ const MESSAGES = {
 		mcpPage: {
 			metadataTitle: "MCP",
 			metadataDescription:
-				"SourceHarbor 的 MCP quickstart，说明真实启动命令、代表性工具，以及它与 API / Web 的关系。",
-			kicker: "SourceHarbor MCP Front Door",
+				"BrewMe 的 MCP quickstart，说明真实启动命令、代表性工具，以及它与 API / Web 的关系。",
+			kicker: "BrewMe MCP Front Door",
 			heroTitle: "MCP Quickstart",
 			heroSubtitle:
 				"把它理解成 tool-first 入口。Web 给运营者看，API 给系统集成用，MCP 给助手和工作流用，但三者都指向同一套 pipeline。",
@@ -1677,7 +1677,7 @@ const MESSAGES = {
 			startDescription:
 				"先通过 repo-local CLI 启动 MCP，这样拿到的还是同一套 server 和 route contract，不会多学一层壳。",
 			startNote:
-				"`./bin/sourceharbor mcp` 会路由到接在 apps/mcp/server.py 上的同一台 FastMCP server。`./bin/dev-mcp` 仍然是底层直达入口。",
+				"`./bin/brewme mcp` 会路由到接在 apps/mcp/server.py 上的同一台 FastMCP server。`./bin/dev-mcp` 仍然是底层直达入口。",
 			toolsTitle: "代表性工具",
 			toolsDescription:
 				"多数会话先摸一个工具族就够了，不需要一上来背全套名字。",
@@ -1690,8 +1690,8 @@ const MESSAGES = {
 		knowledgePage: {
 			metadataTitle: "Knowledge",
 			metadataDescription:
-				"SourceHarbor 的 knowledge layer，承载提取后的 knowledge cards、job-linked evidence 与可复用资产。",
-			kicker: "SourceHarbor Knowledge Layer",
+				"BrewMe 的 knowledge layer，承载提取后的 knowledge cards、job-linked evidence 与可复用资产。",
+			kicker: "BrewMe Knowledge Layer",
 			heroTitle: "Knowledge",
 			heroSubtitle:
 				"把它理解成从 digest 里提炼出来的长期资产层。这里更像知识卡片柜，而不是一次性的阅读流。",
@@ -1731,8 +1731,8 @@ const MESSAGES = {
 		ingestRunsPage: {
 			metadataTitle: "Ingest Runs",
 			metadataDescription:
-				"SourceHarbor 的 intake ledger，用来查看最近 ingest runs、candidate 数量、job 创建与 batch 详情。",
-			kicker: "SourceHarbor Intake",
+				"BrewMe 的 intake ledger，用来查看最近 ingest runs、candidate 数量、job 创建与 batch 详情。",
+			kicker: "BrewMe Intake",
 			heroTitle: "Ingest Runs",
 			heroSubtitle:
 				"把它理解成摄取台账。这里会告诉你每次拉取是否真的发车、发现了多少候选、又创建了多少任务。",
@@ -1775,7 +1775,7 @@ const MESSAGES = {
 		feedPage: {
 			metadataTitle: "Timeline",
 			metadataDescription:
-				"SourceHarbor 的 digest feed，用于阅读条目、按 source/category/feedback 过滤，并从 feed curation 回到 reading pane、job trace 与 evidence。",
+				"BrewMe 的 digest feed，用于阅读条目、按 source/category/feedback 过滤，并从 feed curation 回到 reading pane、job trace 与 evidence。",
 			kicker: "跟着故事走",
 			heroTitle: "Timeline",
 			heroSubtitle:
@@ -1837,8 +1837,8 @@ const MESSAGES = {
 		subscriptionsPage: {
 			metadataTitle: "Subscriptions",
 			metadataDescription:
-				"SourceHarbor 的 source intake 前门，突出 YouTube / Bilibili 强支持，同时接住 RSSHub 路由和通用 RSS feed，并用模板化引导来管理订阅。",
-			kicker: "SourceHarbor Sources",
+				"BrewMe 的 source intake 前门，突出 YouTube / Bilibili 强支持，同时接住 RSSHub 路由和通用 RSS feed，并用模板化引导来管理订阅。",
+			kicker: "BrewMe Sources",
 			heroTitle: "Subscriptions",
 			heroSubtitle:
 				"先从强支持模板或手动粘贴开始，只有在需要时再扩到 RSSHub 路由和通用 feed。",
@@ -2002,7 +2002,7 @@ const MESSAGES = {
 		searchPage: {
 			metadataTitle: "Search",
 			metadataDescription:
-				"SourceHarbor 的 grounded search 与 Ask 入口，基于 digests、transcripts、outlines 与 knowledge cards 做 citation-first retrieval。",
+				"BrewMe 的 grounded search 与 Ask 入口，基于 digests、transcripts、outlines 与 knowledge cards 做 citation-first retrieval。",
 			searchKicker: "先找一篇想读的",
 			askKicker: "围绕你在追的内容提问",
 			searchTitle: "Search",
@@ -2164,8 +2164,8 @@ const MESSAGES = {
 		watchlistsPage: {
 			metadataTitle: "Watchlists",
 			metadataDescription:
-				"保存 SourceHarbor watchlists，用于持续追踪 topic、claim kind、platform 与 source matcher，并把它们接到趋势与通知 readiness。",
-			kicker: "SourceHarbor Compounders",
+				"保存 BrewMe watchlists，用于持续追踪 topic、claim kind、platform 与 source matcher，并把它们接到趋势与通知 readiness。",
+			kicker: "BrewMe Compounders",
 			heroTitle: "Watchlists",
 			heroSubtitle:
 				"把它理解成你要持续关注的话题清单。先从一个主题或来源开始，再按需要打开更深的故事视图。",
@@ -2230,8 +2230,8 @@ const MESSAGES = {
 		trendsPage: {
 			metadataTitle: "Trends",
 			metadataDescription:
-				"查看 SourceHarbor watchlists 的跨运行趋势与 merged story，把多个来源里反复出现的主题收拢成可见产品面，同时保留最近证据运行。",
-			kicker: "SourceHarbor Trends",
+				"查看 BrewMe watchlists 的跨运行趋势与 merged story，把多个来源里反复出现的主题收拢成可见产品面，同时保留最近证据运行。",
+			kicker: "BrewMe Trends",
 			heroTitle: "Merged source stories",
 			heroSubtitle:
 				"这里把重复出现的 watchlist 命中收拢成可见 story。先读当前主线，再按需要往下翻 source coverage 和原始变化。",
@@ -2272,8 +2272,8 @@ const MESSAGES = {
 		briefingsPage: {
 			metadataTitle: "Briefings",
 			metadataDescription:
-				"SourceHarbor 的统一 watchlist briefing 入口，先讲当前主线，再讲最近变化，最后回到具体证据。",
-			kicker: "SourceHarbor Briefings",
+				"BrewMe 的统一 watchlist briefing 入口，先讲当前主线，再讲最近变化，最后回到具体证据。",
+			kicker: "BrewMe Briefings",
 			heroTitle: "Unified briefings",
 			heroSubtitle:
 				"先看这件事现在在说什么，再看哪里变了，最后点进收据。它是建立在 watchlists、merged stories、jobs 和 knowledge 之上的最小真实 unified story 产品线。",
@@ -2347,8 +2347,8 @@ const MESSAGES = {
 		proofPage: {
 			metadataTitle: "Proof",
 			metadataDescription:
-				"SourceHarbor 的 proof boundary，说明 product surface、local supervisor proof、long live-smoke lane 与 remote proof 的边界。",
-			kicker: "SourceHarbor Proof",
+				"BrewMe 的 proof boundary，说明 product surface、local supervisor proof、long live-smoke lane 与 remote proof 的边界。",
+			kicker: "BrewMe Proof",
 			heroTitle: "Proof boundary",
 			heroSubtitle:
 				"把它理解成“哪些话现在能大胆说，哪些还要看额外证据”的总开关。代码、docs、local runtime 和 remote proof 不是同一层账本。",
@@ -2363,7 +2363,7 @@ const MESSAGES = {
 			layers: {
 				productSurfaceTitle: "Product surface",
 				productSurfaceBody:
-					"README、runtime-truth、project-status、Search、Ask、MCP 和 Ops 共同说明 SourceHarbor 是什么，以及每条 claim 具体落在哪层。",
+					"README、runtime-truth、project-status、Search、Ask、MCP 和 Ops 共同说明 BrewMe 是什么，以及每条 claim 具体落在哪层。",
 				localSupervisorTitle: "Local supervisor proof",
 				localSupervisorBody:
 					"`bootstrap -> up -> status -> doctor` 可以证明 repo-managed local stack 真的起来了，而且路由取自 `resolved.env`，不是假设默认值。",
@@ -2378,8 +2378,8 @@ const MESSAGES = {
 		playgroundPage: {
 			metadataTitle: "Playground",
 			metadataDescription:
-				"SourceHarbor 的只读 sample playground，用清楚标注的 demo corpus、example jobs、retrieval 结果与 bundle shape 帮你快速理解产品。",
-			kicker: "SourceHarbor Playground",
+				"BrewMe 的只读 sample playground，用清楚标注的 demo corpus、example jobs、retrieval 结果与 bundle shape 帮你快速理解产品。",
+			kicker: "BrewMe Playground",
 			heroTitle: "Read-only sample playground",
 			heroSubtitle:
 				"这里展示的是 clearly labeled sample corpus，不是 live production results。它的作用是在不接完整环境前先让你感知产品价值。",
@@ -2399,8 +2399,8 @@ const MESSAGES = {
 		jobsPage: {
 			metadataTitle: "Job Trace",
 			metadataDescription:
-				"查看 SourceHarbor 的 Job Trace、运行对比、evidence bundle 与 long-lived knowledge cards，并回到底层 pipeline 证据。",
-			kicker: "SourceHarbor Job Trace",
+				"查看 BrewMe 的 Job Trace、运行对比、evidence bundle 与 long-lived knowledge cards，并回到底层 pipeline 证据。",
+			kicker: "BrewMe Job Trace",
 			heroTitle: "Job Trace",
 			heroSubtitle:
 				"输入 job ID 后，你可以在同一个 operator surface 内看完整 pipeline state、compare drift 与 evidence bundle。",
@@ -2468,10 +2468,10 @@ const MESSAGES = {
 			opensInNewTabSuffix: "(opens in a new tab)",
 		},
 		useCasesPage: {
-			kicker: "SourceHarbor Use Case",
+			kicker: "BrewMe Use Case",
 			whyTitle: "Why this page exists",
 			whyDescription:
-				"这些 use-case 页面是 discoverability surface，不是 hosted 产品承诺。这里的每条 claim 都应该能回到 SourceHarbor 的真实能力。",
+				"这些 use-case 页面是 discoverability surface，不是 hosted 产品承诺。这里的每条 claim 都应该能回到 BrewMe 的真实能力。",
 			nextStepsTitle: "Next truthful steps",
 			nextStepsDescription:
 				"通过这些链接，从 copy 直接跳到真实 product surface、proof 或 sample playground。",
@@ -2525,7 +2525,7 @@ const MESSAGES = {
 				compounders: {
 					title: "值得反复回来用",
 					description:
-						"Watchlists、trends、bundles 和 sample playground 让 SourceHarbor 更像可复用的 research product，而不是一次性 summarizer。",
+						"Watchlists、trends、bundles 和 sample playground 让 BrewMe 更像可复用的 research product，而不是一次性 summarizer。",
 					bullets: ["Watchlists", "Trends", "Bundles"],
 				},
 			},

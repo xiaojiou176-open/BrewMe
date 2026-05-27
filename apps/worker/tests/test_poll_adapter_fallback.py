@@ -105,7 +105,7 @@ def test_build_rss_transcript_returns_none_when_all_fields_empty() -> None:
 def _poll_settings() -> SimpleNamespace:
     return SimpleNamespace(
         sqlite_path="/tmp/worker-state.db",
-        database_url="postgresql://example.invalid/sourceharbor",
+        database_url="postgresql://example.invalid/brewme",
         lock_ttl_seconds=90,
         request_timeout_seconds=10,
         request_retry_attempts=1,

@@ -102,7 +102,7 @@ def test_build_evidence_bundle_uses_current_helpers_and_shapes_payload() -> None
     payload = service.build_evidence_bundle(job_id=job_id)
 
     assert payload is not None
-    assert payload["bundle_kind"] == "sourceharbor_job_evidence_bundle_v1"
+    assert payload["bundle_kind"] == "brewme_job_evidence_bundle_v1"
     assert payload["job"]["id"] == str(job_id)
     assert payload["trace_summary"]["step_count"] == 1
     assert payload["trace_summary"]["notification_retry"] == {"status": "idle"}

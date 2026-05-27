@@ -9,7 +9,7 @@ body:
     attributes:
       label: Summary
       description: What changed, in plain language?
-      placeholder: SourceHarbor now has a result-first README, public proof docs, and a stronger GitHub profile.
+      placeholder: BrewMe now has a result-first README, public proof docs, and a stronger GitHub profile.
     validations:
       required: true
   - type: textarea

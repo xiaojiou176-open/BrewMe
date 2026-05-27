@@ -7,7 +7,7 @@ cd "$ROOT_DIR"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/ci-api-real-smoke.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/ci-api-real-smoke.jsonl"
 
 TEMPORAL_CLI_VERSION="${TEMPORAL_CLI_VERSION:-1.5.1}"
 TEMPORAL_CLI_SHA256_LINUX_AMD64="${TEMPORAL_CLI_SHA256_LINUX_AMD64:-ddc95e08b0b076efd4ea9733a3f488eb7d2be875f8834e616cd2a37358b4852d}"
@@ -17,11 +17,11 @@ TEMPORAL_PID=""
 TEMPORAL_TMPDIR=""
 
 log() {
-  sourceharbor_log info ci_api_real_smoke "$*"
+  brewme_log info ci_api_real_smoke "$*"
 }
 
 fail() {
-  sourceharbor_log error ci_api_real_smoke_error "$*"
+  brewme_log error ci_api_real_smoke_error "$*"
   exit 1
 }
 

@@ -78,7 +78,7 @@ def _expected_public_api_image_line() -> str:
     runner = _extract_workflow_job_runs_on(workflow_text, "publish") or "unknown"
     return (
         "- Public API image publish workflow runs on "
-        f"`{runner}` and builds `ghcr.io/xiaojiou176-open/sourceharbor-api` via `scripts/ci/build_public_api_image.sh`"
+        f"`{runner}` and builds `ghcr.io/xiaojiou176-open/brewme-api` via `scripts/ci/build_public_api_image.sh`"
     )
 
 
@@ -106,7 +106,7 @@ def _render_governance_dashboard() -> str:
         GENERATED_HEADER.rstrip(),
         "# Governance Dashboard",
         "",
-        "This is the thin public-doc control plane for the current SourceHarbor snapshot.",
+        "This is the thin public-doc control plane for the current BrewMe snapshot.",
         "",
         f"- first-hop truth surfaces: {', '.join(surfaces)}",
         f"- nav sections tracked: `{section_count}`",

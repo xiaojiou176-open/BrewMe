@@ -27,7 +27,7 @@ def build_headers(
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "User-Agent": "sourceharbor/1.0",
+        "User-Agent": "brewme/1.0",
     }
     token = environ_get("MINIFLUX_API_TOKEN", "").strip()
     if token:
@@ -91,7 +91,7 @@ def ensure_category_and_feed_with_http_json(
             break
     if category_id is None:
         created = (
-            http_json_fn("POST", f"{base}/v1/categories", headers, {"title": "SourceHarbor"}) or {}
+            http_json_fn("POST", f"{base}/v1/categories", headers, {"title": "BrewMe"}) or {}
         )
         category_id = int(created.get("id"))
 
@@ -172,7 +172,7 @@ def import_entries_with_http_json(
         )
         summary = str(item.get("summary_md") or "").strip()
         url = (
-            str(item.get("video_url") or "").strip() or f"https://local.sourceharbor/jobs/{job_id}"
+            str(item.get("video_url") or "").strip() or f"https://local.brewme/jobs/{job_id}"
         )
         if not summary:
             continue
@@ -180,9 +180,9 @@ def import_entries_with_http_json(
             "title": title,
             "url": url,
             "content": summary,
-            "author": "SourceHarbor",
+            "author": "BrewMe",
             "status": "unread",
-            "external_id": f"sourceharbor:{job_id}",
+            "external_id": f"brewme:{job_id}",
             "published_at": to_unix(str(item.get("published_at") or "")),
         }
         try:

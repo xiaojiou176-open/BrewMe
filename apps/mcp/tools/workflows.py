@@ -85,7 +85,7 @@ def _normalize_workflow_payload(
 
 def register_workflow_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.workflows.run",
+        name="brewme.workflows.run",
         description="Start operational Temporal workflows via API gateway.",
     )
     def run_workflow(

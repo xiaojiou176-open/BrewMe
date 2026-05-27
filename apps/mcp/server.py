@@ -743,7 +743,7 @@ def _redact_sensitive_text(value: str) -> str:
 def create_server() -> FastMCP:
     config = ApiConfig.from_env()
     api_client = ApiClient(config)
-    mcp = FastMCP("sourceharbor")
+    mcp = FastMCP("brewme")
 
     def api_call(
         method: str,

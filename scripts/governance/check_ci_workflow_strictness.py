@@ -712,11 +712,11 @@ def _check_global_rules(
         resolver_block = blocks.get(resolver_name, "")
 
         if (
-            "runs-on: [self-hosted, sourceharbor]" not in hosted_block
-            and 'runs-on: \'["self-hosted","sourceharbor"]\'' not in hosted_block
+            "runs-on: [self-hosted, brewme]" not in hosted_block
+            and 'runs-on: \'["self-hosted","brewme"]\'' not in hosted_block
         ):
             failures.append(
-                f"{workflow_path}: {job_name}: hosted jobs must run on [self-hosted, sourceharbor]"
+                f"{workflow_path}: {job_name}: hosted jobs must run on [self-hosted, brewme]"
             )
 
         if not fallback_block:
@@ -725,11 +725,11 @@ def _check_global_rules(
             )
         else:
             if (
-                "runs-on: [self-hosted, sourceharbor]" not in fallback_block
-                and 'runs-on: \'["self-hosted","sourceharbor"]\'' not in fallback_block
+                "runs-on: [self-hosted, brewme]" not in fallback_block
+                and 'runs-on: \'["self-hosted","brewme"]\'' not in fallback_block
             ):
                 failures.append(
-                    f"{workflow_path}: {fallback_name}: fallback jobs must run on [self-hosted, sourceharbor]"
+                    f"{workflow_path}: {fallback_name}: fallback jobs must run on [self-hosted, brewme]"
                 )
             if not re.search(
                 rf"^\s+if:\s+\$\{{\{{.*always\(\).*(needs\['{re.escape(job_name)}'\]\.result\s*!=\s*['\"]success['\"]|needs\.{re.escape(job_name)}\.result\s*!=\s*['\"]success['\"]).*\}}\}}\s*$",
@@ -824,9 +824,9 @@ def _check_runner_health_specific_rules(
         failures.append(
             "runner-health.yml: runner-bootstrap: missing pool-core online threshold guard (MIN_ONLINE_CORE_RUNNERS)"
         )
-    if "MIN_ONLINE_LABEL_RUNNERS" not in runner_bootstrap or "sourceharbor" not in runner_bootstrap:
+    if "MIN_ONLINE_LABEL_RUNNERS" not in runner_bootstrap or "brewme" not in runner_bootstrap:
         failures.append(
-            "runner-health.yml: runner-bootstrap: missing label-route online threshold guard for sourceharbor"
+            "runner-health.yml: runner-bootstrap: missing label-route online threshold guard for brewme"
         )
     if (
         "python3 scripts/governance/check_runner_baseline.py --profile runner-health"
@@ -917,9 +917,9 @@ def _check_build_public_api_image_specific_rules(text: str, failures: list[str])
         failures.append(
             "build-public-api-image.yml: must build through scripts/ci/build_public_api_image.sh"
         )
-    if "sourceharbor-api" not in text:
+    if "brewme-api" not in text:
         failures.append(
-            "build-public-api-image.yml: must target the dedicated sourceharbor-api image repository"
+            "build-public-api-image.yml: must target the dedicated brewme-api image repository"
         )
     for token in LOCAL_REAL_CHROME_PROFILE_ENV_VARS:
         if token in text:
@@ -1054,13 +1054,13 @@ def _check_publish_mcp_registry_specific_rules(text: str, failures: list[str]) -
         )
     if "mcp-publisher publish" not in text:
         failures.append("publish-mcp-registry.yml: must call `mcp-publisher publish`")
-    if "https://pypi.org/pypi/sourceharbor/json" not in text:
+    if "https://pypi.org/pypi/brewme/json" not in text:
         failures.append(
-            "publish-mcp-registry.yml: must verify the expected SourceHarbor version is already live on PyPI before registry publish"
+            "publish-mcp-registry.yml: must verify the expected BrewMe version is already live on PyPI before registry publish"
         )
-    if "starter-packs/mcp-registry/sourceharbor-server.template.json" not in text:
+    if "starter-packs/mcp-registry/brewme-server.template.json" not in text:
         failures.append(
-            "publish-mcp-registry.yml: must source registry metadata from starter-packs/mcp-registry/sourceharbor-server.template.json"
+            "publish-mcp-registry.yml: must source registry metadata from starter-packs/mcp-registry/brewme-server.template.json"
         )
     for token in LOCAL_REAL_CHROME_PROFILE_ENV_VARS:
         if token in text:

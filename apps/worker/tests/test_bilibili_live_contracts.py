@@ -22,7 +22,7 @@ def test_bilibili_live_canary_matrix_declares_core_extended_and_reader_boundary_
     slugs = [str(item["slug"]) for item in samples]
     reader_samples = [item for item in samples if bool(item.get("reader_boundary_candidate"))]
 
-    assert payload["matrix_kind"] == "sourceharbor_bilibili_live_canary_matrix_v1"
+    assert payload["matrix_kind"] == "brewme_bilibili_live_canary_matrix_v1"
     assert 5 <= len(samples) <= 10
     assert len(slugs) == len(set(slugs))
     assert any(str(item.get("tier")) == "core" for item in samples)

@@ -1,5 +1,0 @@
-{
-  "name": "sourceharbor-claude-code",
-  "version": "0.1.17",
-  "description": "SourceHarbor plugin bundle for Claude Code with MCP-first watchlist briefings and grounded evidence reuse."
-}

@@ -1,7 +1,7 @@
 services:
   miniflux:
     image: ${STRICT_CI_SERVICE_IMAGE_MINIFLUX:-miniflux/miniflux@sha256:802ab7d045826d047883476e2310bf59f5d9b3875f7a8106fa0c43638d01fd64}
-    container_name: sourceharbor-miniflux
+    container_name: brewme-miniflux
     depends_on:
       - db
     ports:
@@ -20,7 +20,7 @@ services:
 
   db:
     image: ${STRICT_CI_SERVICE_IMAGE_POSTGRES_MINIFLUX:-postgres:16-alpine@sha256:20edbde7749f822887a1a022ad526fde0a47d6b2be9a8364433605cf65099416}
-    container_name: sourceharbor-miniflux-db
+    container_name: brewme-miniflux-db
     environment:
       POSTGRES_USER: miniflux
       POSTGRES_PASSWORD: ${MINIFLUX_DB_PASSWORD:-change_me}
@@ -36,7 +36,7 @@ services:
 
   nextflux:
     image: ${STRICT_CI_SERVICE_IMAGE_NEXTFLUX:-electh/nextflux@sha256:cd48b8aab1f4a658257609edf9b1726567a648da23402d68cef8e70bcd4bb88a}
-    container_name: sourceharbor-nextflux
+    container_name: brewme-nextflux
     ports:
       - "${NEXTFLUX_PORT:-3000}:3000"
     depends_on:

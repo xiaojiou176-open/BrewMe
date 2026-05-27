@@ -135,7 +135,7 @@ def test_probe_external_lane_workflows_blocks_when_current_head_has_no_remote_ru
     head = "1111111111111111111111111111111111111111"
 
     monkeypatch.setattr(module, "ROOT", tmp_path)
-    monkeypatch.setattr(module, "_repo_slug", lambda: "xiaojiou176-open/sourceharbor")
+    monkeypatch.setattr(module, "_repo_slug", lambda: "xiaojiou176-open/brewme")
     monkeypatch.setattr(module, "current_git_commit", lambda: head)
     monkeypatch.setattr(module, "_json_or_none", lambda _command: ({"login": "tester"}, None))
     monkeypatch.setattr(module, "_list_commit_runs", lambda _repo, _head: ([], None))
@@ -218,7 +218,7 @@ def test_probe_external_lane_workflows_keeps_optional_publish_lanes_from_flippin
     ]
 
     monkeypatch.setattr(module, "ROOT", tmp_path)
-    monkeypatch.setattr(module, "_repo_slug", lambda: "xiaojiou176-open/sourceharbor")
+    monkeypatch.setattr(module, "_repo_slug", lambda: "xiaojiou176-open/brewme")
     monkeypatch.setattr(module, "current_git_commit", lambda: head)
     monkeypatch.setattr(module, "_json_or_none", lambda _command: ({"login": "tester"}, None))
     monkeypatch.setattr(module, "_list_commit_runs", lambda _repo, _head: (runs, None))
@@ -920,27 +920,27 @@ def test_probe_remote_platform_truth_uses_dedicated_pvr_endpoint_when_repo_field
             return {"login": "tester"}, None
         if cmd.startswith("gh repo view "):
             return {
-                "name": "sourceharbor",
+                "name": "brewme",
                 "owner": {"login": "xiaojiou176"},
                 "visibility": "PUBLIC",
                 "defaultBranchRef": {"name": "main"},
                 "isPrivate": False,
             }, None
-        if cmd == "gh api repos/xiaojiou176-open/sourceharbor":
+        if cmd == "gh api repos/xiaojiou176-open/brewme":
             return {
                 "private_vulnerability_reporting": None,
                 "security_and_analysis": {},
             }, None
-        if cmd == "gh api repos/xiaojiou176-open/sourceharbor/private-vulnerability-reporting":
+        if cmd == "gh api repos/xiaojiou176-open/brewme/private-vulnerability-reporting":
             return {"enabled": True}, None
-        if cmd == "gh api repos/xiaojiou176-open/sourceharbor/actions/permissions":
+        if cmd == "gh api repos/xiaojiou176-open/brewme/actions/permissions":
             return {"enabled": True}, None
-        if cmd == "gh api repos/xiaojiou176-open/sourceharbor/actions/permissions/workflow":
+        if cmd == "gh api repos/xiaojiou176-open/brewme/actions/permissions/workflow":
             return {
                 "default_workflow_permissions": "read",
                 "can_approve_pull_request_reviews": False,
             }, None
-        if cmd == "gh api repos/xiaojiou176-open/sourceharbor/branches/main/protection":
+        if cmd == "gh api repos/xiaojiou176-open/brewme/branches/main/protection":
             return {
                 "required_status_checks": {
                     "contexts": [],
@@ -949,7 +949,7 @@ def test_probe_remote_platform_truth_uses_dedicated_pvr_endpoint_when_repo_field
         raise AssertionError(f"unexpected command: {cmd}")
 
     monkeypatch.setattr(module, "ROOT", tmp_path)
-    monkeypatch.setattr(module, "_repo_slug", lambda: "xiaojiou176-open/sourceharbor")
+    monkeypatch.setattr(module, "_repo_slug", lambda: "xiaojiou176-open/brewme")
     monkeypatch.setattr(module, "_current_actor", lambda: "tester")
     monkeypatch.setattr(
         module,
@@ -970,7 +970,7 @@ def test_probe_remote_platform_truth_uses_dedicated_pvr_endpoint_when_repo_field
 
     monkeypatch.setattr(module, "write_json_artifact", _capture_artifact)
     monkeypatch.setattr(
-        sys, "argv", ["probe_remote_platform_truth.py", "--repo", "xiaojiou176-open/sourceharbor"]
+        sys, "argv", ["probe_remote_platform_truth.py", "--repo", "xiaojiou176-open/brewme"]
     )
 
     exit_code = module.main()
@@ -1060,7 +1060,7 @@ def test_probe_remote_platform_truth_auto_switches_to_more_capable_actor(
     captured = {}
 
     monkeypatch.setattr(module, "ROOT", tmp_path)
-    monkeypatch.setattr(module, "_repo_slug", lambda: "xiaojiou176-open/sourceharbor")
+    monkeypatch.setattr(module, "_repo_slug", lambda: "xiaojiou176-open/brewme")
     monkeypatch.setattr(module, "_current_actor", lambda: "terryyifeng")
     monkeypatch.setattr(
         module, "_discover_logged_in_accounts", lambda: ["terryyifeng", "xiaojiou176"]
@@ -1075,7 +1075,7 @@ def test_probe_remote_platform_truth_auto_switches_to_more_capable_actor(
         lambda _path, report, **_kwargs: captured.setdefault("report", report),
     )
     monkeypatch.setattr(
-        sys, "argv", ["probe_remote_platform_truth.py", "--repo", "xiaojiou176-open/sourceharbor"]
+        sys, "argv", ["probe_remote_platform_truth.py", "--repo", "xiaojiou176-open/brewme"]
     )
 
     exit_code = module.main()
@@ -1765,7 +1765,7 @@ def test_render_current_state_summary_reports_manifest_unknown_for_ghcr(
             "status": "blocked",
             "blocker_type": "registry-auth-failure",
             "manifest_probe": {
-                "target": "ghcr.io/xiaojiou176-open/sourceharbor-ci-standard@sha256:test",
+                "target": "ghcr.io/xiaojiou176-open/brewme-ci-standard@sha256:test",
                 "returncode": 1,
                 "stdout": "",
                 "stderr": "manifest unknown\n",

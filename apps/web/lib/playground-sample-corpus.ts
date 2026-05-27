@@ -1,5 +1,5 @@
 export const PLAYGROUND_SAMPLE_CORPUS = {
-	label: "SourceHarbor Demo Corpus",
+	label: "BrewMe Demo Corpus",
 	sample: true,
 	description:
 		"Curated sample data for read-only demos, playgrounds, and landing pages. Not live operator state.",
@@ -27,7 +27,7 @@ export const PLAYGROUND_SAMPLE_CORPUS = {
 			title: "AI Weekly Ops",
 			pipeline_final_status: "succeeded",
 			digest_excerpt:
-				"This sample digest shows how SourceHarbor turns long-form content into a reusable operator summary.",
+				"This sample digest shows how BrewMe turns long-form content into a reusable operator summary.",
 		},
 		{
 			job_id: "sample-job-bilibili-001",
@@ -86,7 +86,7 @@ export const PLAYGROUND_SAMPLE_CORPUS = {
 		],
 	},
 	example_bundle: {
-		bundle_kind: "sourceharbor_job_evidence_bundle_v1",
+		bundle_kind: "brewme_job_evidence_bundle_v1",
 		sharing_scope: "internal",
 		proof_boundary: "Sample internal bundle for demos only.",
 		contains: [

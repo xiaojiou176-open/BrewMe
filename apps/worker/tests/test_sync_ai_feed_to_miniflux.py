@@ -22,7 +22,7 @@ def test_import_entries_treats_duplicate_entry_as_idempotent(monkeypatch) -> Non
 
     def fake_http_json(method: str, url: str, headers: dict[str, str], payload=None):
         calls.append({"method": method, "url": url, "payload": payload})
-        if payload and payload.get("external_id") == "sourceharbor:job-1":
+        if payload and payload.get("external_id") == "brewme:job-1":
             raise RuntimeError(
                 "HTTP 500 POST http://127.0.0.1:8080/v1/feeds/1/entries/import: "
                 '{"error_message":"store: unable to create entry \\"https://example.com/1\\" '

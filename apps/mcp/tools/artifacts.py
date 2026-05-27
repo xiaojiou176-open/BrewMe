@@ -42,7 +42,7 @@ def _is_not_found_error(payload: dict[str, Any]) -> bool:
 
 def register_artifact_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.artifacts.get",
+        name="brewme.artifacts.get",
         description="Get artifacts. kind=markdown|asset.",
     )
     def get_artifact(
@@ -130,7 +130,7 @@ def register_artifact_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         return invalid_argument(
             "kind must be one of: markdown, asset",
             method="GET",
-            path="sourceharbor.artifacts.get",
+            path="brewme.artifacts.get",
             field="kind",
             value=kind,
         )

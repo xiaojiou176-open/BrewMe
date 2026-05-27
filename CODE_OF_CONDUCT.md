@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We are committed to making participation in the SourceHarbor community a respectful, harassment-free experience for everyone.
+We are committed to making participation in the BrewMe community a respectful, harassment-free experience for everyone.
 
 We pledge to act and interact in ways that build an open, welcoming, inclusive, and healthy community.
 

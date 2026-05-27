@@ -40,16 +40,16 @@ def _write_policy(path: Path) -> None:
         "legacy_retirement_quiet_minutes": 1440,
         "canonical_paths": {
             "repo_runtime_root": ".runtime-cache",
-            "user_state_root": "$HOME/.cache/sourceharbor",
-            "user_cache_root": "$HOME/.cache/sourceharbor",
-            "user_project_venv": "$HOME/.cache/sourceharbor/project-venv",
+            "user_state_root": "$HOME/.cache/brewme",
+            "user_cache_root": "$HOME/.cache/brewme",
+            "user_project_venv": "$HOME/.cache/brewme/project-venv",
             "legacy_state_root": "$HOME/.video-digestor",
             "legacy_cache_root": "$HOME/.cache/video-digestor",
         },
-        "legacy_extra_roots": ["$HOME/.sourceharbor"],
+        "legacy_extra_roots": ["$HOME/.brewme"],
         "duplicate_env_policy": {
-            "canonical_mainline_path": "$HOME/.cache/sourceharbor/project-venv",
-            "duplicate_glob": "$HOME/.cache/sourceharbor/project-venv*",
+            "canonical_mainline_path": "$HOME/.cache/brewme/project-venv",
+            "duplicate_glob": "$HOME/.cache/brewme/project-venv*",
             "reference_files": [".env"],
         },
         "migration_variables": [],
@@ -59,18 +59,18 @@ def _write_policy(path: Path) -> None:
         "cleanup_waves": {},
         "external_cache_maintenance": {
             "report_path": ".runtime-cache/reports/governance/external-cache-maintenance.json",
-            "stamp_path": "$HOME/.cache/sourceharbor/maintenance/external-cache-maintenance-stamp.json",
+            "stamp_path": "$HOME/.cache/brewme/maintenance/external-cache-maintenance-stamp.json",
             "auto_interval_minutes": 60,
             "groups": {},
         },
         "docker_hygiene": {
             "report_path": ".runtime-cache/reports/governance/docker-hygiene.json",
-            "repo_container_prefixes": ["sourceharbor-"],
-            "repo_network_prefixes": ["sourceharbor"],
-            "repo_named_volumes": ["sourceharbor_core_postgres_data"],
+            "repo_container_prefixes": ["brewme-"],
+            "repo_network_prefixes": ["brewme"],
+            "repo_named_volumes": ["brewme_core_postgres_data"],
             "local_debug_image_quiet_hours": 24,
             "repo_local_debug_images": [
-                "ghcr.io/xiaojiou176-open/sourceharbor-ci-standard:local-debug"
+                "ghcr.io/xiaojiou176-open/brewme-ci-standard:local-debug"
             ],
         },
         "excluded_paths": [],
@@ -122,11 +122,11 @@ def test_docker_hygiene_audit_collects_repo_owned_objects(tmp_path: Path) -> Non
         "  exit 0\n"
         "fi\n"
         'if [[ "$1" == "ps" && "$2" == "-a" ]]; then\n'
-        '  printf \'{"ID":"abc","Names":"sourceharbor-core-postgres","Image":"postgres:16","Status":"Exited (0) 1 hour ago","State":"exited"}\\n\'\n'
+        '  printf \'{"ID":"abc","Names":"brewme-core-postgres","Image":"postgres:16","Status":"Exited (0) 1 hour ago","State":"exited"}\\n\'\n'
         "  exit 0\n"
         "fi\n"
         'if [[ "$1" == "network" && "$2" == "ls" ]]; then\n'
-        '  printf \'{"ID":"net1","Name":"sourceharbor_default","Driver":"bridge"}\\n\'\n'
+        '  printf \'{"ID":"net1","Name":"brewme_default","Driver":"bridge"}\\n\'\n'
         "  exit 0\n"
         "fi\n"
         'if [[ "$1" == "network" && "$2" == "inspect" ]]; then\n'
@@ -134,11 +134,11 @@ def test_docker_hygiene_audit_collects_repo_owned_objects(tmp_path: Path) -> Non
         "  exit 0\n"
         "fi\n"
         'if [[ "$1" == "volume" && "$2" == "inspect" ]]; then\n'
-        '  printf \'[{"Name":"sourceharbor_core_postgres_data","CreatedAt":"2026-03-20T00:00:00Z","Mountpoint":"/var/lib/docker/volumes/sourceharbor_core_postgres_data/_data","Labels":{}}]\\n\'\n'
+        '  printf \'[{"Name":"brewme_core_postgres_data","CreatedAt":"2026-03-20T00:00:00Z","Mountpoint":"/var/lib/docker/volumes/brewme_core_postgres_data/_data","Labels":{}}]\\n\'\n'
         "  exit 0\n"
         "fi\n"
         'if [[ "$1" == "image" && "$2" == "inspect" ]]; then\n'
-        '  printf \'[{"RepoTags":["ghcr.io/xiaojiou176-open/sourceharbor-ci-standard:local-debug"],"Created":"2026-03-20T00:00:00Z","Metadata":{"LastTagTime":"2026-03-21T00:00:00Z"}}]\\n\'\n'
+        '  printf \'[{"RepoTags":["ghcr.io/xiaojiou176-open/brewme-ci-standard:local-debug"],"Created":"2026-03-20T00:00:00Z","Metadata":{"LastTagTime":"2026-03-21T00:00:00Z"}}]\\n\'\n'
         "  exit 0\n"
         "fi\n"
         'if [[ "$1" == "rm" || "$1" == "network" || "$1" == "image" ]]; then\n'
@@ -156,9 +156,9 @@ def test_docker_hygiene_audit_collects_repo_owned_objects(tmp_path: Path) -> Non
     assert audit.returncode == 0, audit.stderr
     payload = json.loads(audit.stdout)
     assert payload["status"] == "pass"
-    assert payload["containers"][0]["name"] == "sourceharbor-core-postgres"
-    assert payload["networks"][0]["name"] == "sourceharbor_default"
-    assert payload["volumes"][0]["name"] == "sourceharbor_core_postgres_data"
+    assert payload["containers"][0]["name"] == "brewme-core-postgres"
+    assert payload["networks"][0]["name"] == "brewme_default"
+    assert payload["volumes"][0]["name"] == "brewme_core_postgres_data"
     assert payload["volumes"][0]["cleanup_eligible"] is False
     assert payload["images"][0]["exists"] is True
     assert payload["images"][0]["cleanup_eligible"] is True
@@ -199,7 +199,7 @@ def test_docker_hygiene_blocks_recent_local_debug_image_cleanup(tmp_path: Path) 
         "  exit 1\n"
         "fi\n"
         'if [[ "$1" == "image" && "$2" == "inspect" ]]; then\n'
-        '  printf \'[{"RepoTags":["ghcr.io/xiaojiou176-open/sourceharbor-ci-standard:local-debug"],"Created":"2099-01-01T00:00:00Z","Metadata":{"LastTagTime":"2099-01-01T00:00:00Z"}}]\\n\'\n'
+        '  printf \'[{"RepoTags":["ghcr.io/xiaojiou176-open/brewme-ci-standard:local-debug"],"Created":"2099-01-01T00:00:00Z","Metadata":{"LastTagTime":"2099-01-01T00:00:00Z"}}]\\n\'\n'
         "  exit 0\n"
         "fi\n"
         'if [[ "$1" == "image" && "$2" == "rm" ]]; then\n'

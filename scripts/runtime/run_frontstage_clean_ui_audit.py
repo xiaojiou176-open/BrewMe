@@ -109,16 +109,16 @@ def main() -> int:
     parser.add_argument(
         "--api-base-url",
         default="http://127.0.0.1:9000",
-        help="Local SourceHarbor API base URL.",
+        help="Local BrewMe API base URL.",
     )
     parser.add_argument(
         "--api-key",
-        default="sourceharbor-local-dev-token",
-        help="Local SourceHarbor write/read token for UI audit routes.",
+        default="brewme-local-dev-token",
+        help="Local BrewMe write/read token for UI audit routes.",
     )
     parser.add_argument(
         "--artifact-root-name",
-        default="sourceharbor-frontstage-proof-clean",
+        default="brewme-frontstage-proof-clean",
         help="Artifact root name relative to system tempdir for /api/v1/ui-audit/run.",
     )
     parser.add_argument(

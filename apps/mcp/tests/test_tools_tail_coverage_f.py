@@ -107,19 +107,19 @@ def test_artifacts_tail_branches() -> None:
 
     register_artifact_tools(mcp, fake_api_call)
 
-    bad_markdown_job = mcp.tools["sourceharbor.artifacts.get"](kind="markdown", job_id="bad")
+    bad_markdown_job = mcp.tools["brewme.artifacts.get"](kind="markdown", job_id="bad")
     assert bad_markdown_job["code"] == "INVALID_ARGUMENT"
 
-    missing_required = mcp.tools["sourceharbor.artifacts.get"](kind="asset", job_id=None, path=None)
+    missing_required = mcp.tools["brewme.artifacts.get"](kind="asset", job_id=None, path=None)
     assert missing_required["code"] == "INVALID_ARGUMENT"
 
-    bad_kind = mcp.tools["sourceharbor.artifacts.get"](kind="other")
+    bad_kind = mcp.tools["brewme.artifacts.get"](kind="other")
     assert bad_kind["code"] == "INVALID_ARGUMENT"
 
-    markdown = mcp.tools["sourceharbor.artifacts.get"](kind="markdown")
+    markdown = mcp.tools["brewme.artifacts.get"](kind="markdown")
     assert markdown["markdown"] == "fallback md"
 
-    passthrough = mcp.tools["sourceharbor.artifacts.get"](
+    passthrough = mcp.tools["brewme.artifacts.get"](
         kind="asset", job_id=UUID_1, path="missing.png"
     )
     assert passthrough["code"] == "NOT_FOUND"
@@ -135,7 +135,7 @@ def test_health_tail_branches() -> None:
         raise AssertionError(path)
 
     register_health_tools(mcp, api_error_on_system)
-    invalid_scope_payload = mcp.tools["sourceharbor.health.get"](scope="invalid")
+    invalid_scope_payload = mcp.tools["brewme.health.get"](scope="invalid")
     assert invalid_scope_payload["code"] == "UPSTREAM"
 
     def api_error_on_providers(method: str, path: str, **kwargs: Any) -> dict[str, Any]:
@@ -145,7 +145,7 @@ def test_health_tail_branches() -> None:
         raise AssertionError(path)
 
     register_health_tools(mcp, api_error_on_providers)
-    providers_error = mcp.tools["sourceharbor.health.get"](scope="providers")
+    providers_error = mcp.tools["brewme.health.get"](scope="providers")
     assert providers_error["code"] == "UPSTREAM"
 
 
@@ -198,31 +198,31 @@ def test_jobs_tail_branches() -> None:
 
     register_job_tools(mcp, fake_api_call)
 
-    get_ok = mcp.tools["sourceharbor.jobs.get"](job_id=UUID_1.upper())
+    get_ok = mcp.tools["brewme.jobs.get"](job_id=UUID_1.upper())
     assert get_ok["id"] == "job-1"
 
-    compare_ok = mcp.tools["sourceharbor.jobs.compare"](job_id=UUID_1.upper())
+    compare_ok = mcp.tools["brewme.jobs.compare"](job_id=UUID_1.upper())
     assert compare_ok["job_id"] == "job-1"
     assert compare_ok["stats"]["changed"] is True
 
-    list_ok = mcp.tools["sourceharbor.videos.list"](platform="youtube")
+    list_ok = mcp.tools["brewme.videos.list"](platform="youtube")
     assert list_ok["items"] == []
 
-    bad_video_shape = mcp.tools["sourceharbor.videos.process"](video="bad")
+    bad_video_shape = mcp.tools["brewme.videos.process"](video="bad")
     assert bad_video_shape["code"] == "INVALID_ARGUMENT"
 
-    bad_compare_id = mcp.tools["sourceharbor.jobs.compare"](job_id="bad")
+    bad_compare_id = mcp.tools["brewme.jobs.compare"](job_id="bad")
     assert bad_compare_id["code"] == "INVALID_ARGUMENT"
 
-    missing_platform = mcp.tools["sourceharbor.videos.process"](
+    missing_platform = mcp.tools["brewme.videos.process"](
         video={"url": "https://example.com"}
     )
     assert missing_platform["details"]["field"] == "video.platform"
 
-    missing_url = mcp.tools["sourceharbor.videos.process"](video={"platform": "youtube"})
+    missing_url = mcp.tools["brewme.videos.process"](video={"platform": "youtube"})
     assert missing_url["details"]["field"] == "video.url"
 
-    bad_override_value = mcp.tools["sourceharbor.videos.process"](
+    bad_override_value = mcp.tools["brewme.videos.process"](
         video={"platform": "youtube", "url": "https://example.com"},
         overrides={"llm": "bad"},
     )
@@ -250,7 +250,7 @@ def test_notifications_tail_branches() -> None:
         raise AssertionError(path)
 
     register_notification_tools(mcp, fake_api_call)
-    payload = mcp.tools["sourceharbor.notifications.manage"](action="daily_send")
+    payload = mcp.tools["brewme.notifications.manage"](action="daily_send")
     assert payload["code"] == "UPSTREAM"
 
 
@@ -276,10 +276,10 @@ def test_knowledge_tail_branches() -> None:
         ],
     )
 
-    bad_job_id = mcp.tools["sourceharbor.knowledge.cards.list"](job_id="bad")
+    bad_job_id = mcp.tools["brewme.knowledge.cards.list"](job_id="bad")
     assert bad_job_id["code"] == "INVALID_ARGUMENT"
 
-    payload = mcp.tools["sourceharbor.knowledge.cards.list"](
+    payload = mcp.tools["brewme.knowledge.cards.list"](
         job_id=UUID_1,
         video_id=UUID_2,
         card_type="takeaway",
@@ -324,16 +324,16 @@ def test_feed_tail_branches() -> None:
 
     register_feed_tools(mcp, fake_api_call)
 
-    bad_subscription = mcp.tools["sourceharbor.feed.digests.list"](subscription_id="bad")
+    bad_subscription = mcp.tools["brewme.feed.digests.list"](subscription_id="bad")
     assert bad_subscription["code"] == "INVALID_ARGUMENT"
 
-    bad_feedback = mcp.tools["sourceharbor.feed.digests.list"](feedback="wrong")
+    bad_feedback = mcp.tools["brewme.feed.digests.list"](feedback="wrong")
     assert bad_feedback["code"] == "INVALID_ARGUMENT"
 
-    bad_sort = mcp.tools["sourceharbor.feed.digests.list"](sort="wrong")
+    bad_sort = mcp.tools["brewme.feed.digests.list"](sort="wrong")
     assert bad_sort["code"] == "INVALID_ARGUMENT"
 
-    payload = mcp.tools["sourceharbor.feed.digests.list"](
+    payload = mcp.tools["brewme.feed.digests.list"](
         source="youtube",
         category="tech",
         feedback="useful",
@@ -351,18 +351,18 @@ def test_subscriptions_tail_branches() -> None:
     mcp = _FakeMCP()
     register_subscription_tools(mcp, lambda *_args, **_kwargs: {"ok": True})
 
-    missing_manual_input = mcp.tools["sourceharbor.subscriptions.manage"](action="manual_intake")
+    missing_manual_input = mcp.tools["brewme.subscriptions.manage"](action="manual_intake")
     assert missing_manual_input["details"]["field"] == "source_value"
 
-    bad_batch = mcp.tools["sourceharbor.subscriptions.manage"](
+    bad_batch = mcp.tools["brewme.subscriptions.manage"](
         action="batch_update_category", ids=["bad"]
     )
     assert bad_batch["code"] == "INVALID_ARGUMENT"
 
-    missing_remove_id = mcp.tools["sourceharbor.subscriptions.manage"](action="remove")
+    missing_remove_id = mcp.tools["brewme.subscriptions.manage"](action="remove")
     assert missing_remove_id["details"]["field"] == "id"
 
-    bad_action = mcp.tools["sourceharbor.subscriptions.manage"](action="unknown")
+    bad_action = mcp.tools["brewme.subscriptions.manage"](action="unknown")
     assert bad_action["code"] == "INVALID_ARGUMENT"
 
 
@@ -372,7 +372,7 @@ def test_ui_audit_tail_branches() -> None:
 
     run_mcp = _FakeMCP()
     register_ui_audit_tools(run_mcp, lambda *_args, **_kwargs: {"ok": True})
-    run_invalid = run_mcp.tools["sourceharbor.ui_audit.run"](job_id="bad")
+    run_invalid = run_mcp.tools["brewme.ui_audit.run"](job_id="bad")
     assert run_invalid["code"] == "INVALID_ARGUMENT"
 
     mcp = _FakeMCP()
@@ -397,20 +397,20 @@ def test_ui_audit_tail_branches() -> None:
 
     register_ui_audit_tools(mcp, fake_api_call)
 
-    list_error = mcp.tools["sourceharbor.ui_audit.read"](action="list_findings", run_id=run_id)
+    list_error = mcp.tools["brewme.ui_audit.read"](action="list_findings", run_id=run_id)
     assert list_error["code"] == "UPSTREAM"
 
-    missing_key = mcp.tools["sourceharbor.ui_audit.read"](
+    missing_key = mcp.tools["brewme.ui_audit.read"](
         action="get_artifact", run_id=run_id, key=None
     )
     assert missing_key["code"] == "INVALID_ARGUMENT"
 
-    bad_key = mcp.tools["sourceharbor.ui_audit.read"](
+    bad_key = mcp.tools["brewme.ui_audit.read"](
         action="get_artifact", run_id=run_id, key="../x"
     )
     assert bad_key["code"] == "INVALID_ARGUMENT"
 
-    passthrough_error = mcp.tools["sourceharbor.ui_audit.read"](
+    passthrough_error = mcp.tools["brewme.ui_audit.read"](
         action="get_artifact",
         run_id=run_id,
         key="bad/error.json",
@@ -418,10 +418,10 @@ def test_ui_audit_tail_branches() -> None:
     )
     assert passthrough_error["code"] == "UPSTREAM"
 
-    no_base64 = mcp.tools["sourceharbor.ui_audit.read"](
+    no_base64 = mcp.tools["brewme.ui_audit.read"](
         action="get_artifact", run_id=run_id, key="axe.json"
     )
     assert no_base64["base64"] is None
 
-    invalid_action = mcp.tools["sourceharbor.ui_audit.read"](action="unknown", run_id=run_id)
+    invalid_action = mcp.tools["brewme.ui_audit.read"](action="unknown", run_id=run_id)
     assert invalid_action["code"] == "INVALID_ARGUMENT"

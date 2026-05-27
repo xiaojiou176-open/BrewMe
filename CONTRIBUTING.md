@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for contributing to SourceHarbor.
+Thank you for contributing to BrewMe.
 
 ## Development Workflow
 

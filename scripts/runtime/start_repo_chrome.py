@@ -18,7 +18,7 @@ if str(ROOT / "scripts" / "governance") not in sys.path:
     sys.path.insert(0, str(ROOT / "scripts" / "governance"))
 
 from common import write_json_artifact  # noqa: E402
-from sourceharbor_chrome import (  # noqa: E402
+from brewme_chrome import (  # noqa: E402
     MAX_MACHINE_CHROME_INSTANCES,
     build_launch_command,
     cdp_url,
@@ -41,7 +41,7 @@ def _report_path(repo_root: Path) -> Path:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Start SourceHarbor's dedicated Chrome instance on the repo-owned isolated user data root."
+        description="Start BrewMe's dedicated Chrome instance on the repo-owned isolated user data root."
     )
     parser.add_argument("--user-data-dir", default="")
     parser.add_argument("--profile-dir", default=default_profile_dir())

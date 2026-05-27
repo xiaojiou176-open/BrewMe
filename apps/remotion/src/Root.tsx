@@ -1,13 +1,13 @@
 import "./index.css";
 import { Composition } from "remotion";
-import { SourceHarborFrontDoor } from "./SourceHarborFrontDoor";
+import { BrewMeFrontDoor } from "./BrewMeFrontDoor";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
       <Composition
-        id="SourceHarborFrontDoor"
-        component={SourceHarborFrontDoor}
+        id="BrewMeFrontDoor"
+        component={BrewMeFrontDoor}
         durationInFrames={480}
         fps={30}
         width={1280}

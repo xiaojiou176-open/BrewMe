@@ -806,7 +806,7 @@
   },
   "tools": [
     {
-      "name": "sourceharbor.jobs.get",
+      "name": "brewme.jobs.get",
       "http": {
         "method": "GET",
         "path": "/api/v1/jobs/{job_id}"
@@ -1001,7 +1001,7 @@
       }
     },
     {
-      "name": "sourceharbor.jobs.compare",
+      "name": "brewme.jobs.compare",
       "http": {
         "method": "GET",
         "path": "/api/v1/jobs/{job_id}/compare"
@@ -1077,7 +1077,7 @@
       }
     },
     {
-      "name": "sourceharbor.feed.digests.list",
+      "name": "brewme.feed.digests.list",
       "http": {
         "method": "GET",
         "path": "/api/v1/feed/digests"
@@ -1251,7 +1251,7 @@
       }
     },
     {
-      "name": "sourceharbor.knowledge.cards.list",
+      "name": "brewme.knowledge.cards.list",
       "http": {
         "method": "GET",
         "path": "/api/v1/knowledge/cards"
@@ -1379,7 +1379,7 @@
       }
     },
     {
-      "name": "sourceharbor.videos.list",
+      "name": "brewme.videos.list",
       "http": {
         "method": "GET",
         "path": "/api/v1/videos"
@@ -1425,7 +1425,7 @@
       }
     },
     {
-      "name": "sourceharbor.videos.process",
+      "name": "brewme.videos.process",
       "http": {
         "method": "POST",
         "path": "/api/v1/videos/process"
@@ -1536,7 +1536,7 @@
       }
     },
     {
-      "name": "sourceharbor.retrieval.search",
+      "name": "brewme.retrieval.search",
       "http": {
         "method": "POST",
         "path": "/api/v1/retrieval/search"
@@ -1613,7 +1613,7 @@
       }
     },
     {
-      "name": "sourceharbor.workflows.run",
+      "name": "brewme.workflows.run",
       "http": {
         "method": "POST",
         "path": "/api/v1/workflows/run"
@@ -1723,7 +1723,7 @@
       }
     },
     {
-      "name": "sourceharbor.ingest.poll",
+      "name": "brewme.ingest.poll",
       "http": {
         "method": "POST",
         "path": "/api/v1/ingest/poll"
@@ -1837,7 +1837,7 @@
       }
     },
     {
-      "name": "sourceharbor.ingest.runs.list",
+      "name": "brewme.ingest.runs.list",
       "http": {
         "method": "GET",
         "path": "/api/v1/ingest/runs"
@@ -1981,7 +1981,7 @@
       }
     },
     {
-      "name": "sourceharbor.ingest.runs.get",
+      "name": "brewme.ingest.runs.get",
       "http": {
         "method": "GET",
         "path": "/api/v1/ingest/runs/{run_id}"
@@ -2240,7 +2240,7 @@
       }
     },
     {
-      "name": "sourceharbor.reports.daily_send",
+      "name": "brewme.reports.daily_send",
       "http": {
         "method": "POST",
         "path": "/api/v1/reports/daily/send"
@@ -2334,7 +2334,7 @@
       }
     },
     {
-      "name": "sourceharbor.computer_use.run",
+      "name": "brewme.computer_use.run",
       "http": {
         "method": "POST",
         "path": "/api/v1/computer-use/run"
@@ -2425,7 +2425,7 @@
       }
     },
     {
-      "name": "sourceharbor.ui_audit.run",
+      "name": "brewme.ui_audit.run",
       "http": {
         "method": "POST",
         "path": "/api/v1/ui-audit/run"
@@ -2468,7 +2468,7 @@
       }
     },
     {
-      "name": "sourceharbor.health.get",
+      "name": "brewme.health.get",
       "http": {
         "method": "POST",
         "path": "/api/v1/mcp/virtual/health/get"
@@ -2506,7 +2506,7 @@
       }
     },
     {
-      "name": "sourceharbor.subscriptions.manage",
+      "name": "brewme.subscriptions.manage",
       "http": {
         "method": "POST",
         "path": "/api/v1/mcp/virtual/subscriptions/manage"
@@ -2593,7 +2593,7 @@
       }
     },
     {
-      "name": "sourceharbor.notifications.manage",
+      "name": "brewme.notifications.manage",
       "http": {
         "method": "POST",
         "path": "/api/v1/mcp/virtual/notifications/manage"
@@ -2671,7 +2671,7 @@
       }
     },
     {
-      "name": "sourceharbor.artifacts.get",
+      "name": "brewme.artifacts.get",
       "http": {
         "method": "POST",
         "path": "/api/v1/mcp/virtual/artifacts/get"
@@ -2718,7 +2718,7 @@
       }
     },
     {
-      "name": "sourceharbor.ui_audit.read",
+      "name": "brewme.ui_audit.read",
       "http": {
         "method": "POST",
         "path": "/api/v1/mcp/virtual/ui-audit/read"

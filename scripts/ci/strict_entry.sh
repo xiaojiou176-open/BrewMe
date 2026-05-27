@@ -8,7 +8,7 @@ SCRIPT_NAME="strict_ci_entry"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "governance" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/governance/strict-ci-entry.jsonl"
+brewme_log_init "governance" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/governance/strict-ci-entry.jsonl"
 
 MODE=""
 DEBUG_BUILD="0"
@@ -46,7 +46,7 @@ while (($# > 0)); do
 done
 
 [[ -n "$MODE" ]] || { usage >&2; exit 2; }
-sourceharbor_log info strict_ci_entry_start "mode=$MODE debug_build=$DEBUG_BUILD"
+brewme_log info strict_ci_entry_start "mode=$MODE debug_build=$DEBUG_BUILD"
 
 quoted_forward_args() {
   if ((${#forward_args[@]} == 0)); then
@@ -60,18 +60,18 @@ FORWARDED_ARGS="$(quoted_forward_args || true)"
 run_inside_standard_env() {
   local command=("$@")
   if [[ "${SOURCE_HARBOR_IN_STANDARD_ENV:-0}" == "1" ]]; then
-    sourceharbor_log info strict_ci_entry_passthrough "already inside standard env"
+    brewme_log info strict_ci_entry_passthrough "already inside standard env"
     "${command[@]}"
     return $?
   fi
 
   if [[ "$DEBUG_BUILD" == "1" ]]; then
-    sourceharbor_log info strict_ci_entry_diagnostic_mode "using debug-build diagnostic path"
+    brewme_log info strict_ci_entry_diagnostic_mode "using debug-build diagnostic path"
     SOURCE_HARBOR_STANDARD_ENV_ALLOW_LOCAL_BUILD="1" "$ROOT_DIR/scripts/ci/run_in_standard_env.sh" "${command[@]}"
     return $?
   fi
 
-  sourceharbor_log info strict_ci_entry_release_qualifying "using pinned-image release-qualifying path"
+  brewme_log info strict_ci_entry_release_qualifying "using pinned-image release-qualifying path"
   "$ROOT_DIR/scripts/ci/run_in_standard_env.sh" "${command[@]}"
   return $?
 }
@@ -132,8 +132,8 @@ if ! case "$MODE" in
     exit 2
     ;;
 esac; then
-  sourceharbor_log error complete "FAIL"
+  brewme_log error complete "FAIL"
   exit 1
 fi
 
-sourceharbor_log info complete "PASS"
+brewme_log info complete "PASS"

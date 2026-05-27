@@ -1,5 +1,5 @@
 {
-  "name": "sourceharbor-cwv-budget",
+  "name": "brewme-cwv-budget",
   "version": 1,
   "budgets": {
     "lcp_ms_p75": 2500,

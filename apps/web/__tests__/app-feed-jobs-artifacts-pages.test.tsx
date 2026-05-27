@@ -80,7 +80,7 @@ describe("feed/jobs/artifacts pages", () => {
 		vi.clearAllMocks();
 		mockListSubscriptions.mockResolvedValue([]);
 		mockGetJobEvidenceBundle.mockResolvedValue({
-			bundle_kind: "sourceharbor_job_evidence_bundle_v1",
+			bundle_kind: "brewme_job_evidence_bundle_v1",
 			sharing_scope: "internal",
 			sample: false,
 			generated_at: "2026-04-21T10:00:00Z",
@@ -433,7 +433,7 @@ describe("feed/jobs/artifacts pages", () => {
 				meta: { job: { id: "job-reading-1" }, frame_files: [] },
 			});
 			mockGetJobEvidenceBundle.mockResolvedValue({
-				bundle_kind: "sourceharbor_job_evidence_bundle_v1",
+				bundle_kind: "brewme_job_evidence_bundle_v1",
 				sharing_scope: "internal",
 				sample: false,
 				generated_at: "2026-04-21T10:00:00Z",
@@ -860,7 +860,7 @@ describe("feed/jobs/artifacts pages", () => {
 				},
 			]);
 			mockGetJobEvidenceBundle.mockResolvedValue({
-				bundle_kind: "sourceharbor_job_evidence_bundle_v1",
+				bundle_kind: "brewme_job_evidence_bundle_v1",
 				sharing_scope: "internal",
 				sample: false,
 				generated_at: "2026-04-21T10:00:00Z",

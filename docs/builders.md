@@ -1,6 +1,6 @@
-# Build With SourceHarbor
+# Build With BrewMe
 
-SourceHarbor is the builder side of the same reader-first knowledge system.
+BrewMe is the builder side of the same reader-first knowledge system.
 
 It already exposes six real builder-facing layers:
 
@@ -31,7 +31,7 @@ The safest way to read this page is:
 
 ## Skill Applicability Matrix
 
-Use this before you describe SourceHarbor as a "skill" anything:
+Use this before you describe BrewMe as a "skill" anything:
 
 | Surface | Skill-repo criteria apply? | Honest wording |
 | --- | --- | --- |
@@ -43,7 +43,7 @@ Use this before you describe SourceHarbor as a "skill" anything:
 
 If a newcomer only reads the builder docs, the safe takeaway should be:
 
-- SourceHarbor the repo is the product home for multiple surfaces
+- BrewMe the repo is the product home for multiple surfaces
 - starter packs are one adoption layer inside that repo
 - internal `.agents/skills` stay internal
 
@@ -51,11 +51,11 @@ If a newcomer only reads the builder docs, the safe takeaway should be:
 
 | Surface | Best fit today | Why |
 | --- | --- | --- |
-| **Codex** | Primary fit | SourceHarbor already exposes a real MCP server plus operator-safe HTTP contracts |
+| **Codex** | Primary fit | BrewMe already exposes a real MCP server plus operator-safe HTTP contracts |
 | **GitHub Copilot** | Primary fit | It can reuse the same MCP and HTTP truth, and the repo now ships a real source-installable plugin bundle |
 | **Claude Code** | Primary fit | Same MCP surface, same API-backed state, same retrieval and job evidence |
 | **VS Code agent workflows** | Primary fit | They can reuse the same MCP and HTTP truth, and the repo now ships a real source-installable plugin bundle |
-| **Repo-local CLI users** | Primary fit | `./bin/sourceharbor help` gives one discoverable facade over the real `bin/*` entrypoints without duplicating business logic |
+| **Repo-local CLI users** | Primary fit | `./bin/brewme help` gives one discoverable facade over the real `bin/*` entrypoints without duplicating business logic |
 | **Custom MCP clients** | Primary fit | `./bin/dev-mcp` starts a real FastMCP server over the current pipeline |
 | **Direct HTTP builders** | Primary fit | The repo already carries a public OpenAPI contract and typed client helpers |
 | **OpenHands / OpenCode** | Secondary fit | They are ecosystem-adjacent if you integrate through MCP or HTTP, but they are not the main front door today |
@@ -88,29 +88,29 @@ Representative routes:
 
 Representative tools:
 
-- `sourceharbor.subscriptions.manage` with `action=list_vendor_signals`
-- `sourceharbor.jobs.get`
-- `sourceharbor.jobs.compare`
-- `sourceharbor.knowledge.cards.list`
-- `sourceharbor.retrieval.search`
-- `sourceharbor.ingest.poll`
+- `brewme.subscriptions.manage` with `action=list_vendor_signals`
+- `brewme.jobs.get`
+- `brewme.jobs.compare`
+- `brewme.knowledge.cards.list`
+- `brewme.retrieval.search`
+- `brewme.ingest.poll`
 
 ### 3. Packaged Public CLI
 
 If you want one installable command surface first:
 
 ```bash
-npm install --global ./packages/sourceharbor-cli
-cd /path/to/sourceharbor
-sourceharbor help
-sourceharbor mcp
+npm install --global ./packages/brewme-cli
+cd /path/to/brewme
+brewme help
+brewme mcp
 ```
 
 Current truth:
 
-- package path: [`packages/sourceharbor-cli`](../packages/sourceharbor-cli/README.md)
+- package path: [`packages/brewme-cli`](../packages/brewme-cli/README.md)
 - it is a **thin repo-aware public wrapper**
-- inside a checkout it delegates to the repo-local `bin/sourceharbor`
+- inside a checkout it delegates to the repo-local `bin/brewme`
 - it does not replace the repo-local runtime manager
 - outside a checkout it falls back to public docs guidance instead of inventing a second runtime stack
 
@@ -118,11 +118,11 @@ Current truth:
 
 These remain the direct command truth:
 
-- `./bin/sourceharbor help`
-- `./bin/sourceharbor bootstrap`
-- `./bin/sourceharbor full-stack up`
-- `./bin/sourceharbor doctor`
-- `./bin/sourceharbor mcp`
+- `./bin/brewme help`
+- `./bin/brewme bootstrap`
+- `./bin/brewme full-stack up`
+- `./bin/brewme doctor`
+- `./bin/brewme mcp`
 
 The packaged CLI above does not replace this substrate. It only makes it easier
 to discover and reuse.
@@ -132,12 +132,12 @@ to discover and reuse.
 If you want a public, typed HTTP client first:
 
 ```bash
-npm install ./packages/sourceharbor-sdk
+npm install ./packages/brewme-sdk
 ```
 
 Package path:
 
-- [`packages/sourceharbor-sdk`](../packages/sourceharbor-sdk/README.md)
+- [`packages/brewme-sdk`](../packages/brewme-sdk/README.md)
 
 Current truth:
 
@@ -160,12 +160,12 @@ If you want public templates instead of internal raw skills:
 
 If you need artifacts closer to public distribution than a starter README, open:
 
-- [`starter-packs/codex/sourceharbor-codex-plugin/README.md`](../starter-packs/codex/sourceharbor-codex-plugin/README.md)
-- [`starter-packs/github-copilot/sourceharbor-github-copilot-plugin/README.md`](../starter-packs/github-copilot/sourceharbor-github-copilot-plugin/README.md)
-- [`starter-packs/claude-code/sourceharbor-claude-plugin/README.md`](../starter-packs/claude-code/sourceharbor-claude-plugin/README.md)
-- [`starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/README.md`](../starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/README.md)
+- [`starter-packs/codex/brewme-codex-plugin/README.md`](../starter-packs/codex/brewme-codex-plugin/README.md)
+- [`starter-packs/github-copilot/brewme-github-copilot-plugin/README.md`](../starter-packs/github-copilot/brewme-github-copilot-plugin/README.md)
+- [`starter-packs/claude-code/brewme-claude-plugin/README.md`](../starter-packs/claude-code/brewme-claude-plugin/README.md)
+- [`starter-packs/vscode-agent/brewme-vscode-agent-plugin/README.md`](../starter-packs/vscode-agent/brewme-vscode-agent-plugin/README.md)
 - [`starter-packs/openclaw/clawhub.package.template.json`](../starter-packs/openclaw/clawhub.package.template.json)
-- [`starter-packs/mcp-registry/sourceharbor-server.template.json`](../starter-packs/mcp-registry/sourceharbor-server.template.json)
+- [`starter-packs/mcp-registry/brewme-server.template.json`](../starter-packs/mcp-registry/brewme-server.template.json)
 - [`config/public/mcp-directory-profile.json`](../config/public/mcp-directory-profile.json)
 - [`docs/public-distribution.md`](./public-distribution.md)
 
@@ -176,7 +176,7 @@ Current truth:
 - **Claude Code**: the bundle is submission-ready for the official marketplace path, but live listing still depends on Anthropic review.
 - **VS Code agent workflows**: the repo now ships a source-installable plugin bundle for agent workflows, but live Marketplace listing still remains a separate proof layer.
 - **OpenClaw**: the local pack remains first-cut, while the ClawHub package template is the strongest publish-ready artifact the repo can ship today.
-- **MCP**: the root Python package now produces the real `sourceharbor-mcp` install artifact, and the registry template points at the PyPI identifier `sourceharbor`; the exact live PyPI / Official MCP Registry snapshot now stays in [`docs/public-distribution.md`](./public-distribution.md) so this builder guide does not duplicate fast-moving version or listing state.
+- **MCP**: the root Python package now produces the real `brewme-mcp` install artifact, and the registry template points at the PyPI identifier `brewme`; the exact live PyPI / Official MCP Registry snapshot now stays in [`docs/public-distribution.md`](./public-distribution.md) so this builder guide does not duplicate fast-moving version or listing state.
 
 ## Container Truth For Builders
 
@@ -186,8 +186,8 @@ Do not treat every container surface as builder distribution:
 | --- | --- | --- |
 | `infra/compose/core-services.compose.yml` | repo-local core runtime helpers | local boot aid only |
 | `.devcontainer/devcontainer.json` | contributor workspace parity | development environment only |
-| `ghcr.io/xiaojiou176-open/sourceharbor-api` | dedicated API image route | product-facing API container lane; the product package now reads back as `visibility: public`, but it still stays a separate API-image builder surface rather than the default install story |
-| `ghcr.io/xiaojiou176-open/sourceharbor-ci-standard` | strict CI and devcontainer parity image | infrastructure image, **not** newcomer-facing product container distribution |
+| `ghcr.io/xiaojiou176-open/brewme-api` | dedicated API image route | product-facing API container lane; the product package now reads back as `visibility: public`, but it still stays a separate API-image builder surface rather than the default install story |
+| `ghcr.io/xiaojiou176-open/brewme-ci-standard` | strict CI and devcontainer parity image | infrastructure image, **not** newcomer-facing product container distribution |
 
 The actual newcomer-facing builder surfaces are MCP, HTTP API, packaged CLI,
 TypeScript SDK, starter packs, and plugin-grade bundles.

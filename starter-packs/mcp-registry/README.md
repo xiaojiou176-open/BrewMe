@@ -1,14 +1,14 @@
-# SourceHarbor MCP Registry Submission Template
+# BrewMe MCP Registry Submission Template
 
 This directory holds the official MCP Registry metadata template for
-SourceHarbor.
+BrewMe.
 
 Use it when you want:
 
 - a current `server.json` draft shaped for the official MCP Registry
 - a single place to keep namespace, package, and environment-variable metadata
 - a shared canonical profile you can also reuse for `MCP.so`, `PulseMCP`, and `mcpservers.org`
-- the real Python package lane that produces `sourceharbor-mcp`
+- the real Python package lane that produces `brewme-mcp`
 - an honest reminder that MCP Registry publication still depends on a public
   install method and verified namespace ownership
 
@@ -18,7 +18,7 @@ What this is:
 
 What this is not:
 
-- proof that SourceHarbor is already published in the official MCP Registry
+- proof that BrewMe is already published in the official MCP Registry
 - proof that the package identifier below is already live on PyPI
 
 Current boundary:

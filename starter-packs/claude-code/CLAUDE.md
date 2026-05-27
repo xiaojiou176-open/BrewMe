@@ -1,4 +1,4 @@
-# SourceHarbor Claude Code Pack
+# BrewMe Claude Code Pack
 
 This public pack points at the same surface documented in `docs/compat/claude-code.md`.
 
@@ -11,5 +11,5 @@ Use it when you want:
 Start here:
 
 - `docs/compat/claude-code.md`
-- `templates/public-skills/claude-code/sourceharbor-watchlist-briefing.md`
+- `templates/public-skills/claude-code/brewme-watchlist-briefing.md`
 - `examples/sdk/search.ts`

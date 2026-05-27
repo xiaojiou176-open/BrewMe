@@ -1,10 +1,10 @@
-# SourceHarbor Remotion
+# BrewMe Remotion
 
-This package is the first programmable promo-video lane for SourceHarbor.
+This package is the first programmable promo-video lane for BrewMe.
 
 Current composition:
 
-- `SourceHarborFrontDoor`
+- `BrewMeFrontDoor`
 
 Current story arc:
 
@@ -17,7 +17,7 @@ Current proof assets used by the composition:
 
 - `public/desktop-home-clean.png`
 - `public/desktop-feed-clean.png`
-- `public/sourceharbor-social-preview.png`
+- `public/brewme-social-preview.png`
 
 ## Commands
 

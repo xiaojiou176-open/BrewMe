@@ -4,7 +4,7 @@ import {
 	isSensitiveQueryKey,
 	type QueryValue,
 	sanitizeExternalUrl,
-} from "@sourceharbor/sdk";
+} from "@brewme/sdk";
 
 type ResolveOptions = {
 	allowFallback?: boolean;

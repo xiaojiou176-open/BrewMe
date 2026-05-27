@@ -57,10 +57,10 @@ PY
 
   local -a allowed_prefixes=(
     "$ROOT_DIR/.runtime-cache"
-    "/tmp/sourceharbor"
-    "/tmp/sourceharbor"
-    "/private/tmp/sourceharbor"
-    "/private/tmp/sourceharbor"
+    "/tmp/brewme"
+    "/tmp/brewme"
+    "/private/tmp/brewme"
+    "/private/tmp/brewme"
   )
   local prefix
   for prefix in "${allowed_prefixes[@]}"; do
@@ -71,7 +71,7 @@ PY
   done
   echo "[start_ops_workflows] ${name} is outside allowed cleanup prefixes: $resolved" >&2
   echo "[start_ops_workflows] repo-side cleanup must stay under: $ROOT_DIR/.runtime-cache" >&2
-  echo "[start_ops_workflows] operator-side overrides may use: /tmp/sourceharbor* or /tmp/sourceharbor* (including /private/tmp resolved paths)" >&2
+  echo "[start_ops_workflows] operator-side overrides may use: /tmp/brewme* or /tmp/brewme* (including /private/tmp resolved paths)" >&2
   echo "[start_ops_workflows] allowed prefixes: ${allowed_prefixes[*]}" >&2
   exit 2
 }

@@ -1,6 +1,6 @@
 # Public Proof
 
-SourceHarbor should not rely on vibes, adjectives, or hidden test folders to justify its public story.
+BrewMe should not rely on vibes, adjectives, or hidden test folders to justify its public story.
 
 This page defines the public proof ladder.
 
@@ -19,14 +19,14 @@ These prove that the public narrative maps to visible product surfaces:
 - [docs/runtime-truth.md](./runtime-truth.md)
 - [docs/architecture.md](./architecture.md)
 - [docs/mcp-quickstart.md](./mcp-quickstart.md)
-- `./bin/sourceharbor help`
+- `./bin/brewme help`
 - the web reader routes, including the reader frontstage at `/reader`
 - the API route map
 - the MCP tool map
 
 What this layer answers:
 
-- What does SourceHarbor do?
+- What does BrewMe do?
 - What can a new operator see?
 - What surfaces exist for humans and agents?
 
@@ -180,10 +180,10 @@ plugin-first positioning, read
 
 These are fair claims:
 
-- SourceHarbor is a source-first engineering repository
-- SourceHarbor exposes API, MCP, web, and worker surfaces
-- SourceHarbor can be run locally and inspected end to end
-- SourceHarbor has step-level job evidence and artifact access
+- BrewMe is a source-first engineering repository
+- BrewMe exposes API, MCP, web, and worker surfaces
+- BrewMe can be run locally and inspected end to end
+- BrewMe has step-level job evidence and artifact access
 
 These require stronger evidence:
 
@@ -194,13 +194,13 @@ These require stronger evidence:
 
 Tracked manifests and public presentation assets are inputs to this layer, not proof on their own.
 
-Historical planning ledgers are archived execution context only. They can explain how the repo arrived here, but they must not be treated as the current public truth for SourceHarbor.
+Historical planning ledgers are archived execution context only. They can explain how the repo arrived here, but they must not be treated as the current public truth for BrewMe.
 
 For the shortest current-state summary of what is shipped, what is still gated, and what remains future direction, read [project-status.md](./project-status.md).
 
 ## Short Version
 
-SourceHarbor can be boldly presented, but it must stay truthful:
+BrewMe can be boldly presented, but it must stay truthful:
 
 - **sell the result first**
 - **show the proof right after**

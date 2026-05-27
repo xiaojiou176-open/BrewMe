@@ -2,7 +2,7 @@
 
 Everything in this folder is **sample data**.
 
-It exists to help people understand what SourceHarbor looks like without pretending these files are current live production results.
+It exists to help people understand what BrewMe looks like without pretending these files are current live production results.
 
 Use these assets for:
 

@@ -15,7 +15,7 @@ def test_job_bundle_route_returns_bundle(monkeypatch) -> None:
 
         def build_evidence_bundle(self, *, job_id):  # noqa: ANN001
             return {
-                "bundle_kind": "sourceharbor_job_evidence_bundle_v1",
+                "bundle_kind": "brewme_job_evidence_bundle_v1",
                 "sharing_scope": "internal",
                 "sample": False,
                 "generated_at": "2026-03-31T10:00:00Z",
@@ -34,7 +34,7 @@ def test_job_bundle_route_returns_bundle(monkeypatch) -> None:
         JobsService,
         "build_evidence_bundle",
         lambda self, job_id: {  # noqa: ARG005
-            "bundle_kind": "sourceharbor_job_evidence_bundle_v1",
+            "bundle_kind": "brewme_job_evidence_bundle_v1",
             "sharing_scope": "internal",
             "sample": False,
             "generated_at": "2026-03-31T10:00:00Z",
@@ -62,7 +62,7 @@ def test_job_bundle_route_returns_bundle(monkeypatch) -> None:
     response = client.get("/api/v1/jobs/11111111-1111-1111-1111-111111111111/bundle")
 
     assert response.status_code == 200
-    assert response.json()["bundle_kind"] == "sourceharbor_job_evidence_bundle_v1"
+    assert response.json()["bundle_kind"] == "brewme_job_evidence_bundle_v1"
 
 
 def test_job_bundle_route_returns_404_when_bundle_is_missing(monkeypatch) -> None:

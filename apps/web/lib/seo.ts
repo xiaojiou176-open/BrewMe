@@ -22,7 +22,7 @@ type SeoRoute =
 	| "useCases";
 
 const CORE_KEYWORDS = [
-	"SourceHarbor",
+	"BrewMe",
 	"reader-first source intelligence",
 	"AI knowledge pipeline",
 	"source-first AI workflow",
@@ -63,7 +63,7 @@ const ROUTE_PATHS: Record<SeoRoute, string> = {
 };
 
 const DEFAULT_SOCIAL_PREVIEW_IMAGE =
-	"https://raw.githubusercontent.com/xiaojiou176-open/sourceharbor/main/docs/assets/sourceharbor-social-preview.png";
+	"https://raw.githubusercontent.com/xiaojiou176-open/brewme/main/docs/assets/brewme-social-preview.png";
 
 const ROUTE_KEYWORDS: Record<SeoRoute, string[]> = {
 	dashboard: [
@@ -206,11 +206,11 @@ export function buildAppShellMetadata(): Metadata {
 	const socialPreviewImage = resolveSocialPreviewImage();
 	return {
 		title: {
-			default: "SourceHarbor Front Door",
-			template: "%s | SourceHarbor",
+			default: "BrewMe Front Door",
+			template: "%s | BrewMe",
 		},
 		metadataBase: siteUrl,
-		applicationName: "SourceHarbor",
+		applicationName: "BrewMe",
 		description:
 			"Reader-first front door for source-universe intake, digest curation, published reader documents, and builder entry through MCP and HTTP API.",
 		keywords: dedupeKeywords([
@@ -225,24 +225,24 @@ export function buildAppShellMetadata(): Metadata {
 			follow: true,
 		},
 		openGraph: {
-			title: "SourceHarbor Front Door",
+			title: "BrewMe Front Door",
 			description:
 				"Reader-first front door for source-universe intake, digest curation, published reader documents, and builder entry through MCP and HTTP API.",
 			type: "website",
-			siteName: "SourceHarbor",
+			siteName: "BrewMe",
 			url: canonical,
 			images: [
 				{
 					url: socialPreviewImage,
 					width: 1200,
 					height: 630,
-					alt: "SourceHarbor social preview",
+					alt: "BrewMe social preview",
 				},
 			],
 		},
 		twitter: {
 			card: "summary_large_image",
-			title: "SourceHarbor Front Door",
+			title: "BrewMe Front Door",
 			description:
 				"Reader-first front door for source-universe intake, digest curation, published reader documents, and builder entry through MCP and HTTP API.",
 			images: [socialPreviewImage],
@@ -276,7 +276,7 @@ export function buildProductMetadata({
 		title,
 		description,
 		metadataBase: siteUrl,
-		applicationName: "SourceHarbor",
+		applicationName: "BrewMe",
 		keywords: mergedKeywords,
 		category: "software",
 		alternates: canonical ? { canonical } : undefined,
@@ -288,14 +288,14 @@ export function buildProductMetadata({
 			title,
 			description,
 			type: "website",
-			siteName: "SourceHarbor",
+			siteName: "BrewMe",
 			url: canonical,
 			images: [
 				{
 					url: socialPreviewImage,
 					width: 1200,
 					height: 630,
-					alt: "SourceHarbor social preview",
+					alt: "BrewMe social preview",
 				},
 			],
 		},

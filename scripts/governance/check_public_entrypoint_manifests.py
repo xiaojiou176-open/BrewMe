@@ -20,7 +20,7 @@ MANAGED_BUT_NOT_PUBLIC = {
 }
 REQUIRED_SNIPPETS = (
     'source "$ROOT_DIR/scripts/runtime/entrypoint.sh"',
-    "sourceharbor_entrypoint_bootstrap",
+    "brewme_entrypoint_bootstrap",
 )
 
 

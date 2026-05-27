@@ -20,11 +20,11 @@ def _ensure_required_worker_env(
     monkeypatch.setenv("SQLITE_PATH", str((env_root / "state.db").resolve()))
     monkeypatch.setenv(
         "DATABASE_URL",
-        "postgresql+psycopg://postgres:postgres@localhost:5432/sourceharbor",
+        "postgresql+psycopg://postgres:postgres@localhost:5432/brewme",
     )
     monkeypatch.setenv("TEMPORAL_TARGET_HOST", "localhost:7233")
     monkeypatch.setenv("TEMPORAL_NAMESPACE", "default")
-    monkeypatch.setenv("TEMPORAL_TASK_QUEUE", "sourceharbor-worker")
+    monkeypatch.setenv("TEMPORAL_TASK_QUEUE", "brewme-worker")
     monkeypatch.setenv("PIPELINE_WORKSPACE_DIR", str((env_root / "workspace").resolve()))
     monkeypatch.setenv("PIPELINE_ARTIFACT_ROOT", str((env_root / "artifacts").resolve()))
     return env_root
@@ -144,7 +144,7 @@ class _CaptureNotificationConn:
                     "delivery_id": "delivery-1",
                     "status": "queued",
                     "recipient_email": "notify@example.com",
-                    "subject": "[SourceHarbor] Video digest Demo",
+                    "subject": "[BrewMe] Video digest Demo",
                 }
             )
         if "FROM notification_deliveries" in normalized:
@@ -159,7 +159,7 @@ def test_video_digest_delivery_sql_uses_video_digest_kind() -> None:
         conn,
         job={"job_id": "00000000-0000-0000-0000-000000000001"},
         recipient_email="notify@example.com",
-        subject="[SourceHarbor] Video digest Demo",
+        subject="[BrewMe] Video digest Demo",
         payload_json={"digest_scope": "video"},
     )
 
@@ -184,7 +184,7 @@ def test_get_existing_video_digest_sql_excludes_non_retryable_failed() -> None:
         "delivery_id": "delivery-1",
         "status": "queued",
         "recipient_email": "notify@example.com",
-        "subject": "[SourceHarbor] Video digest Demo",
+        "subject": "[BrewMe] Video digest Demo",
     }
     conn = _CaptureNotificationConn(existing_row=existing_row)
 
@@ -208,7 +208,7 @@ def test_daily_digest_delivery_sql_reuses_retryable_failed_rows() -> None:
         conn,
         digest_date=date(2026, 2, 21),
         recipient_email="notify@example.com",
-        subject="[SourceHarbor] Daily digest 2026-02-21",
+        subject="[BrewMe] Daily digest 2026-02-21",
         payload_json={"digest_scope": "daily", "digest_date": "2026-02-21"},
     )
 
@@ -226,7 +226,7 @@ def test_get_existing_daily_digest_sql_excludes_non_retryable_failed() -> None:
         "delivery_id": "delivery-daily-1",
         "status": "queued",
         "recipient_email": "notify@example.com",
-        "subject": "[SourceHarbor] Daily digest 2026-02-21",
+        "subject": "[BrewMe] Daily digest 2026-02-21",
     }
     conn = _CaptureNotificationConn(existing_row=existing_row)
 

@@ -42,10 +42,10 @@
         ".runtime-cache/tmp/ops-cleanup/cache"
       ],
       "operator_side_override_prefixes": [
-        "/tmp/sourceharbor",
-        "/tmp/sourceharbor",
-        "/private/tmp/sourceharbor",
-        "/private/tmp/sourceharbor"
+        "/tmp/brewme",
+        "/tmp/brewme",
+        "/private/tmp/brewme",
+        "/private/tmp/brewme"
       ],
       "forbidden_repo_root_targets": [
         "cache",

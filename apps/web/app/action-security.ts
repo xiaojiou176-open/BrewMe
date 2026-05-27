@@ -5,7 +5,7 @@ import { z } from "zod";
 import { sanitizeExternalUrl } from "@/lib/api/url";
 
 const MAX_TEXT_LENGTH = 512;
-const SESSION_COOKIE_NAME = "sourceharbor_web_session";
+const SESSION_COOKIE_NAME = "brewme_web_session";
 const SESSION_TOKEN_TTL_SECONDS = 15 * 60;
 
 const identifierSchema = z

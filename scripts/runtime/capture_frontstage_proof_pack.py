@@ -181,7 +181,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--output-dir",
-        default=str(Path(tempfile.gettempdir()) / "sourceharbor-frontstage-proof-clean"),
+        default=str(Path(tempfile.gettempdir()) / "brewme-frontstage-proof-clean"),
         help="Directory to write screenshot artifacts into.",
     )
     args = parser.parse_args()

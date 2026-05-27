@@ -1,4 +1,4 @@
-# SourceHarbor Codex Pack
+# BrewMe Codex Pack
 
 This public pack points at the same surface documented in `docs/compat/codex.md`.
 
@@ -11,5 +11,5 @@ Use it when you want:
 Start here:
 
 - `docs/compat/codex.md`
-- `templates/public-skills/codex/sourceharbor-watchlist-briefing.md`
+- `templates/public-skills/codex/brewme-watchlist-briefing.md`
 - `examples/sdk/search.ts`

@@ -390,7 +390,7 @@ describe("compounder pages", () => {
 			compare_route: "/jobs?job_id=job-3&via=briefing-compare",
 		});
 		mockGetJobEvidenceBundle.mockResolvedValue({
-			bundle_kind: "sourceharbor_job_evidence_bundle_v1",
+			bundle_kind: "brewme_job_evidence_bundle_v1",
 			sharing_scope: "internal",
 			sample: false,
 			generated_at: "2026-03-31T12:00:00Z",
@@ -721,7 +721,7 @@ describe("compounder pages", () => {
 			screen.getByRole("link", { name: "Open starter packs" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/README.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/README.md",
 		);
 	});
 

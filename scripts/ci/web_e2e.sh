@@ -6,10 +6,10 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/ci-web-e2e.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/ci-web-e2e.jsonl"
 BROWSER="${1:-chromium}"
 DATABASE_URL="${DATABASE_URL:-}"
-WEB_E2E_DB_NAME="sourceharbor_web_e2e"
+WEB_E2E_DB_NAME="brewme_web_e2e"
 WEB_E2E_DB_PORT="${WEB_E2E_DB_PORT:-5432}"
 TEMPORAL_CLI_VERSION="${TEMPORAL_CLI_VERSION:-1.5.1}"
 TEMPORAL_CLI_SHA256_LINUX_AMD64="${TEMPORAL_CLI_SHA256_LINUX_AMD64:-ddc95e08b0b076efd4ea9733a3f488eb7d2be875f8834e616cd2a37358b4852d}"
@@ -33,11 +33,11 @@ EOF
 }
 
 log() {
-  sourceharbor_log info ci_web_e2e "$*"
+  brewme_log info ci_web_e2e "$*"
 }
 
 fail() {
-  sourceharbor_log error ci_web_e2e_error "$*"
+  brewme_log error ci_web_e2e_error "$*"
   exit 1
 }
 
@@ -121,7 +121,7 @@ wait_for_http_ok() {
 temporal_task_queue_has_worker_pollers() {
   TEMPORAL_TARGET_HOST="127.0.0.1:${WEB_E2E_TEMPORAL_PORT}" \
   TEMPORAL_NAMESPACE="default" \
-  TEMPORAL_TASK_QUEUE="sourceharbor-worker" \
+  TEMPORAL_TASK_QUEUE="brewme-worker" \
     uv run python - <<'PY' >/dev/null 2>&1
 import asyncio
 import os
@@ -206,10 +206,10 @@ PY
   while [[ "$WEB_E2E_TEMPORAL_PORT" == "$WEB_E2E_API_PORT" ]]; do
     WEB_E2E_TEMPORAL_PORT="$(choose_available_port)"
   done
-  WEB_E2E_SQLITE_STATE_PATH="/tmp/sourceharbor-api-web-e2e-${suffix}.db"
-  WEB_E2E_SQLITE_PATH="/tmp/sourceharbor-worker-web-e2e-${suffix}.db"
-  WEB_E2E_WORKSPACE_DIR="/tmp/sourceharbor-worker-web-e2e-workspace-${suffix}"
-  WEB_E2E_ARTIFACT_ROOT="/tmp/sourceharbor-worker-web-e2e-artifacts-${suffix}"
+  WEB_E2E_SQLITE_STATE_PATH="/tmp/brewme-api-web-e2e-${suffix}.db"
+  WEB_E2E_SQLITE_PATH="/tmp/brewme-worker-web-e2e-${suffix}.db"
+  WEB_E2E_WORKSPACE_DIR="/tmp/brewme-worker-web-e2e-workspace-${suffix}"
+  WEB_E2E_ARTIFACT_ROOT="/tmp/brewme-worker-web-e2e-artifacts-${suffix}"
   log "allocated web-e2e ports: api=${WEB_E2E_API_PORT}, temporal=${WEB_E2E_TEMPORAL_PORT}"
 }
 
@@ -258,11 +258,11 @@ start_api() {
   (
     cd "$ROOT_DIR" && \
     DATABASE_URL="$DATABASE_URL" \
-    SOURCE_HARBOR_API_KEY="sourceharbor-local-dev-token" \
-    WEB_ACTION_SESSION_TOKEN="sourceharbor-local-dev-token" \
+    SOURCE_HARBOR_API_KEY="brewme-local-dev-token" \
+    WEB_ACTION_SESSION_TOKEN="brewme-local-dev-token" \
     TEMPORAL_TARGET_HOST="127.0.0.1:${WEB_E2E_TEMPORAL_PORT}" \
     TEMPORAL_NAMESPACE="default" \
-    TEMPORAL_TASK_QUEUE="sourceharbor-worker" \
+    TEMPORAL_TASK_QUEUE="brewme-worker" \
     SQLITE_STATE_PATH="$WEB_E2E_SQLITE_STATE_PATH" \
     UI_AUDIT_GEMINI_ENABLED="false" \
     NOTIFICATION_ENABLED="0" \
@@ -280,7 +280,7 @@ start_worker() {
     DATABASE_URL="$DATABASE_URL" \
     TEMPORAL_TARGET_HOST="127.0.0.1:${WEB_E2E_TEMPORAL_PORT}" \
     TEMPORAL_NAMESPACE="default" \
-    TEMPORAL_TASK_QUEUE="sourceharbor-worker" \
+    TEMPORAL_TASK_QUEUE="brewme-worker" \
     SQLITE_PATH="$WEB_E2E_SQLITE_PATH" \
     PIPELINE_WORKSPACE_DIR="$WEB_E2E_WORKSPACE_DIR" \
     PIPELINE_ARTIFACT_ROOT="$WEB_E2E_ARTIFACT_ROOT" \
@@ -295,7 +295,7 @@ start_worker() {
       fail "web-e2e worker exited unexpectedly"
     fi
     if temporal_task_queue_has_worker_pollers; then
-      log "web-e2e worker pollers detected on task queue sourceharbor-worker"
+      log "web-e2e worker pollers detected on task queue brewme-worker"
       return 0
     fi
     sleep 1

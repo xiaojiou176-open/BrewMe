@@ -117,7 +117,7 @@ def test_manual_source_plan_covers_creator_pages_video_urls_and_feeds() -> None:
     assert feed_url.recommended_action == "save_subscription"
     assert feed_url.adapter_type == "rss_generic"
 
-    article_url = service.plan("https://example.com/posts/sourceharbor")
+    article_url = service.plan("https://example.com/posts/brewme")
     assert article_url.recommended_action == "add_to_today"
     assert article_url.target_kind == "manual_source_item"
     assert article_url.content_profile == "article"
@@ -132,7 +132,7 @@ def test_manual_source_submit_supports_partial_success_and_counts() -> None:
                 "https://space.bilibili.com/13416784\n"
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ\n"
                 "https://example.com/feed.xml\n"
-                "https://example.com/posts/sourceharbor"
+                "https://example.com/posts/brewme"
             ),
             category="creator",
             tags=["ai", "daily"],
@@ -199,9 +199,9 @@ def test_manual_source_plan_covers_raw_ids_short_urls_and_helper_paths() -> None
     assert youtube_channel_url.recommended_action == "save_subscription"
     assert youtube_channel_url.source_type == "youtube_channel_id"
 
-    youtube_user_url = service.plan("https://www.youtube.com/user/sourceharbor")
+    youtube_user_url = service.plan("https://www.youtube.com/user/brewme")
     assert youtube_user_url.recommended_action == "save_subscription"
-    assert youtube_user_url.source_value == "sourceharbor"
+    assert youtube_user_url.source_value == "brewme"
 
     bilibili_short_url = service.plan("https://b23.tv/demo123")
     assert bilibili_short_url.recommended_action == "add_to_today"
@@ -209,8 +209,8 @@ def test_manual_source_plan_covers_raw_ids_short_urls_and_helper_paths() -> None
     bilibili_video_url = service.plan("https://www.bilibili.com/video/BV1xx411c7mD")
     assert bilibili_video_url.recommended_action == "add_to_today"
 
-    assert service._creator_handle(source_type="youtube_user", source_value="sourceharbor") == (
-        "sourceharbor"
+    assert service._creator_handle(source_type="youtube_user", source_value="brewme") == (
+        "brewme"
     )
     assert service._match_basis(
         source_type="", source_url="https://example.com", rsshub_route=None

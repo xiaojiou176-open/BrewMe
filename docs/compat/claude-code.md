@@ -1,15 +1,15 @@
 # Claude Code Compatibility
 
-This is the shortest honest Claude Code adoption path for SourceHarbor.
+This is the shortest honest Claude Code adoption path for BrewMe.
 
 ## Pick Your Door
 
 | If you want to... | Use this | Why |
 | --- | --- | --- |
 | give Claude Code governed access to jobs, retrieval, and artifacts | MCP | same control-tower truth the operator surfaces use |
-| call SourceHarbor from scripts or tools | `@sourceharbor/sdk` | typed HTTP client for the public contract |
-| do quick terminal inspection | `@sourceharbor/cli` | thin CLI over the current API |
-| boot and manage the whole repo locally | `./bin/sourceharbor` | repo-local runtime management stays in the clone |
+| call BrewMe from scripts or tools | `@brewme/sdk` | typed HTTP client for the public contract |
+| do quick terminal inspection | `@brewme/cli` | thin CLI over the current API |
+| boot and manage the whole repo locally | `./bin/brewme` | repo-local runtime management stays in the clone |
 
 ## Fastest Path
 
@@ -20,8 +20,8 @@ This is the shortest honest Claude Code adoption path for SourceHarbor.
 
 ## Starter Template
 
-Use [templates/public-skills/claude-code/sourceharbor-watchlist-briefing.md](../../templates/public-skills/claude-code/sourceharbor-watchlist-briefing.md)
-when you want Claude Code to operate over SourceHarbor watchlists, Ask, and
+Use [templates/public-skills/claude-code/brewme-watchlist-briefing.md](../../templates/public-skills/claude-code/brewme-watchlist-briefing.md)
+when you want Claude Code to operate over BrewMe watchlists, Ask, and
 evidence surfaces without reading any private repo memory first.
 
 ## Plugin-Grade Bundle
@@ -29,10 +29,10 @@ evidence surfaces without reading any private repo memory first.
 If you want a stronger, submission-ready bundle instead of a docs-only starter,
 use:
 
-- [starter-packs/claude-code/sourceharbor-claude-plugin/README.md](../../starter-packs/claude-code/sourceharbor-claude-plugin/README.md)
-- [starter-packs/claude-code/sourceharbor-claude-plugin/.claude-plugin/plugin.json](../../starter-packs/claude-code/sourceharbor-claude-plugin/.claude-plugin/plugin.json)
-- [starter-packs/claude-code/sourceharbor-claude-plugin/.mcp.json](../../starter-packs/claude-code/sourceharbor-claude-plugin/.mcp.json)
-- [starter-packs/claude-code/sourceharbor-claude-plugin/skills/sourceharbor-watchlist-briefing/SKILL.md](../../starter-packs/claude-code/sourceharbor-claude-plugin/skills/sourceharbor-watchlist-briefing/SKILL.md)
+- [starter-packs/claude-code/brewme-claude-plugin/README.md](../../starter-packs/claude-code/brewme-claude-plugin/README.md)
+- [starter-packs/claude-code/brewme-claude-plugin/.claude-plugin/plugin.json](../../starter-packs/claude-code/brewme-claude-plugin/.claude-plugin/plugin.json)
+- [starter-packs/claude-code/brewme-claude-plugin/.mcp.json](../../starter-packs/claude-code/brewme-claude-plugin/.mcp.json)
+- [starter-packs/claude-code/brewme-claude-plugin/skills/brewme-watchlist-briefing/SKILL.md](../../starter-packs/claude-code/brewme-claude-plugin/skills/brewme-watchlist-briefing/SKILL.md)
 
 This is the repo's strongest current artifact for Anthropic marketplace
 submission or local plugin loading.
@@ -41,7 +41,7 @@ submission or local plugin loading.
 
 - Claude Code is a **ship-now fit** through MCP + HTTP API + the new public
   starter layer.
-- SourceHarbor now ships a plugin-grade Claude Code bundle, but official
+- BrewMe now ships a plugin-grade Claude Code bundle, but official
   marketplace listing still depends on Anthropic review and directory policy.
 - This is still a source-first integration story, not a hosted Claude Code
   product promise.

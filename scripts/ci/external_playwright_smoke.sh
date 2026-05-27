@@ -13,7 +13,7 @@ ensure_external_uv_project_environment "$ROOT_DIR"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/external-playwright-smoke.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/external-playwright-smoke.jsonl"
 
 url="https://example.com"
 browser="chromium"
@@ -26,11 +26,11 @@ heartbeat_seconds="30"
 use_real_profile="0"
 
 log() {
-  sourceharbor_log info external_playwright_smoke "$*"
+  brewme_log info external_playwright_smoke "$*"
 }
 
 fail() {
-  sourceharbor_log error external_playwright_smoke_error "$*"
+  brewme_log error external_playwright_smoke_error "$*"
   exit 1
 }
 
@@ -145,7 +145,7 @@ if ! python3 -c 'import playwright' >/dev/null 2>&1; then
 fi
 export EXTERNAL_SMOKE_PYTHON_SOURCE="$python_source"
 export EXTERNAL_SMOKE_REPO_ROOT="$ROOT_DIR"
-export EXTERNAL_SMOKE_RUN_ID="${sourceharbor_log_run_id:-external-playwright-smoke}"
+export EXTERNAL_SMOKE_RUN_ID="${brewme_log_run_id:-external-playwright-smoke}"
 export EXTERNAL_SMOKE_USE_REAL_PROFILE="$use_real_profile"
 
 log "Running external Playwright smoke: browser=$browser url=$url timeout_ms=$timeout_ms retries=$retries heartbeat_seconds=$heartbeat_seconds"

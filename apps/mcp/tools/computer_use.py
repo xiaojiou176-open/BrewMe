@@ -36,7 +36,7 @@ def _normalize_action_item(item: Any, default_step: int) -> dict[str, Any]:
 
 def register_computer_use_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.computer_use.run",
+        name="brewme.computer_use.run",
         description="Plan computer-use actions from an instruction and screenshot with safety policy checks.",
     )
     def run_computer_use(

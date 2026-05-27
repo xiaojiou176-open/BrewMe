@@ -1,4 +1,4 @@
-import type { ReaderDocument } from "@sourceharbor/sdk";
+import type { ReaderDocument } from "@brewme/sdk";
 
 export const DEMO_READER_DOCUMENT_ID = "demo";
 
@@ -7,7 +7,7 @@ export function buildDemoReaderDocument(): ReaderDocument {
 		id: DEMO_READER_DOCUMENT_ID,
 		stable_key: "preview-reader-demo",
 		slug: DEMO_READER_DOCUMENT_ID,
-		window_id: "preview@SourceHarbor",
+		window_id: "preview@BrewMe",
 		topic_key: "reader-preview",
 		topic_label: "Prototype lessons",
 		title: "What happens after the first prototype",
@@ -48,27 +48,27 @@ export function buildDemoReaderDocument(): ReaderDocument {
 			generated_at: "2026-04-10T00:00:00Z",
 		},
 		coverage_ledger: {
-			ledger_kind: "sourceharbor_preview_coverage_v1",
+			ledger_kind: "brewme_preview_coverage_v1",
 			covered_source_count: 2,
 			gap_source_count: 1,
 			summary:
 				"Preview ledger showing the distinction between a readable body and a not-yet-sealed proof packet.",
 		},
 		traceability_pack: {
-			pack_kind: "sourceharbor_reader_preview_traceability_v1",
+			pack_kind: "brewme_reader_preview_traceability_v1",
 		},
 		source_refs: [
 			{
 				source_item_id: "preview-source-1",
 				title: "Timeline principle",
-				canonical_author_name: "SourceHarbor Editorial Desk",
+				canonical_author_name: "BrewMe Editorial Desk",
 				affiliation_label: "Tracked specimen universe",
 				relation_kind: "matched_subscription",
 				identity_status: "matched_subscription_identity",
 				claim_kinds: ["body-first-reading", "specimen-frontstage"],
 				platform: "preview",
 				source_origin: "frontstage",
-				source_url: "https://example.com/sourceharbor/preview/frontstage",
+				source_url: "https://example.com/brewme/preview/frontstage",
 				raw_stage_contract: {
 					analysis_mode: "advanced",
 					review_required: true,
@@ -89,7 +89,7 @@ export function buildDemoReaderDocument(): ReaderDocument {
 				claim_kinds: ["warning-contract"],
 				platform: "preview",
 				source_origin: "warning",
-				source_url: "https://example.com/sourceharbor/preview/warning",
+				source_url: "https://example.com/brewme/preview/warning",
 				raw_stage_contract: {
 					analysis_mode: "economy",
 					review_required: false,
@@ -109,7 +109,7 @@ export function buildDemoReaderDocument(): ReaderDocument {
 				claim_kinds: ["evidence-drawer"],
 				platform: "preview",
 				source_origin: "backstage",
-				source_url: "https://example.com/sourceharbor/preview/evidence",
+				source_url: "https://example.com/brewme/preview/evidence",
 				digest_preview:
 					"Evidence should feel available on demand, not like a dashboard shouting over the main narrative.",
 			},

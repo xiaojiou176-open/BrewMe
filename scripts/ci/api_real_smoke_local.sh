@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/api-real-smoke-local.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/api-real-smoke-local.jsonl"
 SOURCE_HARBOR_IN_STANDARD_ENV="${SOURCE_HARBOR_IN_STANDARD_ENV:-0}"
 ENV_PROFILE="${ENV_PROFILE:-local}"
 API_HOST="127.0.0.1"
@@ -27,7 +27,7 @@ SMOKE_DATABASE_URL=""
 ADMIN_DATABASE_URL=""
 ADMIN_DATABASE_PG_URL=""
 WORKFLOW_PROBE_ROOT=""
-SMOKE_WRITE_TOKEN="${SOURCE_HARBOR_API_KEY:-sourceharbor-local-dev-token}"
+SMOKE_WRITE_TOKEN="${SOURCE_HARBOR_API_KEY:-brewme-local-dev-token}"
 
 usage() {
   cat <<'EOF'
@@ -47,13 +47,13 @@ EOF
 }
 
 log() {
-  sourceharbor_log info api_real_smoke_local "$*"
+  brewme_log info api_real_smoke_local "$*"
 }
 
 fail_with_kind() {
   local kind="$1"
   local reason="$2"
-  sourceharbor_log error api_real_smoke_local_error "failure_kind=${kind} reason=${reason}"
+  brewme_log error api_real_smoke_local_error "failure_kind=${kind} reason=${reason}"
   exit 1
 }
 
@@ -596,7 +596,7 @@ import uuid
 from sqlalchemy.engine import make_url
 
 base = make_url(os.environ["DATABASE_URL"])
-smoke_db_name = f"sourceharbor_api_smoke_local_{uuid.uuid4().hex[:8]}"
+smoke_db_name = f"brewme_api_smoke_local_{uuid.uuid4().hex[:8]}"
 admin_db_name = base.database or "postgres"
 smoke_url = base.set(database=smoke_db_name).render_as_string(hide_password=False)
 admin_url = base.set(database=admin_db_name).render_as_string(hide_password=False)
@@ -690,7 +690,7 @@ export DATABASE_URL
 export API_INTEGRATION_SMOKE_STRICT="1"
 export TEMPORAL_TARGET_HOST="${TEMPORAL_TARGET_HOST:-127.0.0.1:7233}"
 export TEMPORAL_NAMESPACE="${TEMPORAL_NAMESPACE:-default}"
-export TEMPORAL_TASK_QUEUE="${TEMPORAL_TASK_QUEUE:-sourceharbor-worker}"
+export TEMPORAL_TASK_QUEUE="${TEMPORAL_TASK_QUEUE:-brewme-worker}"
 export SQLITE_STATE_PATH="$STATE_DB_PATH"
 export UI_AUDIT_GEMINI_ENABLED="${UI_AUDIT_GEMINI_ENABLED:-false}"
 export NOTIFICATION_ENABLED="${NOTIFICATION_ENABLED:-0}"

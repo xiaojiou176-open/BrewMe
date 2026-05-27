@@ -102,7 +102,7 @@ describe("reader pages", () => {
 			},
 		]);
 		mockGetNavigationBrief.mockResolvedValue({
-			brief_kind: "sourceharbor_navigation_brief_v1",
+			brief_kind: "brewme_navigation_brief_v1",
 			generated_at: "2026-04-09T00:00:00Z",
 			window_id: "2026-04-09@America/Los_Angeles",
 			document_count: 1,
@@ -154,12 +154,12 @@ describe("reader pages", () => {
 				version: 1,
 				published_with_gap: false,
 				source_item_count: 1,
-				topic_label: "SourceHarbor daily read",
+				topic_label: "BrewMe daily read",
 				consumption_batch_id: "batch-generic",
 				source_refs: [
 					{
 						source_item_id: "src-generic",
-						title: "SourceHarbor daily read",
+						title: "BrewMe daily read",
 						platform: "bilibili",
 						source_origin: "manual_injected",
 						source_url: "https://www.bilibili.com/video/BV1xx411c7mD",
@@ -202,7 +202,7 @@ describe("reader pages", () => {
 
 		expect(
 			screen.getByRole("heading", {
-				name: "SourceHarbor daily read",
+				name: "BrewMe daily read",
 				level: 1,
 			}),
 		).toBeInTheDocument();
@@ -235,7 +235,7 @@ describe("reader pages", () => {
 			],
 			source_refs: [{ source_item_id: "src-1", title: "Agents recap" }],
 			coverage_ledger: {
-				ledger_kind: "sourceharbor_coverage_ledger_v1",
+				ledger_kind: "brewme_coverage_ledger_v1",
 				covered_source_count: 1,
 				gap_source_count: 1,
 				status: "gap_detected",

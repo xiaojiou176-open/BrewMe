@@ -1,7 +1,7 @@
 <!-- generated: docs governance control plane -->
 # Governance Dashboard
 
-This is the thin public-doc control plane for the current SourceHarbor snapshot.
+This is the thin public-doc control plane for the current BrewMe snapshot.
 
 - first-hop truth surfaces: `README.md`, `docs/start-here.md`, `docs/proof.md`, `docs/testing.md`
 - nav sections tracked: `4`

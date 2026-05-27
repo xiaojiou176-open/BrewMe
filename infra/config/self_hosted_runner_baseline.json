@@ -17,7 +17,7 @@
       "purge_paths": [
         ".runtime-cache",
         "mutants/",
-        "/tmp/sourceharbor-strict-ci"
+        "/tmp/brewme-strict-ci"
       ]
     },
     "runner-health": {
@@ -56,8 +56,8 @@
       "purge_paths": [
         ".runtime-cache",
         "mutants/",
-        "/tmp/sourceharbor-strict-ci",
-        "/tmp/sourceharbor-*",
+        "/tmp/brewme-strict-ci",
+        "/tmp/brewme-*",
         "/tmp/temporal-cli-*"
       ]
     }

@@ -40,7 +40,7 @@ def _contains_legacy_root(value: str, legacy_roots: set[str]) -> bool:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Validate SourceHarbor disk-space governance contract and canonical defaults."
+        description="Validate BrewMe disk-space governance contract and canonical defaults."
     )
     parser.add_argument("--repo-root", default=str(repo_root()))
     parser.add_argument("--policy", default="config/governance/disk-space-governance.json")
@@ -94,16 +94,16 @@ def main() -> int:
             ".env",
             ".env.example",
             "scripts/lib/standard_env.sh",
-            "infra/systemd/sourceharbor-api.service",
-            "infra/systemd/sourceharbor-worker.service",
+            "infra/systemd/brewme-api.service",
+            "infra/systemd/brewme-worker.service",
         }
-        if canonical_mainline_path != "$HOME/.cache/sourceharbor/project-venv":
+        if canonical_mainline_path != "$HOME/.cache/brewme/project-venv":
             errors.append(
-                "duplicate_env_policy.canonical_mainline_path must be $HOME/.cache/sourceharbor/project-venv"
+                "duplicate_env_policy.canonical_mainline_path must be $HOME/.cache/brewme/project-venv"
             )
-        if duplicate_glob != "$HOME/.cache/sourceharbor/project-venv*":
+        if duplicate_glob != "$HOME/.cache/brewme/project-venv*":
             errors.append(
-                "duplicate_env_policy.duplicate_glob must be $HOME/.cache/sourceharbor/project-venv*"
+                "duplicate_env_policy.duplicate_glob must be $HOME/.cache/brewme/project-venv*"
             )
         if not isinstance(reference_files, list):
             errors.append("duplicate_env_policy.reference_files must be a list")
@@ -203,11 +203,11 @@ def main() -> int:
 
     env_example = _read(root / ".env.example")
     if (
-        'SOURCE_HARBOR_CACHE_ROOT="${SOURCE_HARBOR_CACHE_ROOT:-$HOME/.cache/sourceharbor}"'
+        'SOURCE_HARBOR_CACHE_ROOT="${SOURCE_HARBOR_CACHE_ROOT:-$HOME/.cache/brewme}"'
         not in env_example
     ):
         errors.append(
-            ".env.example must declare SOURCE_HARBOR_CACHE_ROOT with the canonical ~/.cache/sourceharbor fallback"
+            ".env.example must declare SOURCE_HARBOR_CACHE_ROOT with the canonical ~/.cache/brewme fallback"
         )
     for expected in (
         "${PIPELINE_ARTIFACT_ROOT:-$SOURCE_HARBOR_CACHE_ROOT/artifacts}",
@@ -220,8 +220,8 @@ def main() -> int:
             errors.append(
                 f".env.example missing SOURCE_HARBOR_CACHE_ROOT-derived default `{expected}`"
             )
-    if "$HOME/.sourceharbor" in env_example or "~/.sourceharbor" in env_example:
-        errors.append(".env.example must not default to legacy `.sourceharbor` paths")
+    if "$HOME/.brewme" in env_example or "~/.brewme" in env_example:
+        errors.append(".env.example must not default to legacy `.brewme` paths")
     if "video-digestor" in env_example:
         errors.append(".env.example must not default to legacy `video-digestor` paths")
     if ".runtime/artifacts" in env_example or ".runtime/workspace" in env_example:
@@ -243,16 +243,16 @@ def main() -> int:
             errors.append(f".env.example missing Chrome runtime default `{expected}`")
 
     services = [
-        root / "infra" / "systemd" / "sourceharbor-api.service",
-        root / "infra" / "systemd" / "sourceharbor-worker.service",
+        root / "infra" / "systemd" / "brewme-api.service",
+        root / "infra" / "systemd" / "brewme-worker.service",
     ]
     for path in services:
         text = _read(path)
-        if "/var/cache/sourceharbor/project-venv" in text:
-            errors.append(f"{path.name} still points at /var/cache/sourceharbor/project-venv")
-        if ".cache/sourceharbor/project-venv" not in text:
+        if "/var/cache/brewme/project-venv" in text:
+            errors.append(f"{path.name} still points at /var/cache/brewme/project-venv")
+        if ".cache/brewme/project-venv" not in text:
             errors.append(
-                f"{path.name} missing canonical .cache/sourceharbor/project-venv fallback"
+                f"{path.name} missing canonical .cache/brewme/project-venv fallback"
             )
 
     docs = {
@@ -290,31 +290,31 @@ def main() -> int:
             errors.append(
                 "disk-space-governance.json must count canonical user_state_root in audit_targets repo-external-repo-owned totals"
             )
-    if user_state_root != "$HOME/.cache/sourceharbor":
-        errors.append("canonical_paths.user_state_root must be $HOME/.cache/sourceharbor")
-    if user_cache_root != "$HOME/.cache/sourceharbor":
-        errors.append("canonical_paths.user_cache_root must be $HOME/.cache/sourceharbor")
+    if user_state_root != "$HOME/.cache/brewme":
+        errors.append("canonical_paths.user_state_root must be $HOME/.cache/brewme")
+    if user_cache_root != "$HOME/.cache/brewme":
+        errors.append("canonical_paths.user_cache_root must be $HOME/.cache/brewme")
     browser_audit_targets = [
         item
         for item in policy.get("audit_targets", [])
-        if str(item.get("id") or "") == "external-sourceharbor-browser-root"
+        if str(item.get("id") or "") == "external-brewme-browser-root"
     ]
     if not browser_audit_targets:
         errors.append(
-            "disk-space-governance.json must keep audit target `external-sourceharbor-browser-root`"
+            "disk-space-governance.json must keep audit target `external-brewme-browser-root`"
         )
     else:
         browser_target_path = str(browser_audit_targets[0].get("path") or "").strip()
-        if browser_target_path != "$HOME/.cache/sourceharbor/browser/chrome-user-data":
+        if browser_target_path != "$HOME/.cache/brewme/browser/chrome-user-data":
             errors.append(
-                "external-sourceharbor-browser-root must point at $HOME/.cache/sourceharbor/browser/chrome-user-data"
+                "external-brewme-browser-root must point at $HOME/.cache/brewme/browser/chrome-user-data"
             )
     legacy_extra_roots = policy.get("legacy_extra_roots")
-    if not isinstance(legacy_extra_roots, list) or "$HOME/.sourceharbor" not in {
+    if not isinstance(legacy_extra_roots, list) or "$HOME/.brewme" not in {
         str(item) for item in legacy_extra_roots or []
     }:
         errors.append(
-            "disk-space-governance.json must keep $HOME/.sourceharbor in legacy_extra_roots as a migration input root"
+            "disk-space-governance.json must keep $HOME/.brewme in legacy_extra_roots as a migration input root"
         )
     legacy_roots = {
         str(canonical_paths.get("legacy_state_root") or "").strip().lower(),
@@ -325,11 +325,11 @@ def main() -> int:
     excluded_paths = {str(item) for item in policy.get("excluded_paths", [])}
     audit_target_paths = {str(item.get("path") or "") for item in policy.get("audit_targets", [])}
     if (
-        "$HOME/.cache/sourceharbor/browser/chrome-user-data" in audit_target_paths
-        and "$HOME/.cache/sourceharbor/browser/chrome-user-data" not in excluded_paths
+        "$HOME/.cache/brewme/browser/chrome-user-data" in audit_target_paths
+        and "$HOME/.cache/brewme/browser/chrome-user-data" not in excluded_paths
     ):
         errors.append(
-            "disk-space-governance.json must exclude $HOME/.cache/sourceharbor/browser/chrome-user-data from cleanup execution"
+            "disk-space-governance.json must exclude $HOME/.cache/brewme/browser/chrome-user-data from cleanup execution"
         )
     for wave_name, wave in policy.get("cleanup_waves", {}).items():
         for candidate in wave.get("candidates", []):

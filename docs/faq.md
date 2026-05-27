@@ -1,16 +1,16 @@
 # FAQ
 
-## What is SourceHarbor in one sentence?
+## What is BrewMe in one sentence?
 
 It is a reader-first system for turning long-form sources into searchable knowledge, traceable jobs, and reusable delivery workflows.
 
 ## Is this a hosted service?
 
-No. SourceHarbor is a public, source-first repository. You can inspect it, run it, extend it, and prove it locally. It is not currently presented as a turnkey hosted SaaS.
+No. BrewMe is a public, source-first repository. You can inspect it, run it, extend it, and prove it locally. It is not currently presented as a turnkey hosted SaaS.
 
 ## Why does the repo expose API, MCP, worker, and web at the same time?
 
-Because SourceHarbor is designed as one system with multiple entry surfaces:
+Because BrewMe is designed as one system with multiple entry surfaces:
 
 - operators use the reader-first web surfaces
 - integrations use the API
@@ -23,7 +23,7 @@ No. The strongest current story is around long-form video, but the feed and retr
 
 ## Why should I star it if I am still evaluating?
 
-Because SourceHarbor is useful as both:
+Because BrewMe is useful as both:
 
 - an inspectable source-first system
 - a reference architecture for source intake, digest pipelines, retrieval, and MCP reuse

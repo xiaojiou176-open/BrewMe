@@ -51,7 +51,7 @@ export function BilibiliDiscoveryDesk({
 				</h2>
 				<CardDescription>
 					Use discovery on purpose, then bring the creator space URL, UID, or
-					single video URL back into SourceHarbor only after it earns a slot in
+					single video URL back into BrewMe only after it earns a slot in
 					the reading loop.
 				</CardDescription>
 			</CardHeader>

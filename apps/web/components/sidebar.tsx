@@ -692,7 +692,7 @@ export function Sidebar({
 				) : (
 					<div className="min-w-0">
 						<p className="text-sm font-semibold tracking-tight text-foreground">
-							SourceHarbor
+							BrewMe
 						</p>
 						<p className="text-xs text-muted-foreground">Read first</p>
 					</div>

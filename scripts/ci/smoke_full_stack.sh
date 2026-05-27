@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/smoke-full-stack.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/smoke-full-stack.jsonl"
 ENV_PROFILE="${ENV_PROFILE:-local}"
 LIVE_DIAGNOSTICS_JSON=".runtime-cache/reports/tests/e2e-live-smoke-result.json"
 API_BASE="http://127.0.0.1:9000"
@@ -244,8 +244,8 @@ NEXTFLUX_PORT="${NEXTFLUX_PORT:-$NEXTFLUX_PORT}"
 heartbeat_pid=""
 AI_FEED_SYNC_TMP_OUTPUT=""
 
-log() { sourceharbor_log info smoke_full_stack "$*"; }
-fail() { sourceharbor_log error smoke_full_stack_error "$*"; exit 1; }
+log() { brewme_log info smoke_full_stack "$*"; }
+fail() { brewme_log error smoke_full_stack_error "$*"; exit 1; }
 
 is_truthy() {
   case "$(printf '%s' "${1:-}" | tr '[:upper:]' '[:lower:]')" in

@@ -138,7 +138,7 @@ class ReaderPipelineService:
             singletons=singletons,
         )
         manifest = {
-            "manifest_kind": "sourceharbor_cluster_verdict_manifest_v1",
+            "manifest_kind": "brewme_cluster_verdict_manifest_v1",
             "generated_at": generated_at,
             "consumption_batch_id": str(batch.id),
             "window_id": batch.window_id,
@@ -1407,7 +1407,7 @@ class ReaderPipelineService:
         elif gap_count:
             status = "gap_detected"
         return {
-            "ledger_kind": "sourceharbor_coverage_ledger_v1",
+            "ledger_kind": "brewme_coverage_ledger_v1",
             "coverage_ledger_id": str(uuid.uuid4()),
             "published_doc_id": None,
             "generated_at": datetime.now(UTC).isoformat(),
@@ -1570,7 +1570,7 @@ class ReaderPipelineService:
             item.get("status") != "ready" for item in source_item_map
         )
         return {
-            "pack_kind": "sourceharbor_traceability_pack_v1",
+            "pack_kind": "brewme_traceability_pack_v1",
             "generated_at": datetime.now(UTC).isoformat(),
             "published_doc_id": None,
             "stable_key": None,
@@ -2022,7 +2022,7 @@ class ReaderPipelineService:
             reverse=True,
         )
         return {
-            "brief_kind": "sourceharbor_navigation_brief_v1",
+            "brief_kind": "brewme_navigation_brief_v1",
             "generated_at": datetime.now(UTC).isoformat(),
             "window_id": window_id,
             "document_count": len(ordered),

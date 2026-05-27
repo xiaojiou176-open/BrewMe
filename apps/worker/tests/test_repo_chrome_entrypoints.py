@@ -56,7 +56,7 @@ def test_start_repo_chrome_reports_already_running_without_second_launch(
         "user_data_dir": str(tmp_path / "chrome-user-data"),
         "profile_dir": "Profile 1",
         "profile_path": str(tmp_path / "chrome-user-data" / "Profile 1"),
-        "profile_name": "sourceharbor",
+        "profile_name": "brewme",
         "cdp_port": 9339,
         "cdp_url": "http://127.0.0.1:9339",
     }
@@ -101,7 +101,7 @@ def test_start_repo_chrome_rejects_machine_with_more_than_four_instances(
         "user_data_dir": str(tmp_path / "chrome-user-data"),
         "profile_dir": "Profile 1",
         "profile_path": str(tmp_path / "chrome-user-data" / "Profile 1"),
-        "profile_name": "sourceharbor",
+        "profile_name": "brewme",
         "cdp_port": 9339,
         "cdp_url": "http://127.0.0.1:9339",
     }
@@ -140,7 +140,7 @@ def test_start_repo_chrome_allows_explicit_over_cap_override(
         "user_data_dir": str(tmp_path / "chrome-user-data"),
         "profile_dir": "Profile 1",
         "profile_path": str(tmp_path / "chrome-user-data" / "Profile 1"),
-        "profile_name": "sourceharbor",
+        "profile_name": "brewme",
         "cdp_port": 9339,
         "cdp_url": "http://127.0.0.1:9339",
     }
@@ -198,7 +198,7 @@ def test_stop_repo_chrome_reports_already_stopped(
         "user_data_dir": str(tmp_path / "chrome-user-data"),
         "profile_dir": "Profile 1",
         "profile_path": str(tmp_path / "chrome-user-data" / "Profile 1"),
-        "profile_name": "sourceharbor",
+        "profile_name": "brewme",
         "cdp_port": 9339,
         "cdp_url": "http://127.0.0.1:9339",
     }
@@ -233,7 +233,7 @@ def test_stop_repo_chrome_stops_process_and_cleans_ephemerals(
         "user_data_dir": str(tmp_path / "chrome-user-data"),
         "profile_dir": "Profile 1",
         "profile_path": str(tmp_path / "chrome-user-data" / "Profile 1"),
-        "profile_name": "sourceharbor",
+        "profile_name": "brewme",
         "cdp_port": 9339,
         "cdp_url": "http://127.0.0.1:9339",
     }
@@ -288,7 +288,7 @@ def test_open_repo_chrome_tabs_opens_login_site_set(
         "user_data_dir": str(tmp_path / "chrome-user-data"),
         "profile_dir": "Profile 1",
         "profile_path": str(tmp_path / "chrome-user-data" / "Profile 1"),
-        "profile_name": "sourceharbor",
+        "profile_name": "brewme",
         "cdp_port": 9339,
         "cdp_url": "http://127.0.0.1:9339",
     }
@@ -359,7 +359,7 @@ def test_open_repo_chrome_tabs_reports_bilibili_login_state(
         "user_data_dir": str(tmp_path / "chrome-user-data"),
         "profile_dir": "Profile 1",
         "profile_path": str(tmp_path / "chrome-user-data" / "Profile 1"),
-        "profile_name": "sourceharbor",
+        "profile_name": "brewme",
         "cdp_port": 9339,
         "cdp_url": "http://127.0.0.1:9339",
     }
@@ -486,7 +486,7 @@ def test_open_repo_chrome_tabs_fails_when_repo_owned_process_is_missing(
         "user_data_dir": str(tmp_path / "chrome-user-data"),
         "profile_dir": "Profile 1",
         "profile_path": str(tmp_path / "chrome-user-data" / "Profile 1"),
-        "profile_name": "sourceharbor",
+        "profile_name": "brewme",
         "cdp_port": 9339,
         "cdp_url": "http://127.0.0.1:9339",
     }

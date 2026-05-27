@@ -132,7 +132,7 @@ def _normalize_job_compare_payload(payload: dict[str, Any]) -> dict[str, Any]:
 
 
 def register_job_tools(mcp: FastMCP, api_call: ApiCall) -> None:
-    @mcp.tool(name="sourceharbor.jobs.get", description="Get one job by id.")
+    @mcp.tool(name="brewme.jobs.get", description="Get one job by id.")
     def get_job(job_id: str) -> dict[str, Any]:
         normalized_job_id = parse_uuid(job_id)
         if normalized_job_id is None:
@@ -147,7 +147,7 @@ def register_job_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         return _normalize_job_payload(response)
 
     @mcp.tool(
-        name="sourceharbor.jobs.compare",
+        name="brewme.jobs.compare",
         description="Compare one job against its previous successful run.",
     )
     def compare_job(job_id: str) -> dict[str, Any]:
@@ -163,7 +163,7 @@ def register_job_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         response = api_call("GET", f"/api/v1/jobs/{url_path_segment(normalized_job_id)}/compare")
         return _normalize_job_compare_payload(response)
 
-    @mcp.tool(name="sourceharbor.videos.list", description="List ingested videos.")
+    @mcp.tool(name="brewme.videos.list", description="List ingested videos.")
     def list_videos(
         platform: str | None = None,
         status: str | None = None,
@@ -194,7 +194,7 @@ def register_job_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         )
 
     @mcp.tool(
-        name="sourceharbor.videos.process", description="Trigger ProcessJobWorkflow for one video."
+        name="brewme.videos.process", description="Trigger ProcessJobWorkflow for one video."
     )
     def process_video(
         video: dict[str, Any],

@@ -32,8 +32,8 @@ def test_resolve_chrome_profile_source_mode_by_display_name(tmp_path: Path) -> N
                 "profile": {
                     "info_cache": {
                         "Profile 27": {
-                            "name": "sourceharbor",
-                            "user_name": "sourceharbor-test@example.com",
+                            "name": "brewme",
+                            "user_name": "brewme-test@example.com",
                         }
                     }
                 }
@@ -44,7 +44,7 @@ def test_resolve_chrome_profile_source_mode_by_display_name(tmp_path: Path) -> N
 
     payload = module.resolve_chrome_profile(
         user_data_dir=str(user_data_dir),
-        profile_name="sourceharbor",
+        profile_name="brewme",
         profile_dir="",
     )
 
@@ -65,7 +65,7 @@ def test_resolve_repo_runtime_uses_profile1_and_cdp_defaults(tmp_path: Path) -> 
                 "profile": {
                     "last_used": "Profile 1",
                     "last_active_profiles": ["Profile 1"],
-                    "info_cache": {"Profile 1": {"name": "sourceharbor"}},
+                    "info_cache": {"Profile 1": {"name": "brewme"}},
                 }
             }
         ),
@@ -74,13 +74,13 @@ def test_resolve_repo_runtime_uses_profile1_and_cdp_defaults(tmp_path: Path) -> 
 
     payload = module.resolve_repo_runtime(
         user_data_dir=str(user_data_dir),
-        profile_name="sourceharbor",
+        profile_name="brewme",
         profile_dir="Profile 1",
         cdp_port="9339",
     )
 
     assert payload["profile_dir"] == "Profile 1"
-    assert payload["profile_name"] == "sourceharbor"
+    assert payload["profile_name"] == "brewme"
     assert payload["cdp_port"] == 9339
     assert payload["cdp_url"] == "http://127.0.0.1:9339"
 
@@ -97,10 +97,10 @@ def test_resolve_repo_runtime_fails_when_profile_name_mismatches(tmp_path: Path)
         encoding="utf-8",
     )
 
-    with pytest.raises(RuntimeError, match="expected `sourceharbor`"):
+    with pytest.raises(RuntimeError, match="expected `brewme`"):
         module.resolve_repo_runtime(
             user_data_dir=str(user_data_dir),
-            profile_name="sourceharbor",
+            profile_name="brewme",
             profile_dir="Profile 1",
             cdp_port="9339",
         )

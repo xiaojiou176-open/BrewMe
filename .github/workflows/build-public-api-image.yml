@@ -85,7 +85,7 @@ jobs:
 
       - name: Build and push public API image
         env:
-          SOURCE_HARBOR_PUBLIC_API_IMAGE_REPOSITORY: ghcr.io/xiaojiou176-open/sourceharbor-api
+          SOURCE_HARBOR_PUBLIC_API_IMAGE_REPOSITORY: ghcr.io/xiaojiou176-open/brewme-api
         run: |
           ./scripts/ci/build_public_api_image.sh \
             --push \
@@ -103,6 +103,6 @@ jobs:
         run: |
           {
             echo "### Public API image publish result"
-            echo "- image repository: \`ghcr.io/xiaojiou176-open/sourceharbor-api\`"
-            echo "- package URL: \`https://github.com/orgs/xiaojiou176-open/packages/container/package/sourceharbor-api\`"
+            echo "- image repository: \`ghcr.io/xiaojiou176-open/brewme-api\`"
+            echo "- package URL: \`https://github.com/orgs/xiaojiou176-open/packages/container/package/brewme-api\`"
           } >> "$GITHUB_STEP_SUMMARY"

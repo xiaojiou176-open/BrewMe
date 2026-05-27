@@ -8,7 +8,7 @@ SETTLE_SECONDS="20"
 HEALTH_URL="http://127.0.0.1/healthz"
 CANARY_HEADER_NAME="X-Vd-Canary"
 CANARY_HEADER_VALUE="always"
-ROUTING_SNIPPET_PATH="/etc/nginx/snippets/sourceharbor.canary-routing.conf"
+ROUTING_SNIPPET_PATH="/etc/nginx/snippets/brewme.canary-routing.conf"
 RELOAD_COMMAND="sudo nginx -t && sudo systemctl reload nginx"
 DRY_RUN="0"
 
@@ -78,23 +78,23 @@ log() {
 render_routing_snippet() {
   local weight="$1"
   cat <<ROUTE
-map \$http_x_sourceharbor_canary \$sourceharbor_force_canary {
+map \$http_x_brewme_canary \$brewme_force_canary {
     default 0;
     "1" 1;
     "true" 1;
     "always" 1;
 }
 
-split_clients "\${remote_addr}\${http_user_agent}" \$sourceharbor_canary_bucket {
+split_clients "\${remote_addr}\${http_user_agent}" \$brewme_canary_bucket {
     ${weight}% "canary";
     * "stable";
 }
 
-map "\$sourceharbor_force_canary:\$sourceharbor_canary_bucket" \$sourceharbor_api_upstream {
-    "1:stable" "sourceharbor_api_canary";
-    "1:canary" "sourceharbor_api_canary";
-    "0:canary" "sourceharbor_api_canary";
-    default "sourceharbor_api_stable";
+map "\$brewme_force_canary:\$brewme_canary_bucket" \$brewme_api_upstream {
+    "1:stable" "brewme_api_canary";
+    "1:canary" "brewme_api_canary";
+    "0:canary" "brewme_api_canary";
+    default "brewme_api_stable";
 }
 ROUTE
 }

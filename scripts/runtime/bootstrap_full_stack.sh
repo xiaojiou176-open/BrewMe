@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "components" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/components/full-stack/bootstrap-full-stack.jsonl"
+brewme_log_init "components" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/components/full-stack/bootstrap-full-stack.jsonl"
 
 # shellcheck source=./scripts/lib/load_env.sh
 source "$ROOT_DIR/scripts/lib/load_env.sh"
@@ -31,8 +31,8 @@ WEB_PORT_EXPLICIT="0"
 RESOLVED_ENV_PATH="$(get_runtime_resolved_env_path "$ROOT_DIR")"
 WORKSPACE_HYGIENE="$ROOT_DIR/scripts/runtime/workspace_hygiene.sh"
 
-log() { sourceharbor_log info bootstrap "$*"; }
-fail() { sourceharbor_log error bootstrap_error "$*"; exit 1; }
+log() { brewme_log info bootstrap "$*"; }
+fail() { brewme_log error bootstrap_error "$*"; exit 1; }
 
 is_truthy() {
   case "$(printf '%s' "${1:-}" | tr '[:upper:]' '[:lower:]')" in
@@ -47,7 +47,7 @@ apply_psql_migrations() {
   local migration_name
   local migration_applied
   psql "$psql_url" -v ON_ERROR_STOP=1 <<'SQL' >/dev/null
-CREATE TABLE IF NOT EXISTS sourceharbor_schema_migrations (
+CREATE TABLE IF NOT EXISTS brewme_schema_migrations (
   migration_name TEXT PRIMARY KEY,
   applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -57,7 +57,7 @@ SQL
     migration_applied="$(
       psql "$psql_url" -Atq <<SQL
 SELECT 1
-FROM sourceharbor_schema_migrations
+FROM brewme_schema_migrations
 WHERE migration_name = '${migration_name}'
 LIMIT 1;
 SQL
@@ -68,7 +68,7 @@ SQL
     psql "$psql_url" -v ON_ERROR_STOP=1 <<SQL >/dev/null
 BEGIN;
 \i '$ROOT_DIR/$migration'
-INSERT INTO sourceharbor_schema_migrations (migration_name)
+INSERT INTO brewme_schema_migrations (migration_name)
 VALUES ('${migration_name}');
 COMMIT;
 SQL
@@ -121,7 +121,7 @@ target_port = (os.environ.get("TARGET_DATABASE_PORT") or "15432").strip()
 default_password = os.environ.get("TARGET_DATABASE_PASSWORD", "postgres")
 
 if not raw:
-    raw = f"postgresql+psycopg://postgres:{default_password}@127.0.0.1:{target_port}/sourceharbor"
+    raw = f"postgresql+psycopg://postgres:{default_password}@127.0.0.1:{target_port}/brewme"
 
 if raw.startswith("postgresql://"):
     raw = "postgresql+psycopg://" + raw[len("postgresql://"):]
@@ -132,7 +132,7 @@ if scheme == "postgresql":
     scheme = "postgresql+psycopg"
 
 hostname = parsed.hostname or "127.0.0.1"
-database_name = parsed.path.lstrip("/") or "sourceharbor"
+database_name = parsed.path.lstrip("/") or "brewme"
 
 if hostname in {"localhost", "127.0.0.1"}:
     username = parsed.username or "postgres"
@@ -146,8 +146,8 @@ PY
 
 normalize_temporal_task_queue() {
   local raw_value="${1:-}"
-  if [[ -z "$raw_value" || "$raw_value" == "sourceharbor" ]]; then
-    printf 'sourceharbor-worker\n'
+  if [[ -z "$raw_value" || "$raw_value" == "brewme" ]]; then
+    printf 'brewme-worker\n'
     return 0
   fi
   printf '%s\n' "$raw_value"
@@ -223,11 +223,11 @@ API_PORT="$(resolve_runtime_route_value "$ROOT_DIR" "API_PORT" "$api_port_cli" "
 WEB_PORT="$(resolve_runtime_route_value "$ROOT_DIR" "WEB_PORT" "$web_port_cli" "3000")"
 CORE_POSTGRES_PORT="${CORE_POSTGRES_PORT:-15432}"
 export CORE_POSTGRES_PORT
-DATABASE_URL="$(resolve_runtime_route_value "$ROOT_DIR" "DATABASE_URL" "" "postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/sourceharbor")"
+DATABASE_URL="$(resolve_runtime_route_value "$ROOT_DIR" "DATABASE_URL" "" "postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/brewme")"
 DATABASE_URL="$(normalize_runtime_database_url "$DATABASE_URL" "$CORE_POSTGRES_PORT" "${CORE_POSTGRES_PASSWORD:-postgres}")"
 TEMPORAL_TARGET_HOST="$(resolve_runtime_route_value "$ROOT_DIR" "TEMPORAL_TARGET_HOST" "" "127.0.0.1:7233")"
 TEMPORAL_NAMESPACE="$(resolve_runtime_route_value "$ROOT_DIR" "TEMPORAL_NAMESPACE" "" "default")"
-TEMPORAL_TASK_QUEUE="$(resolve_runtime_route_value "$ROOT_DIR" "TEMPORAL_TASK_QUEUE" "" "sourceharbor-worker")"
+TEMPORAL_TASK_QUEUE="$(resolve_runtime_route_value "$ROOT_DIR" "TEMPORAL_TASK_QUEUE" "" "brewme-worker")"
 TEMPORAL_TASK_QUEUE="$(normalize_temporal_task_queue "$TEMPORAL_TASK_QUEUE")"
 export DATABASE_URL TEMPORAL_TARGET_HOST TEMPORAL_NAMESPACE TEMPORAL_TASK_QUEUE
 
@@ -269,24 +269,24 @@ if is_truthy "$WITH_CORE_SERVICES"; then
 fi
 
 if command -v psql >/dev/null 2>&1; then
-  DB_URL="${DATABASE_URL:-postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/sourceharbor}"
+  DB_URL="${DATABASE_URL:-postgresql+psycopg://postgres:postgres@127.0.0.1:${CORE_POSTGRES_PORT}/brewme}"
   PSQL_URL="${DB_URL/postgresql+psycopg:\/\//postgresql://}"
   if [[ "$DB_URL" == postgresql* ]]; then
     DB_NAME="$(python3 - <<'PY'
 import os
 from urllib.parse import urlparse
 core_port = os.getenv('CORE_POSTGRES_PORT', '15432')
-u = os.getenv('DATABASE_URL', f'postgresql+psycopg://127.0.0.1:{core_port}/sourceharbor')
+u = os.getenv('DATABASE_URL', f'postgresql+psycopg://127.0.0.1:{core_port}/brewme')
 u = u.replace('postgresql+psycopg://', 'postgresql://', 1)
 path = urlparse(u).path.strip('/')
-print(path or 'sourceharbor')
+print(path or 'brewme')
 PY
 )"
     DB_CONN_JSON="$(PSQL_URL="$PSQL_URL" CORE_POSTGRES_PORT="$CORE_POSTGRES_PORT" python3 - <<'PY'
 import json, os
 from urllib.parse import urlparse
 core_port = os.getenv('CORE_POSTGRES_PORT', '15432')
-u = os.getenv('PSQL_URL', f'postgresql://127.0.0.1:{core_port}/sourceharbor')
+u = os.getenv('PSQL_URL', f'postgresql://127.0.0.1:{core_port}/brewme')
 p = urlparse(u)
 print(json.dumps({
   'host': p.hostname or '127.0.0.1',

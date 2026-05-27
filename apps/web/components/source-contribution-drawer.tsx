@@ -1,4 +1,4 @@
-import type { ReaderDocument } from "@sourceharbor/sdk";
+import type { ReaderDocument } from "@brewme/sdk";
 import { Braces, FileStack } from "lucide-react";
 import Link from "next/link";
 

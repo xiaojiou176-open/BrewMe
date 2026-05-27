@@ -2,7 +2,7 @@
 
 This page is the shortest truthful answer to:
 
-- what is already real in SourceHarbor
+- what is already real in BrewMe
 - what is still gated by external dependencies
 - what is sample or local-only proof
 - what is future direction rather than current capability
@@ -24,7 +24,7 @@ can move `main` forward again after a release is cut.
 
 ## Current Program State
 
-SourceHarbor is already a real, source-first product-shaped repository.
+BrewMe is already a real, source-first product-shaped repository.
 
 It has:
 
@@ -105,8 +105,8 @@ These are the strongest current claims:
 
 - **First-run base path:** `./bin/bootstrap-full-stack`, `./bin/full-stack up`, `./bin/doctor`, and the runtime route snapshot under `.runtime-cache/run/full-stack/resolved.env`
 - **Core-stack self-heal:** `./bin/full-stack up` can now attempt the repo-owned `core_services.sh up` path when Temporal is down before it gives up on worker readiness
-- **CLI surfaces:** existing `bin/*` entrypoints remain the repo-local command truth, while `packages/sourceharbor-cli` adds a thin installable bridge for public discovery and starter flows
-- **Public TypeScript SDK:** `packages/sourceharbor-sdk` now exposes a thin contract-first SDK over the same HTTP contract and shared route semantics
+- **CLI surfaces:** existing `bin/*` entrypoints remain the repo-local command truth, while `packages/brewme-cli` adds a thin installable bridge for public discovery and starter flows
+- **Public TypeScript SDK:** `packages/brewme-sdk` now exposes a thin contract-first SDK over the same HTTP contract and shared route semantics
 - **Public starter surface:** `starter-packs/` is the public entry directory, while `docs/public-skills.md`, `docs/compat/*`, `templates/public-skills/*`, and `examples/*` act as companion first-cut starter assets without exposing internal `.agents/skills`
 - **Local write-route contract:** direct write APIs can be exercised with the local dev token path instead of pretending auth is an unresolved product gap
 - **Source intake contract:** strong-supported YouTube/Bilibili templates plus generalized RSSHub/RSS substrate without overclaiming full-universe proof, with the `/subscriptions` front door now consuming the same template catalog exposed through API and MCP while also accepting one-off video/article URLs into the today lane
@@ -128,7 +128,7 @@ These are the strongest outward-facing artifacts that already exist today:
 - tracked GitHub description, homepage, topics, and Discussions intent through
   [`config/public/github-profile.json`](../config/public/github-profile.json)
 - a tracked social-preview upload asset path:
-  `docs/assets/sourceharbor-social-preview.png`
+  `docs/assets/brewme-social-preview.png`
 - a tracked public asset pack and media-kit doc: [media-kit.md](./media-kit.md)
 - plugin-grade Codex and Claude Code bundles
 - first-cut OpenClaw pack plus ClawHub metadata template
@@ -206,17 +206,17 @@ This is the short scoreboard for the directions most likely to get overstated.
 | Track | Current bucket | Why now |
 | --- | --- | --- |
 | Codex / GitHub Copilot / Claude Code / VS Code agent workflows via MCP + HTTP API | **ship-now** | the repo already has real MCP, API, search, ask, and job-trace surfaces |
-| Repo-local CLI/help facade | **ship-now** | `./bin/sourceharbor` is already a truthful discoverability layer over `bin/*` |
-| Packaged public CLI bridge | **ship-now** | `packages/sourceharbor-cli` is now the installable public bridge, while the fuller repo-local operator CLI remains `./bin/sourceharbor` |
-| Public TypeScript SDK | **ship-now** | `packages/sourceharbor-sdk` now exposes the contract-first builder layer over the existing HTTP contract |
-| Codex-compatible plugin bundle | **ship-now** | `starter-packs/codex/sourceharbor-codex-plugin/` is now the strongest public Codex bundle the repo can ship before official self-serve listing exists |
-| GitHub Copilot plugin bundle | **ship-now** | `starter-packs/github-copilot/sourceharbor-github-copilot-plugin/` now gives GitHub Copilot a real source-installable plugin bundle over the same MCP/API truth |
-| Claude Code plugin bundle | **ship-now** | `starter-packs/claude-code/sourceharbor-claude-plugin/` is now the strongest public submission-ready bundle for Claude Code |
-| VS Code agent plugin bundle | **ship-now** | `starter-packs/vscode-agent/sourceharbor-vscode-agent-plugin/` now gives VS Code agent workflows a real source-installable plugin bundle over the same MCP/API truth |
+| Repo-local CLI/help facade | **ship-now** | `./bin/brewme` is already a truthful discoverability layer over `bin/*` |
+| Packaged public CLI bridge | **ship-now** | `packages/brewme-cli` is now the installable public bridge, while the fuller repo-local operator CLI remains `./bin/brewme` |
+| Public TypeScript SDK | **ship-now** | `packages/brewme-sdk` now exposes the contract-first builder layer over the existing HTTP contract |
+| Codex-compatible plugin bundle | **ship-now** | `starter-packs/codex/brewme-codex-plugin/` is now the strongest public Codex bundle the repo can ship before official self-serve listing exists |
+| GitHub Copilot plugin bundle | **ship-now** | `starter-packs/github-copilot/brewme-github-copilot-plugin/` now gives GitHub Copilot a real source-installable plugin bundle over the same MCP/API truth |
+| Claude Code plugin bundle | **ship-now** | `starter-packs/claude-code/brewme-claude-plugin/` is now the strongest public submission-ready bundle for Claude Code |
+| VS Code agent plugin bundle | **ship-now** | `starter-packs/vscode-agent/brewme-vscode-agent-plugin/` now gives VS Code agent workflows a real source-installable plugin bundle over the same MCP/API truth |
 | OpenClaw via local starter pack + MCP / HTTP substrate | **first-cut** | the repo ships a compatibility page plus a first-cut local OpenClaw starter pack, but it still is not a marketplace or primary front-door claim |
 | OpenClaw ClawHub package template | **first-cut** | the repo ships a publish-ready metadata template, but there is still no live ClawHub publish receipt and `CLAWHUB_TOKEN` is currently unset locally |
-| Official MCP Registry listing + metadata template | **ship-now** | a fresh anonymous registry read-back confirms an active `SourceHarbor MCP` entry; exact public version drift now lives in [public-distribution.md](./public-distribution.md), while the durable truth here is that listing existence is proven and newer refresh first depends on PyPI serving `sourceharbor==0.1.19` before registry-side publish auth matters |
-| PyPI package surface | **ship-now** | the public `sourceharbor` project is live; exact public version drift now lives in [public-distribution.md](./public-distribution.md), while the durable truth here is that refresh is blocked by a PyPI Trusted Publisher mismatch surfaced as `invalid-publisher`, not by package absence |
+| Official MCP Registry listing + metadata template | **ship-now** | a fresh anonymous registry read-back confirms an active `BrewMe MCP` entry; exact public version drift now lives in [public-distribution.md](./public-distribution.md), while the durable truth here is that listing existence is proven and newer refresh first depends on PyPI serving `brewme==0.1.19` before registry-side publish auth matters |
+| PyPI package surface | **ship-now** | the public `brewme` project is live; exact public version drift now lives in [public-distribution.md](./public-distribution.md), while the durable truth here is that refresh is blocked by a PyPI Trusted Publisher mismatch surfaced as `invalid-publisher`, not by package absence |
 | Site-specific MCP directory listing inputs | **first-cut** | `config/public/mcp-directory-profile.json` plus the public distribution ledger give the repo a real per-directory listing packet baseline, but same-day submit/read-back still varies per site |
 | Public Python SDK | **later** | no public package surface exists yet |
 | Public skills pack / templates | **first-cut** | `docs/public-skills.md`, `docs/compat/*`, `templates/public-skills/*`, and `examples/*` now provide a usable first public starter surface, but not a fully hardened ecosystem product yet |
@@ -249,12 +249,12 @@ are more specific than generic "secret missing" language.
 | --- | --- | --- | --- |
 | Resend sender identity | provider canary still reports `config_error`; sender configuration remains incomplete because `RESEND_FROM_EMAIL` is still missing | repo code already exposes notifications and settings; GitHub/release truth is no longer the missing piece | set `RESEND_FROM_EMAIL`, verify the sender/domain in Resend, choose a real destination mailbox, then rerun the provider canary or strict live-smoke lane |
 | YouTube strict live-smoke | recent local proof now passes direct probe, provider canary, and strict live-smoke preflight; the remaining step is restoring operator-managed YouTube API access whenever the full live lane is reopened | repo-side implementation is no longer the blocker; the remaining action is making the intended YouTube API access available when the lane is rerun | restore the intended YouTube API access in the environment used for the live-smoke lane, then rerun the strict live-smoke lane when you want the full end-to-end receipt |
-| PyPI version refresh | [public-distribution.md](./public-distribution.md) is the canonical place for the exact live version read-backs and publish-state gap | the latest live PyPI read-back still serves `sourceharbor==0.1.14`, while the repo package line is `0.1.19`; the latest publish attempt reached the real publish step and failed with exact blocker `invalid-publisher` | configure the PyPI Trusted Publisher for repository `xiaojiou176-open/SourceHarbor`, workflow `.github/workflows/publish-pypi.yml`, and environment `external-pypi-publish`; then rerun `publish-pypi.yml` and read the live version back before repeating a newer claim |
-| Official MCP Registry version refresh | [public-distribution.md](./public-distribution.md) is the canonical place for the exact live registry read-back and current refresh gap | the public registry entry still reads `0.1.14`; the latest refresh attempt failed early because the workflow first verifies that live PyPI already serves `sourceharbor==0.1.19`, and today that prerequisite still fails | after PyPI serves `0.1.19`, rerun `publish-mcp-registry.yml` and read the refreshed registry entry back before repeating a newer snapshot claim |
+| PyPI version refresh | [public-distribution.md](./public-distribution.md) is the canonical place for the exact live version read-backs and publish-state gap | the latest live PyPI read-back still serves `brewme==0.1.14`, while the repo package line is `0.1.19`; the latest publish attempt reached the real publish step and failed with exact blocker `invalid-publisher` | configure the PyPI Trusted Publisher for repository `xiaojiou176-open/BrewMe`, workflow `.github/workflows/publish-pypi.yml`, and environment `external-pypi-publish`; then rerun `publish-pypi.yml` and read the live version back before repeating a newer claim |
+| Official MCP Registry version refresh | [public-distribution.md](./public-distribution.md) is the canonical place for the exact live registry read-back and current refresh gap | the public registry entry still reads `0.1.14`; the latest refresh attempt failed early because the workflow first verifies that live PyPI already serves `brewme==0.1.19`, and today that prerequisite still fails | after PyPI serves `0.1.19`, rerun `publish-mcp-registry.yml` and read the refreshed registry entry back before repeating a newer snapshot claim |
 | MCP.so direct listing | [public-distribution.md](./public-distribution.md) now holds the exact current direct-page read-back and listing status | the repo-side packet exists, but this public route still does not prove a live listing | capture either a real submit/accept receipt or a later direct-page read-back in `public-distribution.md` that shows the listing has appeared |
 | mcpservers.org listing | [public-distribution.md](./public-distribution.md) now holds the exact current direct/search read-back and listing status | the repo-side packet exists, but the public surface still does not show a readable listing proof | capture either the approval/listing URL or a later public read-back in `public-distribution.md` that shows the server |
 | awesome-opencode maintainer review | [public-distribution.md](./public-distribution.md) now holds the current upstream PR state | the repo-side packet already landed upstream, so the remaining step is maintainer review rather than repo work | wait for merge/rejection/feedback and capture the resulting URL or maintainer comment in `public-distribution.md` |
-| GitHub social preview | the tracked asset already exists in-repo, but live upload/read-back still remains a manual GitHub Settings step | the remaining step is a manual upload in GitHub repo settings, not a repo-code change | open `Settings -> General -> Social preview`, upload `docs/assets/sourceharbor-social-preview.png`, then read the live setting back |
+| GitHub social preview | the tracked asset already exists in-repo, but live upload/read-back still remains a manual GitHub Settings step | the remaining step is a manual upload in GitHub repo settings, not a repo-code change | open `Settings -> General -> Social preview`, upload `docs/assets/brewme-social-preview.png`, then read the live setting back |
 
 ## Remote Truth Reading Rules
 

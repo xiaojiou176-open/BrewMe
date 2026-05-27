@@ -10,7 +10,7 @@ def _repo_root() -> Path:
 
 def _load_module():
     module_path = _repo_root() / "scripts" / "governance" / "common.py"
-    spec = importlib.util.spec_from_file_location("sourceharbor_governance_common", module_path)
+    spec = importlib.util.spec_from_file_location("brewme_governance_common", module_path)
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)

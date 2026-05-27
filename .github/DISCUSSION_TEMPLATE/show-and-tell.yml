@@ -3,13 +3,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        Share what you built with SourceHarbor, what you learned, or how you adapted it.
+        Share what you built with BrewMe, what you learned, or how you adapted it.
   - type: textarea
     id: built
     attributes:
       label: What you built
       description: Show the workflow, integration, or artifact you created.
-      placeholder: I used SourceHarbor to turn creator interviews into searchable internal research notes.
+      placeholder: I used BrewMe to turn creator interviews into searchable internal research notes.
     validations:
       required: true
   - type: textarea

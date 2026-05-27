@@ -94,7 +94,7 @@ def _normalize_ingest_run(item: Any) -> dict[str, Any]:
 
 
 def register_ingest_tools(mcp: FastMCP, api_call: ApiCall) -> None:
-    @mcp.tool(name="sourceharbor.ingest.poll", description="Trigger one ingest poll cycle.")
+    @mcp.tool(name="brewme.ingest.poll", description="Trigger one ingest poll cycle.")
     def ingest_poll(
         subscription_id: str | None = None,
         platform: str | None = None,
@@ -152,7 +152,7 @@ def register_ingest_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         }
 
     @mcp.tool(
-        name="sourceharbor.ingest.runs.list",
+        name="brewme.ingest.runs.list",
         description="List recent ingest runs.",
     )
     def list_ingest_runs(
@@ -191,7 +191,7 @@ def register_ingest_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         }
 
     @mcp.tool(
-        name="sourceharbor.ingest.runs.get",
+        name="brewme.ingest.runs.get",
         description="Get one ingest run by id.",
     )
     def get_ingest_run(run_id: str) -> dict[str, Any]:

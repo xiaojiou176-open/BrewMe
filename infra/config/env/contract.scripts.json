@@ -40,7 +40,7 @@
       "scope": "scripts",
       "required": false,
       "secret": false,
-      "default": "$HOME/.cache/sourceharbor",
+      "default": "$HOME/.cache/brewme",
       "consumer": [
         "scripts/lib/load_env.sh",
         "scripts/lib/standard_env.sh"
@@ -63,28 +63,28 @@
       "scope": "scripts",
       "required": false,
       "secret": false,
-      "default": "$HOME/.cache/sourceharbor/browser/chrome-user-data",
+      "default": "$HOME/.cache/brewme/browser/chrome-user-data",
       "consumer": [
         "scripts/runtime/bootstrap_repo_chrome.py",
         "scripts/runtime/start_repo_chrome.py",
         "scripts/ci/external_playwright_smoke.sh",
         "scripts/runtime/resolve_chrome_profile.py"
       ],
-      "description": "Dedicated repo-owned Chrome user data root for local-only SourceHarbor browser flows."
+      "description": "Dedicated repo-owned Chrome user data root for local-only BrewMe browser flows."
     },
     {
       "name": "SOURCE_HARBOR_CHROME_PROFILE_NAME",
       "scope": "scripts",
       "required": false,
       "secret": false,
-      "default": "sourceharbor",
+      "default": "brewme",
       "consumer": [
         "scripts/runtime/bootstrap_repo_chrome.py",
         "scripts/runtime/start_repo_chrome.py",
         "scripts/ci/external_playwright_smoke.sh",
         "scripts/runtime/resolve_chrome_profile.py"
       ],
-      "description": "Display name of the dedicated repo-owned Chrome profile used by SourceHarbor."
+      "description": "Display name of the dedicated repo-owned Chrome profile used by BrewMe."
     },
     {
       "name": "SOURCE_HARBOR_CHROME_PROFILE_DIR",
@@ -111,7 +111,7 @@
         "scripts/ci/external_playwright_smoke.sh",
         "scripts/runtime/resolve_chrome_profile.py"
       ],
-      "description": "Fixed CDP port for the dedicated SourceHarbor Chrome instance."
+      "description": "Fixed CDP port for the dedicated BrewMe Chrome instance."
     },
     {
       "name": "MINIFLUX_ADMIN_PASSWORD",

@@ -41,7 +41,7 @@ def _rest_api_json(path: str) -> list[dict[str, object]]:
             "Accept": "application/vnd.github+json",
             "Authorization": f"Bearer {token}",
             "X-GitHub-Api-Version": "2022-11-28",
-            "User-Agent": "sourceharbor-remote-security-alerts",
+            "User-Agent": "brewme-remote-security-alerts",
         },
     )
     try:

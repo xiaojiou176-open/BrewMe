@@ -193,11 +193,11 @@ def readiness_check() -> dict[str, str]:
 @app.get("/metrics", include_in_schema=False)
 def metrics() -> PlainTextResponse:
     lines = [
-        "# HELP sourceharbor_process_start_time_seconds Unix time when the API process started.",
-        "# TYPE sourceharbor_process_start_time_seconds gauge",
-        f"sourceharbor_process_start_time_seconds {_PROCESS_STARTED_UNIX:.3f}",
-        "# HELP sourceharbor_http_requests_total Total HTTP requests handled by method, route and status.",
-        "# TYPE sourceharbor_http_requests_total counter",
+        "# HELP brewme_process_start_time_seconds Unix time when the API process started.",
+        "# TYPE brewme_process_start_time_seconds gauge",
+        f"brewme_process_start_time_seconds {_PROCESS_STARTED_UNIX:.3f}",
+        "# HELP brewme_http_requests_total Total HTTP requests handled by method, route and status.",
+        "# TYPE brewme_http_requests_total counter",
     ]
     with _METRICS_LOCK:
         request_counter_items = sorted(_REQUEST_COUNTER.items())
@@ -205,7 +205,7 @@ def metrics() -> PlainTextResponse:
 
     for (method, route, status), total in request_counter_items:
         lines.append(
-            "sourceharbor_http_requests_total{"
+            "brewme_http_requests_total{"
             f'method="{_escape_metric_label(method)}",'
             f'route="{_escape_metric_label(route)}",'
             f'status="{_escape_metric_label(status)}"'
@@ -214,21 +214,21 @@ def metrics() -> PlainTextResponse:
 
     lines.extend(
         [
-            "# HELP sourceharbor_http_request_duration_seconds_sum Total request duration in seconds by method and route.",
-            "# TYPE sourceharbor_http_request_duration_seconds_sum counter",
-            "# HELP sourceharbor_http_request_duration_seconds_count Total sampled requests by method and route.",
-            "# TYPE sourceharbor_http_request_duration_seconds_count counter",
+            "# HELP brewme_http_request_duration_seconds_sum Total request duration in seconds by method and route.",
+            "# TYPE brewme_http_request_duration_seconds_sum counter",
+            "# HELP brewme_http_request_duration_seconds_count Total sampled requests by method and route.",
+            "# TYPE brewme_http_request_duration_seconds_count counter",
         ]
     )
     for (method, route), duration in request_duration_items:
         lines.append(
-            "sourceharbor_http_request_duration_seconds_sum{"
+            "brewme_http_request_duration_seconds_sum{"
             f'method="{_escape_metric_label(method)}",'
             f'route="{_escape_metric_label(route)}"'
             f"}} {duration['sum']:.9f}"
         )
         lines.append(
-            "sourceharbor_http_request_duration_seconds_count{"
+            "brewme_http_request_duration_seconds_count{"
             f'method="{_escape_metric_label(method)}",'
             f'route="{_escape_metric_label(route)}"'
             f"}} {int(duration['count'])}"

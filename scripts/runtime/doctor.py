@@ -36,7 +36,7 @@ class DoctorCheck:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="SourceHarbor first-run doctor")
+    parser = argparse.ArgumentParser(description="BrewMe first-run doctor")
     parser.add_argument("--json", action="store_true", help="emit machine-readable JSON")
     return parser.parse_args()
 
@@ -167,7 +167,7 @@ def listener_exists(port: int) -> bool:
 
 
 def docker_port_mapping() -> str | None:
-    code, stdout, _ = run_command("docker", "port", "sourceharbor-core-postgres", "5432/tcp")
+    code, stdout, _ = run_command("docker", "port", "brewme-core-postgres", "5432/tcp")
     if code != 0 or not stdout.strip():
         return None
     return stdout.splitlines()[0].strip()
@@ -336,7 +336,7 @@ def check_write_token() -> DoctorCheck:
         title="Write-route auth token",
         status="WARN",
         summary="No SOURCE_HARBOR_API_KEY is exported in the current shell, so direct write-route curls will fail even if the stack is healthy.",
-        next_step='Export SOURCE_HARBOR_API_KEY="${SOURCE_HARBOR_API_KEY:-sourceharbor-local-dev-token}" before probing write APIs from the shell.',
+        next_step='Export SOURCE_HARBOR_API_KEY="${SOURCE_HARBOR_API_KEY:-brewme-local-dev-token}" before probing write APIs from the shell.',
     )
 
 
@@ -397,7 +397,7 @@ def render_text(checks: list[DoctorCheck], live_gates: list[DoctorCheck]) -> str
     blocks = [check for check in checks if check.status == "BLOCK"]
     warns = [check for check in checks if check.status == "WARN"]
     lines = [
-        "SourceHarbor first-run doctor",
+        "BrewMe first-run doctor",
         f"Overall: {overall_status(checks)}",
         "",
         "First-run gates",

@@ -12,7 +12,7 @@ def _settings() -> Settings:
         database_url="sqlite+pysqlite:///:memory:",
         temporal_target_host="127.0.0.1:7233",
         temporal_namespace="default",
-        temporal_task_queue="sourceharbor-worker",
+        temporal_task_queue="brewme-worker",
         rsshub_base_url="https://rsshub.app",
     )
 

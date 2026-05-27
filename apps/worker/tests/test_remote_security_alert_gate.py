@@ -23,10 +23,10 @@ def test_origin_repo_slug_parses_github_ssh_remote(monkeypatch) -> None:
     monkeypatch.setattr(
         module,
         "git_output",
-        lambda *args, **kwargs: "git@github.com:xiaojiou176-open/sourceharbor.git\n",
+        lambda *args, **kwargs: "git@github.com:xiaojiou176-open/brewme.git\n",
     )
 
-    assert module._origin_repo_slug() == "xiaojiou176-open/sourceharbor"
+    assert module._origin_repo_slug() == "xiaojiou176-open/brewme"
 
 
 def test_governance_gates_invoke_remote_security_alert_check() -> None:

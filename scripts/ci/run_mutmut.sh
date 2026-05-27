@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 source "$ROOT_DIR/scripts/lib/standard_env.sh"
 ensure_external_uv_project_environment "$ROOT_DIR"
 
-WORKDIR_ROOT="${MUTATION_WORKDIR_ROOT:-/tmp/sourceharbor-mutation/workdir}"
+WORKDIR_ROOT="${MUTATION_WORKDIR_ROOT:-/tmp/brewme-mutation/workdir}"
 WORKSPACE="$WORKDIR_ROOT/repo"
 REPORT_DIR="$ROOT_DIR/.runtime-cache/reports/mutation"
 REPORT_PATH="$REPORT_DIR/mutmut-cicd-stats.json"

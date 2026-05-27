@@ -1,12 +1,12 @@
-# Why SourceHarbor Stands Out
+# Why BrewMe Stands Out
 
-SourceHarbor is not trying to be "another summarizer repo."
+BrewMe is not trying to be "another summarizer repo."
 
 It is stronger when you read it as a productized knowledge pipeline.
 
 ## Comparison Matrix
 
-| Capability | Transcript-only tool | Summary-only script | Internal dashboard | **SourceHarbor** |
+| Capability | Transcript-only tool | Summary-only script | Internal dashboard | **BrewMe** |
 | :-- | :--: | :--: | :--: | :--: |
 | Continuous source intake | No | No | Partial | **Yes** |
 | Job-level trace and retries | No | No | Partial | **Yes** |
@@ -23,7 +23,7 @@ depend on sender identity, mailbox, and provider readiness.
 
 Most repositories stop after "generate a summary."
 
-SourceHarbor continues:
+BrewMe continues:
 
 1. **Capture** sources repeatedly through a source-universe intake front door
 2. **Run** a job-backed pipeline
@@ -47,7 +47,7 @@ The product line is stronger when you read the doors in order:
 
 ## Trade-Offs
 
-SourceHarbor is a better fit when you want:
+BrewMe is a better fit when you want:
 
 - a durable intake-to-artifact flow
 - operator visibility
@@ -64,7 +64,7 @@ It is a worse fit when you want:
 
 This differentiation gives the repo a stronger public label:
 
-> SourceHarbor is the GitHub-native control tower for long-form knowledge pipelines.
+> BrewMe is the GitHub-native control tower for long-form knowledge pipelines.
 
 That label is easier to remember, easier to share, and easier to star than a vague "AI information hub" description.
 
@@ -73,14 +73,14 @@ That label is easier to remember, easier to share, and easier to star than a vag
 | Ecosystem | Fit level | Why |
 | --- | --- | --- |
 | **MCP** | **Primary** | real, shipped surface today through `./bin/dev-mcp` and `apps/mcp/server.py` |
-| **Packaged public CLI** | **Primary** | `packages/sourceharbor-cli` is now a thin installable wrapper that delegates into repo-local `bin/sourceharbor` when a checkout is present |
-| **Public TypeScript SDK** | **Primary** | `packages/sourceharbor-sdk` now exposes the same typed HTTP client/url/type substrate that the web app uses |
+| **Packaged public CLI** | **Primary** | `packages/brewme-cli` is now a thin installable wrapper that delegates into repo-local `bin/brewme` when a checkout is present |
+| **Public TypeScript SDK** | **Primary** | `packages/brewme-sdk` now exposes the same typed HTTP client/url/type substrate that the web app uses |
 | **Public starter surface** | **First-cut** | `starter-packs/` is the public entry directory, with `docs/public-skills.md`, `docs/compat/*`, `templates/public-skills/*`, and `examples/*` acting as companion starter assets |
 | **Codex** | **Primary** | strong fit for source-first local workflows that want to use MCP or HTTP against the same operator truth |
 | **Claude Code** | **Primary** | same fit pattern as Codex: local, MCP-aware, API-capable, and proof-first |
-| **OpenHands** | Secondary / comparison | adjacent as an agent-runtime ecosystem, but SourceHarbor is not a generic software-task agent |
+| **OpenHands** | Secondary / comparison | adjacent as an agent-runtime ecosystem, but BrewMe is not a generic software-task agent |
 | **OpenCode** | Secondary / comparison | adjacent as a coding/automation workflow surface, but not a primary product identity here |
-| **OpenClaw** | First-cut local pack | the shared MCP / HTTP substrate is real and the repo now ships a local starter pack, but it still should not be sold as a SourceHarbor plugin-first identity or primary front door |
+| **OpenClaw** | First-cut local pack | the shared MCP / HTTP substrate is real and the repo now ships a local starter pack, but it still should not be sold as a BrewMe plugin-first identity or primary front door |
 
 Here, **First-cut** means the starter layer is real and usable today, but it is
 still a public entry surface rather than a fully hardened standalone ecosystem

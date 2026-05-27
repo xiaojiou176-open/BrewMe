@@ -1,6 +1,6 @@
 # Disk Space Governance
 
-This is the disk-space runbook for SourceHarbor.
+This is the disk-space runbook for BrewMe.
 
 Think of it as a warehouse map, not a trash guide.
 
@@ -15,7 +15,7 @@ Those are not the same question.
 
 ## Canonical Path Model
 
-SourceHarbor uses three path classes:
+BrewMe uses three path classes:
 
 | Class | Canonical root | What belongs there |
 | :-- | :-- | :-- |
@@ -167,8 +167,8 @@ Authorized apply requires explicit confirmation:
 These are larger and need extra gates:
 
 - `.runtime-cache/tmp/web-runtime`
-- `.runtime-cache/tmp/sourceharbor-verify-venv`
-- `.runtime-cache/tmp/sourceharbor-pypi-verify-venv`
+- `.runtime-cache/tmp/brewme-verify-venv`
+- `.runtime-cache/tmp/brewme-pypi-verify-venv`
 - `.runtime-cache/tmp/ws6-test-venv`
 
 Before these can be deleted, the cleanup gate must prove:
@@ -254,11 +254,11 @@ Reason:
 - some are protected current-state roots
 - some are shared caches that can hurt other projects
 
-The legacy home-level `.sourceharbor/` root is also not an automatic cleanup
+The legacy home-level `.brewme/` root is also not an automatic cleanup
 target. It is a migration input root and drift signal until local environments
 have been fully moved under `SOURCE_HARBOR_CACHE_ROOT`.
 
-Legacy `video-digestor` roots are different: once current SourceHarbor state is
+Legacy `video-digestor` roots are different: once current BrewMe state is
 canonical under `SOURCE_HARBOR_CACHE_ROOT` and legacy retirement is clear, they
 move into the `external-history` verify-first lane instead of staying
 permanently excluded.

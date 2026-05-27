@@ -22,7 +22,7 @@ resolve_stable_python() {
   for candidate in /usr/bin/python3 /usr/local/bin/python3 "$(command -v python3 2>/dev/null || true)"; do
     [[ -n "$candidate" ]] || continue
     [[ -x "$candidate" ]] || continue
-    if [[ "$candidate" == /tmp/sourceharbor-strict-ci/* ]]; then
+    if [[ "$candidate" == /tmp/brewme-strict-ci/* ]]; then
       continue
     fi
     STABLE_PYTHON="$candidate"
@@ -159,11 +159,11 @@ print_disk_usage /tmp
 
 cleanup_glob "$WORKSPACE/.runtime-cache"
 cleanup_glob "$WORKSPACE/mutants"
-cleanup_glob "/tmp/sourceharbor-strict-ci"
-cleanup_glob "/tmp/sourceharbor-api-web-e2e-*"
-cleanup_glob "/tmp/sourceharbor-worker-web-e2e-*"
-cleanup_glob "/tmp/sourceharbor-live-smoke-*"
-cleanup_glob "/tmp/sourceharbor-api-smoke*"
+cleanup_glob "/tmp/brewme-strict-ci"
+cleanup_glob "/tmp/brewme-api-web-e2e-*"
+cleanup_glob "/tmp/brewme-worker-web-e2e-*"
+cleanup_glob "/tmp/brewme-live-smoke-*"
+cleanup_glob "/tmp/brewme-api-smoke*"
 cleanup_glob "/tmp/temporal-cli-*"
 
 if [[ "$INCLUDE_RUNNER_DIAG" == "1" ]]; then

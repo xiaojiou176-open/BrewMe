@@ -343,7 +343,7 @@ def render_text(plan: dict[str, Any]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Plan or apply SourceHarbor disk-space cleanup with strict gates."
+        description="Plan or apply BrewMe disk-space cleanup with strict gates."
     )
     parser.add_argument("--repo-root", default=str(repo_root()))
     parser.add_argument("--policy", default="")

@@ -73,7 +73,7 @@ jobs:
               raise SystemExit(
                   f"pyproject version {version!r} does not match expected_version {expected_version!r}"
               )
-          marker = "mcp-name: io.github.xiaojiou176-open/sourceharbor-mcp"
+          marker = "mcp-name: io.github.xiaojiou176-open/brewme-mcp"
           if marker not in pathlib.Path("README.md").read_text(encoding="utf-8"):
               raise SystemExit("README.md must keep the MCP ownership marker before PyPI publish")
           print(f"verified expected version {expected_version}")
@@ -96,7 +96,7 @@ jobs:
           dist_dir = Path("dist")
           files = sorted(path.name for path in dist_dir.iterdir() if path.is_file())
           metadata = {
-              "project": "sourceharbor",
+              "project": "brewme",
               "expected_version": os.environ["EXPECTED_VERSION"],
               "dist_files": files,
               "workflow": "publish-pypi.yml",
@@ -127,7 +127,7 @@ jobs:
         run: |
           {
             echo "### PyPI publish result"
-            echo "- project: \`sourceharbor\`"
+            echo "- project: \`brewme\`"
             echo "- expected version: \`${EXPECTED_VERSION}\`"
             echo "- workflow: \`.github/workflows/publish-pypi.yml\`"
             echo "- trusted publisher / environment must already be configured on PyPI"

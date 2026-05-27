@@ -124,7 +124,7 @@ Do not hand-delete the repo-owned external cache root resolved by
 
 ## Local Browser Login State
 
-If a local browser proof actually needs login state, SourceHarbor uses a
+If a local browser proof actually needs login state, BrewMe uses a
 dedicated browser root instead of your default personal Chrome root:
 
 ```bash

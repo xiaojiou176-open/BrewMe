@@ -803,11 +803,11 @@ describe("search and MCP front doors", () => {
 		).toBeInTheDocument();
 		const commandBlock = document.querySelector("pre code");
 		expect(commandBlock).not.toBeNull();
-		expect(commandBlock).toHaveTextContent("./bin/sourceharbor help");
-		expect(commandBlock).toHaveTextContent("./bin/sourceharbor mcp");
+		expect(commandBlock).toHaveTextContent("./bin/brewme help");
+		expect(commandBlock).toHaveTextContent("./bin/brewme mcp");
 		expect(commandBlock).toHaveTextContent("./bin/dev-mcp");
 		expect(
-			screen.getByText("sourceharbor.retrieval.search"),
+			screen.getByText("brewme.retrieval.search"),
 		).toBeInTheDocument();
 		expect(screen.getByRole("link", { name: "Open Search" })).toHaveAttribute(
 			"href",

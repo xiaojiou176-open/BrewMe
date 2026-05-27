@@ -4,10 +4,10 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT_DIR"
 
-IMAGE_REPOSITORY="${SOURCE_HARBOR_PUBLIC_API_IMAGE_REPOSITORY:-ghcr.io/xiaojiou176-open/sourceharbor-api}"
+IMAGE_REPOSITORY="${SOURCE_HARBOR_PUBLIC_API_IMAGE_REPOSITORY:-ghcr.io/xiaojiou176-open/brewme-api}"
 IMAGE_TAG="${SOURCE_HARBOR_PUBLIC_API_IMAGE_SMOKE_TAG:-local-smoke}"
 HOST_PORT="${SOURCE_HARBOR_PUBLIC_API_IMAGE_SMOKE_PORT:-18082}"
-CONTAINER_NAME="sourceharbor-api-smoke-${$}"
+CONTAINER_NAME="brewme-api-smoke-${$}"
 API_URL="http://127.0.0.1:${HOST_PORT}/healthz"
 
 cleanup() {

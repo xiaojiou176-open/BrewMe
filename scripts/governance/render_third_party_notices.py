@@ -35,7 +35,7 @@ import json
 rows = []
 for dist in md.distributions():
     name = (dist.metadata.get("Name") or "").strip()
-    if not name or name.lower() == "sourceharbor":
+    if not name or name.lower() == "brewme":
         continue
     license_expression = (dist.metadata.get("License-Expression") or "").strip()
     license_value = (dist.metadata.get("License") or "").strip()

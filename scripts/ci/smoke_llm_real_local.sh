@@ -6,7 +6,7 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
 # shellcheck source=./scripts/runtime/logging.sh
 source "$ROOT_DIR/scripts/runtime/logging.sh"
-sourceharbor_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/smoke-llm-real-local.jsonl"
+brewme_log_init "tests" "$SCRIPT_NAME" "$ROOT_DIR/.runtime-cache/logs/tests/smoke-llm-real-local.jsonl"
 
 # shellcheck source=./scripts/lib/load_env.sh
 source "$ROOT_DIR/scripts/lib/load_env.sh"
@@ -115,7 +115,7 @@ if [[ -n "${GEMINI_API_KEY:-}" ]]; then
 fi
 
 if [[ -z "${SOURCE_HARBOR_API_KEY:-}" && -z "${CI:-}" && -z "${GITHUB_ACTIONS:-}" ]]; then
-  export SOURCE_HARBOR_API_KEY="sourceharbor-local-dev-token"
+  export SOURCE_HARBOR_API_KEY="brewme-local-dev-token"
 fi
 
 if [[ -z "${GEMINI_API_KEY:-}" ]]; then
@@ -395,7 +395,7 @@ PY
 fi
 
 run_teardown_phase
-BODY="$body" STATUS="$status" DIAGNOSTICS_JSON="$DIAGNOSTICS_JSON" API_BASE_URL="$API_BASE_URL" KEY_SOURCE="$KEY_SOURCE" HEARTBEAT_SECONDS="$HEARTBEAT_SECONDS" AUTH_MODE="$AUTH_MODE" STARTED_AT_UTC="$STARTED_AT_UTC" MAX_RETRIES="$MAX_RETRIES" REQUEST_IDEMPOTENCY_KEY="$REQUEST_IDEMPOTENCY_KEY" TEARDOWN_TRACE="$TEARDOWN_TRACE" ROOT_DIR="$ROOT_DIR" RUN_ID="${sourceharbor_log_run_id:-smoke-llm-real-local}" python3 - <<'PY'
+BODY="$body" STATUS="$status" DIAGNOSTICS_JSON="$DIAGNOSTICS_JSON" API_BASE_URL="$API_BASE_URL" KEY_SOURCE="$KEY_SOURCE" HEARTBEAT_SECONDS="$HEARTBEAT_SECONDS" AUTH_MODE="$AUTH_MODE" STARTED_AT_UTC="$STARTED_AT_UTC" MAX_RETRIES="$MAX_RETRIES" REQUEST_IDEMPOTENCY_KEY="$REQUEST_IDEMPOTENCY_KEY" TEARDOWN_TRACE="$TEARDOWN_TRACE" ROOT_DIR="$ROOT_DIR" RUN_ID="${brewme_log_run_id:-smoke-llm-real-local}" python3 - <<'PY'
 import json
 import os
 import sys
@@ -551,10 +551,10 @@ PY
 
 echo "[smoke_llm_real_local] passed"
 log() {
-  sourceharbor_log info smoke_llm_real_local "$*"
+  brewme_log info smoke_llm_real_local "$*"
 }
 
 fail() {
-  sourceharbor_log error smoke_llm_real_local_error "$*"
+  brewme_log error smoke_llm_real_local_error "$*"
   exit 1
 }

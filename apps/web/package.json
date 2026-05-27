@@ -1,5 +1,5 @@
 {
-	"name": "sourceharbor-web",
+	"name": "brewme-web",
 	"private": true,
 	"version": "0.1.0",
 	"license": "MIT",
@@ -16,7 +16,7 @@
 		"lighthouse:check": "lighthouse http://127.0.0.1:3000 --only-categories=accessibility,best-practices --quiet --chrome-flags='--headless'"
 	},
 	"dependencies": {
-		"@sourceharbor/sdk": "file:../../packages/sourceharbor-sdk",
+		"@brewme/sdk": "file:../../packages/brewme-sdk",
 		"@tailwindcss/postcss": "^4.2.2",
 		"@tailwindcss/typography": "^0.5.19",
 		"class-variance-authority": "^0.7.1",

@@ -48,7 +48,7 @@ def _normalize_reader_document(payload: Any) -> dict[str, Any]:
 
 def register_reader_tools(mcp: FastMCP, api_call: ApiCall) -> None:
     @mcp.tool(
-        name="sourceharbor.reader.documents.list",
+        name="brewme.reader.documents.list",
         description="List current published reader documents with optional window filter.",
     )
     def list_reader_documents(
@@ -80,7 +80,7 @@ def register_reader_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         return {"items": [_normalize_reader_document(item) for item in items]}
 
     @mcp.tool(
-        name="sourceharbor.reader.documents.get",
+        name="brewme.reader.documents.get",
         description="Fetch one published reader document by UUID.",
     )
     def get_reader_document(document_id: str) -> dict[str, Any]:
@@ -99,7 +99,7 @@ def register_reader_tools(mcp: FastMCP, api_call: ApiCall) -> None:
         return _normalize_reader_document(response)
 
     @mcp.tool(
-        name="sourceharbor.reader.navigation.get",
+        name="brewme.reader.navigation.get",
         description="Get the current reader navigation brief for one window.",
     )
     def get_reader_navigation_brief(

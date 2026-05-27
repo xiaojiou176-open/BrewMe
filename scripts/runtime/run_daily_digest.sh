@@ -10,7 +10,7 @@ source "$ROOT_DIR/scripts/lib/http_api.sh"
 load_repo_env "$ROOT_DIR" "$SCRIPT_NAME"
 
 if [[ -z "${SOURCE_HARBOR_API_KEY:-}" && -z "${CI:-}" && -z "${GITHUB_ACTIONS:-}" ]]; then
-  export SOURCE_HARBOR_API_KEY="sourceharbor-local-dev-token"
+  export SOURCE_HARBOR_API_KEY="brewme-local-dev-token"
 fi
 if [[ -z "${WEB_ACTION_SESSION_TOKEN:-}" && -n "${SOURCE_HARBOR_API_KEY:-}" ]]; then
   export WEB_ACTION_SESSION_TOKEN="$SOURCE_HARBOR_API_KEY"
@@ -157,7 +157,7 @@ to_email = sys.argv[2].strip() or None
 job_id = sys.argv[3]
 digest = Path(sys.argv[4]).read_text(encoding="utf-8")
 
-subject = f"[SourceHarbor] Daily digest {digest_date}"
+subject = f"[BrewMe] Daily digest {digest_date}"
 body = f"job_id: {job_id}\n\ndate: {digest_date}\n\n{digest}"
 
 payload = {

@@ -10,11 +10,11 @@ from sqlalchemy.exc import DBAPIError
 
 
 def _load_ops_module():
-    os.environ.setdefault("DATABASE_URL", "sqlite:////tmp/sourceharbor-ops-test.db")
+    os.environ.setdefault("DATABASE_URL", "sqlite:////tmp/brewme-ops-test.db")
     os.environ.setdefault("TEMPORAL_TARGET_HOST", "127.0.0.1:7233")
     os.environ.setdefault("TEMPORAL_NAMESPACE", "default")
-    os.environ.setdefault("TEMPORAL_TASK_QUEUE", "sourceharbor-worker")
-    os.environ.setdefault("SQLITE_STATE_PATH", "/tmp/sourceharbor-ops-test-state.db")
+    os.environ.setdefault("TEMPORAL_TASK_QUEUE", "brewme-worker")
+    os.environ.setdefault("SQLITE_STATE_PATH", "/tmp/brewme-ops-test-state.db")
     module = importlib.import_module("apps.api.app.services.ops")
     return importlib.reload(module)
 
@@ -280,7 +280,7 @@ def test_build_disk_governance_gate_warns_when_repo_tmp_is_present_but_blocked()
                 "blocking_gates": [{"name": "quiet-window", "detail": "0.5m since latest change"}],
                 "duplicate_envs": [
                     {
-                        "path": "/tmp/sourceharbor/project-venv-codex",
+                        "path": "/tmp/brewme/project-venv-codex",
                         "reference_status": "unreferenced-by-known-entrypoints",
                     }
                 ],
@@ -396,7 +396,7 @@ def test_get_inbox_aggregates_sections_and_orders_items(monkeypatch) -> None:
             "to_email": "ops@example.com",
             "enabled": True,
             "failure_alert_enabled": True,
-            "ui_audit_artifact_base_root": "/tmp/sourceharbor-artifacts",
+            "ui_audit_artifact_base_root": "/tmp/brewme-artifacts",
             "ui_audit_gemini_enabled": True,
         },
     )
@@ -497,7 +497,7 @@ def test_get_inbox_emits_gate_items_with_settings_shortcut(monkeypatch) -> None:
             "to_email": None,
             "enabled": False,
             "failure_alert_enabled": False,
-            "ui_audit_artifact_base_root": "/tmp/sourceharbor-artifacts",
+            "ui_audit_artifact_base_root": "/tmp/brewme-artifacts",
             "ui_audit_gemini_enabled": True,
         },
     )
@@ -587,7 +587,7 @@ def test_get_inbox_surfaces_repo_browser_proof_and_bilibili_account_ops_gate(
             "to_email": None,
             "enabled": False,
             "failure_alert_enabled": False,
-            "ui_audit_artifact_base_root": "/tmp/sourceharbor-artifacts",
+            "ui_audit_artifact_base_root": "/tmp/brewme-artifacts",
             "ui_audit_gemini_enabled": False,
         },
     )
@@ -689,7 +689,7 @@ def test_get_inbox_keeps_disk_governance_gate_warn_when_summary_loading_fails(
             "to_email": None,
             "enabled": False,
             "failure_alert_enabled": False,
-            "ui_audit_artifact_base_root": "/tmp/sourceharbor-artifacts",
+            "ui_audit_artifact_base_root": "/tmp/brewme-artifacts",
             "ui_audit_gemini_enabled": True,
         },
     )
@@ -718,7 +718,7 @@ def test_load_failed_jobs_redacts_db_error_details() -> None:
             raise DBAPIError(
                 "SELECT 1",
                 {},
-                Exception("postgresql://ops:super-secret@127.0.0.1:5432/sourceharbor"),
+                Exception("postgresql://ops:super-secret@127.0.0.1:5432/brewme"),
             )
 
         def rollback(self) -> None:
@@ -742,7 +742,7 @@ def test_load_failed_ingest_runs_redacts_db_error_details() -> None:
             raise DBAPIError(
                 "SELECT 1",
                 {},
-                Exception("postgresql://ops:super-secret@127.0.0.1:5432/sourceharbor"),
+                Exception("postgresql://ops:super-secret@127.0.0.1:5432/brewme"),
             )
 
         def rollback(self) -> None:
@@ -766,7 +766,7 @@ def test_load_notification_deliveries_redacts_db_error_details() -> None:
             raise DBAPIError(
                 "SELECT 1",
                 {},
-                Exception("postgresql://ops:super-secret@127.0.0.1:5432/sourceharbor"),
+                Exception("postgresql://ops:super-secret@127.0.0.1:5432/brewme"),
             )
 
         def rollback(self) -> None:

@@ -120,7 +120,7 @@ def _actor_label(
         digest = hashlib.pbkdf2_hmac(
             "sha256",
             str(bearer.credentials).encode("utf-8"),
-            b"sourceharbor-actor-label",
+            b"brewme-actor-label",
             600_000,
         ).hex()[:12]
         return f"bearer_sha256:{digest}"
@@ -128,7 +128,7 @@ def _actor_label(
         digest = hashlib.pbkdf2_hmac(
             "sha256",
             api_key_header.strip().encode("utf-8"),
-            b"sourceharbor-actor-label",
+            b"brewme-actor-label",
             600_000,
         ).hex()[:12]
         return f"api_key_sha256:{digest}"

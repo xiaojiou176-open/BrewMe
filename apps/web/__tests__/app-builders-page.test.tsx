@@ -38,31 +38,31 @@ describe("builders page", () => {
 			screen.getByRole("link", { name: "Inspect Codex bundle" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/codex/sourceharbor-codex-plugin/README.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/codex/brewme-codex-plugin/README.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Inspect Claude bundle" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/claude-code/sourceharbor-claude-plugin/README.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/claude-code/brewme-claude-plugin/README.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Inspect OpenClaw pack" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/openclaw/README.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/openclaw/README.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Inspect MCP registry template" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/mcp-registry/README.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/mcp-registry/README.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Open distribution ledger" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/public-distribution.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/docs/public-distribution.md",
 		);
 		expect(
 			within(liveSubmissionSection).getByRole("link", {
@@ -70,7 +70,7 @@ describe("builders page", () => {
 			}),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/project-status.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/docs/project-status.md",
 		);
 		expect(
 			within(liveSubmissionSection).getByRole("link", {
@@ -78,37 +78,37 @@ describe("builders page", () => {
 			}),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/public-skills.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/docs/public-skills.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Open media kit" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/media-kit.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/docs/media-kit.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Open Codex boundary" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/compat/codex.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/docs/compat/codex.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Open Claude boundary" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/compat/claude-code.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/docs/compat/claude-code.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Open OpenClaw boundary" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/docs/compat/openclaw.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/docs/compat/openclaw.md",
 		);
 		expect(
 			screen.getByRole("link", { name: "Open MCP registry pack" }),
 		).toHaveAttribute(
 			"href",
-			"https://github.com/xiaojiou176-open/sourceharbor/blob/main/starter-packs/mcp-registry/README.md",
+			"https://github.com/xiaojiou176-open/brewme/blob/main/starter-packs/mcp-registry/README.md",
 		);
 	});
 });

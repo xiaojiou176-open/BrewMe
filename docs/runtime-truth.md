@@ -1,6 +1,6 @@
 # Runtime Truth Map
 
-SourceHarbor has multiple truth layers on purpose.
+BrewMe has multiple truth layers on purpose.
 
 Think of them like different ledgers in the same business:
 
@@ -41,7 +41,7 @@ Current cache/state contract:
 
 - repo-side runtime state belongs under `.runtime-cache/`
 - repo-owned external cache and persistent state belong under `SOURCE_HARBOR_CACHE_ROOT`
-- the legacy home-level `.sourceharbor/` root is now only a migration input, not the canonical runtime target
+- the legacy home-level `.brewme/` root is now only a migration input, not the canonical runtime target
 - repo-owned browser state now uses the path resolved by `SOURCE_HARBOR_CHROME_USER_DATA_DIR`
 - local login-dependent browser automation must attach to the repo-owned Chrome instance over CDP instead of second-launching a persistent Chrome context
 - shared tool caches such as `~/.cache/uv` and `~/Library/Caches/ms-playwright` are separate shared-layer objects, not repo-exclusive state
@@ -159,7 +159,7 @@ Wave 2 keeps five capabilities honest:
 
 These are safe:
 
-- SourceHarbor is source-first and proof-first
+- BrewMe is source-first and proof-first
 - local routes may differ from 9000/3000 and should be read from `resolved.env`
 - Postgres, SQLite, and artifacts serve different truth roles
 - Reader, Search, Ask, MCP, and ops surfaces point at the same pipeline

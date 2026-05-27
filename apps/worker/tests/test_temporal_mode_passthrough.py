@@ -19,7 +19,7 @@ def _patch_activity_runtime(
 ):
     settings = Settings(
         sqlite_path=str((tmp_path / "state.db").resolve()),
-        database_url="postgresql+psycopg://postgres:postgres@localhost:5432/sourceharbor",
+        database_url="postgresql+psycopg://postgres:postgres@localhost:5432/brewme",
         pipeline_workspace_dir=str((tmp_path / "workspace").resolve()),
         pipeline_artifact_root=str((tmp_path / "artifacts").resolve()),
     )
