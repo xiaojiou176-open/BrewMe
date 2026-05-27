@@ -23,7 +23,7 @@ same MCP and HTTP API surfaces already documented for Codex and Claude Code.
 2. Copy or symlink `starter-packs/openclaw/` into the local plugin or
    workspace-skill directory you already use for OpenClaw.
 3. Open `starter-packs/openclaw/brewme-mcp-template.json` and replace
-   `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` with the absolute path to your
+   `__REPLACE_WITH_BREWME_REPO_ROOT__` with the absolute path to your
    BrewMe checkout.
 4. Point OpenClaw at that MCP template plus
    `starter-packs/openclaw/openclaw.plugin.json`.
@@ -52,7 +52,7 @@ The MCP template is intentionally explicit:
   "command": "bash",
   "args": [
     "-lc",
-    "cd \"__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__\" && ./bin/dev-mcp"
+    "cd \"__REPLACE_WITH_BREWME_REPO_ROOT__\" && ./bin/dev-mcp"
   ],
   "env": {
     "SOURCE_HARBOR_API_BASE_URL": "http://127.0.0.1:9000"
@@ -60,7 +60,7 @@ The MCP template is intentionally explicit:
 }
 ```
 
-Replace `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` with the absolute path to
+Replace `__REPLACE_WITH_BREWME_REPO_ROOT__` with the absolute path to
 your checkout, for example:
 
 ```json

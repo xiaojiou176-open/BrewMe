@@ -20,7 +20,7 @@ How to use it:
 
 1. Copy this whole directory into the GitHub Copilot plugin source location you
    already manage, or point the source-install flow at this directory.
-2. Replace `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` in `.mcp.json` with the
+2. Replace `__REPLACE_WITH_BREWME_REPO_ROOT__` in `.mcp.json` with the
    absolute path to your BrewMe checkout.
 3. Point GitHub Copilot at `plugin.json`, then start from the included skill.
 

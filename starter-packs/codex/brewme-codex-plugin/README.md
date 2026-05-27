@@ -19,7 +19,7 @@ How to use it:
 
 1. Copy this whole directory into the Codex marketplace or plugin workspace you
    already manage.
-2. Replace `__REPLACE_WITH_SOURCEHARBOR_REPO_ROOT__` in `.mcp.json` with the
+2. Replace `__REPLACE_WITH_BREWME_REPO_ROOT__` in `.mcp.json` with the
    absolute path to your BrewMe checkout.
 3. Point Codex at this bundle through the official docs-supported local or repo
    marketplace path.

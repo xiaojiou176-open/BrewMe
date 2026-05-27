@@ -1,9 +1,9 @@
 FROM python:3.12-slim-bookworm
 
-ARG SOURCEHARBOR_WHEEL
-ARG SOURCEHARBOR_VERSION=0.1.19
-ARG SOURCEHARBOR_VCS_REF=unknown
-ARG SOURCEHARBOR_BUILD_DATE=unknown
+ARG BREWME_WHEEL
+ARG BREWME_VERSION=0.1.19
+ARG BREWME_VCS_REF=unknown
+ARG BREWME_BUILD_DATE=unknown
 
 LABEL org.opencontainers.image.title="BrewMe API"
 LABEL org.opencontainers.image.description="Public API image for BrewMe's FastAPI surface."
@@ -12,9 +12,9 @@ LABEL org.opencontainers.image.documentation="https://github.com/xiaojiou176-ope
 LABEL org.opencontainers.image.licenses="MIT"
 LABEL org.opencontainers.image.source="https://github.com/xiaojiou176-open/brewme"
 LABEL org.opencontainers.image.vendor="BrewMe Maintainers"
-LABEL org.opencontainers.image.version="${SOURCEHARBOR_VERSION}"
-LABEL org.opencontainers.image.revision="${SOURCEHARBOR_VCS_REF}"
-LABEL org.opencontainers.image.created="${SOURCEHARBOR_BUILD_DATE}"
+LABEL org.opencontainers.image.version="${BREWME_VERSION}"
+LABEL org.opencontainers.image.revision="${BREWME_VCS_REF}"
+LABEL org.opencontainers.image.created="${BREWME_BUILD_DATE}"
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -26,7 +26,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     TEMPORAL_TARGET_HOST=temporal:7233 \
     TEMPORAL_NAMESPACE=default \
     TEMPORAL_TASK_QUEUE=brewme-worker \
-    APP_VERSION=${SOURCEHARBOR_VERSION}
+    APP_VERSION=${BREWME_VERSION}
 
 WORKDIR /opt/brewme-runtime
 
@@ -35,12 +35,12 @@ RUN apt-get update \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /var/lib/brewme/state /var/lib/brewme/artifacts /opt/brewme-runtime/scripts
 
-COPY ${SOURCEHARBOR_WHEEL} /tmp/
+COPY ${BREWME_WHEEL} /tmp/
 COPY config /opt/brewme-runtime/config
 COPY scripts/runtime /opt/brewme-runtime/scripts/runtime
 
-RUN python -m pip install --no-cache-dir "/tmp/${SOURCEHARBOR_WHEEL}" \
-  && rm -f "/tmp/${SOURCEHARBOR_WHEEL}" \
+RUN python -m pip install --no-cache-dir "/tmp/${BREWME_WHEEL}" \
+  && rm -f "/tmp/${BREWME_WHEEL}" \
   && python - <<'PY'
 from __future__ import annotations
 

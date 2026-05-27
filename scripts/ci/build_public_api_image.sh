@@ -110,14 +110,14 @@ if [[ "$PUSH_IMAGE" == "1" && "$LOAD_IMAGE" == "1" ]]; then
   exit 2
 fi
 
-SOURCEHARBOR_VERSION="$(resolve_version)"
-SOURCEHARBOR_VCS_REF="$(git rev-parse HEAD 2>/dev/null || printf 'unknown\n')"
-SOURCEHARBOR_BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+BREWME_VERSION="$(resolve_version)"
+BREWME_VCS_REF="$(git rev-parse HEAD 2>/dev/null || printf 'unknown\n')"
+BREWME_BUILD_DATE="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 SOURCE_REPOSITORY_URL="$(resolve_source_repository_url)"
 if [[ -n "$TAG_OVERRIDE" ]]; then
   DEFAULT_TAG="$TAG_OVERRIDE"
 else
-  DEFAULT_TAG="$SOURCEHARBOR_VERSION"
+  DEFAULT_TAG="$BREWME_VERSION"
 fi
 
 rm -rf "$CONTEXT_DIR" "$DIST_DIR"
@@ -125,9 +125,9 @@ mkdir -p "$CONTEXT_DIR" "$DIST_DIR"
 
 uv build --wheel --out-dir "$DIST_DIR"
 
-wheel_path="$(find "$DIST_DIR" -maxdepth 1 -type f -name "brewme-${SOURCEHARBOR_VERSION}-*.whl" | head -n 1)"
+wheel_path="$(find "$DIST_DIR" -maxdepth 1 -type f -name "brewme-${BREWME_VERSION}-*.whl" | head -n 1)"
 if [[ -z "$wheel_path" || ! -f "$wheel_path" ]]; then
-  echo "[build-public-api-image] failed to locate built wheel for version ${SOURCEHARBOR_VERSION}" >&2
+  echo "[build-public-api-image] failed to locate built wheel for version ${BREWME_VERSION}" >&2
   exit 1
 fi
 
@@ -139,10 +139,10 @@ mkdir -p "$CONTEXT_DIR/scripts"
 cp -R "$ROOT_DIR/scripts/runtime" "$CONTEXT_DIR/scripts/runtime"
 
 build_args=(
-  --build-arg "SOURCEHARBOR_WHEEL=${wheel_name}"
-  --build-arg "SOURCEHARBOR_VERSION=${SOURCEHARBOR_VERSION}"
-  --build-arg "SOURCEHARBOR_VCS_REF=${SOURCEHARBOR_VCS_REF}"
-  --build-arg "SOURCEHARBOR_BUILD_DATE=${SOURCEHARBOR_BUILD_DATE}"
+  --build-arg "BREWME_WHEEL=${wheel_name}"
+  --build-arg "BREWME_VERSION=${BREWME_VERSION}"
+  --build-arg "BREWME_VCS_REF=${BREWME_VCS_REF}"
+  --build-arg "BREWME_BUILD_DATE=${BREWME_BUILD_DATE}"
 )
 
 common_args=(
@@ -178,8 +178,8 @@ elif [[ "$PUSH_IMAGE" == "1" ]]; then
     --platform "$PLATFORMS" \
     --push \
     "${metadata_args[@]}" \
-    --tag "${IMAGE_REPOSITORY}:${SOURCEHARBOR_VCS_REF}" \
-    --tag "${IMAGE_REPOSITORY}:${SOURCEHARBOR_VERSION}" \
+    --tag "${IMAGE_REPOSITORY}:${BREWME_VCS_REF}" \
+    --tag "${IMAGE_REPOSITORY}:${BREWME_VERSION}" \
     --tag "${IMAGE_REPOSITORY}:latest" \
     "${build_args[@]}" \
     "$CONTEXT_DIR"
